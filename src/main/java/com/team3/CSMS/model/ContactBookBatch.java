@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "contactbookbatch")
 public class ContactBookBatch {
@@ -27,19 +29,19 @@ public class ContactBookBatch {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cbb_id")
 	private Integer id;
-    
-    @Column(name="courseContent" ,columnDefinition = "nvarchar(150)")
-    private String courseContent;
-    
-    @Column(name="homework" ,columnDefinition = "nvarchar(150)")
-    private String homework;
-    
-    @Column(name="quiznotice",columnDefinition = "nvarchar(150)")
-    private String quizNotice;
-    
-    @Column(name = "phase",columnDefinition = "int default 1")
-    private Integer phase;
-    
+
+	@Column(name = "courseContent", columnDefinition = "nvarchar(150)")
+	private String courseContent;
+
+	@Column(name = "homework", columnDefinition = "nvarchar(150)")
+	private String homework;
+
+	@Column(name = "quiznotice", columnDefinition = "nvarchar(150)")
+	private String quizNotice;
+
+	@Column(name = "phase", columnDefinition = "int default 1")
+	private Integer phase;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
@@ -49,26 +51,27 @@ public class ContactBookBatch {
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
 	private Date update_at;
-	
+
 	// 關聯
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_classlist_id")
-    private ClassList ClassList;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_teacher_id")
-	private Teacher teacher;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_school_id")
-	private School school;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactbooksingle", cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_classlist_id")
+	private ClassList ClassList;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "fk_teacher_id")
+//	private Teacher teacher;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "fk_school_id")
+//	private School school;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactBookBatch", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<ContactBookSingle> contactBookSingle;
-	
+
 	// 建構子
-    public ContactBookBatch(){
-    }
+	public ContactBookBatch() {
+	}
 
 	// getter & setter
 	public Integer getId() {
@@ -135,21 +138,21 @@ public class ContactBookBatch {
 		ClassList = classList;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
+//	public Teacher getTeacher() {
+//		return teacher;
+//	}
 
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+//	public void setTeacher(Teacher teacher) {
+//		this.teacher = teacher;
+//	}
 
-	public School getSchool() {
-		return school;
-	}
+//	public School getSchool() {
+//		return school;
+//	}
 
-	public void setSchool(School school) {
-		this.school = school;
-	}
+//	public void setSchool(School school) {
+//		this.school = school;
+//	}
 
 	public Set<ContactBookSingle> getContactBookSingle() {
 		return contactBookSingle;
@@ -157,6 +160,6 @@ public class ContactBookBatch {
 
 	public void setContactBookSingle(Set<ContactBookSingle> contactBookSingle) {
 		this.contactBookSingle = contactBookSingle;
-	} 
-	
+	}
+
 }
