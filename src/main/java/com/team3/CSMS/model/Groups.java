@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "groups")
 public class Groups implements Serializable {
@@ -41,9 +43,11 @@ public class Groups implements Serializable {
 
 	// 關聯
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<Users> users;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<Pages> pages;
 
 	// 建構子
