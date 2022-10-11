@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +25,9 @@ public class Room {
 	
 	@Column(name="roompic")
 	private byte[] roomPic;
+	
+//	@OneToOne(mappedBy = "room")
+//	private ClassList classList;
 	
 	public Room() {
 	}
@@ -59,5 +63,15 @@ public class Room {
 	public void setRoomSize(int roomSize) {
 		this.roomSize = roomSize;
 	}
+
+//	public ClassList getClassList() {
+//		return classList;
+//	}
+//
+//	public void setClassList(ClassList classList) {
+//		this.classList = classList;
+//	}
+	
+	
 	
 }

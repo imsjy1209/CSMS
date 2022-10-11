@@ -19,8 +19,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name = "contactbookbatch")
+//@Entity
+//@Table(name = "contactbookbatch")
 public class ContactBookBatch {
 
 	@Id

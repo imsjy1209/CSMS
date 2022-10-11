@@ -43,7 +43,7 @@ public class Groups implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
 	private Set<Users> users;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pages", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
 	private Set<Pages> pages;
 
 	// 建構子

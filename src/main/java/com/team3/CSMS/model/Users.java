@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="users")
 public class Users {
@@ -50,6 +52,7 @@ public class Users {
 	// 關聯
 	@ManyToOne
 	@JoinColumn(name = "fk_groups_id")
+	@JsonBackReference
 	private Groups groups;
 	
 	// 建構子
