@@ -69,7 +69,7 @@ public class ContactBookBatch {
 	@JsonManagedReference
 	private Set<ContactBookSingle> contactBookSingle;
 
-	// 建構子
+	// 建構子 
 	public ContactBookBatch() {
 	}
 
