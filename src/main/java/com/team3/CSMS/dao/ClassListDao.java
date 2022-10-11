@@ -20,3 +20,5 @@ public interface ClassListDao extends JpaRepository<ClassList, Integer>{
     List<ClassList> getClassInfoByClassCodeId(@Param("classCodeId")Integer classCodeId);
 }
 
+
+

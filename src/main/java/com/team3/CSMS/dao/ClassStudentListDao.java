@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.team3.CSMS.dto.StudentListDto;
 import com.team3.CSMS.model.ClassStudentList;
 
 public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Integer> {
@@ -15,4 +14,8 @@ public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Int
     "where [csl].fk_classlist_id = :classCodeId ", nativeQuery = true)
      List <ClassStudentList> getStudentListByCodeId(@Param("classCodeId")Integer classCodeId);
     
+
+	@Query(value = "from ClassStudentList where classList = '?1'")
+	List<ClassStudentList>findByNameLike(String name);
+
 }
