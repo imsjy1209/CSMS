@@ -27,7 +27,7 @@ public class ClassStudentList {
 	
 	@ManyToOne
 	@JoinColumn(name="fk_student_id")
-	@JsonBackReference
+	@JsonBackReference	
 	private Student student;
 	
 	@Column(name="studentNo")
