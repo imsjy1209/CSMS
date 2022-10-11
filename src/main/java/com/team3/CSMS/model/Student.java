@@ -22,6 +22,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name="STUDENT")
 public class Student {
@@ -31,9 +34,11 @@ public class Student {
 	@Column(name="student_id")
 	private Integer id;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "student",cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
 	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
 	private Set<Activity> activities=new HashSet<Activity>();
 	
