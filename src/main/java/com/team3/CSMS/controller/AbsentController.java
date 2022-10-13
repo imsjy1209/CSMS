@@ -25,8 +25,7 @@ public class AbsentController {
     // private AbsentService absService;
     @Autowired
     private ClassStudentListService cslService;
-    
-    
+
     // @GetMapping("/absentCheck")
     // public String getAll(Model model){
     //     List<ClassList> clList= clService.findAll();
@@ -35,14 +34,14 @@ public class AbsentController {
     //     }
     //     return "absent/absentCheck";
     // }
-
+    // 取得所有ClassCode
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})
     public @ResponseBody List<ClassList> getcode(){
         List<ClassList> clList = clService.findAll();
         return clList;
     }
-    
+    //取得 上課資訊 & 學生清單
     @GetMapping(value = "/clInfo.json",
                 produces = {"application/json;charset=UTF-8"})
     public @ResponseBody Map<String,Object> getClassInfoByID(@RequestParam("classCodeId") Integer classCodeId){
@@ -53,7 +52,4 @@ public class AbsentController {
         map.put("cliDto", cliDto);
         return map;
     }
-
-
-    
 }
