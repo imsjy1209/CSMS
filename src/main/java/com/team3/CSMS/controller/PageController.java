@@ -57,5 +57,9 @@ public class PageController {
 	public String roomUpdatePage() {
 		return "cs_room/roomUpdate";
 	}
-
+	// 點名跳轉
+	@GetMapping("/absent.page")
+	public String absentCheckPage(){
+		return "cs_absent/absentCheck";
+	}	
 }

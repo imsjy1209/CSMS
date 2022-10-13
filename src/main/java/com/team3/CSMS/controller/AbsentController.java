@@ -17,9 +17,6 @@ import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ClassStudentListService;
 
-
-
-
 @Controller
 public class AbsentController {
     @Autowired
@@ -30,15 +27,14 @@ public class AbsentController {
     private ClassStudentListService cslService;
     
     
-    @GetMapping("/absentCheck")
-    public String getAll(Model model){
-        List<ClassList> clList= clService.findAll();
-        if(clList != null){
-            model.addAttribute("ClList",clList);
-        }
-        return "absent/absentCheck";
-    }
-
+    // @GetMapping("/absentCheck")
+    // public String getAll(Model model){
+    //     List<ClassList> clList= clService.findAll();
+    //     if(clList != null){
+    //         model.addAttribute("ClList",clList);
+    //     }
+    //     return "absent/absentCheck";
+    // }
 
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})
@@ -46,6 +42,7 @@ public class AbsentController {
         List<ClassList> clList = clService.findAll();
         return clList;
     }
+    
     @GetMapping(value = "/clInfo.json",
                 produces = {"application/json;charset=UTF-8"})
     public @ResponseBody Map<String,Object> getClassInfoByID(@RequestParam("classCodeId") Integer classCodeId){

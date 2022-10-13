@@ -73,6 +73,7 @@
       stulist_data+='<td>' +data[idx].clsStu[i].studentName +'</td>'
       stulist_data+='<tr>'
     }
+    
     stulist_data +='</tobody>';
     $('#studentList').append(stulist_data)
   }

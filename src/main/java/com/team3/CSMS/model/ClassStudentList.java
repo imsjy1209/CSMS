@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -26,22 +27,19 @@ public class ClassStudentList {
 //	@JsonBackReference
 //	@JsonManagedReference
 //	@JsonBackReference
+	@JsonIgnoreProperties("classStudentLists")
 	@ManyToOne
 	@JoinColumn(name="fk_classlist_id")
 	private ClassList classList;
 	
-
-
 	@ManyToOne
 	@JoinColumn(name="fk_student_id")
-	@JsonBackReference	
+	// @JsonBackReference
 	private Student student;
 	
 	@Column(name="studentNo")
 	private int studentNo;
 
-	
-	
 	public ClassStudentList() {
 	}
 
