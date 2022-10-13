@@ -17,15 +17,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "contactbookbatch")
-public class ContactBookBatch {
+@Table(name = "contactbook")
+public class ContactBook {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cbb_id")
+	@Column(name = "cb_id")
 	private Integer id;
 
 	@Column(name = "courseContent", columnDefinition = "nvarchar(150)")
@@ -37,38 +38,26 @@ public class ContactBookBatch {
 	@Column(name = "quiznotice", columnDefinition = "nvarchar(150)")
 	private String quizNotice;
 
-	@Column(name = "phase", columnDefinition = "int default 1")
+	@Column(name = "phase") // 記得insert要default 1
 	private Integer phase;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Column(name = "create_at", columnDefinition = "date", nullable = false) // 記得insert要default getDate()
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date create_at;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
 
 	// 關聯
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_classlist_id")
 	private ClassList ClassList;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "fk_teacher_id")
-//	private Teacher teacher;
-
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "fk_school_id")
-//	private School school;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactBookBatch", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactBook", cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private Set<ContactBookSingle> contactBookSingle;
+	private Set<ContactBookSign> contactBookSign;
 
 	// 建構子 
-	public ContactBookBatch() {
+	public ContactBook() {
 	}
 
 	// getter & setter
@@ -120,14 +109,6 @@ public class ContactBookBatch {
 		this.create_at = create_at;
 	}
 
-	public Date getUpdate_at() {
-		return update_at;
-	}
-
-	public void setUpdate_at(Date update_at) {
-		this.update_at = update_at;
-	}
-
 	public ClassList getClassList() {
 		return ClassList;
 	}
@@ -136,28 +117,12 @@ public class ContactBookBatch {
 		ClassList = classList;
 	}
 
-//	public Teacher getTeacher() {
-//		return teacher;
-//	}
-
-//	public void setTeacher(Teacher teacher) {
-//		this.teacher = teacher;
-//	}
-
-//	public School getSchool() {
-//		return school;
-//	}
-
-//	public void setSchool(School school) {
-//		this.school = school;
-//	}
-
-	public Set<ContactBookSingle> getContactBookSingle() {
-		return contactBookSingle;
+	public Set<ContactBookSign> getContactBookSign() {
+		return contactBookSign;
 	}
 
-	public void setContactBookSingle(Set<ContactBookSingle> contactBookSingle) {
-		this.contactBookSingle = contactBookSingle;
+	public void setContactBookSign(Set<ContactBookSign> contactBookSign) {
+		this.contactBookSign = contactBookSign;
 	}
 
 }

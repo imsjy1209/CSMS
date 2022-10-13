@@ -30,6 +30,7 @@ public class AbsentController {
     private ClassStudentListService cslService;
     
     
+    
     @GetMapping("/absentCheck")
     public String getAll(Model model){
         List<ClassList> clList= clService.findAll();
@@ -38,7 +39,6 @@ public class AbsentController {
         }
         return "absent/absentCheck";
     }
-
 
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})

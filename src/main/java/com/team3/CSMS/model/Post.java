@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,6 +32,7 @@ public class Post {
 	@Column(name="topic",columnDefinition = "nvarchar(30)", nullable = false)
 	private String topic;
 	
+	@Lob
 	@Column(name="article",columnDefinition = "nvarchar(max)", nullable = false)
 	private String article;
 	
