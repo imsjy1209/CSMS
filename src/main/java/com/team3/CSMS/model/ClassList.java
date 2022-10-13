@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -27,17 +28,12 @@ public class ClassList {
 	@Column(name="classList_id")
 	private Integer id;
 	
-	
-
-//	@JsonBackReference
-//	@JsonManagedReference
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "classList",cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("classList")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "classList",cascade = CascadeType.ALL)
 	private List<ClassStudentList> classStudentLists ;
 	
 	@Column(name="classcode",columnDefinition = "nvarchar(10)",unique = true, nullable = false)
 	private String classCode;
-	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_school_id")
@@ -46,8 +42,7 @@ public class ClassList {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_teacher_id")
 	private Teacher teacher;
-	
-//	@JsonIgnore
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_room_id")
 	private Room room;

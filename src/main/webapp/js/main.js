@@ -27,19 +27,50 @@ $(".shop-content").on('click','.add-cart',function(){
 
 
 $(document).on('click','.btn-buy',function(){
-	buyButtonClicked();
+//	buyButtonClicked();
+
+    alert('Your Order is placed')
+    console.log();
+//    console.log($(this));
+    
+    var father = $(this).siblings('.cart-content').children();
+//    console.log(father);
+//    console.log(father.length);
+//    
+//    console.log(father.eq(0));
+//    console.log(father.eq(0).find('.detail-box'))
+//    console.log(father.eq(0).find('.detail-box').find('span').text())
+    
+    for(var i=0;i<father.length;i++){
+	var courseId = father.eq(i).find('.detail-box').find('span').text();
+	 console.log(courseId);
+	 
+	 
+	 
+	 var cartContent = document.getElementsByClassName('cart-content')[0]
+	 cartContent.removeChild(cartContent.firstChild);
+	
+}
+    
+//    var cartContent = document.getElementsByClassName('cart-content')[0]
+//    while (cartContent.hasChildNodes()) {
+//        cartContent.removeChild(cartContent.firstChild);
+//    }
+    updatetotal();
+
 })
 
 //Buy Button
-function buyButtonClicked() {
-    alert('Your Order is placed')
-    console.log();
-    var cartContent = document.getElementsByClassName('cart-content')[0]
-    while (cartContent.hasChildNodes()) {
-        cartContent.removeChild(cartContent.firstChild);
-    }
-    updatetotal();
-}
+//function buyButtonClicked() {
+//    alert('Your Order is placed')
+//    console.log();
+//    console.log($(this));
+////    var cartContent = document.getElementsByClassName('cart-content')[0]
+////    while (cartContent.hasChildNodes()) {
+////        cartContent.removeChild(cartContent.firstChild);
+////    }
+////    updatetotal();
+//}
 
 
 
@@ -85,7 +116,7 @@ function updatetotal() {
     for (var i = 0; i < cartBoxes.length; i++) {
         var cartBox = cartBoxes[i];
         var priceElement = cartBox.getElementsByClassName('cart-price')[0];
-        var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
+//        var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
         var price = parseFloat(priceElement.innerText.replace("$", ""));
 //         var quantity = quantityElement.value;
 //         total = total + (price * quantity);
