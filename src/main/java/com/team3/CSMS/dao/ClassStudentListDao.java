@@ -17,5 +17,5 @@ public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Int
 
 	@Query(value = "from ClassStudentList where classList = '?1'")
 	List<ClassStudentList>findByNameLike(String name);
-
+    
 }

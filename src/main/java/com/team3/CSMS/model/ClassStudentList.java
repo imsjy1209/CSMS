@@ -10,9 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 @Table(name="ClassStudentList")
@@ -22,16 +20,13 @@ public class ClassStudentList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="classStudentList_id")
 	private Integer id;
-	
-	
-//	@JsonBackReference
-//	@JsonManagedReference
-//	@JsonBackReference
-	@JsonIgnoreProperties("classStudentLists")
+
+
 	@ManyToOne
 	@JoinColumn(name="fk_classlist_id")
+	@JsonIgnoreProperties("classStudentLists")
 	private ClassList classList;
-	
+
 	@ManyToOne
 	@JoinColumn(name="fk_student_id")
 	// @JsonBackReference

@@ -16,6 +16,12 @@ public class PageController {
 		return "framePage/sideBar";
 	}
 	
+	//商品結帳頁面-OrderDetail=>OrderList(for前台)
+	@GetMapping("/orderPage")
+	public String OrderDetailPage() {
+		return "cs_orderPage/orderPage";
+	}
+	
 	//商品All頁面-Course(for前台)
 	@GetMapping("/courseAllOnPageAjax.page")
 	public String courseAllOnPage() {

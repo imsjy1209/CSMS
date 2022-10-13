@@ -52,7 +52,6 @@
 				<i class='bx bx-x' id="close-cart"></i>
 			</div>
 		</div>
-
 	</header>
 	<section class="shop container">
 		<h2 class="section-title">Course Products</h2>
@@ -109,7 +108,7 @@
 
 <!--####################################################################### -->				
 			<!--Link TO JS-->
-	<script src="js/main.js"></script>
+<!-- 	<script src="js/main.js"></script> -->
 
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -117,6 +116,8 @@
 		crossorigin="anonymous"></script>
 	
 <script type="text/javascript">
+
+
 
 
 $(function(){
@@ -179,6 +180,96 @@ $(function(){
 	}
 })
 
+
+//Open Cart
+$(document).on('click','#cart-icon',function(){ 
+	$(".cart").addClass("active");
+	})
+
+// Close Cart
+$(document).on('click','#close-cart',function(){ 
+	$(".cart").removeClass("active");
+	})
+
+
+$(".shop-content").on('click','.add-cart',function(){
+	var title = $(this).siblings("h2").text();
+	var course_id = $(this).siblings(".course-id").text();
+	var price = $(this).siblings(".price").text();
+	var productImg = $(this).siblings(".product-img").attr("src");
+	
+	addProductToCart(title,course_id, price, productImg);
+    updatetotal();
+})
+
+
+//結帳動作
+$(document).on('click','.btn-buy',function(){
+//	buyButtonClicked();
+
+    alert('Your Order is placed')
+//     console.log();
+    
+    var father = $(this).siblings('.cart-content').children();
+    for(var i=0;i<father.length;i++){
+	var courseId = father.eq(i).find('.detail-box').find('span').text();
+	var studentId=1;
+	
+	 console.log(courseId);
+	 console.log(studentId);
+	 
+  	 var xhr = new XMLHttpRequest();
+	 xhr.open("GET", "<c:url value='/orderDetailCreateAjax.controller?courseId=" + courseId + "&studentId=" + studentId + "' />", true);
+	 xhr.send();
+	 
+	 var cartContent = document.getElementsByClassName('cart-content')[0]
+	 cartContent.removeChild(cartContent.firstChild);
+	
+}
+    updatetotal();
+  	document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+
+})
+
+
+function addProductToCart(title,course_id, price, productImg) {
+
+	for (var i = 0; i < $(".cart-product-title").length; i++) {
+	    if ($(".cart-product-title")[i].innerText == title) {
+	        alert('You have already add this Product to cart');
+	        return;
+	    }
+	}
+   var cartBoxContent ="<div class='cart-box'><img src=" + productImg + " class='cart-img'>" +
+"<div class='detail-box'><span hidden='hidden'>" + course_id + "</span><div class='cart-product-title'>" + title + "</div>" +
+    "<div class='cart-price'>" + price + "</div>" +
+    "</div><i class='bx bxs-trash-alt cart-remove'></i></div>";
+$(".cart-content").append(cartBoxContent);
+
+//Remove Items From Cart
+$(".cart-remove").click(function(){
+	$(this).closest(".cart-box").remove();
+	 updatetotal();
+})
+}
+
+//Update Total
+function updatetotal() {
+    var cartContent = document.getElementsByClassName('cart-content')[0];
+    var cartBoxes = cartContent.getElementsByClassName('cart-box');
+    var total = 0;
+    for (var i = 0; i < cartBoxes.length; i++) {
+        var cartBox = cartBoxes[i];
+        var priceElement = cartBox.getElementsByClassName('cart-price')[0];
+        var price = parseFloat(priceElement.innerText.replace("$", ""));
+           total = total + price;
+    }
+    //If price Contain some Cents Value
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName('total-price')[0].innerText = "$" + total;
+
+}
+
 $("button").click(function(){
 // 	console.log($(this).text());
 	var keyword = $(this).text()
@@ -233,6 +324,7 @@ $("button").click(function(){
 			var ctt = $('.courseTeachTime');
 // 			console.log(ctt.eq(0).val());
 			var cttlength = ctt.length;
+			
 			//第幾個courseTeachTime
 			for(var j=0; j < cttlength; j++){
 				var cttValue = ctt.eq(j).val();

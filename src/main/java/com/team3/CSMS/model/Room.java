@@ -26,9 +26,6 @@ public class Room {
 	@Column(name="roompic")
 	private byte[] roomPic;
 	
-//	@OneToOne(mappedBy = "room")
-//	private ClassList classList;
-	
 	public Room() {
 	}
 	
@@ -64,13 +61,6 @@ public class Room {
 		this.roomSize = roomSize;
 	}
 
-//	public ClassList getClassList() {
-//		return classList;
-//	}
-//
-//	public void setClassList(ClassList classList) {
-//		this.classList = classList;
-//	}
 	
 	
 	

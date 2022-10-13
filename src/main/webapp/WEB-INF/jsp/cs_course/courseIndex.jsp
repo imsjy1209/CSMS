@@ -110,11 +110,14 @@ ${course.courseGrade}${course.courseClass}年級${course.courseSubject}(${course
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	<!--Link TO JS-->
 	<script src="${contextRoot}/js/main.js"></script>
+	
 	<script type="text/javascript"
 		src="${contextRoot}/js/jquery-3.6.1.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+
+
 $("button").click(function(event){
 	var info = $(this).text();
 	if(info=="小學"|| info=="國中"|| info=="高中"){

@@ -25,16 +25,16 @@ public class AbsentController {
     // private AbsentService absService;
     @Autowired
     private ClassStudentListService cslService;
+    
+    @GetMapping("/absentCheck")
+    public String getAll(Model model){
+        List<ClassList> clList= clService.findAll();
+        if(clList != null){
+            model.addAttribute("ClList",clList);
+        }
+        return "absent/absentCheck";
+    }
 
-    // @GetMapping("/absentCheck")
-    // public String getAll(Model model){
-    //     List<ClassList> clList= clService.findAll();
-    //     if(clList != null){
-    //         model.addAttribute("ClList",clList);
-    //     }
-    //     return "absent/absentCheck";
-    // }
-    // 取得所有ClassCode
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})
     public @ResponseBody List<ClassList> getcode(){

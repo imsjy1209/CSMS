@@ -1,6 +1,7 @@
 package com.team3.CSMS.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +21,12 @@ public class OrderListService {
 		List<OrderList> orderListList = orderListDao.findAll();
 		return orderListList;
 	}
+	
+	//完成訂單(新增一筆付款完成的交易)
+	public void insertOrderList(OrderList orderList) {
+		orderListDao.save(orderList);
+	}
+	
+	
 
 }

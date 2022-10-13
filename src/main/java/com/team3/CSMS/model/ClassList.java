@@ -13,11 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
 
 @Entity
 @Table(name="ClassList")
@@ -28,15 +24,14 @@ public class ClassList {
 	@Column(name="classList_id")
 	private Integer id;
 
-	// @JsonBackReference
-	// @JsonIgnore	
+	
 	@JsonIgnoreProperties("classList")
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "classList",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "classList",cascade = CascadeType.ALL)
+
 	private List<ClassStudentList> classStudentLists ;
 	
 	@Column(name="classcode",columnDefinition = "nvarchar(10)",unique = true, nullable = false)
 	private String classCode;
-	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_school_id")
@@ -45,8 +40,7 @@ public class ClassList {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_teacher_id")
 	private Teacher teacher;
-	
-	@JsonIgnore
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_room_id")
 	private Room room;
