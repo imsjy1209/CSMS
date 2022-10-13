@@ -1,9 +1,8 @@
 package com.team3.CSMS.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="ClassStudentList")
@@ -33,6 +33,7 @@ public class ClassStudentList {
 
 	@ManyToOne
 	@JoinColumn(name="fk_student_id")
+	@JsonBackReference	
 	private Student student;
 	
 	@Column(name="studentNo")

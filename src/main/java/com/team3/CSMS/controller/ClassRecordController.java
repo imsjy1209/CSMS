@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.model.ClassRecord;
-import com.team3.CSMS.model.Course;
+
 import com.team3.CSMS.service.ClassRecordService;
 
 @Controller

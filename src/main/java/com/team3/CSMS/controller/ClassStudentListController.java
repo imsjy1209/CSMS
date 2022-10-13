@@ -1,8 +1,6 @@
 package com.team3.CSMS.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ClassStudentList;
-import com.team3.CSMS.model.Course;
 import com.team3.CSMS.service.ClassStudentListService;
 
 @Controller
