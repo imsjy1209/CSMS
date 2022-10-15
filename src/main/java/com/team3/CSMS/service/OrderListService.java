@@ -26,7 +26,5 @@ public class OrderListService {
 	public void insertOrderList(OrderList orderList) {
 		orderListDao.save(orderList);
 	}
-	
-	
 
 }
