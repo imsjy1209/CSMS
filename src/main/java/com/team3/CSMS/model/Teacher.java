@@ -1,13 +1,17 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,47 +19,54 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name="TEACHER")
+@Table(name = "TEACHER")
 public class Teacher {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="teacher_id")
+	@Column(name = "teacher_id")
 	private Integer id;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_user_id")
+	@JoinColumn(name = "fk_user_id")
 	private Users users;
-	
-	@Column(name="name",columnDefinition = "nvarchar(15)", nullable = false)
+
+	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
 	private String name;
-	
-	@Column(name="title",columnDefinition = "nvarchar(30)", nullable = false)
+
+	@Column(name = "title", columnDefinition = "nvarchar(30)", nullable = false)
 	private String title;
-	
-	@Column(name="hiredate", nullable = false)
+
+	@Column(name = "hiredate", nullable = false)
 	private Date hiredate;
-	
-	@Column(name="resigndate")
+
+	@Column(name = "resigndate")
 	private Date resigndate;
-	
-	@Column(name="status",columnDefinition = "nvarchar(10)", nullable = false)
+
+	@Column(name = "status", columnDefinition = "nvarchar(10)", nullable = false)
 	private String status;
-	
-	
-	@Column(name="expertise",columnDefinition = "nvarchar(30)", nullable = false)
+
+	@Column(name = "expertise", columnDefinition = "nvarchar(30)", nullable = false)
 	private String expertise;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="create_at", columnDefinition = "datetime default getDate()", nullable = false)
+	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
 	private Date create_at;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="update_at", columnDefinition = "datetime default getDate()", nullable = false)
+	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
 	private Date update_at;
+
+	// @JsonIgnoreProperties("Teacher")
+	// @JsonManagedReference
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL)
+	public Set<Score> score;
 
 	public Teacher() {
 	}

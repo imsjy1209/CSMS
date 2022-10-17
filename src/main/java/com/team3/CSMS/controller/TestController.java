@@ -12,4 +12,10 @@ public class TestController {
 	}
 	
 	
+//	@GetMapping("/a")
+//	public String scoreEdit() {
+//		return "/cs_score/scoreEdit";
+//	}
+	
+	
 }
