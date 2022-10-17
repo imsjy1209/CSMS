@@ -31,7 +31,7 @@ public class StudentListDto implements Serializable{
     }
     public void setStudentName(String studentName) {
         this.studentName = studentName;
-    }
+    }   
 
     
 }
