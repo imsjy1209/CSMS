@@ -21,6 +21,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+	
+	<!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <title>Welcome</title>
 <style>
         /*
@@ -71,7 +74,7 @@
             border-bottom: 1px dashed #ddd;
             margin: 40px 0;
         }
-        /*On/Off Button Style*/ 
+        /*On/Off Course Button Style*/ 
         .con.active{
 			background-color:green;
  			cursor: default; 
@@ -90,9 +93,38 @@
 		cursor: pointer;
 		}
 		
+		  /*On/Off OrderDetail Button Style*/ 
+        .oDon.active{
+			background-color:green;
+ 			cursor: default; 
+		}
+
+		.oDoff.active{
+ 			background-color:red;
+ 			cursor: default; 
+		}
+		
+		 .oDon{
+			cursor: pointer;
+		}
+
+		.oDoff{
+		cursor: pointer;
+		}
+		
 		.class-studentList:hover{
 		background-color:yellow;
 		}
+		
+		.orderWait.active{
+	background-color:orange;
+}
+.orderNoP.active{
+	background-color:red;
+}
+.orderFin.active{
+	background-color:green;
+}
 		
         /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -264,6 +296,9 @@
                         </li>
                         <li>
                             <a id="orderList-Btn"  href="#">OrderList(訂單)</a>
+                        </li>
+                         <li>
+                            <a id="orderDetail-Btn"  href="#">OrderDetail(訂單明細)</a>
                         </li>
                        <li>
                             <a id="room-Btn" href="#">Room(教室)</a>

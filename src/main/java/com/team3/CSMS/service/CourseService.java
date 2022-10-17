@@ -2,6 +2,7 @@ package com.team3.CSMS.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,8 @@ public class CourseService {
 	
 	@Autowired
 	private CourseDao courseDao;
+	
+
 	
 	//刪除課程商品
 		public void deleteCourse(Course course) {
@@ -65,5 +68,39 @@ public class CourseService {
 
 		return courseDao.findById(id);
 	}
-
+	
+	//課程方案多選處理(模糊查詢)
+	public List<Course> findCourseByKeyWord
+	(String courseSubject,String courseGrade,String courseCategory){
+		return courseDao.findByLike(courseSubject, courseGrade, courseCategory);
+	}
+	
+	//課程模糊搜尋1
+	public List<Course> findByCourseCategoryContaing(String courseCategory){
+		return courseDao.findByCourseCategoryContaining(courseCategory);
+	}
+	//課程模糊搜尋2
+	public List<Course> findByCourseSubjectContaing(String courseSubject){
+		return courseDao.findByCourseSubjectContaining(courseSubject);
+	}
+	//課程模糊搜尋3
+	public List<Course> findByCourseGradeContaing(String courseGrade){
+		return courseDao.findByCourseGradeContaining(courseGrade);
+	}
+	//課程模糊搜尋4
+	public List<Course> findByCourseSemesterContaing(String courseSemester){
+		return courseDao.findByCourseSemesterContaining(courseSemester);
+	}
+	
+	//課程模糊搜尋5
+	public List<Course> findByCourseOnOffIsAndCourseSemesterContainingOrCourseOnOffIsAndCourseCategoryContainingOrCourseOnOffIsAndCourseSubjectContainingOrCourseOnOffIsAndCourseGradeContaining(Integer courseOnOff1,String courseSemester,Integer courseOnOff2,String courseCategory,Integer courseOnOff3,String courseSubject,Integer courseOnOff4,String courseGrade){
+		return courseDao.findByCourseOnOffIsAndCourseSemesterContainingOrCourseOnOffIsAndCourseCategoryContainingOrCourseOnOffIsAndCourseSubjectContainingOrCourseOnOffIsAndCourseGradeContaining(courseOnOff1,courseSemester,courseOnOff2,courseCategory,courseOnOff3,courseSubject,courseOnOff4,courseGrade);
+	}
+	
+//	//課程方案多選處理(模糊查詢)
+//	public List<Course> findCourseByKeyWord
+//	(String courseSubject1,String courseSubject2,String courseSubject3,String courseGrade1,String courseGrade2,String courseGrade3,String courseCategory1,String courseCategory2){
+//		return courseDao.findByLike2(courseSubject1, courseSubject2, courseSubject3, courseGrade1, courseGrade2, courseGrade3, courseCategory1, courseCategory2);
+//	}
+	
 }

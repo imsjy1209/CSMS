@@ -9,7 +9,10 @@
 
 
 
-            <h2>Main Info</h2>
+            <h3 class='main-title'>Main Info</h3>
+<!--             <div class="row"> -->
+            <div class="bigDiv">
+ <div class="col-xs-6">
            <table id="table" class="table table-striped mt-5 ">
 			
 			<thead id="thead-title">
@@ -22,7 +25,21 @@
 			
 			
 		</table>
-           
+</div>
+
+ <div class="subDiv col-xs-6"  style='display: none'>
+ <table id="table2" class="table table-striped mt-5 ">
+ <thead id="thead-title2">
+ </thead>
+
+ <tbody id="content-data2">
+			
+</tbody>
+ </table>
+ </div>
+ 
+ 
+   </div>         
        </div>
     </nav>
 
@@ -50,15 +67,12 @@
 
 <script type="text/javascript">
 
-
-
 // window.onload = function() {
 // 	var xhr = new XMLHttpRequest();
 // 	xhr.open("GET", "<c:url value='/AllCourseBackAjax.page' />", true);
 // 	xhr.send();
 // 	xhr.onreadystatechange = function() {
 // 		if (xhr.readyState == 4 && xhr.status == 200) {
-			
 // 			var content0 = "";
 // 			content0 += 
 // 			"<tr>" +
@@ -80,14 +94,11 @@
 // 			"<td>Function</td>"+
 // 			"<td>Function</td>"+
 // 			"</tr>"; 
-			
 // 			var content = "";
 // 			var courseList = JSON.parse(xhr.responseText);
 // 			console.log(courseList);
 // 			for(var i=0; i < courseList.length; i++){
 // 				content += 
-					
-
 // 				"<tr><td><input type='checkbox'/></td>" +	
 // 				"<td id='course-id'>" + courseList[i].id + "</td>" +
 // 				"<td>" + courseList[i].courseYear + "</td>" +
@@ -106,14 +117,11 @@
 //     	       	"<td class='test1'><a href='${contextRoot}/updateCourseData1.controller?id=" + courseList[i].id + "' type='button' class='btn btn-warning'>Edit</a></td>" +
 // 				"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
 // 		               		"</tr>";
-
 // 			}
 // 			var info0 = document.getElementById("thead-title");
 // 			info0.innerHTML = content0;
-			
 // 			var info = document.getElementById("content-data");
 // 			info.innerHTML = content;
-			
 // 			$('input[type="checkbox"]').click(function() {
 // 				console.log('checkbox', $(this));
 // 				let bgColor = 'none';
@@ -124,10 +132,11 @@
 // 			})
 // 		}
 // 	}
-		
 // }
 //======================Course=======================
 	$('#course-Btn').click(function(){
+// 		console.log($('.main-title'))
+		$('.main-title').text('Course')
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "<c:url value='/AllCourseBackAjax.page' />", true);
 		xhr.send();
@@ -153,7 +162,7 @@
 				"<td>上/下架</td>"+
 				"<td>圖片</td>"+
 				"<td>Function</td>"+
-				"<td>Function</td>"+
+// 				"<td>Function</td>"+
 				"</tr>"; 
 				
 				var content = "";
@@ -180,7 +189,7 @@
 	    	       		"<td><button class='con'>ON</button><button class='coff'>OFF</button></td>" +
 	    	       		"<td>" + "<img alt='img' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
 	    	       		"<td class='test1'><a href='${contextRoot}/updateCourseData1.controller?id=" + courseList[i].id + "' type='button' class='btn btn-warning'>Edit</a></td>" +
-						"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+// 						"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
 						"<td class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
 			        "</tr>";
 				}
@@ -257,6 +266,7 @@
 //========================ClassList==================
 	
 	$('#classList-Btn').click(function(){
+		$('.main-title').text('ClassList')
 	var xhr = new XMLHttpRequest();
 	var xhrRoom = new XMLHttpRequest();
 	xhrRoom.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
@@ -290,10 +300,11 @@
 			console.log(classListList);
 			
 			var roomList = JSON.parse(xhrRoom.responseText);
-			console.log(roomList);
+// 			console.log(roomList);
 			
 			var content = "";
 			for(var i=0; i < classListList.length; i++){
+				
 				content += 
 				"<tr><td><input type='checkbox'/></td>" +	
 				"<td class='classListId'>" + classListList[i].id + "</td>" +
@@ -356,6 +367,7 @@
 //========================ClassRecord==================
 	
 	$('#classRecord-Btn').click(function(){
+		$('.main-title').text('ClassRecord')
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllClassRecordAjax.controller' />", true);
 	xhr.send();
@@ -394,10 +406,8 @@
 			}
 			var info0 = document.getElementById("thead-title");
 			info0.innerHTML = content0;
-			
 			var info = document.getElementById("content-data");
 			info.innerHTML = content;
-			
 			$('input[type="checkbox"]').click(function() {
 				console.log('checkbox', $(this));
 				let bgColor = 'none';
@@ -413,6 +423,7 @@
 //========================OrderList==================
 	
 	$('#orderList-Btn').click(function(){
+		$('.main-title').text('OrderList')
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllOrderListAjax.controller' />", true);
 	xhr.send();
@@ -488,9 +499,198 @@
 	}
 	})	
 	
+//========================OrderDetail==================
+	
+	$('#orderDetail-Btn').click(function(){
+		$('.main-title').text('OrderDetail')
+		var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/findAllOrderDetail.controller' />", true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			
+			var content0 = "";
+			content0 += 
+			"<tr>" +
+// 			"<td>多選</td>"+
+			"<td>OD_id</td>"+
+			"<td>學生id</td>"+
+			"<td>學生名稱</td>"+
+			"<td>方案id</td>"+
+			"<td>方案資訊</td>"+
+			"<td>購買狀態</td>"+
+			"<td>排課狀態</td>"+
+			"<td>Function</td>"+
+			"<td>Function</td>"+
+			"</tr>";
+			
+			var content = "";
+			var orderDetailList = JSON.parse(xhr.responseText);
+			
+			console.log(orderDetailList);
+			
+			for(var i=0; i < orderDetailList.length; i++){
+				content += 
+// 				"<tr><td><input type='checkbox'/></td>" +	
+				"<td class='oDId-id'>" + orderDetailList[i].id + "</td>" +
+				"<td class='student-id'>" + orderDetailList[i].student.id + "</td>" +
+				"<td>" + orderDetailList[i].student.name + "</td>" +
+				"<td class='course-id'>" + orderDetailList[i].course.id + "</td>" +
+				"<td>" + orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseSubject + orderDetailList[i].course.courseClass + "</td>" +
+// 				"<td>" + orderDetailList[i].confirmOrder + "</td>" +
+				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
+// 				"<td>" + orderDetailList[i].arrangeClassList + "</td>" +
+				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
+    	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
+    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+           		"</tr>";
+			}
+			var info0 = document.getElementById("thead-title");
+			info0.innerHTML = content0;
+			
+			var info = document.getElementById("content-data");
+			info.innerHTML = content;
+			
+			//將是否已排課轉換成按鈕
+			$('.arrange-info').each(function(){
+				var arrangeInfo = $(this).text();
+				if(arrangeInfo==1){
+					$(this).prev().prev().addClass('active')
+				}else{
+					$(this).prev().addClass('active')
+				}
+				
+			})
+			
+			//將購買狀態轉換成按鈕
+			$('.order-info').each(function(){
+				var orderInfo = $(this).text();
+				console.log(orderInfo)
+				if(orderInfo==0){
+					$(this).prev().prev().prev().addClass('active')
+				}
+				else if(orderInfo==1){
+					$(this).prev().prev().addClass('active')
+				}
+				else{
+					$(this).prev().addClass('active')
+				}
+			})
+			
+	//針對已購買課程的OrderDetail，透過CourseId找到對應的ClassListId並新增到ClassStudentList中
+	$('.oDon').click(function(){
+// 		$('.bigDiv').addClass('row')
+// 		$('.subDiv').css('display','block')
+		
+		if($(this).next().next().text()==0){
+			$(this).addClass('active');
+			$(this).next().removeClass('active');
+		var studentId = $(this).parent().siblings('.student-id').text();
+		var courseId = $(this).parent().siblings('.course-id').text();
+		var orderId = $(this).parent().siblings('.oDId-id').text();
+		
+		console.log("got uuuuuuuuuuuu")
+		console.log(orderId)
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/findClassStudentListByCourseIdAndClassListIdAjax.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
+		xhr.send();
+		}else{
+			console.log('nothing happened');
+		}
+// 		xhr.onreadystatechange = function() {
+// 		if (xhr.readyState == 4 && xhr.status == 200) {
+			
+// 			var content0 = "";
+// 			content0 += 
+// 			"<tr>" +
+// 			"<td>多選</td>"+
+// 			"<td>id</td>"+
+// 			"<td>課程代碼</td>"+
+// 			"<td>學生名稱</td>"+
+// 			"<td>座號</td>"+
+// 			"<td>Function</td>"+
+// 			"<td>Function</td>"+
+// 			"</tr>";
+			
+// 			var content = "";
+// 			var cslList = JSON.parse(xhr.responseText);
+			
+// 			console.log(cslList);
+			
+// 			for(var i=0; i < cslList.length; i++){
+// 				content += 
+// 				"<tr><td><input type='checkbox'/></td>" +	
+// 				"<td>" + cslList[i].id + "</td>" +
+// 				"<td>" + cslList[i].classList.classCode + "</td>" +
+// 				"<td>" + cslList[i].student.name + "</td>" +
+// 				"<td>" + cslList[i].studentNo + "</td>" +
+//     	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
+//     	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+//            		"</tr>";
+// 			}
+// 			var info0 = document.getElementById("thead-title2");
+// 			info0.innerHTML = content0;
+			
+// 			var info = document.getElementById("content-data2");
+// 			info.innerHTML = content;
+				
+// 			}
+// 		}
+				
+	})
+	
+	$('.oDoff').click(function(){
+		if($(this).next().text()==1){
+			$(this).addClass('active');
+			$(this).prev().removeClass('active');
+		var studentId = $(this).parent().siblings('.student-id').text();
+		var courseId = $(this).parent().siblings('.course-id').text();
+		var orderId = $(this).parent().siblings('.oDId-id').text();
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/findClassStudentListByClassListIdAndStudentId.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
+		xhr.send();
+		
+		}else{
+			console.log('nothing happened')
+			}
+		
+		
+	})
+			
+			//刪除按鈕的功能
+			$('.oD-delete-td').click(function(){
+			var oDidDel = $(this).siblings('.oDId-id').text();
+			console.log(oDidDel);
+			if(window.confirm('確定刪除嗎?')){
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/deleteOrderDetailByIdAjax.controller?id=" + oDidDel + "' />", true);
+				xhr.send();
+				$(this).parent().remove();
+				
+		 	} 
+		 	else{
+		 		console.log("nothing happened")
+		 	}
+			})
+			
+			
+			$('input[type="checkbox"]').click(function() {
+				console.log('checkbox', $(this));
+				let bgColor = 'none';
+				if ($(this).prop('checked')) {
+					bgColor = 'lightblue';
+				}
+				$(this).closest('tr').css('background', bgColor)
+			})
+		}
+	}
+	})		
+	
 //========================ClassStudentList==================
 	
 	$('#classStudentList-Btn').click(function(){
+		$('.main-title').text('ClassStudentList')
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllClassStudentListAjax.controller' />", true);
 	xhr.send();
@@ -505,22 +705,24 @@
 			"<td>課程代碼</td>"+
 			"<td>學生名稱</td>"+
 			"<td>座號</td>"+
-			"<td>Function</td>"+
+// 			"<td>Function</td>"+
 			"<td>Function</td>"+
 			"</tr>";
 			
 			var content = "";
 			var cslList = JSON.parse(xhr.responseText);
+			
 			console.log(cslList);
+			
 			for(var i=0; i < cslList.length; i++){
 				content += 
-				"<tr><td><input type='checkbox'/></td>" +	
-				"<td>" + cslList[i].id + "</td>" +
+				"<tr><td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
+				"<td class='cslId-td'>" + cslList[i].id + "</td>" +
 				"<td>" + cslList[i].classList.classCode + "</td>" +
 				"<td>" + cslList[i].student.name + "</td>" +
-				"<td>" + cslList[i].studentNo + "</td>" +
-    	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+				"<td class='cslStudentNo'>" + cslList[i].studentNo + "</td>" +
+//     	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
+    	       	"<td class='cslDel-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -529,14 +731,56 @@
 			var info = document.getElementById("content-data");
 			info.innerHTML = content;
 			
-			$('input[type="checkbox"]').click(function() {
-				console.log('checkbox', $(this));
-				let bgColor = 'none';
-				if ($(this).prop('checked')) {
-					bgColor = 'lightblue';
+			$('.cslDel-td').click(function(){
+				if(window.confirm('確定刪除嗎?')){
+				var cslId = $(this).siblings('.cslId-td').text();
+				console.log(cslId);
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/deleteClassStudentListByEntityAjax.controller?cslId=" + cslId +"' />", true);
+				xhr.send();
+				$(this).parent().remove();
 				}
-				$(this).closest('tr').css('background', bgColor)
+				else{
+					console.log('nothing happened')
+				}
 			})
+			
+			$('.bxs-edit').click(function(){
+				console.log($(this));
+				var oriStuNo = $(this).parent().siblings('.cslStudentNo').text();
+				contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+oriStuNo+ "'>";
+				$(this).parent().siblings('.cslStudentNo').html(contentEdit);
+				
+				$('.stuNoEdit').change(function(){
+					console.log('changeeeeeeeee')
+					var newStuNo = $(this).val();
+// 					console.log(newStuNo);
+					var cslId= $(this).parent().siblings('.cslId-td').text();
+// 					console.log(cslId)
+					
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", "<c:url value='/updateClassStudentListByIdAjax.controller?cslId=" + cslId +"&newStuNo=" + newStuNo + "' />", true);
+					xhr.send();
+					
+					var cslStudentNoTd = $(this).parent();
+					$(this).remove();
+					cslStudentNoTd.text(newStuNo);
+					
+				})
+				
+			})
+			
+			
+			
+			
+// 			$('input[type="checkbox"]').click(function() {
+// 				console.log('checkbox', $(this));
+// 				let bgColor = 'none';
+// 				if ($(this).prop('checked')) {
+// 					bgColor = 'lightblue';
+// 				}
+// 				$(this).closest('tr').css('background', bgColor)
+// 			})
 		}
 	}
 	})	
@@ -546,6 +790,7 @@
 //========================Room==================
 	
 	$('#room-Btn').click(function(){
+		$('.main-title').text('Room')
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
 	xhr.send();
@@ -610,22 +855,22 @@
 
 	 
 //=======================暫時不用=======================
-	$(document).on('click','#delete-btn',function() {
-	var id = $(this).parent().siblings("#course-id").text();
-	console.log($(this));
-	console.log(id);
+// 	$(document).on('click','#delete-btn',function() {
+// 	var id = $(this).parent().siblings("#course-id").text();
+// 	console.log($(this));
+// 	console.log(id);
 	
-	if(window.confirm('確定刪除嗎?')){
-		document.location.href = href="${contextRoot}/deleteCourseData.controller?id="+id;
+// 	if(window.confirm('確定刪除嗎?')){
+// 		document.location.href = href="${contextRoot}/deleteCourseData.controller?id="+id;
 		
-	} 
-	else{
-		console.log("nothing happened")
-	}
+// 	} 
+// 	else{
+// 		console.log("nothing happened")
+// 	}
 	
 	//document.location.href = "${contextRoot}/updateRoomData.controller/"
 	//+ id + "/" + roomName + "/" + roomSize;
-});
+// });
 
 
 		

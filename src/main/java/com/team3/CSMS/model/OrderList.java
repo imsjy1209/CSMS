@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -31,8 +32,9 @@ public class OrderList {
 	@Column(name="orderList_id")
 	private Integer id;
 	
+//	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "orderList",cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnoreProperties("orderList")
 	private List<OrderDetail> orderDetails ;
 	
 	@OneToOne(cascade = CascadeType.ALL)
