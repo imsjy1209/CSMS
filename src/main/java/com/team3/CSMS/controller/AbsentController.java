@@ -36,7 +36,7 @@ public class AbsentController {
         }
         return "absent/absentCheck";
     }
-
+    
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})
     public @ResponseBody List<ClassList> getcode(){
@@ -50,17 +50,21 @@ public class AbsentController {
         Map<String,Object> map = new HashMap<>();
         List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
         List<StudentListDto>slDto=cslService.getStudentListByClassCodeId(classCodeId);
-        map.put("slDto", slDto);
+        map.put("slDto", slDto);    
         map.put("cliDto", cliDto);
         return map;
     }
     //透過ID和日期 查出缺勤
-    public @ResponseBody Map<String,Object> getAbsentByIdAndDay(@RequestParam("classCodeId") Integer classCodeId,String dayz){
-        Map<String,Object> map = new HashMap<>();
-        List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
-        List<Absent> abList=absService.searchAbsent(classCodeId, dayz);
-        map.put("cliDto", cliDto);
-        map.put("abList", abList);
-        return map;
+    @GetMapping(value = "/getAbsentData.json",
+                produces = {"application/json;charset=UTF-8"})
+    public @ResponseBody List<Absent> getAbsentByIdAndDay(@RequestParam("classCodeId")Integer classCodeId,@RequestParam("days")String days){
+        System.out.println(classCodeId);
+        System.out.println(days);
+        // Map<String,Object> map = new HashMap<>();
+        // List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
+        List<Absent> abList=absService.searchAbsent(classCodeId, days);
+        // map.put("cliDto", cliDto);
+        // map.put("abList", abList);
+        return abList;
     }
 }
