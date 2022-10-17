@@ -3,6 +3,7 @@ package com.team3.CSMS.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -34,9 +36,15 @@ public class Student {
 	@Column(name="student_id")
 	private Integer id;
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
-	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
+	//=================update By Neil-1015=================
+	@JsonIgnoreProperties("student")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "student",cascade = CascadeType.ALL)
+	private List<ClassStudentList> classStudentLists ;
+	
+	//=================update By Neil-1015=================
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
+//	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
@@ -97,13 +105,13 @@ public class Student {
 		this.users = users;
 	}
 
-	public Set<ClassStudentList> getClassStudentLists() {
-		return classStudentLists;
-	}
-
-	public void setClassStudentLists(Set<ClassStudentList> classStudentLists) {
-		this.classStudentLists = classStudentLists;
-	}
+//	public Set<ClassStudentList> getClassStudentLists() {
+//		return classStudentLists;
+//	}
+//
+//	public void setClassStudentLists(Set<ClassStudentList> classStudentLists) {
+//		this.classStudentLists = classStudentLists;
+//	}
 
 	public String getName() {
 		return name;
@@ -177,5 +185,23 @@ public class Student {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public List<ClassStudentList> getClassStudentLists() {
+		return classStudentLists;
+	}
+
+	public void setClassStudentLists(List<ClassStudentList> classStudentLists) {
+		this.classStudentLists = classStudentLists;
+	}
+
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+	
+	
 
 }

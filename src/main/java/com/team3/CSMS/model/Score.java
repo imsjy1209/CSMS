@@ -7,8 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Score")
@@ -35,8 +41,8 @@ public class Score {
 	private Student student;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_course_id")
-	private Course course;
+	@JoinColumn(name = "fk_classlist_id")
+	private ClassList classlist;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_school_id")
@@ -45,6 +51,17 @@ public class Score {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_parent_id")
 	private Parent parent;
+	
+
+	@JsonManagedReference
+//	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "fk_teacher_id")
+	//@JsonIgnoreProperties("score")
+	private Teacher teacher;
+	
+	@Column(name = "frequency")
+	private Integer frequency;
 
 	public Score() {
 
@@ -66,12 +83,12 @@ public class Score {
 		this.student = student;
 	}
 
-	public Course getCourse() {
-		return course;
+	public ClassList getClasslist() {
+		return classlist;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setClasslist(ClassList classlist) {
+		this.classlist = classlist;
 	}
 
 	public School getSchool() {
@@ -89,5 +106,23 @@ public class Score {
 	public void setParent(Parent parent) {
 		this.parent = parent;
 	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public Integer getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(Integer frequency) {
+		this.frequency = frequency;
+	}
+
+	
 
 }
