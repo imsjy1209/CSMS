@@ -60,6 +60,7 @@ public class RoomController {
 			oldRoom.setRoomSize(roomSize);
 			byte[] newByte = file.getBytes();
 			
+			
 			System.out.println(newByte);
 			
 			if(newByte.length!=0){

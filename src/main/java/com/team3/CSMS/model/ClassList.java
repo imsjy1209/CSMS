@@ -1,6 +1,7 @@
 package com.team3.CSMS.model;
 
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +26,9 @@ public class ClassList {
 	private Integer id;
 
 	
+//	@JsonManagedReference
 	@JsonIgnoreProperties("classList")
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "classList",cascade = CascadeType.ALL)
-
 	private List<ClassStudentList> classStudentLists ;
 	
 	@Column(name="classcode",columnDefinition = "nvarchar(10)",unique = true, nullable = false)

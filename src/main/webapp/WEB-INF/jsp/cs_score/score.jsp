@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> --%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
 <link rel="stylesheet"
@@ -40,8 +40,8 @@
 <body>
 	<div class="topbtn">
 		<!-- 	<a id="showdata" href="#" type="button" class="btn btn-primary ">show data</a> -->
-		<a href="${contextRoot}/roomCreate.page" type="button"
-			class="btn btn-primary ">Go To CreateFormPage</a> <a type="button"
+		<a href="${contextRoot}/findAllScore.controller" type="button"
+			class="btn btn-primary ">新增</a> <a type="button"
 			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go
 			To HomePage</a>
 	</div>
@@ -57,11 +57,11 @@
 					<td>次數</td>
 					<td>分數</td>
 					<td>班導名稱</td>
-					<td>通知家長</td>				
+					<td>通知家長</td>
 					<td>編輯功能</td>
 					<td>刪除功能</td>
 
-					
+
 				</tr>
 			</thead>
 			<tbody id="content-data">
@@ -95,7 +95,7 @@
 	window.onload = function() {
 		console.log("gogogo")
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/findAllScore.controller' />",
+		xhr.open("GET", "<c:url value='/findAllScore.controller'/>",
 				true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
@@ -124,8 +124,9 @@
 							+ scoreList[i].school.name
 							+ "</td>"
 							+ "<td class='test1'><a type='button' class='btn btn-info'>email</a></td>"
-							+ "<td class='test2'><a type='button' class='btn btn-warning'>Edit</a></td>"
-							+ "<td class='test3'><a onclick='return confirm('確定刪除嗎?')' type='button' class='btn btn-danger'>Delete</a></td>"
+//  							+ "<td class='test2'><a type='button' class='btn btn-warning' href='${contextRoot}/scoreData/edit?id="+${item.id}+"'>Edit</a></td>"
+ 							+"<td class='test1'><a href='${contextRoot}/scoreData/edit?id=" +scoreList[i].id+ "' type='button' class='btn btn-warning'>Edit</a></td>" 
+ 							+ "<td class='test3'><a onclick='return confirm('確定刪除嗎?')' type='button' class='btn btn-danger'>Delete</a></td>"
 							+ "</tr>";
 							
 							

@@ -25,7 +25,7 @@ public class Absent{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="absentOrNot_id")
     private int id;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,7 +36,7 @@ public class Absent{
     
     // 對應課程
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_classlist_id")
+	@JoinColumn(name="fk_classId_id")
     private ClassList ClassList;
     
 	// 對應學生號碼
@@ -44,7 +44,7 @@ public class Absent{
     @JoinColumn(name="fk_student_id")
     private Student student;
 
-    @Column(name="arrviedOrNot")
+    @Column(name="arrivedOrNot")
     private int arrviedOrNot;
     //---------------- Constructor------------------
     public Absent(){

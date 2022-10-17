@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Course;
+import com.team3.CSMS.model.Room;
+import com.team3.CSMS.model.School;
+import com.team3.CSMS.model.Teacher;
+import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.CourseService;
+import com.team3.CSMS.service.RoomService;
+import com.team3.CSMS.service.SchoolService;
+import com.team3.CSMS.service.TeacherService;
 
 
 @Controller
@@ -23,6 +33,18 @@ public class CourseController {
 
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private ClassListService classListService;
+	
+	@Autowired
+	private RoomService roomService;
+	
+	@Autowired
+	private SchoolService schoolService;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//刪除Course資料
 		@GetMapping("/deleteCourseData.controller")
@@ -101,7 +123,7 @@ public class CourseController {
 			}
 		}
 	
-	//課程方案建立Course
+	//建立Course方案+ClassList
 	@PostMapping("courseDataCreate.controller")
 	public String courseCreateAction(
 			@RequestParam(name="courseYear", required = true) int courseYear,
@@ -132,7 +154,6 @@ public class CourseController {
 			course1.setEndDate(endDate);
 			course1.setStartDate(startDate);
 			
-			
 			//圖片轉base64
 			if(!file.isEmpty() && file != null) {
 				byte[] bytes = file.getBytes();
@@ -141,6 +162,51 @@ public class CourseController {
 				course1.setCoursePic(base64Encoded);
 			}
 			courseService.insertCourse(course1);
+			
+			String classCode = "";
+			if(courseSubject.equals("國文")) {
+				
+				classCode += "CH" + courseYear;
+				System.out.println(classCode);
+				ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+				String firstClassCodeStr = oneClassList.getClassCode();
+				String oldClassCodeStr = firstClassCodeStr.substring(6);
+				Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+				classCode += "0" + (newClassCode+1);
+			}	
+			else if(courseSubject.equals("英文")){
+				classCode += "EN" + courseYear;
+				System.out.println(classCode);
+				ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+				String firstClassCodeStr = oneClassList.getClassCode();
+				String oldClassCodeStr = firstClassCodeStr.substring(6);
+				Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+				classCode += "0" + (newClassCode+1);
+			}
+			
+			else if(courseSubject.equals("數學")) {
+				classCode += "MA" + courseYear;
+				System.out.println(classCode);
+				ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+				String firstClassCodeStr = oneClassList.getClassCode();
+				String oldClassCodeStr = firstClassCodeStr.substring(6);
+				Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+				classCode += "0" + (newClassCode+1);
+				
+			}
+				Room oneRoom = roomService.findRoomById(4);
+				School oneSchool = schoolService.findSchoolById(1);
+				Teacher oneTeacher = teacherService.findTeacherById(1);
+				
+				ClassList newClassList = new ClassList();
+				newClassList.setClassCode(classCode);
+				newClassList.setClassMember(99);
+				newClassList.setRoom(oneRoom);
+				newClassList.setSchool(oneSchool);
+				newClassList.setTeacher(oneTeacher);
+				newClassList.setCourse(course1);
+				classListService.insertClassList(newClassList);
+			
 			return "redirect:/courseCreate.page";
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -184,6 +250,41 @@ public class CourseController {
 		List<Course> courseList = courseService.findCourseByCategory(category);
 		return courseList;
 	}
+	
+	//商品總total頁面--以多選關鍵字搜尋(for前台)--Ajax
+	@GetMapping("/findAllCourseByKeyWordAjax.controller")
+	public @ResponseBody List<Course> findAllCourseByKeyWordAjax
+	(@RequestParam(name="cs")String cs,@RequestParam(name="cg")String cg,@RequestParam(name="cc")String cc) {
+		String newCS = "%"+cs+"%";
+		String newCG = "%"+cg+"%";
+		String newCC = "%"+cc+"%";
+		
+		List<Course> courseList = courseService.findCourseByKeyWord(newCS,newCG,newCC);
+		return courseList;
+	}
+	
+	//商品總total頁面--以單一關鍵字搜尋(for前台)--Ajax
+	@GetMapping("/findAllCourseByMoHuAjax.controller")
+	public @ResponseBody List<Course> findAllCourseByMoHuAjax(@RequestParam(name="mohu")String mohu) {
+		
+		List<Course> mohuList1 = courseService.findByCourseOnOffIsAndCourseSemesterContainingOrCourseOnOffIsAndCourseCategoryContainingOrCourseOnOffIsAndCourseSubjectContainingOrCourseOnOffIsAndCourseGradeContaining(1,mohu,1,mohu,1,mohu,1,mohu);
+		
+		return mohuList1;
+	}
+	
+	
+	//======被Neil廢棄的程式碼=============================================
+//	//商品總total頁面--以多選關鍵字搜尋(for前台)--Ajax
+//	@GetMapping("/findAllCourseByCheckedBoxAjax.controller")
+//	public @ResponseBody List<Course> findAllCourseByCheckedBoxAjax
+//	(@RequestParam(name="csCH")String csCH,@RequestParam(name="csEN")String csEN,@RequestParam(name="csMA")String csMA,@RequestParam(name="cgEle")String cgEle,@RequestParam(name="cgJun")String cgJun,@RequestParam(name="cgSen")String cgSen,@RequestParam(name="ccNor")String ccNor,@RequestParam(name="ccRush")String ccRush) {
+//		List<Course> courseList = courseService.findCourseByKeyWord(csCH, csEN, csMA, cgEle, cgJun, cgSen, ccNor, ccRush);
+//		for(Course oneCourse:courseList) {
+//			String courseSubject = oneCourse.getCourseSubject();
+//			System.out.println(courseSubject);
+//		}
+//		return courseList;
+//	}
 	
 	
 	

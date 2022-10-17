@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="OrderDetail")
@@ -22,18 +23,25 @@ public class OrderDetail {
 	@Column(name="orderDetail_id")
 	private Integer id;
 	
+//	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="fk_orderlist_id")
-	@JsonBackReference
+	@JsonIgnoreProperties("orderDetails")
 	private OrderList orderList;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="fk_student_id")
 	private Student student;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="fk_course_id")
 	private Course course;
+	
+	@Column(name="confirmOrder")
+	private Integer confirmOrder;
+	
+	@Column(name="arrangeClassList")
+	private Integer arrangeClassList;
 	
 	
 	public OrderDetail() {
@@ -70,5 +78,23 @@ public class OrderDetail {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
+	public Integer getConfirmOrder() {
+		return confirmOrder;
+	}
+
+	public void setConfirmOrder(Integer confirmOrder) {
+		this.confirmOrder = confirmOrder;
+	}
+
+	public Integer getArrangeClassList() {
+		return arrangeClassList;
+	}
+
+	public void setArrangeClassList(Integer arrangeClassList) {
+		this.arrangeClassList = arrangeClassList;
+	}
+	
+	
 
 }

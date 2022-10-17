@@ -1,0 +1,26 @@
+package com.team3.CSMS.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.team3.CSMS.dao.SchoolDao;
+import com.team3.CSMS.model.School;
+
+@Service
+@Transactional
+public class SchoolService {
+	
+	@Autowired
+	private SchoolDao schoolDao;
+	
+	//find School by id--Neil 1015
+	public School findSchoolById(Integer id) {
+		Optional<School> oneSchool = schoolDao.findById(id);
+		return oneSchool.get();
+		
+	}
+
+}

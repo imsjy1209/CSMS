@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ClassListDao;
@@ -157,6 +158,16 @@ public class ClassListService {
 			dtoList.add(clpDto);
 		}
 		return dtoList;
+	}
+	
+	 //find ClassList by CourseId--Neil 1015
+	public ClassList findClassListByCourseId(Integer courseId) {
+		return classListDao.findClassListByCourseId(courseId);
+	}
+	
+	//模糊查詢+OrderByClassCode
+	public ClassList findLatestClassListByClassCode (String name){
+		return classListDao.findLatestClassListByClassCode(name);
 	}
 
 }

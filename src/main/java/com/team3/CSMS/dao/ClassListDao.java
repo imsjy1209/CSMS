@@ -2,6 +2,7 @@ package com.team3.CSMS.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -120,6 +121,16 @@ public interface ClassListDao extends JpaRepository<ClassList, Integer>{
     (@Param("sessionAccount") String sessionAccount, @Param("classListId") Integer classListId,
      @Param("studentId") Integer studentId);
     
+    
+    
+    //find ClassList by CourseId--Neil 1015
+    @Query(value = "from ClassList where fk_course_id = ?1")
+    ClassList findClassListByCourseId(Integer courseId);
+
+    
+    //find ClassList by ClassCode Like--Neil 1015
+    @Query(value = "SELECT TOP(1) * from ClassList WHERE classCode like ?1% order BY classCode DESC", nativeQuery = true)
+    ClassList findLatestClassListByClassCode(String classCode);
     
 }
 

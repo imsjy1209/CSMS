@@ -68,4 +68,10 @@ public class PageController {
 	public String absentCheckPage(){
 		return "cs_absent/absentCheck";
 	}	
+
+	@GetMapping("/messages.page")
+	public String messagesPage(){
+		return "cs_messagez/messagez";
+	}
+	
 }
