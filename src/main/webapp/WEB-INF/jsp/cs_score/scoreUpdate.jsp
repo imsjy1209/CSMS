@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -23,42 +23,27 @@
 }
 </style>
 
-<title>RoomData Edit</title>
+<title>score Edit</title>
 </head>
 <body>
 
-	<form action="${contextRoot}/roomDataUpdateAAA" method="POST"
+	<form action="${contextRoot}/scoreDataUpdateAAA" method="POST"
 		class="row g-3 form1" enctype="multipart/form-data">
-		<h3>RoomData Edit</h3>
-		<input type="hidden" name="roomId" class="form-control" id="roomId"
-				value="${room1.id}">
+		<h3>scoreData Edit</h3>
+		<input type="hidden" name="scoreId" class="form-control" id="scoreId"
+				value="${score1.id}">
 		<div class="col-12">
-			<label for="inputRoomName" class="form-label">RoomName</label>
-			<input type="text" name="roomName" class="form-control" id="inputRoomName"
-				value="${room1.roomName}">
+			<label for="inputScore" class="form-label">請輸入成績</label>
+			<input type="text" name="score" class="form-control" id="inputScore"
+				value="${score1.score}">
 		</div>
 
-		<div class=" col-12">
-			<label for="inputRoomSize" class="form-label">RoomSize</label> <input
-				type="text" name="roomSize" class="form-control" id="inputRoomSize"
-				value="${room1.roomSize}">
-		</div>
-
-
-
-		<div class="input-group mb-13">
-			<label class="input-group-text" for="imgInp">Upload</label>
-			<input type="file" name="roomPic" class="form-control" id="imgInp"
-				value="" accept="image/gif, image/jpeg, image/png">
-		</div>
-		<div class="col-md-6">
-			Picture Preview <img width="100" id="preview_imgInp" src="${contextRoot}/AllRoomPic/${room1.id}" />
-		</div>
 
 		<div class="col-12">
-			<button type="submit" class="btn btn-primary">Update</button>
-			<a type="button" class="btn btn-dark" href="${contextRoot}/queryRoomData.controller">Go To All Room Data</a>
-			<a type="button" class="btn btn-warning" href="${contextRoot}/homepage.controller">Go To HomePage</a>
+<%-- 			<button type="submit" class="btn btn-primary" formaction="${contextRoot}/score">Update</button> --%>
+			<button type="submit" class="btn btn-primary" >Update</button>
+			<a type="button" class="btn btn-dark" href="${contextRoot}/score">Go To All score Data</a>
+<%-- 			<a type="button" class="btn btn-warning" href="${contextRoot}/homepage.controller">Go To HomePage</a> --%>
 			${msg.ok}
 		</div>
 	</form>
