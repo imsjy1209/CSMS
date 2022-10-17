@@ -18,6 +18,7 @@ public class ContactBookListTeacherVerDto implements Serializable {
 	private String homework;
 	private String quizNotice;
 	private Integer phase;
+	private Integer classListId;
 	
 	public ContactBookListTeacherVerDto() {
 	}
@@ -33,6 +34,7 @@ public class ContactBookListTeacherVerDto implements Serializable {
 		this.homework = contactBook.getHomework();
 		this.quizNotice = contactBook.getQuizNotice();
 		this.phase = contactBook.getPhase();
+		this.classListId = contactBook.getClassList().getId();
 	}
 
 	public Integer getCb_id() {
@@ -105,6 +107,14 @@ public class ContactBookListTeacherVerDto implements Serializable {
 
 	public void setPhase(Integer phase) {
 		this.phase = phase;
+	}
+
+	public Integer getClassListId() {
+		return classListId;
+	}
+
+	public void setClassListId(Integer classListId) {
+		this.classListId = classListId;
 	}
 
 }
