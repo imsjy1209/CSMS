@@ -11,11 +11,13 @@ import org.springframework.data.repository.query.Param;
 import com.team3.CSMS.model.ClassList;
 
 public interface ClassListDao extends JpaRepository<ClassList, Integer>{
-    // 課堂資訊
+    // 出缺勤用課堂資訊
     @Query(value = "SELECT * from [ClassList] as [cl] "+
     "inner join [Room] as room on room.room_id =[cl].fk_room_id "+
     "inner join [Course] as course on course.course_id = [cl].fk_course_id "+
-    "WHERE [cl].classList_id = :classCodeId ", nativeQuery = true)
+	"where course.startDate <= GETDATE() "+
+	"and course.endDate >= GETDATE() "+
+    "and [cl].classList_id = :classCodeId ", nativeQuery = true)
     List<ClassList> getClassInfoByClassCodeId(@Param("classCodeId") Integer classCodeId);
     
     // 老師課程選單By account, classListId
