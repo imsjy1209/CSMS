@@ -6,11 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,11 +23,11 @@ import com.team3.CSMS.dto.ContactBookListParentVerDto;
 import com.team3.CSMS.dto.ContactBookListSchoolVerDto;
 import com.team3.CSMS.dto.ContactBookListStudentVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
-import com.team3.CSMS.dto.InputSelectedClassListIdDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ContactBookService;
+import com.team3.CSMS.service.ContactBookSignService;
 
 @Controller
 public class ContactBookController {
@@ -39,6 +37,9 @@ public class ContactBookController {
 
 	@Autowired
 	private ContactBookService cbService;
+	
+	@Autowired
+	private ContactBookSignService cbsService;
 
 	/* 進入聯絡簿系統 */
 	// 【老師】聯絡簿首頁
@@ -147,7 +148,6 @@ public class ContactBookController {
 		return map;
 	}
 	
-	
 	/* 新增聯絡簿 */
 	// 【老師】進入新增編輯頁
 	@GetMapping("/ContactBook/T_Edit/{classListId}")
@@ -161,13 +161,16 @@ public class ContactBookController {
 		return clService.findById(classListId);
 	}
 
-	// 【老師】點「建立聯絡簿」按鈕insert一筆帶ClassListId資料
-	@GetMapping(value = "/insertTheClassListIdIntoContactBook.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody ContactBook teacherContactBookEstablish(@PathVariable("classListId") Integer classListId) {
+	// 【老師】點「建立聯絡簿」按鈕要做兩件事：
+	// (1) ContactBook：insert一筆帶ClassListId資料
+	// (2) ContactBookSign：接著insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
+	@PostMapping(value = "/insertTheClassListIdIntoContactBook.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ContactBook teacherContactBookEstablish(@RequestParam("classListId") Integer classListId) {
 		ContactBook cbBean = cbService.insertTheClassListIdIntoContactBook(classListId);
+		cbsService.insertContactBookSignByCbIdAndStudentId(classListId);
 		return cbBean;
 	}
 
-
-
+	// 【老師】點「確認送出」按鈕
+	
 }

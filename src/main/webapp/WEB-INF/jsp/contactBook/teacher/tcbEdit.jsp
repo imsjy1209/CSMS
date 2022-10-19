@@ -23,22 +23,7 @@
 
 	<form:form method="post" action="" modelAttribute="">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
-			<tr>
-				<th class="table-info" scope="col" style="text-align:center">建立日期</th>
-				<td><input type="text" class="form-control" id="createAt" name="createAt" value="" readonly /></td>
-			</tr>
-			<tr>
-				<th class="table-info" scope="col">課程內容</th>
-				<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>
-			</tr>
-			<tr>
-				<th class="table-info" scope="col">回家作業</th>
-				<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>
-			</tr>
-			<tr>
-				<th class="table-info" scope="col">考試通知</th>
-				<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>
-			</tr>
+			<!-- insert的聯絡簿內容放置處 -->
 		</table>
 		<br><br>
 		<div style="text-align:center">
@@ -78,10 +63,10 @@
 var clsListId =  ${classListId};
 // console.log(classListId);
 
-/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 */
+/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
 	
-	// 帶入【老師】選定的課程相關資訊
+	// (1) 帶入【老師】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
     xhr1.send();
@@ -115,41 +100,82 @@ window.onload = function(){
     	}
     }
     
-    // 帶入insert的該筆聯絡簿資料
+    // (2)帶入insert的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
+    xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
-    	if (xhr1.readyState == 4 && xhr1.status == 200) {
+    	if (xhr2.readyState == 4 && xhr2.status == 200) {
     		
-//     		// 帶入課程相關資訊 
-//     		var clsInfoList = JSON.parse(xhr1.responseText);
-//     		console.log(clsInfoList); // 得到ClassList物件
-//     		var clscode = clsInfoList.classCode;
-//         	var category = clsInfoList.course.courseCategory;
-//         	var subject = clsInfoList.course.courseSubject;
-//         	var grade = clsInfoList.course.courseGrade;
-//         	var level = clsInfoList.course.courseClass;
-//     		var teacherName = clsInfoList.teacher.name;
-//     		var schoolName = clsInfoList.school.name;
+    		var cbList = JSON.parse(xhr2.responseText);  
+     		console.log(cbList); // 得到ContactBookList物件
+    		var cbId = cbList.id;
+    		console.log(cbId);
+        	var createAt = cbList.create_at;
+        	var courseContent = cbList.courseContent;
+        	var homework = cbList.homework;
+        	var quizNotice = cbList.quizNotice;
+        	
+    		var cbListObj = '<tr>';
+    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">聯絡簿編號</th>';
+    		cbListObj += '<td><input type="text" class="form-control" id="cbId" name="cbId" value="' + cbId + '" readonly /></td>';
+    		cbListObj += '</tr>';
     		
-//     		var clsInfoObj = '<tr>';
-//     		clsInfoObj += '<th class="table-warning" scope="col">課程代號</th>';
-//     		clsInfoObj += '<td>' + clscode + '</td>';
-//     		clsInfoObj += '<th class="table-warning" scope="col">課程資訊</th>';
-//     		clsInfoObj += '<td>'+ category + '班&nbsp-&nbsp' + subject + '&nbsp-&nbsp' + grade + level +'年級</td>';
-//     		clsInfoObj += '</tr>';
-//     		clsInfoObj += '<tr>';
-//     		clsInfoObj += '<th class="table-warning" scope="col">授課教師</th>';
-//     		clsInfoObj += '<td>' + teacherName + '</td>';
-//     		clsInfoObj += '<th class="table-warning" scope="col">班導師</th>';
-//     		clsInfoObj += '<td>' + schoolName + '</td>';
-//     		clsInfoObj += '</tr>';
+    		cbListObj += '<tr>';
+    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">建立日期</th>';
+    		cbListObj += '<td><input type="text" class="form-control" id="createAt" name="createAt" value="' + createAt + '" readonly /></td>';
+    		cbListObj += '</tr>';
     		
-//     		$('#classInfo').append(clsInfoObj);
+    		cbListObj += '<tr>';
+    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">課程內容</th>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
+    		if(courseContent != null){
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
+    		} else {
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>';
+    		}
+    		cbListObj += '</tr>';
+    		
+    		cbListObj += '<tr>';
+    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">回家作業</th>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
+    		if(homework != null){
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
+    		} else {
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>';
+    		}
+    		cbListObj += '</tr>';
+    		
+    		cbListObj += '<tr>';
+    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">考試通知</th>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
+    		if(quizNotice != null){
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
+    		} else {
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>';
+    		}
+    		cbListObj += '</tr>';
+    		
+    		$('#cbListEdit').append(cbListObj);
     	}
     }
+    
+    // (3)帶入「確認送出」按鈕 
+    
+    
+    
+    
+    
+    
+    // (4)帶入「回上一頁」按鈕
+    
+    
+    
+    
+    
 }
+
+
 
 
 

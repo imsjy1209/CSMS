@@ -15,12 +15,12 @@ public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Int
      List <ClassStudentList> getStudentListByCodeId(@Param("classCodeId")Integer classCodeId);
     
 
-    //find ClassStudntList By ClassListId--Neil 1015
+    //find ClassStudntList By ClassListId--Neil 1015 -- → 聯絡簿也有用：insert ContactBookSign 使用
 	@Query(value = "from ClassStudentList where fk_classlist_id = ?1")
-	List<ClassStudentList>findClassStudentListByClassListId(Integer id);
+	List<ClassStudentList> findClassStudentListByClassListId(Integer id); // id = classListId
 	
     //find ClassStudntList By ClassListId And StudentId--Neil 1015
 	@Query(value = "from ClassStudentList where fk_classlist_id = ?1 AND fk_student_id=?2")
-	ClassStudentList findClassStudentListByClassListIdAndStudentId(Integer clId,Integer stId);
-    
+	ClassStudentList findClassStudentListByClassListIdAndStudentId(Integer clId, Integer stId);
+	
 }
