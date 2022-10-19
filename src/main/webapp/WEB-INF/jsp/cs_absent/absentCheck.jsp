@@ -11,7 +11,7 @@
 <BR/>
 <div class="form-group">
   <label for="exampleFormControlSelect1">chose class</label>
-  <select class="form-control" id="classCode" name="classCode">
+  <select class="form-control classCodeId" id="classCode" name="classCode">
     <option value="-1" selected="selected" hidden>selected</option>
   </select>
 </div>
@@ -20,7 +20,6 @@
   <p id="classInfo">
   </p>
 </div>
-<form:form>
 <table class="table table-hover" id="studentList">
     <thead>
       <tr>
@@ -31,14 +30,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="checkbox" checkes></td>
-        <td>22</td>
-        <td>謝冬冬</td>
       </tr>
     </tbody>
-    <button type="submit" class="btn btn-primary mb-2">send</button>
+    <button type="button" class="btn btn-primary mb-2" id="send">send</button>
   </table>
-</form:form>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -97,51 +92,76 @@
         displayStudentListAndInfo(xhr2.responseText);//當選擇改變時找出對應資訊和學生清單
       }
     }
-
     // insert class info and student list
     function displayStudentListAndInfo (responseText){
+    // console.log($(".classCodeId").val());
     let dataSource =JSON.parse(responseText);
     let stuList=dataSource.slDto;
-    console.log(stuList);
     let teacher=dataSource.cliDto[0].teacherName;
     let clsRoom=dataSource.cliDto[0].classroom;
     let subject=dataSource.cliDto[0].subject;
     let school=dataSource.cliDto[0].schoolType;
     let grade=dataSource.cliDto[0].grade;
     // insert class info
-    // $('#classInfo').remove();
     let  classInfo=$("#classInfo");
     classInfo.html(" 教室: "+clsRoom+" 課程內容: "+school+'&nbsp&nbsp&nbsp&nbsp'+grade+'&nbsp&nbsp&nbsp&nbsp'+subject+'&nbsp'+" 老師: "+teacher)
     // insert students list
     let studentLength=stuList.length;
     $('#studentList tbody tr td').remove();
-    // console.log(studentLength);
+    stulist_data="<tbody>";
+      for (i=0;i<studentLength; i++){
+        stulist_data+="<tr>"
+          stulist_data+="<td><select name='absOrNot' id='absOrNot' class='absOrNot'>"
+            stulist_data+="<option value='0'>缺席</option>"
+            stulist_data+="<option value='1'selected='selected'>出席</option>"
+            stulist_data+="<option value='2'>請假</option>"
+            stulist_data+="</select></td>"
+            stulist_data+="<td>" +stuList[i].studentSitID +"</td>"
+            stulist_data+="<td style='display:none' class='stuId'>" +stuList[i].studentId +"</td>"
+            stulist_data+="<td>" +stuList[i].studentName +"</td>"
+            stulist_data+="<tr>"
+            }
+            stulist_data +="</tobody>";
+            $('#studentList').append(stulist_data);
+          }//end of funtion displayStudentListAndInfo
+        }
 
-    stulist_data='<tbody>';
-    for (i=0;i<studentLength; i++){
-      stulist_data+='<tr>'
-      stulist_data+='<td><input type="checkbox" checked> </td>'
-      stulist_data+='<td>' +stuList[i].studentSitID +'</td>'
-      stulist_data+='<td>' +stuList[i].studentName +'</td>'
-      stulist_data+='<tr>'
-    }
-    
-    stulist_data +='</tobody>';
-    $('#studentList').append(stulist_data)
-    
-  }//end of funtion displayStudentListAndInfo
-  }
-
-	
+    $("#send").click(function(){
+      // ===============傳送absent List=============
+      let AbsentList=[];
+          let classCodeId=$(".classCodeId").val();
+          let studentId;
+          let absOrNot;
+          $('.absOrNot').each(function(){
+            let absOrNot=$(this).val();
+            let studentId=$(this).parent().next().next().text();
+            let eachList={"classCodeId":classCodeId,"studentId":studentId,"absOrNot":absOrNot};
+            AbsentList.push(eachList);
+          })
+          let AbsentListJsonString=JSON.stringify(AbsentList);
+          // console.log(AbsentListJsonString);
+          $.ajax({                            
+                url:'http://localhost:8081/CSMS/absentDataInsert',
+                contentType:'application/json;charset=UTF-8',
+                dataType:null,
+                method:'post',
+                data:AbsentListJsonString,
+                success:function(result){
+                  // console.log(result)
+                  console.log("okokok")
+                },
+                error:function(err){
+                  // console.log(err)
+                  console.log("ngngngng")
+                }
+	        })
+    })    
   //=======================版面動作=======================
-	
   $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
     });
-
-  
 </script>
 </body>
 </html>

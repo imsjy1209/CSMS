@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import com.team3.CSMS.model.ClassList;
 
-public class ClassListTeacherVerDto implements Serializable {
-
+public class AllClassListStudentVerDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer classListId;
@@ -15,10 +14,10 @@ public class ClassListTeacherVerDto implements Serializable {
 	private String courseGrade;
 	private Integer courseClass;
 
-	public ClassListTeacherVerDto() {
+	public AllClassListStudentVerDto() {
 	}
 	
-	public ClassListTeacherVerDto(ClassList classList) {
+	public AllClassListStudentVerDto(ClassList classList) {
 		super();
 		this.classListId = classList.getId();
 		this.classCode = classList.getClassCode();
@@ -75,5 +74,4 @@ public class ClassListTeacherVerDto implements Serializable {
 	public void setCourseClass(Integer courseClass) {
 		this.courseClass = courseClass;
 	}
-
 }

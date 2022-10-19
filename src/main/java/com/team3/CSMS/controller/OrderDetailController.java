@@ -113,7 +113,7 @@ public class OrderDetailController {
 		@PostMapping("/updateOrderDetailData.controller")
 		public void updateOrderDetailData
 		(@RequestBody List<OrderDetailDto> orderDetailDtoList){
-			
+
 			for(OrderDetailDto oneOrderDetailDto:orderDetailDtoList) {
 				Integer userODId = oneOrderDetailDto.getoDId();
 				Integer userCourseId = oneOrderDetailDto.getCourseInfoId();

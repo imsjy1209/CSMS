@@ -151,7 +151,7 @@ var ODIdListNoPurchase = [];
 		success:function(result){
 			console.log(result)
 			console.log("okokok")
-		
+	
 		},
 		error:function(err){
 			console.log(err)

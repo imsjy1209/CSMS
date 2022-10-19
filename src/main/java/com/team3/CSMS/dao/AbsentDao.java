@@ -9,17 +9,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Absent;
-import com.team3.CSMS.model.ClassList;
+// import com.team3.CSMS.model.ClassList;
 
-//透過日期和課堂編號 找出 出缺勤名單
+
 public interface AbsentDao extends JpaRepository<Absent, Integer> {
-    
-    @Query(value = "select * from absentOrNot as abs "+
-    "where CONVERT(varchar(12) , [days], 112 )= :days "+
-    "and fk_classId_id= :classCodeId ", nativeQuery = true)
-    List<Absent>selectAbsentByDaysAndClassCodeId(@Param("classCodeId") Integer classCodeId,@Param("days") String days);
 
-   
+    // 透過日期 和 班級代號 找到出勤名單
+    @Query(value =  "select * from absentOrNot as abs "+
+                    "where CONVERT(varchar(12) , [days], 112 )= :days "+
+                    "and fk_classId_id= :classCodeId ", nativeQuery = true)
+    List<Absent>selectAbsentByDaysAndClassCodeId(@Param("classCodeId") Integer classCodeId,@Param("days") String days);
+    
+    // SQL insert 資料 
+    @Query (value= "insert into absentOrNot (fk_classId_id,fk_student_id,arrivedOrNot) "+
+            "values(:classId,:studentId,:arrivedValue) ", nativeQuery = true)
+    void insertAbsentData(@Param("classId") Integer classId,@Param("studentId") Integer studentId ,@Param("arrivedValue")Integer arrivedValue);
+    
     // 可以空值得寫法
     // @Query(value= "SELECT 'Table 1' AS MSG, COLUMN1, COLUMN2 COLUMN3, COLUMN4, COLUMN5 FROM TABLE1 "+
     // "WHERE COLUMN1 = :column1 AND COLUMN2 = :column2 AND COLUMN3 = :column3 "+

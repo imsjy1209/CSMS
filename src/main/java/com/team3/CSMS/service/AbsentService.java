@@ -1,6 +1,6 @@
 package com.team3.CSMS.service;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +37,9 @@ public class AbsentService {
         Absent oneAbsent = aDao.save(absent);
         return oneAbsent;
     }
-
+    
+    // SQL語法塞資料
+    public void insertAbsentData(Integer classId,Integer studentId, Integer arrivedValue){
+        aDao.insertAbsentData(classId, studentId, arrivedValue);
+    }
 }

@@ -15,8 +15,6 @@ public class ScoreDto  implements Serializable{
     private int score;
     private String school;
     
-    
-    
     public ScoreDto(){
     }
     public ScoreDto(Score Score){ 

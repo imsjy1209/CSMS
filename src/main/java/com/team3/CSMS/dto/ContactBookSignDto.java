@@ -12,7 +12,9 @@ public class ContactBookSignDto implements Serializable{
     private String studentName;
     private String parentName;
     private String relationship;
-//    private Boolean parentSign;
+    private Integer parentSign;
+	private Integer student_id;
+	private Integer bd_id;
     
     public ContactBookSignDto() {
     	
