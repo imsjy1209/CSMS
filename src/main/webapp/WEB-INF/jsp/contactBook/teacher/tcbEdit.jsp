@@ -12,6 +12,42 @@
 	<h4>【老師】聯絡簿編輯</h4>
 	<br>
 	
+	<div id="classInfo-area">
+		<table id="classInfo" class="table table-bordered" style="text-align:center">
+			<!-- 課程資訊內容放置處 -->
+		</table>
+	</div>
+	<br>
+	
+<!-- 	<div id="createAt" style="text-align:right"> </div> -->
+
+	<form:form method="post" action="" modelAttribute="">
+		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
+			<tr>
+				<th class="table-info" scope="col" style="text-align:center">建立日期</th>
+				<td><input type="text" class="form-control" id="createAt" name="createAt" value="" readonly /></td>
+			</tr>
+			<tr>
+				<th class="table-info" scope="col">課程內容</th>
+				<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>
+			</tr>
+			<tr>
+				<th class="table-info" scope="col">回家作業</th>
+				<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>
+			</tr>
+			<tr>
+				<th class="table-info" scope="col">考試通知</th>
+				<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>
+			</tr>
+		</table>
+		<br><br>
+		<div style="text-align:center">
+			<input type="button" class="btn btn-danger" tabindex="-1" role="button" value="確認送出" />
+			<a href="/CSMS/ContactBook/T_Index" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>
+		</div>
+
+
+	</form:form>
 </div>
 
 
@@ -38,10 +74,95 @@
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
+/* 取得路徑變數@PathVariable("classListId") */ 
+var clsListId =  ${classListId};
+// console.log(classListId);
+
+/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 */
+window.onload = function(){ 
+	
+	// 帶入【老師】選定的課程相關資訊
+	var xhr1 = new XMLHttpRequest();
+    xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
+    xhr1.send();
+    xhr1.onreadystatechange = function(){
+    	if (xhr1.readyState == 4 && xhr1.status == 200) {
+    		
+    		var clsInfoList = JSON.parse(xhr1.responseText);
+    		console.log(clsInfoList); // 得到ClassList物件
+    		var clscode = clsInfoList.classCode;
+        	var category = clsInfoList.course.courseCategory;
+        	var subject = clsInfoList.course.courseSubject;
+        	var grade = clsInfoList.course.courseGrade;
+        	var level = clsInfoList.course.courseClass;
+    		var teacherName = clsInfoList.teacher.name;
+    		var schoolName = clsInfoList.school.name;
+    		
+    		var clsInfoObj = '<tr>';
+    		clsInfoObj += '<th class="table-warning" scope="col">課程代號</th>';
+    		clsInfoObj += '<td>' + clscode + '</td>';
+    		clsInfoObj += '<th class="table-warning" scope="col">課程資訊</th>';
+    		clsInfoObj += '<td>'+ category + '班&nbsp-&nbsp' + subject + '&nbsp-&nbsp' + grade + level +'年級</td>';
+    		clsInfoObj += '</tr>';
+    		clsInfoObj += '<tr>';
+    		clsInfoObj += '<th class="table-warning" scope="col">授課教師</th>';
+    		clsInfoObj += '<td>' + teacherName + '</td>';
+    		clsInfoObj += '<th class="table-warning" scope="col">班導師</th>';
+    		clsInfoObj += '<td>' + schoolName + '</td>';
+    		clsInfoObj += '</tr>';
+    		
+    		$('#classInfo').append(clsInfoObj);
+    	}
+    }
+    
+    // 帶入insert的該筆聯絡簿資料
+	var xhr2 = new XMLHttpRequest();
+    xhr2.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
+    xhr2.send();
+    xhr2.onreadystatechange = function(){
+    	if (xhr1.readyState == 4 && xhr1.status == 200) {
+    		
+//     		// 帶入課程相關資訊 
+//     		var clsInfoList = JSON.parse(xhr1.responseText);
+//     		console.log(clsInfoList); // 得到ClassList物件
+//     		var clscode = clsInfoList.classCode;
+//         	var category = clsInfoList.course.courseCategory;
+//         	var subject = clsInfoList.course.courseSubject;
+//         	var grade = clsInfoList.course.courseGrade;
+//         	var level = clsInfoList.course.courseClass;
+//     		var teacherName = clsInfoList.teacher.name;
+//     		var schoolName = clsInfoList.school.name;
+    		
+//     		var clsInfoObj = '<tr>';
+//     		clsInfoObj += '<th class="table-warning" scope="col">課程代號</th>';
+//     		clsInfoObj += '<td>' + clscode + '</td>';
+//     		clsInfoObj += '<th class="table-warning" scope="col">課程資訊</th>';
+//     		clsInfoObj += '<td>'+ category + '班&nbsp-&nbsp' + subject + '&nbsp-&nbsp' + grade + level +'年級</td>';
+//     		clsInfoObj += '</tr>';
+//     		clsInfoObj += '<tr>';
+//     		clsInfoObj += '<th class="table-warning" scope="col">授課教師</th>';
+//     		clsInfoObj += '<td>' + teacherName + '</td>';
+//     		clsInfoObj += '<th class="table-warning" scope="col">班導師</th>';
+//     		clsInfoObj += '<td>' + schoolName + '</td>';
+//     		clsInfoObj += '</tr>';
+    		
+//     		$('#classInfo').append(clsInfoObj);
+    	}
+    }
+}
 
 
 
-
+// 帶入今日日期
+//	var fullDate = new Date();
+//	var yyyy = fullDate.getFullYear();
+//	var MM = (fullDate.getMonth() + 1) >= 10 ? (fullDate.getMonth() + 1) : ("0" + (fullDate.getMonth() + 1));
+//	var dd = fullDate.getDate() < 10 ? ("0"+fullDate.getDate()) : fullDate.getDate();
+//	var today = yyyy + "-" + MM + "-" + dd;
+//	// console.log(today); // String
+//	var contentStr = "<span>建立日期：" + today + "<span>";
+//	// console.log(contentStr);
+//	$("#createAt").append(contentStr);
 
 //=======================版面動作=======================
 
@@ -54,3 +175,4 @@ $(document).ready(function () {
 </script>
 </body>
 </html>
+

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,14 @@ public class ContactBookService {
 		}
 		return dtoList;
 	}
+	
+	// 老師點「建立聯絡簿」按鈕
+	public ContactBook insertTheClassListIdIntoContactBook(Integer classListId) {
+		ContactBook cbBean = cbDao.insertTheClassListIdIntoContactBook(classListId);
+		return cbBean;
+	}
+	
+	
 	
 	// 校方聯絡簿選單By classListId
 	public List<ContactBookListSchoolVerDto> getSchoolContactBookListByClassListId(Integer classListId) {

@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,8 @@ import com.team3.CSMS.dto.ContactBookListSchoolVerDto;
 import com.team3.CSMS.dto.ContactBookListStudentVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 import com.team3.CSMS.dto.InputSelectedClassListIdDto;
+import com.team3.CSMS.model.ClassList;
+import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ContactBookService;
 
@@ -59,13 +63,6 @@ public class ContactBookController {
 	@GetMapping("/ContactBook/P_Index")
 	public String parentContactBookPage() {
 		return "contactBook/parent/pcbIndex";
-	}
-	
-	/* 編輯聯絡簿 */
-	// 【老師】聯絡簿編輯頁
-	@GetMapping("/ContactBook/T_Edit")
-	public String teacherContactBookEditPage() {
-		return "contactBook/teacher/tcbEdit";
 	}
 	
 	// 【校方】聯絡簿編輯頁
@@ -106,7 +103,7 @@ public class ContactBookController {
 		return aclPDto;
 	}
 
-	/* 依課程篩選後之聯絡簿清單(可能要改) */
+	/* 依課程篩選後之聯絡簿清單(需要消滅一些Dto!!!) */
 	// 【老師】課程選單對應聯絡簿清單
 	@GetMapping(value = "/teacherContactBookList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody List<ContactBookListTeacherVerDto> getTeacherContactBookList(@RequestParam("classListId") Integer classListId) { // 1	
@@ -149,5 +146,28 @@ public class ContactBookController {
 		map.put("cblPDto", cblPDto);
 		return map;
 	}
+	
+	
+	/* 新增聯絡簿 */
+	// 【老師】進入新增編輯頁
+	@GetMapping("/ContactBook/T_Edit/{classListId}")
+	public String teacherContactBookEstablishPage(@PathVariable("classListId") Integer classListId) {
+		return "contactBook/teacher/tcbEdit";
+	}	
+	
+	// 【共用Json】新增/編輯聯絡部上方的課程資訊
+	@GetMapping(value = "/findClsInfoByClassListId.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ClassList findClsInfoByClsListID(@RequestParam("classListId") Integer classListId) {
+		return clService.findById(classListId);
+	}
+
+	// 【老師】點「建立聯絡簿」按鈕insert一筆帶ClassListId資料
+	@GetMapping(value = "/insertTheClassListIdIntoContactBook.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ContactBook teacherContactBookEstablish(@PathVariable("classListId") Integer classListId) {
+		ContactBook cbBean = cbService.insertTheClassListIdIntoContactBook(classListId);
+		return cbBean;
+	}
+
+
 
 }
