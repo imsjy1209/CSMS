@@ -33,13 +33,11 @@ public class ContactBookService {
 		return dtoList;
 	}
 	
-	// 老師點「建立聯絡簿」按鈕
+	// 老師點「建立聯絡簿」按鈕insert一筆帶ClassListId資料
 	public ContactBook insertTheClassListIdIntoContactBook(Integer classListId) {
 		ContactBook cbBean = cbDao.insertTheClassListIdIntoContactBook(classListId);
 		return cbBean;
 	}
-	
-	
 	
 	// 校方聯絡簿選單By classListId
 	public List<ContactBookListSchoolVerDto> getSchoolContactBookListByClassListId(Integer classListId) {

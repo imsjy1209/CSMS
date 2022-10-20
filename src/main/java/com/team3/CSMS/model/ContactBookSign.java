@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -21,9 +22,17 @@ public class ContactBookSign {
 	@Column(name = "cbs_id")
 	private Integer id;
 
-	@Column(name = "parentSign") // 記得第一次insert要default 0
+	@Column(name = "parentSign") 
 	private Integer parentSign;
+	// private Integer parentSign = 0; // insert要default 0 (方法一)
 
+	@PrePersist
+	public void onCreate() {
+		if (parentSign == null) {
+			parentSign = 0; // insert要default 0 (方法二)
+		} 
+	}
+	
 	// 關聯
 	@ManyToOne
 	@JoinColumn(name = "fk_cb_id")
@@ -36,6 +45,7 @@ public class ContactBookSign {
 
 	// 建構子
 	public ContactBookSign() {
+		//this.parentSign = 0; // insert要default 0 (方法三)
 	}
 
 	// getter & setter
