@@ -15,6 +15,7 @@
   		<label for="exampleFormControlSelect1">選擇課程：</label>
   		<select class="form-control" id="classInfoList" name="classInfoList">
     		<option value="-1" selected="selected" hidden>請選擇</option>
+<<<<<<< HEAD
 <!--     		<option Value="5">【CH11201】&nbsp&nbsp&nbsp日常班&nbsp&nbsp-&nbsp&nbsp國文&nbsp&nbsp-&nbsp&nbsp國小6年級</option> -->
 <!--         	<option Value="4">【EN11201】&nbsp&nbsp&nbsp衝刺班&nbsp&nbsp-&nbsp&nbsp英文&nbsp&nbsp-&nbsp&nbsp國小6年級</option> -->
 <!-- 			<option Value="3">【MA11201】&nbsp&nbsp&nbsp日常班&nbsp&nbsp-&nbsp&nbsp數學&nbsp&nbsp-&nbsp&nbsp國小6年級</option> -->
@@ -25,6 +26,26 @@
   	<!-- 記得改${sessionScope.account} -->
 	<div>
   		<a href="#" type="button" class="btn btn-success" tabindex="-1" role="button" aria-disabled="false">建立聯絡簿</a>
+=======
+  		</select>
+  	</div>
+  	<br>
+  	<br>
+<!-- 	<div> -->
+<!-- 		<label for="exampleFormControlSelect1">建立聯絡簿：</label> -->
+<!-- 		<table id="add_cbList" class="table table-borderless" style="text-align:center"> -->
+<!-- 			<tr> -->
+<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder=""/></td> -->
+<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder="課程內容" /></td> -->
+<!-- 			  <td><input type="text" class="form-control" id="hw" name="hw" placeholder="回家作業" /></td> -->
+<!-- 			  <td><input type="text" class="form-control" id="quiz" name="quiz" placeholder="考試通知" /></td> -->
+<!-- 			  <td><a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">新增</a></td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+	<div id="btn-area">
+		<button id="btn-init" type="button" class="btn btn-secondary" disabled>建立聯絡簿</button>
+>>>>>>> e7b73a0dbd3abbc59adde6958947887cbcc57b7b
 	</div>
 
 	<br>
@@ -32,6 +53,7 @@
   		<table id="cbList" class="table table-bordered" style="text-align:center">
   			<thead  id="cbList-title">
     			<tr>
+<<<<<<< HEAD
 			      <th class="table-info" scope="col">編號</th>
 			      <th class="table-info" scope="col">建立日期</th>
 			      <th class="table-info" scope="col">課程代號</th>
@@ -97,6 +119,22 @@
 			      <td></td>
 			    </tr>
 			</tbody>
+=======
+				     <th class="table-info" scope="col">編號</th>
+				     <th class="table-info" scope="col">建立日期</th>
+				     <th class="table-info" scope="col">課程代號</th>
+				     <th class="table-info" scope="col">授課教師</th>
+				     <th class="table-info" scope="col">班導師</th>
+				     <th class="table-info" scope="col">課程內容</th>
+				     <th class="table-info" scope="col">回家作業</th>
+				     <th class="table-info" scope="col">考試通知</th>
+				     <th class="table-info" scope="col">案件狀態</th>
+			    </tr>
+			</thead>
+<!-- 				      <a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">編輯</a> -->
+<!-- 				      <a href="#" type="button" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="false">刪除</a> -->
+
+>>>>>>> e7b73a0dbd3abbc59adde6958947887cbcc57b7b
 		</table>
   	</div>
   	
@@ -155,6 +193,7 @@ window.onload = function(){
     }
 } 
 
+<<<<<<< HEAD
 /* 選單change事件：依選到的項目(classListId)帶出對應的聯絡簿清單 */	
 $("#classInfoList").on("change",function(){
 	var selectedClassListId = $(this).prop("value"); // 抓選到的option的value屬性值(classListId=?)
@@ -194,6 +233,84 @@ $("#classInfoList").on("change",function(){
   	}
  });	
 	
+=======
+
+/* 選單change事件：(1)替換為enable版建立聯絡簿按鈕 (2)依選到的項目(classListId)帶出對應的聯絡簿清單 */	
+$("#classInfoList").on("change",function(){
+	// 抓選到的option的value屬性值(classListId=?)
+	var selectedClassListId = $(this).prop("value"); 
+	// console.log($(this).prop("value"));
+	
+	// 新增enable的button、移除disable的button
+	var EnableBtnUrl = "<c:url value='/ContactBook/T_Edit/"+selectedClassListId+"'/>";
+	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	$("#btn-area").append(EnableBtn); // 記得!!!!!!!!要加判斷能否連去EnableBtnUrl!!!!!!!!! 擺放位置要等json那一包載完吧???
+	$("#btn-init").remove();
+	
+	// 找出對應contactBookList
+	var xhr2 = new XMLHttpRequest();
+	xhr2.open("GET","<c:url value='/teacherContactBookList.json'/>"+"?classListId="+selectedClassListId,true); 
+	xhr2.send();                    
+  	xhr2.onreadystatechange = function(){
+  		
+  		if(xhr2.readyState == 4 && xhr2.status == 200){
+  			var cbList = JSON.parse(xhr2.responseText);
+	  	  	
+	  	  	cb_content ='<tbody id="cbList-data">';
+	  	    for (i = 0 ; i < cbList.length ; i++){
+	  	    	if (cbList.length > 0){
+		  	    	cb_content +='<tr>';
+		  	    	cb_content +='<td>' + cbList[i].cb_id + '</td>';
+		  	    	cb_content +='<td>' + cbList[i].create_at + '</td>';
+		  	    	cb_content +='<td>' + cbList[i].classCode + '</td>';
+		  	    	cb_content +='<td>' + cbList[i].teacherName + '</td>';
+		  	    	cb_content +='<td>' + cbList[i].schoolName + '</td>'; 
+		  	    	
+		  	    	// cb_content +='<td>' + cbList[i].courseContent + '</td>';
+		  	    	if (cbList[i].courseContent != null ){
+		  	    		cb_content +='<td>' + cbList[i].courseContent + '</td>';
+		  	    	} else {
+		  	    		cb_content +='<td></td>';
+		  	    	}
+		  	    	
+		  	    	// cb_content +='<td>' + cbList[i].homework + '</td>'; 
+		  	    	if (cbList[i].homework != null ){
+		  	    		cb_content +='<td>' + cbList[i].homework + '</td>';
+		  	    	} else {
+		  	    		cb_content +='<td></td>';
+		  	    	}
+		  	    	
+		  	    	// cb_content +='<td>' + cbList[i].quizNotice + '</td>';
+		  	    	if (cbList[i].quizNotice != null ){
+		  	    		cb_content +='<td>' + cbList[i].quizNotice + '</td>';
+		  	    	} else {
+		  	    		cb_content +='<td></td>';
+		  	    	}
+		  	    	
+ 		  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
+					if (cbList[i].phase == 1){
+						cb_content +='<td>編輯中</td>';
+					} else if (cbList[i].phase == 2) {
+						cb_content +='<td>審核中</td>';
+					} else if (cbList[i].phase == 3) {
+						cb_content +='<td>已通過</td>';
+					} else if (cbList[i].phase == 4) {
+						cb_content +='<td>已取消</td>';
+					} else {
+						cb_content +='<td>系統發生問題，請通知系統管理員</td>';
+					}
+		  	    	
+		  	    	cb_content +='</tr>';
+	  	    	} else {
+	  	    		cb_content ='<tr><td colspan="10">查無結果</td></tr>';
+	  	    	}
+	  	    }
+		  	cb_content +='</tbody>';
+		  	$('#cbList').append(cb_content);
+	  	}
+  	}
+ });	
+>>>>>>> e7b73a0dbd3abbc59adde6958947887cbcc57b7b
 
 
 //=======================版面動作=======================

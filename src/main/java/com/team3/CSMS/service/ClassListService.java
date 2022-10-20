@@ -147,7 +147,7 @@ public class ClassListService {
 		}
 		return dtoList;
 	}
-
+	
 	// 列出家長課程選單By account, classListId, studentId
 	public List<ClassListParentVerDto> getClassInfoListByParentAccount(String sessionAccount, Integer classListId,
 			Integer studentId) {

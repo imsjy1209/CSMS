@@ -10,6 +10,7 @@ import com.team3.CSMS.model.ContactBook;
 
 public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 	
+	/* 老師 */
 	// 老師聯絡簿選單By classListId
     @Query(value = "select * from [ContactBook] as CB "
     		+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
@@ -20,6 +21,21 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
     		, nativeQuery = true)
     List<ContactBook> getTeacherContactBookListByClassListId(@Param("classListId") Integer classListId);
 	
+    // 老師點「建立聯絡簿」，insert一筆資料By classListId
+    @Query(value = "insert into ContactBook ([fk_classlist_id]) values (:classListId);"
+    		+ "select top(1)* from ContactBook where [fk_classlist_id] = :classListId "
+    		+ "order by [create_at] desc, [phase] asc;"
+    		, nativeQuery = true)
+    ContactBook insertTheClassListIdIntoContactBook(@Param("classListId") Integer classListId);
+    
+    // 老師點「回上一頁」，若phase==1，delete該筆資料By cb_id
+    
+    
+    
+    // 老師點「確認送出」，update聯絡簿欄位和phase=2，並insert簽名資料
+    
+    
+    /* 校方 */
 	// 校方聯絡簿選單By classListId
 	@Query(value = "select * from [ContactBook] as CB "
 			+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
@@ -29,6 +45,8 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "order by CB.[create_at] desc, CB.[phase] asc", nativeQuery = true)
 	List<ContactBook> getSchoolContactBookListByClassListId(@Param("classListId") Integer classListId);
 	
+	
+	/* 學生 */
 	// 學生聯絡簿選單By classListId
 	@Query(value = "select * from [ContactBook] as CB "
 			+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
@@ -38,6 +56,7 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "order by CB.[create_at] desc, CB.[phase] asc", nativeQuery = true)
 	List<ContactBook> getStudentContactBookListByClassListId(@Param("classListId") Integer classListId);
 	
+	/* 家長 */
 	// 家長聯絡簿選單By classListId, studentId
 	@Query(value = "select * from [ContactBook] as CB \r\n"
 			+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
@@ -48,6 +67,8 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "where [classlist_id] = :classListId and [student_id] = :studentId and [phase] = 3 "
 			+ "order by CB.[create_at] desc, CB.[phase] asc", nativeQuery = true)
 	List<ContactBook> getParentContactBookListByClassListId(@Param("classListId") Integer classListId, Integer studentId);
+	
+	
 	
 	
 }
