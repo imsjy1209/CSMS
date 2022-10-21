@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.OrderDetailDao;
+import com.team3.CSMS.model.Course;
 import com.team3.CSMS.model.OrderDetail;
+import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -39,10 +41,22 @@ public class OrderDetailService {
 	return oneOrderDetailList;
 	}
 	
+	//找訂單明細By OrderDetail Id
 	public OrderDetail findOrderDetailById(Integer id) {
 		Optional<OrderDetail> oneOrderDetail = orderDetailDao.findById(id);
 		OrderDetail aOrderDetail = oneOrderDetail.get();
 		return aOrderDetail;
+	}
+	
+	//====找訂單明細By Student And ConfirmOrder====
+	public List<OrderDetail> findByStudentIsAndConfirmOrderIs(Student student,Integer confirmOrder){
+		List<OrderDetail> orderDetailList = orderDetailDao.findByStudentIsAndConfirmOrderIs(student, confirmOrder);
+		return orderDetailList;
+	}
+	
+	//=====找訂單明細By Student And Course=========
+	public OrderDetail findByStudentIsAndCourseIs(Student student,Course course) {
+		return orderDetailDao.findByStudentIsAndCourseIs(student, course);
 	}
 
 }

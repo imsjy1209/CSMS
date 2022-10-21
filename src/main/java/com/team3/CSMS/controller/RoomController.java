@@ -68,7 +68,7 @@ public class RoomController {
 			oldRoom.setRoomPic(newByte);
 			}
 			roomService.insertRoom(oldRoom);
-			return "redirect:/roomCreate.page";
+			return "redirect:/courseAllPageBackAjax.page";
 		} catch (IOException e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("errorMsg", "上傳失敗，請重新上傳");

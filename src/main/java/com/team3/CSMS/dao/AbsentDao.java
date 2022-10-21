@@ -5,6 +5,7 @@ import java.util.List;
 // import javax.servlet.jsp.jstl.sql.Result;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,6 +22,8 @@ public interface AbsentDao extends JpaRepository<Absent, Integer> {
     List<Absent>selectAbsentByDaysAndClassCodeId(@Param("classCodeId") Integer classCodeId,@Param("days") String days);
     
     // SQL insert 資料 
+    
+    @Modifying
     @Query (value= "insert into absentOrNot (fk_classId_id,fk_student_id,arrivedOrNot) "+
             "values(:classId,:studentId,:arrivedValue) ", nativeQuery = true)
     void insertAbsentData(@Param("classId") Integer classId,@Param("studentId") Integer studentId ,@Param("arrivedValue")Integer arrivedValue);

@@ -1,6 +1,7 @@
 package com.team3.CSMS.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,19 @@ public class OrderListService {
 	public void insertOrderList(OrderList orderList) {
 		orderListDao.save(orderList);
 	}
+
+	
+	//找訂單By 訂單Id
+	public OrderList findOrderListById(Integer orderListId) {
+		Optional<OrderList> oneOrderListOpt = orderListDao.findById(orderListId);
+		OrderList oneOrderList = oneOrderListOpt.get();
+		return oneOrderList;
+	}
+	//刪除訂單
+	public void deleteOrderListByEntity(OrderList orderList) {
+		orderListDao.delete(orderList);
+	}
+	
+	
 
 }

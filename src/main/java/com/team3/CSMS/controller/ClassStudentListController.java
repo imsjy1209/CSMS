@@ -1,6 +1,7 @@
 package com.team3.CSMS.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ClassStudentList;
+import com.team3.CSMS.model.Course;
 import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ClassStudentListService;
+import com.team3.CSMS.service.CourseService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.StudentService;
 
@@ -29,6 +32,9 @@ public class ClassStudentListController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private CourseService courseService;
 	
 	@Autowired
 	private OrderDetailService orderDetailService;
@@ -119,8 +125,30 @@ public class ClassStudentListController {
 			//透過ClassListId和StudentId刪除對應的ClassStudentList
 			ClassStudentList oneClassStudentList = classStudentListService.findClassStudentListByClassListIdAndStudentId(oneClassListId, studentId);
 			classStudentListService.deleteClassStudentListByEntity(oneClassStudentList);
-			
-
 		
 		}
+		
+		//將ClassStudentList中已排課的學生從ClassStudentList中移除，並更新OrderDetail中，該學生的排課狀態
+				@GetMapping("/delClassStudentListAndUpdateOrderDetailByClassListIdAndStudentId.controller")
+				public @ResponseBody void findClassStudentListByIdAndStuIdAndCourseId
+				(@RequestParam(name="courseId")Integer courseId,@RequestParam(name="stuId")Integer stuId,@RequestParam(name="cslId")Integer cslId){
+					
+					//刪除該同學在ClassStudentList中的資料
+					ClassStudentList oneCSL = classStudentListService.findClassStudentListById(cslId);
+					oneCSL.setClassList(null);
+					oneCSL.setStudent(null);
+					classStudentListService.deleteClassStudentListByEntity(oneCSL);
+					
+					Student oneStudent = studentService.findStudentById(stuId);
+					Optional<Course> oneCourseOpt = courseService.findCourseById(courseId);
+					Course oneCourse = oneCourseOpt.get();
+					
+					OrderDetail oneOrderDetail = orderDetailService.findByStudentIsAndCourseIs(oneStudent,oneCourse);
+					oneOrderDetail.setArrangeClassList(0);
+					orderDetailService.insertOrderDetail(oneOrderDetail);
+					
+				}
+		
+		
+		
 }

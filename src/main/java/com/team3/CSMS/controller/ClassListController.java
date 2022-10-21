@@ -46,5 +46,22 @@ public class ClassListController {
 			
 			classListService.insertClassList(aClassList);
 		}	
+		
+		//更改課程已報名人數
+		@GetMapping("/updateClssListMemberDataAjax.controller")
+		public @ResponseBody void updateClssListMemberDataAjax
+		(@RequestParam(name="clId")Integer clId,@RequestParam(name="clMemVal")Integer clMemVal) {
+			ClassList oneClassList = classListService.findById(clId);
+			oneClassList.setClassMember(clMemVal);
+			classListService.insertClassList(oneClassList);
+		}	
+		
+		// find ClassList And ClassStudentList By ClassListId
+		@GetMapping("/findClassListByIdAjax.controller")
+		public @ResponseBody ClassList findClassListByIdAjax(@RequestParam(name="classListId")Integer classListId) {
+			ClassList oneClassList = classListService.findById(classListId);
+			 return oneClassList;
+		}
+		
 
 }

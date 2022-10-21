@@ -125,17 +125,23 @@
             $('#studentList').append(stulist_data);
           }//end of funtion displayStudentListAndInfo
         }
-
     $("#send").click(function(){
       // ===============傳送absent List=============
+      confirm('確定送出嗎?')
       let AbsentList=[];
+          // 找到classcodeId的值< class="classCodeId">
           let classCodeId=$(".classCodeId").val();
           let studentId;
           let absOrNot;
+          // table 裡的每一列
           $('.absOrNot').each(function(){
+            // 取的每一列tr 裡面的select有沒有沒有出席的數值
             let absOrNot=$(this).val();
+            // 找到每一頁隱藏 學生的id
             let studentId=$(this).parent().next().next().text();
+            // 建立一個 物件塞入陣列
             let eachList={"classCodeId":classCodeId,"studentId":studentId,"absOrNot":absOrNot};
+            // 塞入 131的 AbsentList
             AbsentList.push(eachList);
           })
           let AbsentListJsonString=JSON.stringify(AbsentList);
@@ -145,6 +151,7 @@
                 contentType:'application/json;charset=UTF-8',
                 dataType:null,
                 method:'post',
+                //  data: 要改
                 data:AbsentListJsonString,
                 success:function(result){
                   // console.log(result)
@@ -156,6 +163,7 @@
                 }
 	        })
     })    
+
   //=======================版面動作=======================
   $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {

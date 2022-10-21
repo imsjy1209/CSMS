@@ -22,6 +22,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="activity")
 @Component
@@ -39,13 +42,14 @@ public class Activity {
 	private String place;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date", columnDefinition = "datetime")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date date;
 	
 	@Column(name="content",columnDefinition = "nvarchar(max)")
 	private String content;
-	
+	@JsonIgnore
 	@Lob
 	@Column(name = "photo_file")
 	private byte[] photo_file;
@@ -60,6 +64,9 @@ public class Activity {
 	joinColumns = {@JoinColumn(name="fk_act_id",referencedColumnName = "activity_id")},
 	inverseJoinColumns= {@JoinColumn(name="fk_stu_id",referencedColumnName="student_id")})
 	private Set<Student> students=new HashSet<Student>();
+	
+	@Column(name="removed")
+	private int removed=0;
 	
 	@PrePersist
 	public void onCreate() {
@@ -80,6 +87,16 @@ public class Activity {
 		this.photo_file = photo_file;
 	}
 	
+	
+	
+	public Activity(String name, String place, Date date, String content) {
+		super();
+		this.name = name;
+		this.place = place;
+		this.date = date;
+		this.content = content;
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -139,5 +156,18 @@ public class Activity {
 	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
+
+	public int getRemoved() {
+		return removed;
+	}
+
+	public void setRemoved(int removed) {
+		this.removed = removed;
+	}
+
+	public void setAdded(Date added) {
+		this.added = added;
+	}
+	
 	
 }

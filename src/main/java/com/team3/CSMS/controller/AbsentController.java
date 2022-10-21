@@ -19,9 +19,11 @@ import com.team3.CSMS.dto.ClassInfoDto;
 import com.team3.CSMS.dto.StudentListDto;
 import com.team3.CSMS.model.Absent;
 import com.team3.CSMS.model.ClassList;
+import com.team3.CSMS.model.Student;
 import com.team3.CSMS.service.AbsentService;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ClassStudentListService;
+import com.team3.CSMS.service.StudentService;
 
 @Controller
 public class AbsentController {
@@ -31,15 +33,17 @@ public class AbsentController {
     private AbsentService absService;
     @Autowired
     private ClassStudentListService cslService;
+    @Autowired
+    private StudentService stuService;
     
-    @GetMapping("/absentCheck")
-    public String getAll(Model model){
-        List<ClassList> clList= clService.findAll();
-        if(clList != null){
-            model.addAttribute("ClList",clList);
-        }
-        return "absent/absentCheck";
-    }
+    // @GetMapping("/absentCheck")
+    // public String getAll(Model model){
+    //     List<ClassList> clList= clService.findAll();
+    //     if(clList != null){
+    //         model.addAttribute("ClList",clList);
+    //     }
+    //     return "absent/absentCheck";
+    // }
     
     @GetMapping(value = "/clCodeList.json",
                 produces = {"application/json;charset=UTF-8"})
@@ -79,23 +83,35 @@ public class AbsentController {
         oneAbsent.setArrviedOrNot(absOrNot);
         absService.insertAbsent(oneAbsent);
     }  
+    
     // 批量新增absentData 
     @PostMapping("/absentDataInsert")
     public @ResponseBody void insertAbsent(@RequestBody List<AbsentListDto> AbsentListJsonString){
-        System.out.println("====================================================================");
+        // for迴圈把json資料單獨讀出 放進自己寫的AbsentListDto裡
         for(AbsentListDto oneAbsentDto:AbsentListJsonString){
             Integer classId =oneAbsentDto.getClassCodeId();
-            System.out.println("classId: "+classId);
+            // System.out.println("classId: "+classId);
             Integer studentId =oneAbsentDto.getStudentId();
-            System.out.println("studentId: "+ studentId);
+            // System.out.println("studentId: "+ studentId);
             Integer arrivedValue =oneAbsentDto.getArrivedValue();
-            System.out.println("arrivedValue: "+arrivedValue);
+            // System.out.println("arrivedValue: "+arrivedValue);
+            // 方法一
             // Absent oAbsent=new Absent();
+            // // 透過id get classList  把classList塞進去
+            // ClassList cl=clService.findById(classId);
+            // oAbsent.setClassList(cl);
+            // // 透過id Get student 把student塞進去
+            // Student student=stuService.findStudentById(studentId);
+            // oAbsent.setStudent(student);
             // oAbsent.setArrviedOrNot(arrivedValue);
-            // oAbsent.setClassList();
+            // absService.insert(oAbsent);
+
             System.out.println("start insert");
+            //方法二 透過原生語法 把變數個別塞入
             absService.insertAbsentData(classId, studentId, arrivedValue);
             System.out.println("end of insert");
+
+
         }
     }
 
