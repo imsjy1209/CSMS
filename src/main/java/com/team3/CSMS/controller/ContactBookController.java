@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -148,19 +149,20 @@ public class ContactBookController {
 		return map;
 	}
 	
-	/* 新增聯絡簿 */
-	// 【老師】進入新增編輯頁
-	@GetMapping("/ContactBook/T_Edit/{classListId}")
-	public String teacherContactBookEstablishPage(@PathVariable("classListId") Integer classListId) {
-		return "contactBook/teacher/tcbEdit";
-	}	
-	
-	// 【共用Json】新增/編輯聯絡部上方的課程資訊
+	/* 共用 */
+	// 【共用Json】新增/更新聯絡部上方的課程資訊
 	@GetMapping(value = "/findClsInfoByClassListId.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody ClassList findClsInfoByClsListID(@RequestParam("classListId") Integer classListId) {
 		return clService.findById(classListId);
 	}
-
+	
+	/* 新增聯絡簿 */
+	// 【老師】進入新增編輯頁
+	@GetMapping("/ContactBook/T_Edit/{classListId}")
+	public String teacherContactBookUpdatePage(@PathVariable("classListId") Integer classListId) {
+		return "contactBook/teacher/tcbEdit";
+	}	
+	
 	// 【老師】點「建立聯絡簿」按鈕要做兩件事：
 	// (1) ContactBook：insert一筆帶ClassListId資料
 	// (2) ContactBookSign：接著insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
@@ -171,6 +173,56 @@ public class ContactBookController {
 		return cbBean;
 	}
 
-	// 【老師】點「確認送出」按鈕
+	/* 更新聯絡簿 */
+	// 【老師】進入更新完成頁
+	@GetMapping("/ContactBook/T_Update/{clsListId}")
+	public String teacherContactBookEstablishPage(@PathVariable("clsListId") Integer clsListId) {
+		return "contactBook/teacher/tcbUpdate";
+	}	
 	
+	// 【老師】點「確認送出」按鈕
+	@PutMapping(value = "/teacherUpdateContactBookByCbId.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ContactBook teacherUpdateOneContactBook(
+			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
+			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			cbBean.setCourseContent(courseContent);
+			cbBean.setHomework(homework);
+			cbBean.setQuizNotice(quizNotice);
+			cbBean.setPhase(2);
+			cbService.save(cbBean);
+		}				
+		return cbBean;
+	}
+	// 符號不行QQ
+	
+	
+//	@PutMapping(value = "/teacherUpdateContactBookByCbId.json", produces = { "application/json;charset=UTF-8" })
+//	public @ResponseBody ContactBook teacherUpdateOneContactBook(
+//			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
+//			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId) {
+//		ContactBook cbBean = cbService.updateContactBookByCbId(courseContent, homework, quizNotice, cbId);
+//		return cbBean;
+//	}
+
+
+	/* 刪除聯絡簿 */
+	// 【老師】點「回上一頁」按鈕，先依當下的cbId抓到cbBean資料，再做以下兩件事：
+	//  (1) 若phase == 1，要先完成以下兩件事，才返回聯絡簿首頁
+	//      i. 以fk_cb_id刪除ContactBookSign資料
+	//		ii.設定classlist_id=null，再刪除ContactBook資料
+	//  (2) 若phase != 1，直接返回聯絡簿首頁
+	@GetMapping("/ContactBook/T_GoPrevPage")
+	public String teacherGoBackToContactBookIndex(@RequestParam("cbId") Integer cbId) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			if (cbBean.getPhase() == 1) {
+				cbsService.deleteContactBookSignByCbId(cbId);
+				cbBean.setClassList(null);
+				cbService.deleteThisContactBookData(cbBean);
+			} 
+		}
+		return "redirect:/ContactBook/T_Index";
+	}
 }

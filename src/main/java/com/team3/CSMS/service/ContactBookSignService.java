@@ -44,12 +44,17 @@ public class ContactBookSignService {
 
 	}
 	
+	// 老師點「回上一頁」：以fk_cb_id刪除ContactBookSign資料
+	public void deleteContactBookSignByCbId(Integer cbId) {
+		cbsDao.deleteContactBookSignByCbId(cbId);
+	}
+
 	
 }
 
 //--------------------------------- Yan's Note (勿刪) ---------------------------------
 //// 【原方法】老師點「建立聯絡簿」，同時insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
-//public void insertContactBookSignByCbIdAndStudentId(Integer classListId){
+//  public void insertContactBookSignByCbIdAndStudentId(Integer classListId){
 //	// 撈出這個班的學生id，用迴圈方式依序insert到聯絡簿簽名紀錄table
 //	List<ClassStudentList> cslList = cslDao.findClassStudentListByClassListId(classListId);
 //	

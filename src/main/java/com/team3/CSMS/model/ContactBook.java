@@ -43,9 +43,9 @@ public class ContactBook {
 	private Integer phase;
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "create_at", columnDefinition = "date", nullable = false) // insert要default getDate()
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date create_at;
 	
 	@PrePersist
