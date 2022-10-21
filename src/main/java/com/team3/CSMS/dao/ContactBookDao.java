@@ -3,6 +3,7 @@ package com.team3.CSMS.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -39,15 +40,10 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
     		+ "where [cb_id] = :cbId; "
     		+ "select * from ContactBook [cb_id] = :cbId; "
     		, nativeQuery = true)
-    ContactBook updateContactBookById(
-    		@Param("courseContent") Integer courseContent, 
-    		@Param("homework") Integer homework, 
-    		@Param("quizNotice") Integer quizNotice,
-    		@Param("cbId") Integer cbId);
-    
-    
-    // 老師點「回上一頁」，若phase==1，delete該筆資料By cb_id
-    
+    @Modifying
+    ContactBook updateContactBookByCbId(
+    		@Param("courseContent") String courseContent, @Param("homework") String homework, 
+    		@Param("quizNotice") String quizNotice, @Param("cbId") Integer cbId);
     
     /* 校方 */
 	// 校方聯絡簿選單By classListId

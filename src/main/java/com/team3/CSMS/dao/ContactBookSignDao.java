@@ -1,13 +1,18 @@
 package com.team3.CSMS.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.ContactBookSign;
 
 public interface ContactBookSignDao extends JpaRepository<ContactBookSign, Integer> {
 
-    
-    
+	// 老師點「回上一頁」：以fk_cb_id刪除ContactBookSign資料
+    @Query(value = "delete from ContactBookSign where [fk_cb_id] = :cbId", nativeQuery = true)
+    @Modifying
+    void deleteContactBookSignByCbId(@Param("cbId") Integer cbId);
     
     
 }

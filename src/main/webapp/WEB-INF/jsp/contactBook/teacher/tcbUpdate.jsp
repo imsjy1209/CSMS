@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【老師】聯絡簿編輯</h4>
+	<h4>【老師】聯絡簿修改</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -26,11 +26,7 @@
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
 			<!-- 聯絡簿按鈕放置處 -->
-<!-- 			<a href="/ContactBook/T_Update/" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a> -->
-<!-- 			<a href="/ContactBook/T_GoPrevPage?cbId=cbId" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a> -->
 		</div>
-
-
 	</div>
 </div>
 
@@ -58,9 +54,9 @@
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
-/* 取得路徑變數@PathVariable("classListId") */ 
-var clsListId =  ${classListId};
-// console.log(classListId);
+/* 取得路徑變數@PathVariable("clsListId") */ 
+var clsListId =  ${clsListId};
+// console.log(clsListId);
 
 /* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
@@ -129,9 +125,9 @@ window.onload = function(){
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">課程內容</th>';
     		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
     		if(courseContent != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly  /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value=" " readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -139,9 +135,9 @@ window.onload = function(){
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">回家作業</th>';
     		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
     		if(homework != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value=" " readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -149,17 +145,16 @@ window.onload = function(){
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">考試通知</th>';
     		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
     		if(quizNotice != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value=" " readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		$('#cbListEdit').append(cbListObj);
     		
     		// (3)帶入「確認送出」按鈕 
-    		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/"+clsListId+"'/>";
-    		UpdateBtnObj = '<a href="'+teacherUpdateBtnUrl+'" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a>&nbsp&nbsp'
+    		UpdateBtnObj = '<button id="btn-init" type="button" class="btn btn-secondary" disabled>確認送出</button>&nbsp&nbsp'
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕
