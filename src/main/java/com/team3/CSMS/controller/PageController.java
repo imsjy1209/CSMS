@@ -69,9 +69,27 @@ public class PageController {
 	public String roomUpdatePage() {
 		return "cs_room/roomUpdate";
 	}
-	// 點名跳轉
+	// 出缺勤跳轉
 	@GetMapping("/absent.page")
 	public String absentCheckPage(){
 		return "cs_absent/absentCheck";
-	}	
+	}
+	// 更改出缺勤
+	@GetMapping("/absentUpdate.page")
+	public String absentUpdatePage(){
+		return "cs_absent/absentUpdate";
+	}
+	
+	// 傳送訊息跳轉
+	// @GetMapping("/messages.page")
+	// public String messagesPage(){
+	// 	return "cs_messagez/messagez";
+	// }
+
+	// 更改個人密碼用
+	@GetMapping("/passw0rdUpdate.page")
+	public String pwdUpdatePage(){
+		return "cd_updateProfile/updatePWD";
+	}
+
 }

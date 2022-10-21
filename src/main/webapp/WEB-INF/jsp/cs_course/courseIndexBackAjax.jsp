@@ -276,7 +276,6 @@
 					else{
 						offlist.eq(i).addClass('active');
 					}
-					
 				}
 				//=========上下架的變更=========
 				$(".con").click(function(){

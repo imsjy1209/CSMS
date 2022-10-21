@@ -2,20 +2,21 @@ package com.team3.CSMS.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="post")
@@ -33,31 +34,46 @@ public class Post {
 	private String topic;
 	
 	@Lob
-	@Column(name="article",columnDefinition = "nvarchar(max)", nullable = false)
+	@Column(name="article", columnDefinition = "nvarchar(max)", nullable = false)
 	private String article;
 	
-	@Column(name="isDelete",columnDefinition = "bit", nullable = false)
-	private boolean isDelete;
+	@Column(name="isDelete")
+	private Integer isDelete; // insert data default 0 (0表示沒有刪除，1表示有刪除)
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
+	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date update_at; // insert data default getDate() ; update data default getDate()
 	
-	// 關聯
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="fk_users_id")
-    private Users users;
-	    
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		} 
+		if (isDelete == null) {
+			isDelete = 0;
+		}
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
+	
 	// 建構子
     public Post(){
     }
-
+    
     // getter & setter
 	public Integer getId() {
 		return id;
@@ -91,11 +107,11 @@ public class Post {
 		this.article = article;
 	}
 
-	public boolean getIsDelete() {
+	public Integer getIsDelete() {
 		return isDelete;
 	}
 
-	public void setisDelete(boolean isDelete) {
+	public void setisDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -114,13 +130,5 @@ public class Post {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
-
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}  
 	
 }

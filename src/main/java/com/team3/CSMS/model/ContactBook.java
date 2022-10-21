@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,14 +39,24 @@ public class ContactBook {
 	@Column(name = "quiznotice", columnDefinition = "nvarchar(150)")
 	private String quizNotice;
 
-	@Column(name = "phase") // 記得insert要default 1
+	@Column(name = "phase") // insert要default 1
 	private Integer phase;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@Column(name = "create_at", columnDefinition = "date", nullable = false) // 記得insert要default getDate()
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "create_at", columnDefinition = "date", nullable = false) // insert要default getDate()
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date create_at;
+	
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		} 
+		if (phase == null) {
+			phase = 1;
+		}
+	}
 
 	// 關聯
 	@OneToOne(cascade = CascadeType.ALL)

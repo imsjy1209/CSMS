@@ -8,11 +8,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ClassListDao;
+import com.team3.CSMS.dto.AllClassListParentVerDto;
+import com.team3.CSMS.dto.AllClassListSchoolVerDto;
+import com.team3.CSMS.dto.AllClassListStudentVerDto;
+import com.team3.CSMS.dto.AllClassListTeacherVerDto;
 import com.team3.CSMS.dto.ClassInfoDto;
 import com.team3.CSMS.dto.ClassListParentVerDto;
 import com.team3.CSMS.dto.ClassListSchoolVerDto;
 import com.team3.CSMS.dto.ClassListStudentVerDto;
-import com.team3.CSMS.dto.ClassListTeacherVerDto;
 import com.team3.CSMS.model.ClassList;
 
 @Service
@@ -34,23 +37,21 @@ public class ClassListService {
 		Optional<ClassList> optional = classListDao.findById(id);
 		if (optional.isPresent()) {
 			return optional.get();
-		}
-		else return null;
+		} else
+			return null;
 	}
-		
-		//找單筆課程資訊ClassList
-		public ClassList findClassListById(Integer id) {
-			Optional<ClassList> oneClassList = classListDao.findById(id);
-			ClassList aClassList = oneClassList.get();
-			return aClassList;
-		}
-		
-		//新增課程資訊
-		public void insertClassList(ClassList classList) {
-			classListDao.save(classList);
-		}
-		
 
+	// 找單筆課程資訊ClassList
+	public ClassList findClassListById(Integer id) {
+		Optional<ClassList> oneClassList = classListDao.findById(id);
+		ClassList aClassList = oneClassList.get();
+		return aClassList;
+	}
+
+	// 新增課程資訊
+	public void insertClassList(ClassList classList) {
+		classListDao.save(classList);
+	}
 
 	public List<ClassInfoDto> getClassInfoByClassCodeId(Integer classCodeId) {
 		List<ClassList> clList = classListDao.getClassInfoByClassCodeId(classCodeId);
@@ -67,18 +68,64 @@ public class ClassListService {
 		List<ClassList> clList = classListDao.findAll();
 		return clList;
 	}
-	
-	// 列出老師課程選單By account, classListId
-	public List<ClassListTeacherVerDto> getClassInfoListByTeacherAccount(String sessionAccount, Integer classListId) {
-		List<ClassList> clList = classListDao.getClassInfoListByTeacherAccount(sessionAccount, classListId);
-		ArrayList<ClassListTeacherVerDto> dtoList = new ArrayList<>();
+
+	/* 依使用者帳號列出可選擇之課程清單 */
+	// 老師課程選單By account
+	public List<AllClassListTeacherVerDto> getAllClassInfoListByTeacherAccount(String sessionAccount) {
+		List<ClassList> clList = classListDao.getAllClassInfoListByTeacherAccount(sessionAccount); // 寫BA001sessionAccount
+		ArrayList<AllClassListTeacherVerDto> dtoList = new ArrayList<>();
 		for (ClassList clOne : clList) {
-			ClassListTeacherVerDto cltDto = new ClassListTeacherVerDto(clOne);
+			AllClassListTeacherVerDto cltDto = new AllClassListTeacherVerDto(clOne);
 			dtoList.add(cltDto);
+		}
+		return dtoList;
+	}	
+	
+	// 校方課程選單By account
+	public List<AllClassListSchoolVerDto> getAllClassInfoListBySchoolAccount(String sessionAccount) {
+		List<ClassList> clList = classListDao.getAllClassInfoListBySchoolAccount(sessionAccount);
+		ArrayList<AllClassListSchoolVerDto> dtoList = new ArrayList<>();
+		for (ClassList clOne : clList) {
+			AllClassListSchoolVerDto clsDto = new AllClassListSchoolVerDto(clOne);
+			dtoList.add(clsDto);
 		}
 		return dtoList;
 	}
 	
+	// 學生課程選單By account
+	public List<AllClassListStudentVerDto> getAllClassInfoListByStudentAccount(String sessionAccount) {
+		List<ClassList> clList = classListDao.getAllClassInfoListByStudentAccount(sessionAccount);
+		ArrayList<AllClassListStudentVerDto> dtoList = new ArrayList<>();
+		for (ClassList clOne : clList) {
+			AllClassListStudentVerDto clstuDto = new AllClassListStudentVerDto(clOne);
+			dtoList.add(clstuDto);
+		}
+		return dtoList;
+	}	
+	
+	// 家長課程選單By account
+	public List<AllClassListParentVerDto> getAllClassInfoListByParentAccount(String sessionAccount) {
+		List<ClassList> clList = classListDao.getAllClassInfoListByParentAccount(sessionAccount);
+		ArrayList<AllClassListParentVerDto> dtoList = new ArrayList<>();
+		for (ClassList clOne : clList) {
+			AllClassListParentVerDto clpDto = new AllClassListParentVerDto(clOne);
+			dtoList.add(clpDto);
+		}
+		return dtoList;
+	}
+	
+	/* 課程選單選了哪一項(可能要改) */
+//	// 列出老師課程選單By account, classListId
+//	public List<ClassListTeacherVerDto> getClassInfoListByTeacherAccount(String sessionAccount, Integer classListId) {
+//		List<ClassList> clList = classListDao.getClassInfoListByTeacherAccount(sessionAccount, classListId);
+//		ArrayList<ClassListTeacherVerDto> dtoList = new ArrayList<>();
+//		for (ClassList clOne : clList) {
+//			ClassListTeacherVerDto cltDto = new ClassListTeacherVerDto(clOne);
+//			dtoList.add(cltDto);
+//		}
+//		return dtoList;
+//	}
+
 	// 列出校方課程選單By account, classListId
 	public List<ClassListSchoolVerDto> getClassInfoListBySchoolAccount(String sessionAccount, Integer classListId) {
 		List<ClassList> clList = classListDao.getClassInfoListBySchoolAccount(sessionAccount, classListId);
@@ -100,9 +147,10 @@ public class ClassListService {
 		}
 		return dtoList;
 	}
-
+	
 	// 列出家長課程選單By account, classListId, studentId
-	public List<ClassListParentVerDto> getClassInfoListByParentAccount(String sessionAccount, Integer classListId, Integer studentId) {
+	public List<ClassListParentVerDto> getClassInfoListByParentAccount(String sessionAccount, Integer classListId,
+			Integer studentId) {
 		List<ClassList> clList = classListDao.getClassInfoListByParentAccount(sessionAccount, classListId, studentId);
 		ArrayList<ClassListParentVerDto> dtoList = new ArrayList<>();
 		for (ClassList clOne : clList) {

@@ -20,8 +20,5 @@ public class StudentService {
 		Optional<Student> oneStudent = studentDao.findById(id);
 		return oneStudent.get();
 	}
-
-	
-	
 	
 }

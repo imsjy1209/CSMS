@@ -27,6 +27,7 @@ public class OrderListService {
 	public void insertOrderList(OrderList orderList) {
 		orderListDao.save(orderList);
 	}
+
 	
 	//找訂單By 訂單Id
 	public OrderList findOrderListById(Integer orderListId) {
@@ -38,7 +39,6 @@ public class OrderListService {
 	public void deleteOrderListByEntity(OrderList orderList) {
 		orderListDao.delete(orderList);
 	}
-	
 	
 	
 

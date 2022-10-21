@@ -183,6 +183,7 @@ background-color:green;
         #sidebar .sidebar-header {
             padding: 20px;
             background: #6d7fcc;
+            text-align: center;
         }
 
         #sidebar ul.components {
@@ -252,7 +253,9 @@ background-color:green;
             background: #6d7fcc !important;
             color: #fff !important;
         }
-
+        .csmslogo{
+            width: 60%;
+        }
         /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -289,7 +292,8 @@ background-color:green;
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>CSMS Back end System</h3>
+                <img src="${contextRoot}/image/CSMS1.png" class="csmslogo" alt="">
+                <h5>Back-end System</h5>
             </div>
 
             <ul class="list-unstyled components">
