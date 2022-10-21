@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +50,90 @@ public class ContactBookController {
 	public String teacherContactBookPage() {
 		return "contactBook/teacher/tcbIndex";
 	}
+	
+	/* 依使用者帳號列出可選擇之課程清單 */
+	// 【老師】課程選單對應聯絡簿清單
+	@GetMapping(value = "/allTeacherClassList.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<AllClassListTeacherVerDto> getAllTeacherClassList(String sessionAccount) { // BA001
+		// 預想：
+		// LoginController會寫@SessionAttributes(names = {"account"}) -- 延伸：聽說每個controller都要寫，否則會取不到(待查)
+		// getAttribute() -- 抓session的account資料餵給json -- how?? 忘記了 要查一下~~
+		List<AllClassListTeacherVerDto> aclTDto = clService.getAllClassInfoListByTeacherAccount("BA001"); // 之後要改回sessionAccount
+		return aclTDto;
+	}
 
+	/* 依課程篩選後之聯絡簿清單 */
+	// 【老師】課程選單對應聯絡簿清單
+	@GetMapping(value = "/teacherContactBookList.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<ContactBookListTeacherVerDto> getTeacherContactBookList(@RequestParam("classListId") Integer classListId) { // 1	
+		List<ContactBookListTeacherVerDto> cblTDto = cbService.getTeacherContactBookListByClassListId(classListId);
+		return cblTDto;
+	}
+
+	/* 共用 */
+	// 【共用Json】新增/更新聯絡部上方的課程資訊
+	@GetMapping(value = "/findClsInfoByClassListId.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ClassList findClsInfoByClsListID(@RequestParam("classListId") Integer classListId) {
+		return clService.findById(classListId);
+	}
+	
+	/* 新增聯絡簿 */
+	// 【老師】進入新增編輯頁
+	@GetMapping("/ContactBook/T_Edit/{classListId}")
+	public String teacherContactBookEditPage(@PathVariable("classListId") Integer classListId) {
+		return "contactBook/teacher/tcbEdit";
+	}	
+	
+	// 【老師】點「建立聯絡簿」按鈕要做兩件事：
+	// (1) ContactBook：insert一筆帶ClassListId資料
+	// (2) ContactBookSign：接著insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
+	@PostMapping(value = "/insertTheClassListIdIntoContactBook.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ContactBook teacherContactBookEstablish(@RequestParam("classListId") Integer classListId) {
+		ContactBook cbBean = cbService.insertTheClassListIdIntoContactBook(classListId);
+		cbsService.insertContactBookSignByCbIdAndStudentId(classListId);
+		return cbBean;
+	}
+	
+	
+	/* 更新聯絡簿 */
+	// 【老師】點「確認送出」按鈕，進入更新完成頁
+	@PostMapping("/ContactBook/T_Update/{clsListId}")
+	public String teacherUpdateOneContactBook(@PathVariable("clsListId") Integer clsListId,
+			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
+			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId, Model model) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			cbBean.setCourseContent(courseContent);
+			cbBean.setHomework(homework);
+			cbBean.setQuizNotice(quizNotice);
+			cbBean.setPhase(2);
+			cbService.save(cbBean);
+		}
+		model.addAttribute("cbBean", cbBean);
+		return "contactBook/teacher/tcbUpdate";
+	} // 某些符號不行，前端限制只能打英數中小數點？
+
+	/* 刪除聯絡簿 */
+	// 【老師】點「回上一頁」按鈕，先依當下的cbId抓到cbBean資料，再做以下兩件事：
+	//  (1) 若phase == 1，要先完成以下兩件事，才返回聯絡簿首頁
+	//      i. 以fk_cb_id刪除ContactBookSign資料
+	//		ii.設定classlist_id=null，再刪除ContactBook資料
+	//  (2) 若phase != 1，直接返回聯絡簿首頁
+	@GetMapping("/ContactBook/T_GoPrevPage")
+	public String teacherGoBackToContactBookIndex(@RequestParam("cbId") Integer cbId) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			if (cbBean.getPhase() == 1) {
+				cbsService.deleteContactBookSignByCbId(cbId);
+				cbBean.setClassList(null);
+				cbService.deleteThisContactBookData(cbBean);
+			} 
+		}
+		return "redirect:/ContactBook/T_Index";
+	}
+	
+	
+	// -----------------------其他角色-----------------------
 	// 【校方】聯絡簿首頁
 	@GetMapping("/ContactBook/Sc_Index")
 	public String schoolContactBookPage() {
@@ -68,29 +152,10 @@ public class ContactBookController {
 		return "contactBook/parent/pcbIndex";
 	}
 	
-
-	/* 編輯聯絡簿 */
-	// 【老師】聯絡簿編輯頁
-	@GetMapping("/ContactBook/T_Edit")
-	public String teacherContactBookEditPage() {
-		return "contactBook/teacher/tcbEdit";
-	}
-	
 	// 【校方】聯絡簿編輯頁
 	@GetMapping("/ContactBook/Sc_Edit")
 	public String schoolContactBookEditPage() {
-		return "contactBook/school/tcbEdit";
-	}
-
-	/* 依使用者帳號列出可選擇之課程清單 */
-	// 【老師】課程選單對應聯絡簿清單
-	@GetMapping(value = "/allTeacherClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListTeacherVerDto> getAllTeacherClassList(String sessionAccount) { // BA001
-		// 預想：
-		// LoginController會寫@SessionAttributes(names = {"account"}) -- 延伸：聽說每個controller都要寫，否則會取不到(待查)
-		// getAttribute() -- 抓session的account資料餵給json -- how?? 忘記了 要查一下~~
-		List<AllClassListTeacherVerDto> aclTDto = clService.getAllClassInfoListByTeacherAccount("BA001"); // 之後要改回sessionAccount
-		return aclTDto;
+		return "contactBook/school/sccbEdit";
 	}
 
 	// 【校方】課程選單對應聯絡簿清單
@@ -113,15 +178,7 @@ public class ContactBookController {
 		List<AllClassListParentVerDto> aclPDto = clService.getAllClassInfoListByParentAccount(sessionAccount); // 之後要改回sessionAccount
 		return aclPDto;
 	}
-
-	/* 依課程篩選後之聯絡簿清單(需要消滅一些Dto!!!) */
-	// 【老師】課程選單對應聯絡簿清單
-	@GetMapping(value = "/teacherContactBookList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<ContactBookListTeacherVerDto> getTeacherContactBookList(@RequestParam("classListId") Integer classListId) { // 1	
-		List<ContactBookListTeacherVerDto> cblTDto = cbService.getTeacherContactBookListByClassListId(classListId);
-		return cblTDto;
-	}
-
+	
 	// 【校方】課程選單對應聯絡簿清單
 	@GetMapping(value = "/schoolContactBookList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<String, Object> getSchoolContactBookList(String sessionAccount, Integer classListId) { // AA002,1
@@ -157,81 +214,5 @@ public class ContactBookController {
 		map.put("cblPDto", cblPDto);
 		return map;
 	}
-	
-	/* 共用 */
-	// 【共用Json】新增/更新聯絡部上方的課程資訊
-	@GetMapping(value = "/findClsInfoByClassListId.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody ClassList findClsInfoByClsListID(@RequestParam("classListId") Integer classListId) {
-		return clService.findById(classListId);
-	}
-	
-	/* 新增聯絡簿 */
-	// 【老師】進入新增編輯頁
-	@GetMapping("/ContactBook/T_Edit/{classListId}")
-	public String teacherContactBookUpdatePage(@PathVariable("classListId") Integer classListId) {
-		return "contactBook/teacher/tcbEdit";
-	}	
-	
-	// 【老師】點「建立聯絡簿」按鈕要做兩件事：
-	// (1) ContactBook：insert一筆帶ClassListId資料
-	// (2) ContactBookSign：接著insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
-	@PostMapping(value = "/insertTheClassListIdIntoContactBook.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody ContactBook teacherContactBookEstablish(@RequestParam("classListId") Integer classListId) {
-		ContactBook cbBean = cbService.insertTheClassListIdIntoContactBook(classListId);
-		cbsService.insertContactBookSignByCbIdAndStudentId(classListId);
-		return cbBean;
-	}
 
-	/* 更新聯絡簿 */
-	// 【老師】進入更新完成頁
-	@GetMapping("/ContactBook/T_Update/{clsListId}")
-	public String teacherContactBookEstablishPage(@PathVariable("clsListId") Integer clsListId) {
-		return "contactBook/teacher/tcbUpdate";
-	}	
-	
-	// 【老師】點「確認送出」按鈕
-	@PutMapping(value = "/teacherUpdateContactBookByCbId.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody ContactBook teacherUpdateOneContactBook(
-			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
-			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId) {
-		ContactBook cbBean = cbService.findById(cbId);
-		if (cbBean != null) {
-			cbBean.setCourseContent(courseContent);
-			cbBean.setHomework(homework);
-			cbBean.setQuizNotice(quizNotice);
-			cbBean.setPhase(2);
-			cbService.save(cbBean);
-		}				
-		return cbBean;
-	}
-	// 符號不行QQ
-	
-	
-//	@PutMapping(value = "/teacherUpdateContactBookByCbId.json", produces = { "application/json;charset=UTF-8" })
-//	public @ResponseBody ContactBook teacherUpdateOneContactBook(
-//			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
-//			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId) {
-//		ContactBook cbBean = cbService.updateContactBookByCbId(courseContent, homework, quizNotice, cbId);
-//		return cbBean;
-//	}
-
-
-	/* 刪除聯絡簿 */
-	// 【老師】點「回上一頁」按鈕，先依當下的cbId抓到cbBean資料，再做以下兩件事：
-	//  (1) 若phase == 1，要先完成以下兩件事，才返回聯絡簿首頁
-	//      i. 以fk_cb_id刪除ContactBookSign資料
-	//		ii.設定classlist_id=null，再刪除ContactBook資料
-	//  (2) 若phase != 1，直接返回聯絡簿首頁
-	@GetMapping("/ContactBook/T_GoPrevPage")
-	public String teacherGoBackToContactBookIndex(@RequestParam("cbId") Integer cbId) {
-		ContactBook cbBean = cbService.findById(cbId);
-		if (cbBean != null) {
-			if (cbBean.getPhase() == 1) {
-				cbsService.deleteContactBookSignByCbId(cbId);
-				cbBean.setClassList(null);
-				cbService.deleteThisContactBookData(cbBean);
-			} 
-		}
-		return "redirect:/ContactBook/T_Index";
-	}
 }

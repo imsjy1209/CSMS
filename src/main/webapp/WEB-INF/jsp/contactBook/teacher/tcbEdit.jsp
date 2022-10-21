@@ -19,7 +19,7 @@
 	</div>
 	<br>
 
-	<div id=cbList-area>
+	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/T_Update/${classListId}">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
 			<!-- insert的聯絡簿內容放置處 -->
 		</table>
@@ -29,12 +29,8 @@
 <!-- 			<a href="/ContactBook/T_Update/" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a> -->
 <!-- 			<a href="/ContactBook/T_GoPrevPage?cbId=cbId" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a> -->
 		</div>
-
-
-	</div>
+	</form>
 </div>
-
-
 
 
 <!-- CDN -->
@@ -60,7 +56,7 @@
 //=======================作業區=======================
 /* 取得路徑變數@PathVariable("classListId") */ 
 var clsListId =  ${classListId};
-// console.log(classListId);
+// console.log(clsListId);
 
 /* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
@@ -157,9 +153,11 @@ window.onload = function(){
     		
     		$('#cbListEdit').append(cbListObj);
     		
-    		// (3)帶入「確認送出」按鈕 
-    		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/"+clsListId+"'/>";
-    		UpdateBtnObj = '<a href="'+teacherUpdateBtnUrl+'" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a>&nbsp&nbsp'
+    		// (3)帶入「確認送出」按鈕
+//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/"+clsListId+"/"+courseContent+"/"+homework+"/"+quizNotice+"/"+cbId+"'/>";
+//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/" + clsListId + "'/>";
+			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
+//     		UpdateBtnObj = '<a href="'+teacherUpdateBtnUrl+'" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a>'
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕
