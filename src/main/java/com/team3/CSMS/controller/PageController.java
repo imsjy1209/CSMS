@@ -73,10 +73,17 @@ public class PageController {
 	public String absentUpdatePage(){
 		return "cs_absent/absentUpdate";
 	}
-	// 傳送訊息跳轉
-	@GetMapping("/messages.page")
-	public String messagesPage(){
-		return "cs_messagez/messagez";
-	}
 	
+	// 傳送訊息跳轉
+	// @GetMapping("/messages.page")
+	// public String messagesPage(){
+	// 	return "cs_messagez/messagez";
+	// }
+
+	// 更改個人密碼用
+	@GetMapping("/passw0rdUpdate.page")
+	public String pwdUpdatePage(){
+		return "cd_updateProfile/updatePWD";
+	}
+
 }
