@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+</head>
+<body>
+
+	<jsp:include page="layout/navbar.jsp"></jsp:include>
+	<div class="container">
+		<div align="center" style="width: 50%; height: 200px; margin: 0 auto;">
+
+			<img src="${pageContext.request.contextPath}/downloadImage/${act.id}"
+				class="img-fluid img"
+				style="display: block; width: 100%; height: auto; position: relative; top: 50px"
+				alt="...">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><div align="left"
+						style="float: left;">活動名稱:</div>${act.name}</li>
+				<li class="list-group-item"><div align="left"
+						style="float: left;">活動地點:</div>${act.place}</li>
+				<li class="list-group-item"><div align="left"
+						style="float: left;">活動日期:</div>${act.date}</li>
+				<li class="list-group-item"><div align="left"
+						style="float: left;">詳細內容:</div>${act.content}</li>
+				<li class="list-group-item">
+				<a href="${contextRoot}/quit/${act.id}" class="card-link">取消報名</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

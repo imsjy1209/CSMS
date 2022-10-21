@@ -74,7 +74,16 @@ public class Post {
     public Post(){
     }
     
-    // getter & setter
+    
+    
+    public Post(Integer userType, String topic, String article) {
+		super();
+		this.userType = userType;
+		this.topic = topic;
+		this.article = article;
+	}
+
+	// getter & setter
 	public Integer getId() {
 		return id;
 	}

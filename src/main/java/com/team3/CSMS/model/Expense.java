@@ -40,6 +40,8 @@ public class Expense {
 	@Column(name="other")
 	private int other;
 	
+	
+
 	public Expense(String year, String semester, int income, int totalcost, int markting, int personnel, int other) {
 		super();
 		this.year = year;
@@ -51,9 +53,25 @@ public class Expense {
 		this.other = other;
 	}
 
-	public Expense() {
+	public Expense(int id, String year, String semester, int income, int totalcost, int markting, int personnel,
+			int other) {
+		super();
+		this.id = id;
+		this.year = year;
+		this.semester = semester;
+		this.income = income;
+		this.totalcost = totalcost;
+		this.markting = markting;
+		this.personnel = personnel;
+		this.other = other;
 	}
 
+	public Expense() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 	public String getYear() {
 		return year;
 	}
