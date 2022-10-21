@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team3.CSMS.dto.AbsentListDto;
 import com.team3.CSMS.dto.ClassInfoDto;
 import com.team3.CSMS.dto.StudentListDto;
 import com.team3.CSMS.model.Absent;
@@ -54,17 +58,45 @@ public class AbsentController {
         map.put("cliDto", cliDto);
         return map;
     }
-    //透過ID和日期 查出缺勤
+    //透過ID和日期 查出缺勤表
     @GetMapping(value = "/getAbsentData.json",
                 produces = {"application/json;charset=UTF-8"})
-    public @ResponseBody List<Absent> getAbsentByIdAndDay(@RequestParam("classCodeId")Integer classCodeId,@RequestParam("days")String days){
+    public @ResponseBody  Map<String,Object> getAbsentByIdAndDay(@RequestParam("classCodeId")Integer classCodeId,@RequestParam("days")String days){
         System.out.println(classCodeId);
         System.out.println(days);
-        // Map<String,Object> map = new HashMap<>();
-        // List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
+        Map<String,Object> map = new HashMap<>();
+        List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
         List<Absent> abList=absService.searchAbsent(classCodeId, days);
-        // map.put("cliDto", cliDto);
-        // map.put("abList", abList);
-        return abList;
+        // List<AbsentDataDto> abList=absService.searchAbsent(classCodeId, days);
+        map.put("cliDto", cliDto);
+        map.put("abList", abList);
+        return map;
     }
+    // 透過ID更改學生出缺情狀況
+    @GetMapping(value="/updateStudentOrNotByID")
+    public @ResponseBody void updateStudentAbsentById (@RequestParam(name="absid")Integer absid,@RequestParam(name="absOrNot") Integer absOrNot){
+        Absent oneAbsent=absService.findStudentAbsentById(absid);
+        oneAbsent.setArrviedOrNot(absOrNot);
+        absService.insertAbsent(oneAbsent);
+    }  
+    // 批量新增absentData 
+    @PostMapping("/absentDataInsert")
+    public @ResponseBody void insertAbsent(@RequestBody List<AbsentListDto> AbsentListJsonString){
+        System.out.println("====================================================================");
+        for(AbsentListDto oneAbsentDto:AbsentListJsonString){
+            Integer classId =oneAbsentDto.getClassCodeId();
+            System.out.println("classId: "+classId);
+            Integer studentId =oneAbsentDto.getStudentId();
+            System.out.println("studentId: "+ studentId);
+            Integer arrivedValue =oneAbsentDto.getArrivedValue();
+            System.out.println("arrivedValue: "+arrivedValue);
+            // Absent oAbsent=new Absent();
+            // oAbsent.setArrviedOrNot(arrivedValue);
+            // oAbsent.setClassList();
+            System.out.println("start insert");
+            absService.insertAbsentData(classId, studentId, arrivedValue);
+            System.out.println("end of insert");
+        }
+    }
+
 }

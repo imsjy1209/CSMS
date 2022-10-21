@@ -26,6 +26,7 @@ import com.team3.CSMS.dto.ContactBookListStudentVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ContactBook;
+
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.ContactBookSignService;
@@ -65,6 +66,14 @@ public class ContactBookController {
 	@GetMapping("/ContactBook/P_Index")
 	public String parentContactBookPage() {
 		return "contactBook/parent/pcbIndex";
+	}
+	
+
+	/* 編輯聯絡簿 */
+	// 【老師】聯絡簿編輯頁
+	@GetMapping("/ContactBook/T_Edit")
+	public String teacherContactBookEditPage() {
+		return "contactBook/teacher/tcbEdit";
 	}
 	
 	// 【校方】聯絡簿編輯頁
