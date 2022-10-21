@@ -1,9 +1,9 @@
 package com.team3.CSMS.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.team3.CSMS.dto.OrderDetailDto;
-import com.team3.CSMS.model.ClassStudentList;
+import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Course;
 import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.OrderList;
 import com.team3.CSMS.model.Student;
+import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.CourseService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.OrderListService;
@@ -37,6 +39,9 @@ public class OrderDetailController {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private ClassListService classListService;
 	
 	//刪除訂單明細ById
 	@GetMapping("/deleteOrderDetailByIdAjax.controller")
@@ -104,7 +109,22 @@ public class OrderDetailController {
 			oneOrderDetail.setConfirmOrder(2);
 			
 			orderDetailService.insertOrderDetail(oneOrderDetail);
+			Optional<Course> oneCourseOpt = courseService.findCourseById(userCourseId);
+			Course oneCourse = oneCourseOpt.get();
+			int oneCourseMember = oneCourse.getCourseMember();
+			if(oneCourseMember-1 != 0) {
+				oneCourse.setCourseMember(oneCourseMember-1);
+				courseService.insertCourse(oneCourse);
+				
+				ClassList oneClassList = classListService.findClassListByCourseId(userCourseId);
+				oneClassList.setClassMember(oneClassList.getClassMember()+1);
+				classListService.insertClassList(oneClassList);
+			}else {
+				System.out.println("已額滿");
+			}
 		}
+		
+		
 		
 	}
 	
@@ -134,5 +154,17 @@ public class OrderDetailController {
 					 List<OrderDetail> orderDetailList = orderDetailService.findAllOrderDetail();
 					 return orderDetailList;
 				}
+				
+		//========find OrderDetail By Id And ConfirmOrder Is 2===========		
+				@GetMapping(value ="/findByStudentIsAndConfirmOrderIsAjax.controller")
+				public @ResponseBody List<OrderDetail> findByStudentIsAndConfirmOrderIsAjax(@RequestParam(name="stuIdForFindAlreadyBuy")Integer stuIdForFindAlreadyBuy) {
+					Student oneStudent = studentService.findStudentById(stuIdForFindAlreadyBuy);
+					 List<OrderDetail> orderDetailList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStudent,2);
+					 return orderDetailList;
+				}	
+				
+				
+				
+				
 	
 }

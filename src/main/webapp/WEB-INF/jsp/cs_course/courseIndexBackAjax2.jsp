@@ -79,19 +79,19 @@
 		<div class="col-md-2">
 			<label for="courseMember" class="form-label">上限人數</label> <input
 				type="text" name="courseMember" class="form-control formMem" id="courseMember"
-				 value="">
+				 value="${courseForUpdate.courseMember}">
 		</div>
 		
         <div class="col-md-5">
 			<label for="startDate" class="form-label">開課日期</label> <input
 				type="text" name="startDate" class="form-control formSD" id="startDate"
-				value="">
+				value="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${courseForUpdate.startDate}"/>">
 		</div>
 		
         <div class="col-md-5">
 			<label for="endDate" class="form-label">結課日期</label> <input
 				type="text" name="endDate" class="form-control formED" id="endDate"
-				value="">
+				value="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${courseForUpdate.endDate}"/>">
 		</div>
 		
         <div class="col-md-4">
@@ -276,6 +276,7 @@
 					else{
 						offlist.eq(i).addClass('active');
 					}
+					
 				}
 				//=========上下架的變更=========
 				$(".con").click(function(){
@@ -1256,34 +1257,6 @@
 //=====================Course Edit Btn===============================
 	$(document).on('click','.courseEditBtn',function(){
 		$('#exampleModalCenter').modal('show')
-		var cYear = $(this).parent().siblings('.courseYearInfo').text();
-		var cSem = $(this).parent().siblings('.courseSemInfo').text();
-		var cCat = $(this).parent().siblings('.courseCategoryInfo').text();
-		var cGra = $(this).parent().siblings('.courseGradeInfo').text();
-		var ccl = $(this).parent().siblings('.courseClassInfo').text();
-		var cSub = $(this).parent().siblings('.courseSubjectInfo').text();
-		var cPri = $(this).parent().siblings('.coursePriceInfo').text();
-		var cTT = $(this).parent().siblings('.courseTeachTimeInfo').text();
-		var cMem = $(this).parent().siblings('.courseMemberInfo').text();
-		var cSD = $(this).parent().siblings('.startDateInfo').text();
-		var cED = $(this).parent().siblings('.endDateInfo').text();
-		var cOnOff = $(this).parent().siblings('.onOrOff-td').children().val();
-console.log(cOnOff)
-		
-		$('.formYear').val(cYear);
-		$('.formSem').val(cSem);
-		$('.formCat').val(cCat);
-		$('.formSub').val(cSub);
-		$('.formGra').val(cGra);
-		$('.formCla').val(ccl);
-		$('.formPri').val(cPri);
-		$('.formTT').val(cTT);
-		$('.formSD').val(cSD);
-		$('.formED').val(cED);
-		$('.formOnOff').val(cOnOff);
-		$('.formMem').val(cMem);
-		
-		console.log('7777777777')
 	
 	})
 	

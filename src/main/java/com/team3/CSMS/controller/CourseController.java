@@ -18,13 +18,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Course;
+import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.Room;
 import com.team3.CSMS.model.School;
+import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.CourseService;
+import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.RoomService;
 import com.team3.CSMS.service.SchoolService;
+import com.team3.CSMS.service.StudentService;
 import com.team3.CSMS.service.TeacherService;
 
 
@@ -41,10 +45,16 @@ public class CourseController {
 	private RoomService roomService;
 	
 	@Autowired
+	private OrderDetailService orderDetailService;
+	
+	@Autowired
 	private SchoolService schoolService;
 	
 	@Autowired
 	private TeacherService teacherService;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	//刪除Course資料
 		@GetMapping("/deleteCourseData.controller")
@@ -227,6 +237,26 @@ public class CourseController {
 	@GetMapping("/AllOnCourseAjax.page")
 	public @ResponseBody List<Course> findAllOnCourse() {
 		List<Course> courseList = courseService.findCourseByOn();
+		return courseList;
+	}
+	
+	//======Super Cool~~~~~~~~=====商品總total頁面-移除該學生已購買過的商品(for前台)--Ajax===========
+	@PostMapping("/AllOnCourseExceptAlreadyBuyAjax.controller")
+	public @ResponseBody List<Course> AllOnCourseExceptAlreadyBuyAjax(@RequestParam(name="stuIdForFindAlreadyBuy")Integer stuIdForFindAlreadyBuy) {
+		
+		List<Course> courseList = courseService.findCourseByOn();
+		
+		Student oneStudent = studentService.findStudentById(stuIdForFindAlreadyBuy);
+		List<OrderDetail> orderDetailList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStudent, 2);
+		for(OrderDetail oneOrderDetail:orderDetailList) {
+			Course oneCourse = oneOrderDetail.getCourse();
+			courseList.removeIf(o->oneCourse==o);
+		}
+//		for(Course oneNewCourse:courseList) {
+//			System.out.println(oneNewCourse.getCourseSubject());
+//		}
+		
+		
 		return courseList;
 	}
 	

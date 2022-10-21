@@ -35,6 +35,7 @@ public interface CourseDao extends JpaRepository<Course,Integer> {
 	List<Course> findByCourseGradeContaining(String courseGrade);
 	List<Course> findByCourseSemesterContaining(String courseSemester);
 	
+	
 	List<Course> findByCourseOnOffIsAndCourseSemesterContainingOrCourseOnOffIsAndCourseCategoryContainingOrCourseOnOffIsAndCourseSubjectContainingOrCourseOnOffIsAndCourseGradeContaining
 	(Integer courseOnOff1,String courseSemester,Integer courseOnOff2,String courseCategory,Integer courseOnOff3,String courseSubject,Integer courseOnOff4,String courseGrade);
 
