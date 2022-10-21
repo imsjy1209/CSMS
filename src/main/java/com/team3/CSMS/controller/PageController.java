@@ -28,6 +28,12 @@ public class PageController {
 		return "cs_course/courseIndexAjax";
 	}
 	
+//	//商品All頁面-Course(for前台)
+//	@GetMapping("/courseAllOnPageAjax2.page")
+//	public String courseAllOnPage2() {
+//		return "cs_course/courseIndexAjax2";
+//	}
+	
 	//商品All頁面-Course(for後台)
 	@GetMapping("/courseAllPageBackAjax.page")
 	public String courseAllPageBackAjax() {

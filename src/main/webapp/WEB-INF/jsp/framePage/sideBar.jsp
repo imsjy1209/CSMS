@@ -125,6 +125,38 @@
 .orderFin.active{
 	background-color:green;
 }
+
+.bxs-edit{
+	cursor: pointer;
+	    transition: 0.5s;
+}
+.bxs-edit:hover{
+     color:orange;
+}
+
+.bxs-trash:hover{
+     color:red;
+}
+.oDoffText{
+color:azure;
+background-color:red;
+}
+.oDonText{
+color:azure;
+background-color:green;
+}
+.orderWaitText{
+color:azure;
+background-color:orange;
+}
+.orderNoPText{
+color:azure;
+background-color:red;
+}
+.orderFinText{
+color:azure;
+background-color:green;
+}
 		
         /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -298,7 +330,7 @@
                             <a id="orderList-Btn"  href="#">OrderList(訂單)</a>
                         </li>
                          <li>
-                            <a id="orderDetail-Btn"  href="#">OrderDetail(訂單明細)</a>
+                            <a id="orderDetail-Btn"  href="#">購買/排課狀態(訂單明細)</a>
                         </li>
                        <li>
                             <a id="room-Btn" href="#">Room(教室)</a>

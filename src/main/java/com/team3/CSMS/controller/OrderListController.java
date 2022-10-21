@@ -35,7 +35,15 @@ public class OrderListController {
 		public @ResponseBody List<OrderList> findAllOrderListAjax(Model model) {
 			 List<OrderList> orderListList = orderListService.findAllOrderList();
 			 return orderListList;
-		}	
+		}
+	//刪除一筆OrderList-ajax
+		@GetMapping("/deleteOrderListByIdAjax.controller")
+		public @ResponseBody void deleteOrderListByIdAjax(@RequestParam("orderListId")Integer orderListId) {
+			 OrderList oneOrderList = orderListService.findOrderListById(orderListId);
+			 oneOrderList.setStudent(null);
+			 orderListService.deleteOrderListByEntity(oneOrderList);
+		}
+		
 	//完成訂單(新增一筆付款完成的交易)
 		@GetMapping("/insertOrderList.controller")
 		public void insertOrderList

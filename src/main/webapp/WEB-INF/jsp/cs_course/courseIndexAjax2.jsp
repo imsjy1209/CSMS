@@ -29,47 +29,18 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
 	crossorigin="anonymous">	
-
-<style>
-.modal-open{ 
-overflow-y:scroll; 
-} 
-.container{
-padding-right:15px!important;
-}
-
-</style>	
+	
 </head>
-<body class="container">
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        
-        
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
+<body>
 
 	<header>
 	
-	
-	
-	
+
+
 		<div class="nav container">
 			<a href="#" class="logo">CramSchool</a>
 			<div><i class='bx bx-cart' style='font-size:48px;' id="cart-icon"></i><span class="badge badge-primary badge-pill">0</span></div>
-			
+<!-- 			<i class='bx bx-shopping-bag' id="cart-icon"></i> -->
 			<!--Cart-->
 			<div class="cart">
 				<h2 class="cart-title">Your Cart</h2> 
@@ -94,8 +65,6 @@ padding-right:15px!important;
 	<section class="shop container">
 		<h2 class="section-title">Course Products</h2>
 		<div class="shop-category-select">
-		
-		
 
 		<!--********************************Mohu********************************-->
 		  
@@ -152,18 +121,8 @@ padding-right:15px!important;
 		
 			
 		</div>
-		
-
 
 	</section>
-	
-<footer>
-<!-- 		<div id="already-buy-course-area" class="already-buy-course-area"> -->
-<h3>已擁有的課程</h3>
-<div class="shop-content-test" id="already-buy-course-area">
-		12345
-		</div>
-</footer>			
 	
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -178,12 +137,29 @@ padding-right:15px!important;
   crossorigin="anonymous"></script>
 	
 
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
+<!-- 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!-- 		crossorigin="anonymous"></script> -->
+<!-- 	<script -->
+<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
+<!-- 		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
+<!-- 		crossorigin="anonymous"></script> -->
+		
+<!-- 	<script -->
+<!-- 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
+<!-- 		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
+<!-- 		crossorigin="anonymous"></script> -->
+		
+		
+
 <!--####################################################################### -->				
 			<!--Link TO JS-->
 <!-- 	<script src="js/main.js"></script> -->
 
 
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
 	
 <script type="text/javascript">
 
@@ -212,6 +188,7 @@ $(".searchAllBtn").click(function(){
 				content += 
 				"<div class='product-box'>" +	
 				"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" +
+				
 				"<h2 class='product-title'>" +
 				courseList[i].courseGrade+
     	        courseList[i].courseClass + "年級" +
@@ -303,7 +280,8 @@ $(".searchAllBtn").click(function(){
 				for(var i=0; i < courseList.length; i++){
 					content += 
 					"<div class='product-box'>" +	
-					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img' >" +
+					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" +
+					
 					"<h2 class='product-title'>" +
 					courseList[i].courseGrade+
 	    	        courseList[i].courseClass + "年級" +
@@ -421,7 +399,8 @@ $(".searchAllBtn").click(function(){
 				for(var i=0; i < courseList.length; i++){
 					content += 
 					"<div class='product-box'>" +	
-					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img' >" +
+					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' height='650' class='product-img'>" +
+					
 					"<h2 class='product-title'>" +
 					courseList[i].courseGrade+
 	    	        courseList[i].courseClass + "年級" +
@@ -500,14 +479,8 @@ $(".searchAllBtn").click(function(){
 	})
 
 $(function(){
-	var stuIdForFindAlreadyBuy =2;
 	var xhr = new XMLHttpRequest();
-	
-	if(stuIdForFindAlreadyBuy!=null){
-	xhr.open("POST", "<c:url value='/AllOnCourseExceptAlreadyBuyAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
-	}
-	else
-	xhr.open("GET", "<c:url value='/findAllCourseByKeyWordAjax.controller?cg=" + cg +"&cs=" + cs +"&cc=" + cc + "' />", true);
+	xhr.open("GET", "<c:url value='/AllOnCourseAjax.page' />", true);
 	xhr.send();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -517,7 +490,8 @@ $(function(){
 			for(var i=0; i < courseList.length; i++){
 				content += 
 				"<div class='product-box'>" +	
-				"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" +
+				"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img' data-toggle='modal' data-target='#exampleModal'>" +
+				
 				"<h2 class='product-title'>" +
 				courseList[i].courseGrade+
     	        courseList[i].courseClass + "年級" +
@@ -536,9 +510,9 @@ $(function(){
     	       	"<i class='bx bx-shopping-bag add-cart'></i>" +
     	       	"<input size='3' class='courseTeachTime' id='courseTeachTime' value='" + courseList[i].courseTeachTime + "' type='hidden'></input>" +
     	       	"</div>"
+    	       	
     	       
 			}
-			
 			var info = document.getElementById("shop-content-ajax");
 			info.innerHTML = content;
 			console.log("loading finished")
@@ -572,9 +546,9 @@ $(function(){
 				})
 			})
 			
-			//=========禮拜幾上課的燈==========
+			
 			var ctt = $('.courseTeachTime');
-//   			console.log(ctt.eq(0).val());
+// 			console.log(ctt.eq(0).val());
 			var cttlength = ctt.length;
 			//第幾個courseTeachTime
 			for(var j=0; j < cttlength; j++){
@@ -588,69 +562,10 @@ $(function(){
 					}
 				}
 			}
-		}//End of print data
+			
+		}
 	}
-	//End Of CourseDataLoading
-	functionGoGo();
 })
-
-function functionGoGo(){
-		//start testttttttttttttttttt
-		var stuIdForFindAlreadyBuy =2;
-		console.log(stuIdForFindAlreadyBuy)
-		var xhrTest = new XMLHttpRequest();
-		xhrTest.open("GET", "<c:url value='/findByStudentIsAndConfirmOrderIsAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
-		xhrTest.send();
-		xhrTest.onreadystatechange = function() {
-			if (xhrTest.readyState == 4 && xhrTest.status == 200) {
-				var contentTest = "";
-				var orderDetailList = JSON.parse(xhrTest.responseText);
-				console.log(orderDetailList);
-				for(var i=0; i < orderDetailList.length; i++){
-					contentTest += 
-					"<div class='product-box-test'>" +	
-					"<img alt='img' width='200px' src='data:image/jpeg;base64,"+orderDetailList[i].course.coursePic + "' class='product-img'>" +
-					"<h2 class='product-title'>" +
-					orderDetailList[i].course.courseGrade+
-					orderDetailList[i].course.courseClass + "年級" +
-					orderDetailList[i].course.courseSubject +
-					orderDetailList[i].course.courseCategory + 
-	    	       	"</h2>" +
-	    	       	
-	    	       	"<p class='course-info'>上課期間:" + orderDetailList[i].course.startDate + "~" +
-	    	       	orderDetailList[i].course.endDate + "</p>" +
-	    	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
-	    	       	"<span class='price'>$" + orderDetailList[i].course.coursePrice + "</span>" +
-	    	       	"<input size='3' class='courseTeachTime' id='courseTeachTime' value='" + orderDetailList[i].course.courseTeachTime + "' type='hidden'></input>" +
-	    	       	"</div>"
-	    	       
-				}
-				var infoTest = document.getElementById("already-buy-course-area");
-				infoTest.innerHTML = contentTest;
-				console.log("loading finished")
-				
-				var ctt = $('.courseTeachTime');
-//   			console.log(ctt.eq(0).val());
-				var cttlength = ctt.length;
-				//第幾個courseTeachTime
-				for(var j=0; j < cttlength; j++){
-				var cttValue = ctt.eq(j).val();
-				
-				//第j個courseTeachTime的第z個星期是否有上課
-				for(var z=0;z<7;z++){
-				var onOrOff = cttValue.substr(z,1);
-					if(onOrOff==1){
-						ctt.eq(j).siblings('.course-info').find('button').eq(z).addClass('active');
-					}
-				}
-			}
-				
-			}
-			else{
-				console.log('gggggggggggg')
-			}
-		}//end of testtttttttttttttttt
-	}
 
 
 //===========照片點擊後放大===========
@@ -659,32 +574,6 @@ function functionGoGo(){
 // 	$(this).width(700);
 // 	console.log("gottttttt uuuuuuuuuu")
 // })
-
-
-$(document).on('click','img',function(){
-	$('#exampleModalCenter').modal('show')
-	var titleModal = $(this).siblings("h2").text();
-	var courseIdModal = $(this).siblings(".course-id").text();
-	var priceModal = $(this).siblings(".price").text();
-	var productImgModal = $(this).attr("src");
-	var cartBoxContentModal ="";
-	cartBoxContentModal+="<div class='product-box-modal'>" +	
-		"<img alt='img' src='"+productImgModal+"' class='product-img'>" +
-		"<h2 class='product-title'>" +
-		titleModal +
-       	"</h2>" +
-       	"<span class='price'>" + priceModal + "</span>" +
-       	"</div>"
-		$(".modal-body").append(cartBoxContentModal);
-})
-
-$('#exampleModalCenter').on('hidden.bs.modal', function (e) {
-  $('.product-box-modal').remove();
-  console.log('7777777')
-})
-
-
-
 
 //Open Cart
 $(document).on('click','#cart-icon',function(){ 
@@ -804,12 +693,62 @@ function addProductToCart(title,course_id, price, productImg) {
 "<div class='detail-box'><span hidden='hidden'>" + course_id + "</span><div class='cart-product-title'>" + title + "</div>" +
     "<div class='cart-price'>" + price + "</div>" +
     "</div><i class='bx bxs-trash-alt cart-remove'></i></div>";
-    
 $(".cart-content").append(cartBoxContent);
 
 
 
+// //===============Remove Items From Cart===============
+// $(".cart-remove").click(function(){
+// 	var courseIdForRemove = $(this).siblings(".detail-box").find('span').text()
+// 	$(this).closest(".cart-box").remove();
+	
+// 	//========更新購物車顯示裡面的商品數量=============
+// 	var cartNum = $('.cart-content').children('.cart-box').length;
+// 	$('.badge-pill').text(cartNum)
+	
+// 	//更新商品庫存數量
+// 	var courseUpdateNumId = $(this).siblings('.detail-box').find('span').text();
+// 	console.log('===============')
+// 	console.log(courseUpdateNumId)
+// 	console.log('===============')
+// 	$('.shop-content').children('.product-box').each(function(){
+// 		var targetId = $(this).children('.course-id').text();
+// 		if(courseUpdateNumId==targetId){
+// 			var targetIdMem = $(this).children('.course-member').text();
+// 			var targetIdMemNum = targetIdMem.substr(5);
+// // 			console.log($(this).children('.course-member').text())
+// 			$(this).children('.course-member').text("尚餘人數:"+ (Number(targetIdMemNum)+1))
+// // 			console.log((Number(targetIdMemNum)+1))
+// 			console.log(targetIdMem)
+// 			console.log(targetIdMemNum)
+// 			return false;
+// 		}
+		
+// 	})
+	
+	
+// // 	var keyVal = thisCourseMem.substr(5);
+// // 	console.log(keyVal)
+// // 	var newKeyVal = Number(keyVal)-1;
+// // 	console.log(newKeyVal)
+// // 	$(this).siblings('.course-member').text("尚餘人數" + newKeyVal);
 
+//    //=============移除購物車圖示的背景色===========
+//     var targetId="";
+//     $('.product-box').each(function(){
+//     	targetId = $(this).children('.course-id').text()
+    	
+//     	if(targetId==courseIdForRemove){
+// //     		console.log("got uuuuuuuuuuuuuuu")
+//     		$(this).children('.add-cart').removeClass('active')
+    		
+//     	}
+//     })
+
+	
+// 	updatetotal();
+    
+// })
 //================End OF RemoveItems From Cart===============
 
 }
