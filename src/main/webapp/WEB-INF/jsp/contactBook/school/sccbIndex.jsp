@@ -101,6 +101,7 @@ window.onload = function(){
 
 /* 選單change事件：依選到的項目(classListId)帶出對應的聯絡簿清單 */	
 $("#classInfoList").on("change",function(){
+	
 	// 抓選到的option的value屬性值(classListId=?)
 	var selectedClassListId = $(this).prop("value"); 
 	// console.log($(this).prop("value"));
@@ -110,42 +111,47 @@ $("#classInfoList").on("change",function(){
 	xhr2.open("GET","<c:url value='/schoolContactBookList.json'/>"+"?classListId="+selectedClassListId,true); 
 	xhr2.send();                    
   	xhr2.onreadystatechange = function(){
-  		
   		if(xhr2.readyState == 4 && xhr2.status == 200){
   			var cbList = JSON.parse(xhr2.responseText);
-	  	  	
-	  	  	cb_content ='<tbody id="cbList-data">';
-	  	    for (i = 0 ; i < cbList.length ; i++){
-	  	    	if (cbList.length > 0){
-		  	    	cb_content +='<tr>';
+  			
+  			// 先清除還在畫面上的聯絡簿表格
+  			$('#cbList tbody tr td').remove(); 
+  			
+  			// 再加入新篩選的聯絡簿表格
+  			cb_content ='<tbody id="cbList-data">';
+  			
+  			if (cbList.length > 0){
+  				console.log(cbList.length);
+  				for (i = 0 ; i < cbList.length ; i++){
+  					cb_content +='<tr>';
 		  	    	cb_content +='<td>' + cbList[i].cb_id + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].create_at + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].classCode + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].teacherName + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].schoolName + '</td>'; 
-		  	    	
-		  	    	// cb_content +='<td>' + cbList[i].courseContent + '</td>';
+  					
+		  	   		// cb_content +='<td>' + cbList[i].courseContent + '</td>';
 		  	    	if (cbList[i].courseContent != null ){
 		  	    		cb_content +='<td>' + cbList[i].courseContent + '</td>';
 		  	    	} else {
 		  	    		cb_content +='<td></td>';
 		  	    	}
-		  	    	
-		  	    	// cb_content +='<td>' + cbList[i].homework + '</td>'; 
+  					
+		  	   		// cb_content +='<td>' + cbList[i].homework + '</td>'; 
 		  	    	if (cbList[i].homework != null ){
 		  	    		cb_content +='<td>' + cbList[i].homework + '</td>';
 		  	    	} else {
 		  	    		cb_content +='<td></td>';
 		  	    	}
 		  	    	
-		  	    	// cb_content +='<td>' + cbList[i].quizNotice + '</td>';
+		  	   		// cb_content +='<td>' + cbList[i].quizNotice + '</td>';
 		  	    	if (cbList[i].quizNotice != null ){
 		  	    		cb_content +='<td>' + cbList[i].quizNotice + '</td>';
 		  	    	} else {
 		  	    		cb_content +='<td></td>';
 		  	    	}
 		  	    	
- 		  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
+		  	   		// cb_content +='<td>' + cbList[i].phase + '</td>';
 					if (cbList[i].phase == 2) {
 						cb_content +='<td style="color:red">待審核</td>';
 						cb_content +='<td>';
@@ -162,17 +168,19 @@ $("#classInfoList").on("change",function(){
 					} else {
 						cb_content +='<td>系統發生問題，請通知系統管理員</td>';
 					}
-					
-		  	    	cb_content +='</tr>';
-	  	    	} else {
-	  	    		cb_content +='<tr><td colspan="10">查無結果</td></tr>';
-	  	    	}
-	  	    }
-		  	cb_content +='</tbody>';
-		  	$('#cbList').append(cb_content);
-	  	}
+					cb_content +='<tr>';
+  				}
+
+  			} else{
+  				console.log(cbList.length);
+  				cb_content +='<tr><td colspan="10">查無結果</td></tr>';
+  			}
+	  	  	cb_content +='</tbody>';
+	  	  	$('#cbList').append(cb_content); 
+  		}
   	}
- });	
+});
+
 // cb_content +='<a href="#" type="button" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="false">刪除</a>';
 //=======================版面動作=======================
 

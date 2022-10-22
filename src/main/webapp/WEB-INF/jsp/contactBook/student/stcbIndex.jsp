@@ -121,8 +121,8 @@ $("#classInfoList").on("change",function(){
   			var cbList = JSON.parse(xhr2.responseText);
 	  	  	
 	  	  	cb_content ='<tbody id="cbList-data">';
-	  	    for (i = 0 ; i < cbList.length ; i++){
-	  	    	if (cbList.length > 0){
+	  	  	if (cbList.length > 0){
+	  	    	for (i = 0 ; i < cbList.length ; i++){
 		  	    	cb_content +='<tr>';
 		  	    	cb_content +='<td>' + cbList[i].cb_id + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].create_at + '</td>';
@@ -152,15 +152,17 @@ $("#classInfoList").on("change",function(){
 		  	    	}
 		  	    	
 		  	    	cb_content +='</tr>';
-	  	    	} else {
-	  	    		cb_content ='<tr><td colspan="8">查無結果</td></tr>';
-	  	    	}
-	  	    }
-		  	cb_content +='</tbody>';
-		  	$('#cbList').append(cb_content);
-	  	}
+	  	    	} 
+	  	    	
+  			} else{
+  				console.log(cbList.length);
+  				cb_content +='<tr><td colspan="8">查無結果</td></tr>';
+  			}
+	  	  	cb_content +='</tbody>';
+	  	  	$('#cbList').append(cb_content); 
+  		}
   	}
- });	
+});
 
 //=======================版面動作=======================
 

@@ -130,11 +130,14 @@ $("#classInfoList").on("change",function(){
   	xhr2.onreadystatechange = function(){
   		
   		if(xhr2.readyState == 4 && xhr2.status == 200){
+  			
   			var cbList = JSON.parse(xhr2.responseText);
 	  	  	
+  			$('#cbList tbody tr td').remove(); // 清除還在畫面上的聯絡簿篩選結果清單
+  			
 	  	  	cb_content ='<tbody id="cbList-data">';
-	  	    for (i = 0 ; i < cbList.length ; i++){
-	  	    	if (cbList.length > 0){
+	  	  	if (cbList.length > 0){
+		  	  	for (i = 0 ; i < cbList.length ; i++){
 		  	    	cb_content +='<tr>';
 		  	    	cb_content +='<td>' + cbList[i].cb_id + '</td>';
 		  	    	cb_content +='<td>' + cbList[i].create_at + '</td>';
@@ -163,7 +166,7 @@ $("#classInfoList").on("change",function(){
 		  	    		cb_content +='<td></td>';
 		  	    	}
 		  	    	
- 		  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
+			  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
 					if (cbList[i].phase == 1){
 						cb_content +='<td style="color:red">編輯中</td>';
 					} else if (cbList[i].phase == 2) {
@@ -177,16 +180,16 @@ $("#classInfoList").on("change",function(){
 					}
 		  	    	
 		  	    	cb_content +='</tr>';
-	  	    	} else {
-	  	    		cb_content ='<tr><td colspan="9">查無結果</td></tr>';
-	  	    	}
-	  	    }
-		  	cb_content +='</tbody>';
-		  	$('#cbList').append(cb_content);
-	  	}
-  	}
- });	
-
+	  	  		} // end of for loop 
+		    } else {
+		    	// console.log(cbList.length);
+		    	cb_content +='<tr><td colspan="9">查無結果</td></tr>';
+		    }
+  			cb_content +='</tbody>';	
+  			$('#cbList').append(cb_content);	
+  		}
+  	} 	
+});	
 //=======================版面動作=======================
 
 $(document).ready(function () {

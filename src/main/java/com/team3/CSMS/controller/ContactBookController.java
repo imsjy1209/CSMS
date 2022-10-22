@@ -18,8 +18,6 @@ import com.team3.CSMS.dto.AllClassListSchoolVerDto;
 import com.team3.CSMS.dto.AllClassListStudentVerDto;
 import com.team3.CSMS.dto.AllClassListTeacherVerDto;
 import com.team3.CSMS.dto.ClassListParentVerDto;
-import com.team3.CSMS.dto.ClassListSchoolVerDto;
-import com.team3.CSMS.dto.ClassListStudentVerDto;
 import com.team3.CSMS.dto.ContactBookListParentVerDto;
 import com.team3.CSMS.dto.ContactBookListSchoolVerDto;
 import com.team3.CSMS.dto.ContactBookListStudentVerDto;
