@@ -26,6 +26,7 @@ public class ContactBookSignService {
 	@Autowired
 	private ContactBookSignDao cbsDao;
 	
+	//------------------------- 老師 -------------------------
 	// 【JPA方法】老師點「建立聯絡簿」，同時insert一組資料By fk_cb_id, 每個班(fk_classlist_id)的student_id
 	public void insertContactBookSignByCbIdAndStudentId(Integer classListId) {
 		
@@ -49,6 +50,8 @@ public class ContactBookSignService {
 		cbsDao.deleteContactBookSignByCbId(cbId);
 	}
 
+	//------------------------- 家長 -------------------------
+	
 	
 }
 

@@ -14,7 +14,6 @@ import com.team3.CSMS.dto.AllClassListTeacherVerDto;
 import com.team3.CSMS.dto.ClassInfoDto;
 import com.team3.CSMS.dto.ClassListParentVerDto;
 import com.team3.CSMS.dto.ClassListSchoolVerDto;
-import com.team3.CSMS.dto.ClassListStudentVerDto;
 import com.team3.CSMS.model.ClassList;
 
 @Service
@@ -113,18 +112,7 @@ public class ClassListService {
 		return dtoList;
 	}
 	
-	/* 課程選單選了哪一項(可能要改) */
-//	// 列出老師課程選單By account, classListId
-//	public List<ClassListTeacherVerDto> getClassInfoListByTeacherAccount(String sessionAccount, Integer classListId) {
-//		List<ClassList> clList = classListDao.getClassInfoListByTeacherAccount(sessionAccount, classListId);
-//		ArrayList<ClassListTeacherVerDto> dtoList = new ArrayList<>();
-//		for (ClassList clOne : clList) {
-//			ClassListTeacherVerDto cltDto = new ClassListTeacherVerDto(clOne);
-//			dtoList.add(cltDto);
-//		}
-//		return dtoList;
-//	}
-
+	/* 課程選單選了哪一項(可能要刪) */
 	// 列出校方課程選單By account, classListId
 	public List<ClassListSchoolVerDto> getClassInfoListBySchoolAccount(String sessionAccount, Integer classListId) {
 		List<ClassList> clList = classListDao.getClassInfoListBySchoolAccount(sessionAccount, classListId);
@@ -132,17 +120,6 @@ public class ClassListService {
 		for (ClassList clOne : clList) {
 			ClassListSchoolVerDto clsDto = new ClassListSchoolVerDto(clOne);
 			dtoList.add(clsDto);
-		}
-		return dtoList;
-	}
-
-	// 列出學生課程選單By account, classListId
-	public List<ClassListStudentVerDto> getClassInfoListByStudentAccount(String sessionAccount, Integer classListId) {
-		List<ClassList> clList = classListDao.getClassInfoListByStudentAccount(sessionAccount, classListId);
-		ArrayList<ClassListStudentVerDto> dtoList = new ArrayList<>();
-		for (ClassList clOne : clList) {
-			ClassListStudentVerDto clstuDto = new ClassListStudentVerDto(clOne);
-			dtoList.add(clstuDto);
 		}
 		return dtoList;
 	}

@@ -92,7 +92,6 @@ public class ContactBookController {
 		return cbBean;
 	}
 	
-	
 	/* 更新聯絡簿 */
 	// 【老師】點「確認送出」按鈕，進入更新完成頁
 	@PostMapping("/ContactBook/T_Update/{clsListId}")
@@ -130,7 +129,7 @@ public class ContactBookController {
 		return "redirect:/ContactBook/T_Index";
 	}
 	
-	//------------------------- 校方 -------------------------  進度：施工中
+	//------------------------- 校方 -------------------------  進度：施工中(還差查詢簽名進度、取消退件功能、考慮加入前台送出功能)
 	/* 進入聯絡簿系統 */
 	// 【校方】聯絡簿首頁
 	@GetMapping("/ContactBook/Sc_Index")
@@ -153,14 +152,43 @@ public class ContactBookController {
 		return cblSDto;
 	}
 	
-	
+	/* 更新聯絡簿 */
 	// 【校方】聯絡簿編輯頁
-	@GetMapping("/ContactBook/Sc_Edit")
-	public String schoolContactBookEditPage() {
+	@GetMapping("/ContactBook/Sc_Edit/{classListId}/{cbId}")
+	public String schoolContactBookEditPage
+	(@PathVariable("classListId") Integer classListId, @PathVariable("cbId") Integer cbId) {
 		return "contactBook/school/sccbEdit";
 	}
 	
+	// 【校方】於首頁挑選其中一筆聯絡簿進行編輯/查看
+	@GetMapping(value = "/schoolClickOneContactBook.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ContactBook schoolClickOneContactBookToGoEditing(@RequestParam("cbId") Integer cbId) {
+		ContactBook cbBean = cbService.findById(cbId);
+		return cbBean;
+	}
 	
+	// 【校方】點「確認送出」按鈕，進入更新完成頁
+	@PostMapping("/ContactBook/Sc_Update/{clsListId}")
+	public String schoolUpdateOneContactBook(@PathVariable("clsListId") Integer clsListId,
+			@RequestParam("courseContent") String courseContent, @RequestParam("homework") String homework, 
+			@RequestParam("quizNotice") String quizNotice, @RequestParam("cbId") Integer cbId, Model model) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			cbBean.setCourseContent(courseContent);
+			cbBean.setHomework(homework);
+			cbBean.setQuizNotice(quizNotice);
+			cbBean.setPhase(3);
+			cbService.save(cbBean);
+		}
+		model.addAttribute("cbBean", cbBean);
+		return "contactBook/school/sccbUpdate";
+	} // 某些符號不行，前端限制只能打英數中小數點？
+	
+	// 【校方】點「回上一頁」
+	@GetMapping("/ContactBook/Sc_GoPrevPage")
+	public String schoolGoBackToContactBookIndex() {
+		return "redirect:/ContactBook/Sc_Index";
+	}
 	
 	
 	//------------------------- 學生 -------------------------  進度：已完成

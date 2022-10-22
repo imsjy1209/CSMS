@@ -22,7 +22,22 @@ public class ContactBookService {
 	@Autowired
 	private ContactBookDao cbDao;
 	
-	/* 老師 */
+	//------------------------- 共用 -------------------------
+	// 【共用】以id單筆查詢(此處id為cb_id)
+	public ContactBook findById(Integer id) {
+		Optional<ContactBook> optional = cbDao.findById(id);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+	}
+	
+	// 【共用】儲存一個Entity物件
+	public void save(ContactBook contactBook) {
+		cbDao.save(contactBook);
+	}
+	
+	//------------------------- 老師 -------------------------
 	// 老師聯絡簿選單By classListId
 	public List<ContactBookListTeacherVerDto> getTeacherContactBookListByClassListId(Integer classListId) {
 		List<ContactBook> cbList = cbDao.getTeacherContactBookListByClassListId(classListId);
@@ -40,33 +55,17 @@ public class ContactBookService {
 		return cbBean;
 	}
 	
-	// 老師點「確認送出」按鈕
-	public ContactBook updateContactBookByCbId(String courseContent, String homework, String quizNotice, Integer cbId) {
-		ContactBook cbBean = cbDao.updateContactBookByCbId(courseContent, homework, quizNotice, cbId);
-		return cbBean;
-	}
-	
-	// 【共用】以id單筆查詢(此處id為cb_id)
-	public ContactBook findById(Integer id) {
-		Optional<ContactBook> optional = cbDao.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
-	}
-	
-	// 【共用】儲存一個Entity物件
-	public void save(ContactBook contactBook) {
-		cbDao.save(contactBook);
-	}
+	// 老師點「確認送出」按鈕使用JPA內建方法
+	// (1)【共用】以id單筆查詢(此處id為cb_id)	
+	// (2)【共用】儲存一個Entity物件
+
 	
 	// 老師點「回上一頁」：delete當下這筆資料
 	public void deleteThisContactBookData(ContactBook cbBean) {
 		cbDao.delete(cbBean);
 	}
 	
-	
-	/* 校方 */
+	//------------------------- 校方 -------------------------
 	// 校方聯絡簿選單By classListId
 	public List<ContactBookListSchoolVerDto> getSchoolContactBookListByClassListId(Integer classListId) {
 		List<ContactBook> cbList = cbDao.getSchoolContactBookListByClassListId(classListId);
@@ -78,7 +77,15 @@ public class ContactBookService {
 		return dtoList;
 	}
 	
-	/* 學生 */
+	// 校方點單筆編輯查看使用JPA內建方法
+	// (1)【共用】以id單筆查詢(此處id為cb_id)	
+
+	// 校方點「確認送出」按鈕使用JPA內建方法
+	// (1)【共用】以id單筆查詢(此處id為cb_id)	
+	// (2)【共用】儲存一個Entity物件
+	
+	
+	//------------------------- 學生 -------------------------
 	// 學生聯絡簿選單By classListId
 	public List<ContactBookListStudentVerDto> getStudentContactBookListByClassListId(Integer classListId) {
 		List<ContactBook> cbList = cbDao.getStudentContactBookListByClassListId(classListId);
@@ -90,7 +97,7 @@ public class ContactBookService {
 		return dtoList;
 	}
 	
-	/* 家長 */
+	//------------------------- 家長 -------------------------
 	// 家長聯絡簿選單By classListId
 	public List<ContactBookListParentVerDto> getParentContactBookListByClassListId(Integer classListId, Integer studentId) {
 		List<ContactBook> cbList = cbDao.getParentContactBookListByClassListId(classListId, studentId);
