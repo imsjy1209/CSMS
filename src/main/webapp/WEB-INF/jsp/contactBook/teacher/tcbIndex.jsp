@@ -165,9 +165,9 @@ $("#classInfoList").on("change",function(){
 		  	    	
  		  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
 					if (cbList[i].phase == 1){
-						cb_content +='<td>編輯中</td>';
+						cb_content +='<td style="color:red">編輯中</td>';
 					} else if (cbList[i].phase == 2) {
-						cb_content +='<td>審核中</td>';
+						cb_content +='<td style="color:blue">審核中</td>';
 					} else if (cbList[i].phase == 3) {
 						cb_content +='<td>已通過</td>';
 					} else if (cbList[i].phase == 4) {
@@ -178,7 +178,7 @@ $("#classInfoList").on("change",function(){
 		  	    	
 		  	    	cb_content +='</tr>';
 	  	    	} else {
-	  	    		cb_content ='<tr><td colspan="10">查無結果</td></tr>';
+	  	    		cb_content ='<tr><td colspan="9">查無結果</td></tr>';
 	  	    	}
 	  	    }
 		  	cb_content +='</tbody>';

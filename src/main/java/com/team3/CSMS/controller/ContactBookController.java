@@ -43,7 +43,7 @@ public class ContactBookController {
 	@Autowired
 	private ContactBookSignService cbsService;
 
-	//------------------------- 老師 -------------------------
+	//------------------------- 老師 -------------------------  進度：大致ok，只差一些特殊操情境的前端卡控
 	/* 進入聯絡簿系統 */
 	// 【老師】聯絡簿首頁
 	@GetMapping("/ContactBook/T_Index")
@@ -52,7 +52,7 @@ public class ContactBookController {
 	}
 	
 	/* 依使用者帳號列出可選擇之課程清單 */
-	// 【老師】課程選單對應聯絡簿清單
+	// 【老師】課程選單
 	@GetMapping(value = "/allTeacherClassList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody List<AllClassListTeacherVerDto> getAllTeacherClassList(String sessionAccount) { // BA001
 		// 預想：
@@ -71,7 +71,7 @@ public class ContactBookController {
 	}
 
 	/* 共用 */
-	// 【共用Json】新增/更新聯絡部上方的課程資訊
+	// 【共用Json】新增/更新聯絡簿頁面上方的課程資訊
 	@GetMapping(value = "/findClsInfoByClassListId.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody ClassList findClsInfoByClsListID(@RequestParam("classListId") Integer classListId) {
 		return clService.findById(classListId);
@@ -132,76 +132,79 @@ public class ContactBookController {
 		return "redirect:/ContactBook/T_Index";
 	}
 	
-	
-	// -----------------------其他角色-----------------------
+	//------------------------- 校方 -------------------------  進度：施工中
+	/* 進入聯絡簿系統 */
 	// 【校方】聯絡簿首頁
 	@GetMapping("/ContactBook/Sc_Index")
 	public String schoolContactBookPage() {
 		return "contactBook/school/sccbIndex";
 	}
-
-	// 【學生】聯絡簿首頁
-	@GetMapping("/ContactBook/St_Index")
-	public String studentContactBookPage() {
-		return "contactBook/student/stcbIndex";
+	
+	/* 依使用者帳號列出可選擇之課程清單 */
+	// 【校方】課程選單
+	@GetMapping(value = "/allSchoolClassList.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<AllClassListSchoolVerDto> getAllSchoolClassList(String sessionAccount) { // AA002
+		List<AllClassListSchoolVerDto> aclSDto = clService.getAllClassInfoListBySchoolAccount("AA002"); // 之後要改回sessionAccount
+		return aclSDto;
 	}
-
-	// 【家長】聯絡簿首頁
-	@GetMapping("/ContactBook/P_Index")
-	public String parentContactBookPage() {
-		return "contactBook/parent/pcbIndex";
+	
+	// 【校方】課程選單對應聯絡簿清單
+	@GetMapping(value = "/schoolContactBookList.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<ContactBookListSchoolVerDto> getSchoolContactBookList(@RequestParam("classListId") Integer classListId) { // AA002,1
+		List<ContactBookListSchoolVerDto> cblSDto = cbService.getSchoolContactBookListByClassListId(classListId);
+		return cblSDto;
 	}
+	
 	
 	// 【校方】聯絡簿編輯頁
 	@GetMapping("/ContactBook/Sc_Edit")
 	public String schoolContactBookEditPage() {
 		return "contactBook/school/sccbEdit";
 	}
-
-	// 【校方】課程選單對應聯絡簿清單
-	@GetMapping(value = "/allSchoolClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListSchoolVerDto> getAllSchoolClassList(String sessionAccount) { // AA002
-		List<AllClassListSchoolVerDto> aclSDto = clService.getAllClassInfoListBySchoolAccount(sessionAccount); // 之後要改回sessionAccount
-		return aclSDto;
+	
+	
+	
+	
+	//------------------------- 學生 -------------------------  進度：已完成
+	/* 進入聯絡簿系統 */
+	// 【學生】聯絡簿首頁
+	@GetMapping("/ContactBook/St_Index")
+	public String studentContactBookPage() {
+		return "contactBook/student/stcbIndex";
 	}
-
-	// 【學生】課程選單對應聯絡簿清單
+	
+	/* 依使用者帳號列出可選擇之課程清單 */
+	// 【學生】課程選單
 	@GetMapping(value = "/allStudentClassList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody List<AllClassListStudentVerDto> getAllStudentClassList(String sessionAccount) { // CA001
-		List<AllClassListStudentVerDto> aclStuDto = clService.getAllClassInfoListByStudentAccount(sessionAccount); // 之後要改回sessionAccount
+		List<AllClassListStudentVerDto> aclStuDto = clService.getAllClassInfoListByStudentAccount("CA001"); // 之後要改回sessionAccount
 		return aclStuDto;
 	}
-
-	// 【家長】課程選單對應聯絡簿清單
+	
+	// 【學生】課程選單對應聯絡簿清單
+	@GetMapping(value = "/studentContactBookList.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<ContactBookListStudentVerDto> getStudentContactBookList(@RequestParam("classListId") Integer classListId) { // CA001,1
+		List<ContactBookListStudentVerDto> cblStuDto = cbService.getStudentContactBookListByClassListId(classListId);
+		return cblStuDto;
+	}
+	
+	//------------------------- 家長 -------------------------  進度：施工中
+	/* 進入聯絡簿系統 */	
+	// 【家長】聯絡簿首頁
+	@GetMapping("/ContactBook/P_Index")
+	public String parentContactBookPage() {
+		return "contactBook/parent/pcbIndex";
+	}
+	
+	/* 依使用者帳號列出可選擇之課程清單 */
+	// 【家長】課程選單
 	@GetMapping(value = "/allParentClassList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody List<AllClassListParentVerDto> getAllParentClassList(String sessionAccount) { // DA001
 		List<AllClassListParentVerDto> aclPDto = clService.getAllClassInfoListByParentAccount(sessionAccount); // 之後要改回sessionAccount
 		return aclPDto;
 	}
 	
-	// 【校方】課程選單對應聯絡簿清單
-	@GetMapping(value = "/schoolContactBookList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody Map<String, Object> getSchoolContactBookList(String sessionAccount, Integer classListId) { // AA002,1
-		Map<String, Object> map = new HashMap<>();
-		List<ClassListSchoolVerDto> clSDto = clService.getClassInfoListBySchoolAccount(sessionAccount, classListId);
-		List<ContactBookListSchoolVerDto> cblSDto = cbService.getSchoolContactBookListByClassListId(classListId);
-		map.put("clSDto", clSDto);
-		map.put("cblSDto", cblSDto);
-		return map;
-	}
-
-	// 【學生】課程選單對應聯絡簿清單
-	@GetMapping(value = "/studentContactBookList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody Map<String, Object> getStudentContactBookList(String sessionAccount, Integer classListId) { // CA001,1
-		Map<String, Object> map = new HashMap<>();
-		List<ClassListStudentVerDto> clStuDto = clService.getClassInfoListByStudentAccount(sessionAccount, classListId);
-		List<ContactBookListStudentVerDto> cblStuDto = cbService.getStudentContactBookListByClassListId(classListId);
-		map.put("clStuDto", clStuDto);
-		map.put("cblStuDto", cblStuDto);
-		return map;
-	}
-
-	// 【家長】課程選單對應聯絡簿清單
+	// 【家長】課程選單對應聯絡簿清單(要改)
 	@GetMapping(value = "/parentContactBookList.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<String, Object> getParentContactBookList(String sessionAccount, Integer classListId,
 			Integer studentId) { // DA001,1,1
@@ -214,5 +217,8 @@ public class ContactBookController {
 		map.put("cblPDto", cblPDto);
 		return map;
 	}
+	
+	//------------------------- Admin -------------------------  進度：規劃待施行
 
+	
 }
