@@ -10,37 +10,35 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="expense")
+@Table(name = "expense")
 @Component
 public class Expense {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="year")
+
+	@Column(name = "year")
 	private String year;
-	
-	@Column(name="semester")
+
+	@Column(name = "semester")
 	private String semester;
-	
-	@Column(name="income")
+
+	@Column(name = "income")
 	private int income;
-	
-	@Column(name="totalcost")
+
+	@Column(name = "totalcost")
 	private int totalcost;
-	
-	@Column(name="markting")
+
+	@Column(name = "markting")
 	private int markting;
-	
-	@Column(name="personnel")
+
+	@Column(name = "personnel")
 	private int personnel;
-	
-	@Column(name="other")
+
+	@Column(name = "other")
 	private int other;
-	
-	
 
 	public Expense(String year, String semester, int income, int totalcost, int markting, int personnel, int other) {
 		super();
@@ -67,11 +65,9 @@ public class Expense {
 	}
 
 	public Expense() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	
-	
 	public String getYear() {
 		return year;
 	}

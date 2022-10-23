@@ -1,7 +1,6 @@
 package com.team3.CSMS.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,40 +23,29 @@ public class ExpenseController {
 	public String expenseform(Model m) {
 		Expense exp = new Expense();
 		m.addAttribute("expense", exp);
-		return "expenseform2";
+		return "expense/expenseform2";
 	}
-	
+
 	@GetMapping("/addExpense")
-	public String createExp(@RequestParam String year,
-			@RequestParam String semester,
-			@RequestParam int income,
-			@RequestParam int totalcost,
-			@RequestParam int markting,
-			@RequestParam int personnel,
-			@RequestParam int other,
-			Model m) {
-		Expense exp = new Expense(year,semester,income,totalcost,markting,personnel,other);
+	public String createExp(@RequestParam String year, @RequestParam String semester, @RequestParam int income,
+			@RequestParam int totalcost, @RequestParam int markting, @RequestParam int personnel,
+			@RequestParam int other, Model m) {
+		Expense exp = new Expense(year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
-		m.addAttribute("message","新增成功");
-		return "expenseform2";
+		m.addAttribute("message", "新增成功");
+		return "expense/expenseform2";
 	}
-	
+
 	@GetMapping("/expense/edit")
-	public String edit(@RequestParam int id,
-			@RequestParam String year,
-			@RequestParam String semester,
-			@RequestParam int income,
-			@RequestParam int totalcost,
-			@RequestParam int markting,
-			@RequestParam int personnel,
-			@RequestParam int other,
-			Model m) {
-		Expense exp = new Expense(id,year,semester,income,totalcost,markting,personnel,other);
+	public String edit(@RequestParam int id, @RequestParam String year, @RequestParam String semester,
+			@RequestParam int income, @RequestParam int totalcost, @RequestParam int markting,
+			@RequestParam int personnel, @RequestParam int other, Model m) {
+		Expense exp = new Expense(id, year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
-		m.addAttribute("message","更新成功");
-		return "expenseform2";
+		m.addAttribute("message", "更新成功");
+		return "expense/expenseform2";
 	}
-	
+
 	@GetMapping("/expense/all")
 	public @ResponseBody List<Expense> first() {
 
@@ -73,14 +61,14 @@ public class ExpenseController {
 	@GetMapping("/trypage")
 	public String home() {
 
-		return "chart/try";
+		return "expense/try";
 	}
 
 	@GetMapping("/expense/selectdate")
 	public @ResponseBody Expense getone(@RequestParam String year, @RequestParam String semester) {
 		Expense expense = new Expense();
 		Expense data = eSer.findBydate(year, semester);
-		if(data == null) {
+		if (data == null) {
 			return expense;
 		}
 		return data;
@@ -96,10 +84,19 @@ public class ExpenseController {
 		System.out.println("come");
 		return eSer.getAllYear();
 	}
-//	@GetMapping("/expense/coursenum")
-//	public @ResponseBody List<String> couresnum(){
-//		List<String> map = eSer.coursenum();
-//		System.out.println(map);
-//		return map;
-//	}
+
+	@GetMapping("/expense/coursenum")
+	public @ResponseBody List<String> coursenum(@RequestParam String year, @RequestParam String semester) {
+		String up = "";
+		String down = "";
+		if (semester.equals("上學期")) {
+			up = year + "-01-31";
+			down = year + "-06-30";
+		} else {
+			up = year + "-07-01";
+			down = year + "-01-30";
+		}
+		System.out.println(up + "" + down);
+		return eSer.coursenum(up, down);
+	}
 }

@@ -50,6 +50,10 @@ public class ContactBookSignService {
 		cbsDao.deleteContactBookSignByCbId(cbId);
 	}
 
+	//------------------------- 校方 -------------------------
+	
+	
+	
 	//------------------------- 家長 -------------------------
 	
 	

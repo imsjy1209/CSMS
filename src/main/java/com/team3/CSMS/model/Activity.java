@@ -87,8 +87,6 @@ public class Activity {
 		this.photo_file = photo_file;
 	}
 	
-	
-	
 	public Activity(String name, String place, Date date, String content) {
 		super();
 		this.name = name;
@@ -168,6 +166,5 @@ public class Activity {
 	public void setAdded(Date added) {
 		this.added = added;
 	}
-	
 	
 }

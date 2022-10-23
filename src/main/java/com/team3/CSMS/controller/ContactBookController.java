@@ -160,7 +160,7 @@ public class ContactBookController {
 		return "contactBook/school/sccbEdit";
 	}
 	
-	// 【校方】於首頁挑選其中一筆聯絡簿進行編輯/查看
+	// 【校方】於首頁挑選其中一筆聯絡簿進行編輯
 	@GetMapping(value = "/schoolClickOneContactBook.json", produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody ContactBook schoolClickOneContactBookToGoEditing(@RequestParam("cbId") Integer cbId) {
 		ContactBook cbBean = cbService.findById(cbId);
@@ -189,6 +189,22 @@ public class ContactBookController {
 	public String schoolGoBackToContactBookIndex() {
 		return "redirect:/ContactBook/Sc_Index";
 	}
+	
+	/* 查看聯絡簿 */
+	// 【校方】聯絡簿細項頁
+	@GetMapping("/ContactBook/Sc_Check/{classListId}/{cbId}")
+	public String schoolContactBookCheckPage
+	(@PathVariable("classListId") Integer classListId, @PathVariable("cbId") Integer cbId) {
+		return "contactBook/school/sccbCheck";
+	}
+	
+	// 【校方】於首頁挑選其中一筆聯絡簿進行查看
+	// (1) ContactBook：詳/schoolClickOneContactBook.json
+	// (2) ContactBookSign：
+	
+	
+	
+	/* 取消聯絡簿 */
 	
 	
 	//------------------------- 學生 -------------------------  進度：已完成

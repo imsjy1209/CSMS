@@ -10,17 +10,17 @@ import com.team3.CSMS.model.Post;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 	@Modifying
-	@Query(value="update Post set isDelete = 0 where id=:id")
+	@Query(value = "update Post set isDelete = 0 where id=:id")
 	public void already(int id);
-	
+
 	@Modifying
-	@Query(value="update Post set isDelete = 1 where id=:id")
+	@Query(value = "update Post set isDelete = 1 where id=:id")
 	public void remove(int id);
-	
-	@Query(value="from Post where isDelete = 0")
+
+	@Query(value = "from Post where isDelete = 0")
 	public List<Post> viewAllBySchool();
-	
-	@Query(value="from Post where isDelete = 0 and userType = 2")
+
+	@Query(value = "from Post where isDelete = 0 and userType = 2")
 	public List<Post> viewAllByAll();
-	
+
 }

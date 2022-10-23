@@ -60,7 +60,7 @@ console.log(pvClsListId);
 var pvCbId =  ${cbId};
 console.log(pvCbId);
 
-/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕帶入 */
+/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料、「回上一頁」按鈕 */
 window.onload = function(){ 
 	
 	// (1) 帶入【校方】選定的課程相關資訊
@@ -125,41 +125,37 @@ window.onload = function(){
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">課程內容</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly /></td>';
     		if(courseContent != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="" readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">回家作業</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
     		if(homework != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="" readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">考試通知</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
     		if(quizNotice != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="" readonly /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		$('#cbListEdit').append(cbListObj);
     		
-    		// (3)帶入「確認送出」按鈕
-			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
-    		$('#cbListBtnArea').append(UpdateBtnObj);
-    		
-    		// (4)帶入「回上一頁」按鈕
+    		// (3)帶入「回上一頁」按鈕
     		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
