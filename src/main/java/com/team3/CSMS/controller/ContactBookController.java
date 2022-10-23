@@ -24,7 +24,7 @@ import com.team3.CSMS.dto.ContactBookListStudentVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ContactBook;
-
+import com.team3.CSMS.model.ContactBookSign;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.ContactBookSignService;
@@ -129,7 +129,18 @@ public class ContactBookController {
 		return "redirect:/ContactBook/T_Index";
 	}
 	
-	//------------------------- 校方 -------------------------  進度：施工中(還差查詢簽名進度、取消退件功能、考慮加入前台送出功能)
+//	/* 取消聯絡簿 */
+//	@GetMapping("/ContactBook/T_Cancel")
+//	public String teacherCancelOneContactBook(@RequestParam("cbId") Integer cbId) {
+//		ContactBook cbBean = cbService.findById(cbId);
+//		if (cbBean != null) {
+//			cbBean.setPhase(4);
+//			cbService.save(cbBean);
+//		}
+//		return "redirect:/ContactBook/T_Index";
+//	}
+	
+	//------------------------- 校方 -------------------------  進度：大致ok，只差一些特殊操情境的前端卡控
 	/* 進入聯絡簿系統 */
 	// 【校方】聯絡簿首頁
 	@GetMapping("/ContactBook/Sc_Index")
@@ -200,12 +211,23 @@ public class ContactBookController {
 	
 	// 【校方】於首頁挑選其中一筆聯絡簿進行查看
 	// (1) ContactBook：詳/schoolClickOneContactBook.json
-	// (2) ContactBookSign：
-	
-	
+	// (2) ContactBookSign：班上學生及其家長簽名等細項
+	@GetMapping(value = "/schoolContactBookParentSign.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<ContactBookSign> schoolCheckContactBookParentSign(@RequestParam("cbId") Integer cbId){
+		List<ContactBookSign> cbsList = cbsService.findContactBookSignByCbId(cbId);
+		return cbsList;
+	}
 	
 	/* 取消聯絡簿 */
-	
+	@GetMapping("/ContactBook/Sc_Cancel")
+	public String schoolCancelOneContactBook(@RequestParam("cbId") Integer cbId) {
+		ContactBook cbBean = cbService.findById(cbId);
+		if (cbBean != null) {
+			cbBean.setPhase(4);
+			cbService.save(cbBean);
+		}
+		return "redirect:/ContactBook/Sc_Index";
+	}
 	
 	//------------------------- 學生 -------------------------  進度：已完成
 	/* 進入聯絡簿系統 */

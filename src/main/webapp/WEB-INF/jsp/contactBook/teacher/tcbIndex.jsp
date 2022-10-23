@@ -6,6 +6,8 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+ <!-- BOX ICONS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	
 <!-- CONTENT -->
 <div class="container">	
@@ -49,6 +51,7 @@
 				     <th class="table-info" scope="col">回家作業</th>
 				     <th class="table-info" scope="col">考試通知</th>
 				     <th class="table-info" scope="col">案件狀態</th>
+<!-- 				     <th class="table-info" scope="col">操作</th> -->
 			    </tr>
 			</thead>
 <!-- 				      <a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">編輯</a> -->
@@ -169,14 +172,18 @@ $("#classInfoList").on("change",function(){
 			  	    	// cb_content +='<td>' + cbList[i].phase + '</td>';
 					if (cbList[i].phase == 1){
 						cb_content +='<td style="color:red">編輯中</td>';
+						//cb_content +='<td><a href="/CSMS/ContactBook/T_Cancel?cbId="'+cbList[i].cb_id+'"><i class="bx bx-trash"></i></a>"</td>';
 					} else if (cbList[i].phase == 2) {
 						cb_content +='<td style="color:blue">審核中</td>';
+						//cb_content +='<td></td>';
 					} else if (cbList[i].phase == 3) {
 						cb_content +='<td>已通過</td>';
+						//cb_content +='<td></td>';
 					} else if (cbList[i].phase == 4) {
 						cb_content +='<td>已取消</td>';
+						//cb_content +='<td></td>';
 					} else {
-						cb_content +='<td>系統發生問題，請通知系統管理員</td>';
+						cb_content +='<td>error</td>';
 					}
 		  	    	
 		  	    	cb_content +='</tr>';

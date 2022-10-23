@@ -161,7 +161,7 @@ $("#classInfoList").on("change",function(){
 					} else if (cbList[i].phase == 3) {
 						cb_content +='<td>已送出</td>';
 						cb_content +='<td>';
-						cb_content +="<a href='/CSMS/ContactBook/Sc_Check/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bxs-bullseye bx-tada bx-flip-horizontal' style='font-size:28px'></i></a>";
+						cb_content +="<a href='/CSMS/ContactBook/Sc_Check/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bx-spreadsheet' style='font-size:28px'></i></a>";
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 4) {
 						cb_content +='<td>已取消</td>';

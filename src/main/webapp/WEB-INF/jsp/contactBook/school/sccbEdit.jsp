@@ -51,6 +51,10 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+        
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
@@ -159,13 +163,32 @@ window.onload = function(){
 			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
-    		// (4)帶入「回上一頁」按鈕
+    		// (4)帶入「取消本件」按鈕
+    		CancelBenObj = '<button type="button" class="btn btn-success" onclick="cancelConfirm()">取消本件</button>&nbsp&nbsp';
+    		$('#cbListBtnArea').append(CancelBenObj);
+    		
+    		// (5)帶入「回上一頁」按鈕
     		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
     }
 }
 
+function cancelConfirm() {
+	Swal.fire({
+		title: '確定要刪除本件？',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確認',
+		cancelButtonText: '取消'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			window.location.href = "/CSMS/ContactBook/Sc_Cancel?cbId="+pvCbId;
+	   }
+	})
+}
 
 //=======================版面動作=======================
 

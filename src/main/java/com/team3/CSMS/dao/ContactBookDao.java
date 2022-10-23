@@ -16,7 +16,7 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
     		+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
     		+ "inner join [Teacher] as T on T.[teacher_id] = CL.[fk_teacher_id] "
     		+ "inner join [School] as S on S.[school_id] = CL.[fk_school_id] "
-    		+ "where [fk_classlist_id] = :classListId and [phase] < 4 "
+    		+ "where [fk_classlist_id] = :classListId "
     		+ "order by CB.[create_at] desc, CB.[phase] asc, [cb_id] desc;"
     		, nativeQuery = true)
     List<ContactBook> getTeacherContactBookListByClassListId(@Param("classListId") Integer classListId);
@@ -39,7 +39,7 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
 			+ "inner join [Teacher] as T on T.[teacher_id] = CL.[fk_teacher_id] "
 			+ "inner join [School] as S on S.[school_id] = CL.[fk_school_id] "
-			+ "where  CB.[fk_classlist_id] = :classListId and ([phase] = 2 or [phase] = 3) "
+			+ "where  CB.[fk_classlist_id] = :classListId and [phase] > 1 "
 			+ "order by CB.[create_at] desc, CB.[phase] asc, [cb_id] desc;", nativeQuery = true)
 	List<ContactBook> getSchoolContactBookListByClassListId(@Param("classListId") Integer classListId);
 	

@@ -3,6 +3,7 @@ package com.team3.CSMS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,8 +52,12 @@ public class ContactBookSignService {
 	}
 
 	//------------------------- 校方 -------------------------
-	
-	
+	// 校方點單筆查詢，顯示ContactBookSign查詢結果
+	// (1) 以id查詢(此處id為fk_cb_id)
+	public  List<ContactBookSign> findContactBookSignByCbId(@Param("cbId") Integer cbId){
+		List<ContactBookSign> cbsList = cbsDao.findContactBookSignByCbId(cbId);
+		return cbsList;
+	}
 	
 	//------------------------- 家長 -------------------------
 	

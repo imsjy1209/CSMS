@@ -162,12 +162,11 @@ window.onload = function(){
     		
     		// (4)帶入「回上一頁」按鈕
     		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
-    		$('#cbListBtnArea').append(prevPageBtnObj);
+			$('#cbListBtnArea').append(prevPageBtnObj);
     	}
     }
     
 }
-
 
 //=======================版面動作=======================
 

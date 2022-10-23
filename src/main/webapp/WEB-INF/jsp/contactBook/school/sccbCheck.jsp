@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿編輯</h4>
+	<h4>【校方】聯絡簿查詢</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -19,17 +19,29 @@
 	</div>
 	<br>
 
-	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/Sc_Update/${classListId}">
+	<div id="cbList-area">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
-			<!-- insert的聯絡簿內容放置處 -->
+			<!-- 聯絡簿內容放置處 -->
+		</table>
+		<br>
+		<table id="cbsListEdit" class="table table-bordered" style="text-align:center">
+			<thead  id="cbsList-title">
+				<tr>
+				     <th class="table-success" scope="col">紀錄編號</th>
+				     <th class="table-success" scope="col">座號</th>
+				     <th class="table-success" scope="col">學生姓名</th>
+				     <th class="table-success" scope="col">家長姓名</th>
+				     <th class="table-success" scope="col">關係</th>
+				     <th class="table-success" scope="col">家長簽名</th>
+			    </tr>
+			</thead>
+			<!-- 聯絡簿簽名紀錄內容放置處 -->
 		</table>
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
 			<!-- 聯絡簿按鈕放置處 -->
-<!-- 			<a href="/ContactBook/T_Update/" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a> -->
-<!-- 			<a href="/ContactBook/T_GoPrevPage?cbId=cbId" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a> -->
 		</div>
-	</form>
+	</div>
 </div>
 
 
@@ -56,11 +68,11 @@
 //=======================作業區=======================
 /* 取得路徑變數@PathVariable("classListId")、("cbId") */ 
 var pvClsListId =  ${classListId};
-console.log(pvClsListId);
+// console.log(pvClsListId);
 var pvCbId =  ${cbId};
-console.log(pvCbId);
+// console.log(pvCbId);
 
-/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料、「回上一頁」按鈕 */
+/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「回上一頁」按鈕 (4)帶入聯絡簿簽名紀錄資料 */
 window.onload = function(){ 
 	
 	// (1) 帶入【校方】選定的課程相關資訊
@@ -71,7 +83,7 @@ window.onload = function(){
     	if (xhr1.readyState == 4 && xhr1.status == 200) {
     		
     		var clsInfoList = JSON.parse(xhr1.responseText);
-    		console.log(clsInfoList); // 得到ClassList物件
+    		// console.log(clsInfoList); // 得到ClassList物件
     		var clscode = clsInfoList.classCode;
         	var category = clsInfoList.course.courseCategory;
         	var subject = clsInfoList.course.courseSubject;
@@ -105,7 +117,7 @@ window.onload = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
     		
     		var cbList = JSON.parse(xhr2.responseText);  
-     		console.log(cbList); // 得到ContactBook物件
+     		// console.log(cbList); // 得到ContactBook物件
     		var cbId = cbList.id;
     		console.log(cbId);
         	var createAt = cbList.create_at;
@@ -159,6 +171,39 @@ window.onload = function(){
     		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
+    }
+    
+ 	// (4)帶入聯絡簿簽名紀錄資料
+	var xhr3 = new XMLHttpRequest();
+    xhr3.open("GET", "<c:url value='/schoolContactBookParentSign.json'/>"+"?cbId="+pvCbId, true);
+    xhr3.send();
+    xhr3.onreadystatechange = function(){
+    	if (xhr3.readyState == 4 && xhr3.status == 200) {
+    		
+    		var cbsList = JSON.parse(xhr3.responseText);  
+    		console.log(cbsList); // 得到ContactBookSign物件
+    		
+    		cbsListObj ='<tbody id="cbsList-data">';
+    		for (var i = 0 ; i < cbsList.length ; i++) {
+    			cbsListObj +='<tr>';
+    			cbsListObj +='<td>' + cbsList[i].id + '</td>';
+    			cbsListObj +='<td>' + cbsList[i].student.classStudentLists[0].studentNo + '</td>';
+    			cbsListObj +='<td>' + cbsList[i].student.name + '</td>';
+    			cbsListObj +='<td>' + cbsList[i].student.parent.name + '</td>';
+    			cbsListObj +='<td>' + cbsList[i].student.relationship + '</td>';
+    			
+    			// cbsListObj +='<td>' + cbsList[i].parentSign + '</td>';
+    			if (cbsList[i].parentSign == 0) {
+    				cbsListObj +='<td style="color:red">未簽名</td>';
+    			} else {
+    				cbsListObj +='<td>已簽名</td>';
+    			}
+    			
+    			cbsListObj +='</tr>';
+    		}
+    		cbsListObj +='</tbody>';
+    		$('#cbsListEdit').append(cbsListObj);
+    	}
     }
 }
 
