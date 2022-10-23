@@ -95,7 +95,7 @@ table {
 				},
 				events : function(fetchInfo, successCallback, failureCallback) {
 					$.ajax({
-						url : 'http://localhost:8081/my-app/getAllajax',
+						url : 'http://localhost:8081/CSMS/getAllajax',
 						contentType : 'application/json ; charset=UTF-8', // 送過去的格式(預設)
 						dataType : 'json', // 傳回來的格式
 						method : 'get',

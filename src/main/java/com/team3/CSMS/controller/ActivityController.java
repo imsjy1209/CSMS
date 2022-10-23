@@ -109,7 +109,7 @@ public class ActivityController {
 		try {
 			activity.setPhoto_file(file.getBytes());
 			aService.insert(activity);
-			return "homepage";
+			return "activity/homepage";
 		} catch (IOException e) {
 			e.printStackTrace();
 			m.addAttribute("id", id);
