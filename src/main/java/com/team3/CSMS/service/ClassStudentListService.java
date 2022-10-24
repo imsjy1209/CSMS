@@ -22,11 +22,11 @@ public class ClassStudentListService {
     
     //找到學生清單
     public List<StudentListDto> getStudentListByClassCodeId(Integer classCodeId){
-        if(classStudentListDao==null){
-            System.out.println("i am null");
-        }else {
-            System.out.println("im not null");
-        }
+        // if(classStudentListDao==null){
+        //     System.out.println("i am null");
+        // }else {
+        //     System.out.println("im not null");
+        // }
         List<ClassStudentList> csList=classStudentListDao.getStudentListByCodeId(classCodeId);
         ArrayList<StudentListDto> dtoList=new ArrayList<>();
         for(ClassStudentList csl:csList){

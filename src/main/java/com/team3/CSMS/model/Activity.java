@@ -35,7 +35,7 @@ public class Activity {
 	@Column(name="activity_id")
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="activity_name")
 	private String name;
 	
 	@Column(name="place")

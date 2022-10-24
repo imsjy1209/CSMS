@@ -89,7 +89,12 @@ public class PageController {
 	// 更改個人密碼用
 	@GetMapping("/passw0rdUpdate.page")
 	public String pwdUpdatePage(){
-		return "cd_updateProfile/updatePWD";
+		return "cs_updateProfile/updatePWD";
 	}
 
+	// 更改成員權限
+	@GetMapping("/userControl.page")
+	public String usersControl(){
+		return "cs_user/userUpdate";
+	}
 }
