@@ -29,18 +29,22 @@ public class Users {
 	
 	// 學生外來
 	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
 	private Student student;
 	
 	// 老師外來
 	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
 	private Teacher teacher;
 
 	// 校方外蘭
 	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
 	private School school;
 
 	// 家長外來
 	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
 	private Parent parent;
 
 	@Column(name="account" , columnDefinition = "varchar(15)",unique = true, nullable = false)
@@ -91,12 +95,12 @@ public class Users {
 		update_at = new Date();
 	}
 	
-	// 關聯
-	@ManyToOne
-	@JoinColumn(name = "fk_groups_id")
-//	@JsonBackReference
-	@JsonIgnoreProperties("users")
-	private Groups groups;
+//	// 關聯
+//	@ManyToOne
+//	@JoinColumn(name = "fk_groups_id")
+////	@JsonBackReference
+//	@JsonIgnoreProperties("users")
+//	private Groups groups;
 	
 	// 建構子
 	public Users() {
@@ -167,13 +171,13 @@ public class Users {
 		this.update_at = update_at;
 	}
 
-	public Groups getGroups() {
-		return groups;
-	}
-
-	public void setGroups(Groups groups) {
-		this.groups = groups;
-	}
+//	public Groups getGroups() {
+//		return groups;
+//	}
+//
+//	public void setGroups(Groups groups) {
+//		this.groups = groups;
+//	}
 	
 	// 外來Getter&Setter
 	public Student getStudent() {

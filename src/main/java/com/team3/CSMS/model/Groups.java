@@ -58,11 +58,11 @@ public class Groups implements Serializable {
 		update_at = new Date();
 	}
 
-	// 關聯
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
-//	@JsonManagedReference
-	@JsonIgnoreProperties("groups")
-	private Set<Users> users;
+//	// 關聯
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
+////	@JsonManagedReference
+//	@JsonIgnoreProperties("groups")
+//	private Set<Users> users;
 	
 	// 移除Pages Model，刪除關聯部分
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
@@ -106,13 +106,13 @@ public class Groups implements Serializable {
 		this.update_at = update_at;
 	}
 
-	public Set<Users> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<Users> users) {
-		this.users = users;
-	}
+//	public Set<Users> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<Users> users) {
+//		this.users = users;
+//	}
 
 //	public Set<Pages> getPages() {
 //		return pages;

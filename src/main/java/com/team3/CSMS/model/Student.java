@@ -49,6 +49,7 @@ public class Student {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_user_id")
+	@JsonIgnoreProperties("student")
 	private Users users;
 	
 	@Column(name="name",columnDefinition = "nvarchar(15)", nullable = false)

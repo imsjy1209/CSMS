@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "PARENT")
@@ -30,6 +31,7 @@ public class Parent {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id", nullable = false)
+	@JsonIgnoreProperties("parent")
 	private Users users;
 
 	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
