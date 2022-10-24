@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -26,6 +27,22 @@ public class Users {
 	@Column(name="users_id")
 	private Integer id;
 	
+	// 學生外來
+	@OneToOne(mappedBy = "users")
+	private Student student;
+	
+	// 老師外來
+	@OneToOne(mappedBy = "users")
+	private Teacher teacher;
+
+	// 校方外蘭
+	@OneToOne(mappedBy = "users")
+	private School school;
+
+	// 家長外來
+	@OneToOne(mappedBy = "users")
+	private Parent parent;
+
 	@Column(name="account" , columnDefinition = "varchar(15)",unique = true, nullable = false)
 	private String account;
 	
@@ -156,6 +173,39 @@ public class Users {
 
 	public void setGroups(Groups groups) {
 		this.groups = groups;
+	}
+	
+	// 外來Getter&Setter
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
 	}
 	
 }
