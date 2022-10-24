@@ -17,15 +17,14 @@
         <table class="table table-hover" id="schoolList">
             <thead>
               <tr>
-                  <th scope="col">校方人員編號</th>
+                  <th scope="col">校方人員</th>
                   <th scope="col">姓名</th>
                   <th scope="col">職位</th>
                   <th scope="col">權限</th>
               </tr> 
             </thead>
-            <tbody>
-              <tr>
-              </tr>
+            <tbody id="sLbody">
+
             </tbody>
           </table>
     </div>
@@ -39,9 +38,8 @@
                   <th scope="col">權限</th>
               </tr> 
             </thead>
-            <tbody>
-              <tr>
-              </tr>
+            <tbody id ="tLbody">
+
             </tbody>
           </table>
     </div>
@@ -54,10 +52,7 @@
                   <th scope="col">權限</th>
               </tr> 
             </thead>
-            <tbody>
-              <tr>
-              </tr>
-            </tbody>
+            <tbody id="stubody"></tbody>
           </table>
     </div>
     <div class="tab-pane fade" id="nav-parents" role="tabpanel" aria-labelledby="nav-parents-tab">
@@ -69,9 +64,8 @@
                   <th scope="col">權限</th>
               </tr> 
             </thead>
-            <tbody>
-              <tr>
-              </tr>
+            <tbody id="pLbody">
+
             </tbody>
           </table>
     </div>
@@ -99,10 +93,128 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 
 <script>
+// 校方人員 分頁按鈕
+$("#nav-school-tab").click(getSchoolList);
+$("#nav-teacher-tab").click(getTeacherList);
+$("#nav-student-tab").click(getStudentList);
+$("#nav-parents-tab").click(getParentList);
 
+function getSchoolList(){
+  // console.log("school");
+  let xhr = new XMLHttpRequest();
+    xhr.open("GET","<c:url value='/getSchoolList.page'/>",true);
+    xhr.send();
+    xhr.onreadystatechange = function(){
+  
+      if (xhr.readyState==4 && xhr.status == 200){
+        let schoolList = JSON.parse(xhr.responseText);
+        let schoolBody;
+        $('#sLbody').html('');
+        schoolList.forEach(object => {
+          schoolBody +='<tr><td>'+object.schoolId+'</td>';
+          schoolBody +='<td>' +object.schoolName+'</td>';
+          schoolBody +='<td>'+object.title+'</td>';
+          let propermissionText;
+          if (object.whitelist==0){
+            propermissionText="Disable";
+          }else{
+            propermissionText="Enable";
+          }
+          schoolBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          schoolBody+="<option value='0' >Disable</option>"
+          schoolBody+="<option value='1' >Enable</option>"
+          schoolBody +='<td></td></tr>';
+        });
+        // schoolBody +='</tobody>';
+        $('#sLbody').append(schoolBody);
+        }
+      }
+    }
 
-
-
+function getTeacherList(){
+  let xhr2 = new XMLHttpRequest();
+    xhr2.open("GET","<c:url value='/getTeacherList.page'/>",true);
+    xhr2.send();
+    xhr2.onreadystatechange = function(){
+      if (xhr2.readyState==4 && xhr2.status == 200){
+        let teacherList = JSON.parse(xhr2.responseText);
+        let teacherBody;
+        $('#tLbody').html('');
+        teacherList.forEach(object => {
+          teacherBody +='<tr><td>'+object.teacherId+'</td>';
+          teacherBody +='<td>' +object.teacherName+'</td>';
+          teacherBody +='<td>'+object.subject+'</td>';
+          let propermissionText;
+          if (object.whitelist==0){
+            propermissionText="Disable";
+          }else{
+            propermissionText="Enable";
+          }
+          teacherBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          teacherBody+="<option value='0' >Disable</option>"
+          teacherBody+="<option value='1' >Enable</option>"
+          teacherBody +='<td></td></tr>';
+        });
+        // schoolBody +='</tobody>';
+        $('#tLbody').append(teacherBody);
+        }
+      }
+    }
+function getStudentList(){
+  // console.log("student");
+  let xhr3 = new XMLHttpRequest();
+    xhr3.open("GET","<c:url value='/getStudentList.page'/>",true);
+    xhr3.send();
+    xhr3.onreadystatechange = function(){
+      if (xhr3.readyState==4 && xhr3.status == 200){
+        let studentList = JSON.parse(xhr3.responseText);
+        let studentBody;
+        $('#stubody').html('');
+        studentList.forEach(object => {
+          studentBody +='<tr><td>'+object.studentID+'</td>';
+          studentBody +='<td>' +object.studentName+'</td>';
+          let propermissionText;
+          if (object.whitelist==0){
+            propermissionText="Disable";
+          }else{
+            propermissionText="Enable";
+          }
+          studentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          studentBody+="<option value='0' >Disable</option>"
+          studentBody+="<option value='1' >Enable</option>"
+          studentBody +='<td></td></tr>';
+        });
+        $('#stubody').append(studentBody);
+        }
+      }
+}
+function getParentList(){
+  let xhr4 = new XMLHttpRequest();
+    xhr4.open("GET","<c:url value='/getParentList.page'/>",true);
+    xhr4.send();
+    xhr4.onreadystatechange = function(){
+      if (xhr4.readyState==4 && xhr4.status == 200){
+        let parentList = JSON.parse(xhr4.responseText);
+        let parentBody;
+        $('#pLbody').html('');
+        parentList.forEach(object => {
+          parentBody +='<tr><td>'+object.parentId+'</td>';
+          parentBody +='<td>' +object.parentsName+'</td>';
+          let propermissionText;
+          if (object.whitelist==0){
+            propermissionText="Disable";
+          }else{
+            propermissionText="Enable";
+          }
+          parentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          parentBody+="<option value='0' >Disable</option>"
+          parentBody+="<option value='1' >Enable</option>"
+          parentBody +='<td></td></tr>';
+        });
+        $('#pLbody').append(parentBody);
+        }
+      }
+}
 
 //=======================版面動作=======================
   $(document).ready(function () {

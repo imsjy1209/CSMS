@@ -152,22 +152,7 @@
           window.onload=function(){
             //FIXME: 要改成透過session 找到那個人的密碼, 互動視窗資料不會清除
             //TODO: 在取得網頁時就要抓到user_id和舊密碼
-            let userId=8;
-          	
-            var xhr = new XMLHttpRequest();
-    		xhr.open("GET", "<c:url value='/userProfile.json?userId=" +  userId + " '/>", true);
-    		xhr.send();
-    		
-    		xhr.onreadystatechange = function() {
-    			if (xhr.readyState == 4 && xhr.status == 200) {
-    				
-    				var userProfile = JSON.parse(xhr.responseText);
-    				console.log(userProfile)
-    				
-    			}
-    			
-    		}
-          
+            let user_id=18;
             let prevPwd="hK_3345678";
             // let xhr = new XMLHttpRequest(); //for classcodeList
             // xhr.open("POST","<c:url value='/??????'/>",true);
@@ -233,7 +218,7 @@
               // console.log(this);
             }
             else {
-              msg1.innerHTML = "✔";
+              msg1.innerHTML = "✔ ";
               msg1.style.color="green";
               $(this).attr("aria-invalid", "true");
               // console.log(this);
@@ -376,14 +361,11 @@
           }
           // FIXME: 怪怪ㄉ 按件好像會垮住
           $(".btnn").click(changePwd); 
-           
             function changePwd(){
-              let user_id =18;
-              var newPwd = $("#idPwd3").val();//FIXME: 改query寫法
-              console.log(newPwd)
-              
-//               let newPwdValue = newPwd.value;
-//               console.log(newPwdValue);
+              let user_id;
+              let newPwd = document.getElementById("idPwd3");//FIXME: 改query寫法
+              let newPwdValue = newPwd.value;
+              console.log(newPwdValue);
               //TODO: post請求 把新密碼往後丟
               // console.log(newPwdValue);
               // let xhr2 = new XMLHttpRequest(); //for classcodeList

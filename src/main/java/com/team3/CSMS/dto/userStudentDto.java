@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 import com.team3.CSMS.model.Users;
 
-public class userStudentDto implements Serializable{
+public class UserStudentDto implements Serializable{
     private static final long serialVersionUID=1L;
 
     private Integer StudentID;
     private String StudentName;
-    private Integer whitList;
+    private Integer whiteList;
 
-    public userStudentDto(){
+    public UserStudentDto(){
 
     }
 
-    public userStudentDto(Users users){
+    public UserStudentDto(Users users){
         this.StudentID=users.getStudent().getId();
         this.StudentName=users.getStudent().getName();
-        this.whitList=users.getAccRight();
+        this.whiteList=users.getAccRight();
     }
 
     public Integer getStudentID() {
@@ -34,10 +34,10 @@ public class userStudentDto implements Serializable{
         StudentName = studentName;
     }
     public Integer getWhitList() {
-        return whitList;
+        return whiteList;
     }
-    public void setWhitList(Integer whitList) {
-        this.whitList = whitList;
+    public void setWhitList(Integer whiteList) {
+        this.whiteList = whiteList;
     }
 
     

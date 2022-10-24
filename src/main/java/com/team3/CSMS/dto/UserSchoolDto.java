@@ -44,7 +44,5 @@ public class UserSchoolDto implements Serializable{
     public void setWhitelist(Integer whitelist) {
         this.whitelist = whitelist;
     }
-    
-
-    
+  
 }
