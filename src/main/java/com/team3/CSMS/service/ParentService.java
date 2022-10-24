@@ -36,4 +36,7 @@ public class ParentService {
 
 		return null;
 	}
+	public Parent searchParentByname(String name) {		
+		return pDao.searchParent(name);
+	}
 }

@@ -100,6 +100,19 @@ public class Student {
 	public void onUpdate() {
 		update_at = new Date();
 	}
+	
+	public Student(Users users, String name, String gender, String schoolType, String schoolName, String grade,
+			Parent parent, String relationship) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.schoolType = schoolType;
+		this.schoolName = schoolName;
+		this.grade = grade;
+		this.parent = parent;
+		this.relationship = relationship;
+	}
 
 	// 建構子
 	public Student() {

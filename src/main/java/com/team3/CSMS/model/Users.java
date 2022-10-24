@@ -1,6 +1,8 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +64,10 @@ public class Users {
 	@Column(name="closereason",columnDefinition = "nvarchar(10)")
 	private String closeReason;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="fk_groups_id")
+	private Groups groups;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Column(name="create_at", columnDefinition = "datetime", nullable = false)
@@ -95,6 +101,8 @@ public class Users {
 		update_at = new Date();
 	}
 	
+	
+
 //	// 關聯
 //	@ManyToOne
 //	@JoinColumn(name = "fk_groups_id")
@@ -102,6 +110,23 @@ public class Users {
 //	@JsonIgnoreProperties("users")
 //	private Groups groups;
 	
+	public Users(String account, String password, Groups groups) {
+		super();
+		this.account = account;
+		this.password = password;
+		this.groups = groups;
+	}
+
+	
+	
+	public Groups getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Groups groups) {
+		this.groups = groups;
+	}
+
 	// 建構子
 	public Users() {
 	}

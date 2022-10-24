@@ -42,38 +42,40 @@
 						console.log(type);
 						console.log("ON");
 						htmlSeg += "建立導師帳號<br><br>"
-						htmlSeg += "<form action=${pageContext.request.contextPath}/addExpense method=get>";
-						htmlSeg += "帳號: <input name='income'><br><br>";
-						htmlSeg += "密碼: <input name='totalcost'><br><br>";
-						htmlSeg += "名字: <input name='markting'><br><br>";
-						htmlSeg += "職位: <input name='personnel'><br><br>";
+						htmlSeg += "<form action=${pageContext.request.contextPath}/register/addschool method=get>";
+						htmlSeg += "帳號: <input name='account'><br><br>";
+						htmlSeg += "密碼: <input name='password'><br><br>";
+						htmlSeg += "名字: <input name='name'><br><br>";
+						htmlSeg += "職位: <input name='title'><br><br>";
 						htmlSeg += "聘用日期: <input name='hiredate' id='datepicker'><br><br>";
 						htmlSeg += "離職: <input name='resigndate' id='datepicker2'><br><br>";
-						htmlSeg += "<input type='submit' value='上傳'>"
+						htmlSeg += "<input type='submit' value='註冊'>"
 						htmlSeg += "</form>"
 					}if (type == "3") {
 						htmlSeg += "建立講師帳號<br><br>"
-						htmlSeg += "<form action=${pageContext.request.contextPath}/expense/edit method=get>";
-						htmlSeg += "帳號: <input name='income'><br><br>";
-						htmlSeg += "密碼: <input name='totalcost'><br><br>";
-						htmlSeg += "名字: <input name='markting'><br><br>";
-						htmlSeg += "職位: <input name='personnel'><br><br>";
+						htmlSeg += "<form action=${pageContext.request.contextPath}/register/addteacher method=get>";
+						htmlSeg += "帳號: <input name='account'><br><br>";
+						htmlSeg += "密碼: <input name='password'><br><br>";
+						htmlSeg += "名字: <input name='name'><br><br>";
+						htmlSeg += "職位: <input name='title'><br><br>";
 						htmlSeg += "聘用日期: <input name='hiredate' id='datepicker'><br><br>";
 						htmlSeg += "離職: <input name='resigndate' id='datepicker2'><br><br>";
 						htmlSeg += "專長: <input name='expertise'><br><br>";
-						htmlSeg += "<input type='submit' value='更新'>"
+						htmlSeg += "<input type='submit' value='註冊'>"
 						htmlSeg += "</form>"
 					}if (type == "4") {
-						htmlSeg += "建立講師帳號<br><br>"
-							htmlSeg += "<form action=${pageContext.request.contextPath}/expense/edit method=get>";
-							htmlSeg += "帳號: <input name='income'><br><br>";
-							htmlSeg += "密碼: <input name='totalcost'><br><br>";
-							htmlSeg += "名字: <input name='markting'><br><br>";
+						htmlSeg += "建立學生帳號<br><br>"
+							htmlSeg += "<form action=${pageContext.request.contextPath}/register/addStudent method=get>";
+							htmlSeg += "帳號: <input name='account'><br><br>";
+							htmlSeg += "密碼: <input name='password'><br><br>";
+							htmlSeg += "名字: <input name='name'><br><br>";
+							htmlSeg += "性別: <input name='gender'><br><br>";
 							htmlSeg += "教育階段: <input name='schoolType'><br><br>";
 							htmlSeg += "就讀學校: <input name='schoolName'><br><br>";
-							htmlSeg += "年級: <input name='grade' id='datepicker2'><br><br>";
-							htmlSeg += "專長: <input name='expertise'><br><br>";
-							htmlSeg += "<input type='submit' value='更新'>"
+							htmlSeg += "年級: <input name='grade'><br><br>";
+							htmlSeg += "(選填)父母名字: <input name='parentname'><br><br>";
+							htmlSeg += "(選填)關係: <input name='relationship'><br><br>";
+							htmlSeg += "<input type='submit' value='上傳'>"
 							htmlSeg += "</form>"
 						}
 				dataArea.innerHTML = htmlSeg;
@@ -88,7 +90,7 @@
 				$(function() {
 					$("#datepicker2").datepicker({
 						appendText : "(西元年-月-日)",
-						altField : "#datepicker",
+						altField : "#datepicker2",
 						altFormat : "yy-mm-dd",
 						dateFormat : "yy-mm-dd"
 					});
