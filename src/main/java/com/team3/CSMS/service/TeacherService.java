@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.TeacherDao;
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Teacher;
 
 @Service
@@ -28,5 +29,7 @@ public class TeacherService {
 	public List<Teacher> findAllTeacher(){
 		return teacherDao.findAll();
 	}
-
+	public void insert(Teacher p) {
+		teacherDao.save(p);
+	}
 }
