@@ -36,6 +36,35 @@ public class OrderListController {
 			 List<OrderList> orderListList = orderListService.findAllOrderList();
 			 return orderListList;
 		}
+		
+		//找全部訂單資訊-ajax-依照OrderDate降序
+		@GetMapping("/findAllByOrderByOrderDateDesc.controller")
+		public @ResponseBody List<OrderList> findAllByOrderByOrderDateDesc(Model model) {
+			 List<OrderList> orderListList = orderListService.findAllByOrderByOrderDateDesc();
+			 return orderListList;
+		}
+		
+		//找全部訂單資訊-ajax-依照OrderDate升序
+		@GetMapping("/findAllByOrderByOrderDateAsc.controller")
+		public @ResponseBody List<OrderList> findAllByOrderByOrderDateAsc(Model model) {
+			 List<OrderList> orderListList = orderListService.findAllByOrderByOrderDateAsc();
+			 return orderListList;
+		}
+		
+		//找全部訂單資訊-ajax-依照OrderListId升序
+		@GetMapping("/findAllByOrderByIdAsc.controller")
+		public @ResponseBody List<OrderList> findAllByOrderByIdAsc(Model model) {
+			 List<OrderList> orderListList = orderListService.findAllByOrderByIdAsc();
+			 return orderListList;
+		}
+		
+		//找全部訂單資訊-ajax-依照OrderListId降序
+		@GetMapping("/findAllByOrderByIdDesc.controller")
+		public @ResponseBody List<OrderList> findAllByOrderByIdDesc(Model model) {
+			 List<OrderList> orderListList = orderListService.findAllByOrderByIdDesc();
+			 return orderListList;
+		}
+		
 	//刪除一筆OrderList-ajax
 		@GetMapping("/deleteOrderListByIdAjax.controller")
 		public @ResponseBody void deleteOrderListByIdAjax(@RequestParam("orderListId")Integer orderListId) {

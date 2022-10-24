@@ -41,11 +41,6 @@ public class Student {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "student",cascade = CascadeType.ALL)
 	private List<ClassStudentList> classStudentLists ;
 	
-	//=================update By Neil-1015=================
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
-//	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
-	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
 	private Set<Activity> activities=new HashSet<Activity>();

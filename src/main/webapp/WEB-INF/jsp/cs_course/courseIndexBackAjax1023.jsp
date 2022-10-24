@@ -158,6 +158,17 @@
 			
 		</table>
 </div>
+
+<!--  <div class="subDiv col-xs-6"  style='display: none'> -->
+<!--  <table id="table2" class="table table-striped mt-5 "> -->
+<!--  <thead id="thead-title2"> -->
+<!--  </thead> -->
+
+<!--  <tbody id="content-data2"> -->
+			
+<!-- </tbody> -->
+<!--  </table> -->
+<!--  </div> -->
  
  
    </div>         
@@ -165,6 +176,29 @@
     </nav>
 
 </body>    
+
+
+
+
+		
+<!-- 			<script src="https://code.jquery.com/jquery-3.2.1.min.js" -->
+<!-- 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!-- 		crossorigin="anonymous"></script> -->
+		
+<!-- 	<script -->
+<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
+<!-- 		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
+<!-- 		crossorigin="anonymous"></script> -->
+		
+<!-- 	<script -->
+<!-- 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
+<!-- 		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
+<!-- 		crossorigin="anonymous"></script> -->
+		
+		
+<!-- 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" -->
+<!-- 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" -->
+<!-- 		crossorigin="anonymous"></script> -->
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -183,7 +217,6 @@
 		//=========前置作業========
 			$('.OrderListBtnGroup').remove();
 			$('.classListSelDiv').remove();
-			$('.ClassStudentListBtnGroup').remove();
 			$('.main-title').text('課程商品-Course')
 	})
 		function showAllCourse(){
@@ -196,6 +229,8 @@
 				var content0 = "";
 				content0 += 
 				"<tr>" +
+// 				"<td>編輯</td>"+
+// 				"<td>id</td>"+
 				"<td>年度</td>"+
 				"<td>學期</td>"+
 				"<td>分類</td>"+
@@ -210,6 +245,7 @@
 				"<td>上/下架</td>"+
 				"<td>圖片</td>"+
 				"<td>編輯</td>"+
+// 				"<td>Function</td>"+
 				"</tr>"; 
 				
 				var content = "";
@@ -218,6 +254,7 @@
 				for(var i=0; i < courseList.length; i++){
 					content += 
 					"<tr>" +
+// 						"<td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
 						"<td id='course-id' hidden='hidden'>" + courseList[i].id + "</td>" +
 						"<td class='courseYearInfo'>" + courseList[i].courseYear + "</td>" +
 						"<td class='courseSemInfo'>" + courseList[i].courseSemester + "</td>" +
@@ -232,7 +269,10 @@
 	    	       		"<td class='endDateInfo'>" + courseList[i].endDate + "</td>" +
 	    	       		"<td><button class='con'>ON</button><button class='coff'>OFF</button></td>" +
 	    	       		"<td class='cPic-td'>" + "<img alt='img' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
+// 	    	       		"<td><a href='${contextRoot}/updateCourseData1.controller?id=" + courseList[i].id + "' style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
 	    	       		"<td><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
+// 	    	       		"<td class='test1'><a href='${contextRoot}/updateCourseData1.controller?id=" + courseList[i].id + "' type='button' class='btn btn-warning'>Edit</a></td>" +
+// 						"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
 						"<td class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
 			        "</tr>";
 				}
@@ -285,6 +325,58 @@
 				}
 				})
 				
+// 				//編輯功能
+// 				$('.bxs-edit').click(function(){
+// // 					console.log($(this).parent().siblings('.courseInfo'))
+					
+// 					$(this).parent().siblings('.courseInfo').each(function(){
+// 						var thisVal = $(this).text();
+// 						var courseInfoEdit ="<input class='courseEdit' type='text' size='2' value='"+thisVal+ "'>";
+// 						$(this).html(courseInfoEdit)
+// 					})
+					
+// 					$('.courseEdit').change(function(){
+// 						var len = $('.courseEdit').length;
+// 						var v1 = "";
+// 						console.log(v1)
+						
+// 						var j = 'param';
+// 						var i = 0;
+// 						for(i = 0; i < len; i++) {
+// 							v1=	$(".courseEdit:eq(" + i + ")").val()
+// 						 eval('var ' + j + i + '= ' + v1 + ';');
+// 						}
+// 						console.log("param0 = " + param0);
+// // 						console.log("param1 = " + param1);
+						
+
+// 					})
+// // 					var cy =$(this).parent().siblings('.courseYear').text();
+// // 					var cc =$(this).parent().siblings('.courseCategory').text();
+// // 					var cs =$(this).parent().siblings('.courseSubject').text();
+// // 					var cg =$(this).parent().siblings('.courseGrade').text();
+// // 					var ccl =$(this).parent().siblings('.courseClass').text();
+// // 					var cp =$(this).parent().siblings('.coursePrice').text();
+// // 					var ct =$(this).parent().siblings('.courseTeachTime').text();
+// // 					var cm =$(this).parent().siblings('.courseMember').text();
+// // 					var sd =$(this).parent().siblings('.startDate').text();
+// // 					var ed =$(this).parent().siblings('.endDate').text();
+// // 					var cof =$(this).parent().siblings('.courseOnOff').text();
+					
+// // 					contentEdit1 = "<input class='stuNoEdit' type='text' size='3' value='"+cy+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cc+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cs+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cg+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+ccl+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cp+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+ct+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cm+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+sd+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+ed+ "'>"
+// // 					contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+cof+ "'>"
+// 				})
+				
+				
 				//=========多選變色功能=========
 				$('input[type="checkbox"]').click(function() {
 					console.log('checkbox', $(this));
@@ -299,65 +391,6 @@
 		
 }
 
-	//==========將圖片轉換成base64===============
-	var data_64;
-	$('#coursePicForUpload').change(function(e){
-		
-		readURL(this);
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$("#preview_imgInp").attr('src', e.target.result);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-	
-	var file=e.target.files[0];
-	console.log($('#coursePic'))
-	console.log(file)
-	var reader = new FileReader();
-	reader.readAsDataURL(file);
-	reader.onloadend=function(){
-	//轉換成Base64
-		data_64 = reader.result.substring(reader.result.indexOf(",")+1);
-// 		console.log(data_64)
-		$('#coursePic').val(data_64);
-		
-		}
-	})	
-//========Ajax更新Form表單====================
-$(document).on('click','.updateCourseAjax',function(e){
-		var coursePicForUpdateVal = $('#coursePic').val()
-		
-		if(coursePicForUpdateVal==""){
-			var oriPicVal = $('.cPicEdit').attr('src').substr(23);
-			$('#coursePic').val(oriPicVal);
-		}
-		
-		e.preventDefault();
-	    var form = $('form')[0];
-	    var formData = new FormData(form);
-	    $.ajax({
-	        url:'http://localhost:8081/CSMS/updateCourseDataAjax.controller',
-	        type : "POST",
-	        data : formData,
-	        contentType: false,
-	        cache: false,
-	        processData: false,
-	        success : function(data) 
-	        {
-	            console.log(data);
-	        },error: function(data) 
-	        {
-	            console.log('無法送出');
-	        }
-	    })
-	
-	})
-
-
 
 //========================ClassList==================
 	
@@ -365,7 +398,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		findAllClassListGo()
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
-		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('班級資訊-ClassList')
 	})
 	
@@ -386,30 +418,19 @@ $(document).on('click','.updateCourseAjax',function(e){
 	
 	var xhr = new XMLHttpRequest();
 	var xhrRoom = new XMLHttpRequest();
-	var xhrTeacher = new XMLHttpRequest();
-	var xhrSchool = new XMLHttpRequest();
-	
 	xhrRoom.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
 	xhrRoom.send();
-	
-	xhrTeacher.open("GET", "<c:url value='/findAllTeacherAjax.controller' />", true);
-	xhrTeacher.send();
-	
-	xhrSchool.open("GET", "<c:url value='/findAllSchoolAjax.controller' />", true);
-	xhrSchool.send();
 	
 	xhr.open("GET", "<c:url value='/findAllClassListAjax.controller' />", true);
 	xhr.send();
 	
 	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200 &&
-			xhrRoom.readyState == 4 && xhrRoom.status == 200 &&
-			xhrTeacher.readyState == 4 && xhrTeacher.status == 200 &&
-			xhrSchool.readyState == 4 && xhrSchool.status == 200) {
+		if (xhr.readyState == 4 && xhr.status == 200) {
 			
 			var content0 = "";
 			content0 += 
 			"<tr>" +
+// 			"<td>多選</td>"+
 			"<td>id</td>"+
 			"<td>課程代碼</td>"+
 			"<td>班導</td>"+
@@ -425,9 +446,10 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"</tr>";
 			
 			var classListList = JSON.parse(xhr.responseText);
+			console.log(classListList);
+			
 			var roomList = JSON.parse(xhrRoom.responseText);
-			var teacherList = JSON.parse(xhrTeacher.responseText);
-			var schoolList = JSON.parse(xhrSchool.responseText);
+// 			console.log(roomList);
 			
 			var contentClassCodeOpt = "<option selected value='0'>ClassCode Choose...</option>";
 			var content = "";
@@ -437,48 +459,21 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<option value='"+Number(i+1)+"'>" + classListList[i].classCode + "</option>";
 				
 				content += 
+// 				"<tr><td><input type='checkbox'/></td>" +	
 				"<td class='classListId'>" + classListList[i].id + "</td>" +
 				"<td><a class='class-studentList' href='####'>" + classListList[i].classCode + "</a></td>" +
-
-				"<td>" + "<select class='teacherDataSelect'>" 
-				for(var j=0;j<teacherList.length;j++){
-					if(classListList[i].teacher.id==teacherList[j].id){	
-	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].expertise + "-"+teacherList[j].name+"</option>";
-					}
-					else{
-						content += 	"<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
-						}
-					}
-				
-	    		content +=  "</select>"+
-    	    	"</td>" +
-    	    	"<td>" + "<select class='schoolDataSelect'>";
-				for(var j=0;j<schoolList.length;j++){
-					if(classListList[i].school.id==schoolList[j].id){	
-	    		content += 	"<option value='"+ schoolList[j].id +"' selected>"+schoolList[j].name+"</option>";
-	    					}
-					else{
-						content += 	"<option value='"+ schoolList[j].id +"'>"+schoolList[j].name+"</option>";
-					}
-				}
-	    		content +=  "</select>"+
-    	    	"</td>" +
-				
-				//====教室資訊Select Option======
+				"<td>" + classListList[i].teacher.name + "</td>" +
+				"<td>" + classListList[i].school.name + "</td>" +
 				"<td>" + 
-				"<select class='roomDataSelect'>";
+				"<select class='roomDataSelect'>"+
+					"<option value='" +classListList[i].room.id+"'>"+classListList[i].room.roomName+"</option>"
 				for(var j=0;j<roomList.length;j++){
-					if(classListList[i].room.id==roomList[j].id){
-	content += 	"<option value='"+ roomList[j].id +"' selected>"+roomList[j].roomName+"</option>";
-					}
-					else{
-						content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";	
-					}
+	content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
+					
 				}
 	content +=  "</select>"+
+	
 				"</td>" +
-				
-				
     	       	"<td>" + classListList[i].course.courseCategory + "班"+"</td>" +
     	       	"<td>" + classListList[i].course.courseSubject+"-" +
     	       			 classListList[i].course.courseGrade +
@@ -498,40 +493,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			
 			$('.classCodeSel').html(contentClassCodeOpt);
 			
-			
-			//======各項下拉式改值==========	
-			$('.roomDataSelect').change(function(){
-				var roomId = $(this).find('option:selected').val();
-				var classListId = $(this).parent().siblings('.classListId').text();
-				console.log(classListId)
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "<c:url value='/updateClssListRoomDataAjax.controller?classListId=" + classListId + "&roomId=" + roomId +"' />", true);
-				xhr.send();
-				
-				console.log('change Success')
-				
-			})
-			
-			$('.teacherDataSelect').change(function(){
-				var teacherId = $(this).find('option:selected').val();
-				var classListId = $(this).parent().siblings('.classListId').text();
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "<c:url value='/updateClssListTeacherDataAjax.controller?classListId=" + classListId + "&teacherId=" + teacherId +"' />", true);
-				xhr.send();
-				console.log('change Success')
-			})
-			
-			$('.schoolDataSelect').change(function(){
-				var schoolId = $(this).find('option:selected').val();
-				var classListId = $(this).parent().siblings('.classListId').text();
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "<c:url value='/updateClssListSchoolDataAjax.controller?classListId=" + classListId + "&schoolId=" + schoolId +"' />", true);
-				xhr.send();
-				console.log('change Success')
-			})
-			
-
-			//=====編輯按鈕功能=============	
+			//=====編輯按鈕功能=============
 			$('.classList-edit-btn').click(function(){
 				var classM = $(this).parent().siblings('.classMember')
 				var clMem = classM.text();
@@ -556,26 +518,31 @@ $(document).on('click','.updateCourseAjax',function(e){
 				
 			})
 			
-
+			$('.roomDataSelect').change(function(){
+				var roomId = $(this).find('option:selected').val();
+// 				console.log(roomId);
+				var classListId = $(this).parent().siblings('.classListId').text();
+				console.log(classListId)
+// 				console.log($(this))
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/updateClssListRoomDataAjax.controller?classListId=" + classListId + "&roomId=" + roomId +"' />", true);
+				xhr.send();
+				
+				console.log('change Success')
+				
+			})
+			
+			$('input[type="checkbox"]').click(function() {
+				console.log('checkbox', $(this));
+				let bgColor = 'none';
+				if ($(this).prop('checked')) {
+					bgColor = 'lightblue';
+				}
+				$(this).closest('tr').css('background', bgColor)
+			})
 		}
 	}
 	}
-	
-	
-	//========ClassList中的studentList Delete Btn function=========	
-	$(document).on('click','.csl-del-btn',function(){
-		
-		var cslId = $(this).parent().siblings('.csl-id').text();
-		var stuId = $(this).parent().siblings('.student-id').text();
-		var courseId = $(this).closest('.foldStudentInfo').prev().find('.course-id').text();
-
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/delClassStudentListAndUpdateOrderDetailByClassListIdAndStudentId.controller?courseId=" + courseId +"&stuId=" + stuId + "&cslId=" + cslId + "' />", true);
-		xhr.send();
-		
-		$(this).closest('tr').remove();
-		
-	})
 	
 //========================ClassRecord==================
 	
@@ -584,7 +551,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
-		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('上課紀錄-ClassRecord')
 		
 		var xhr = new XMLHttpRequest();
@@ -609,6 +575,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			
 			var content = "";
 			var classRecordList = JSON.parse(xhr.responseText);
+// 			console.log(classRecordList);
 			for(var i=0; i < classRecordList.length; i++){
 				content += 
 				"<tr><td><input type='checkbox'/></td>" +	
@@ -646,7 +613,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		
 		//======前置作業==========
 		$('.classListSelDiv').remove();
-		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('訂單總表-OrderList')
 
 		
@@ -659,6 +625,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		 				 '<button type="button" class="OLDescOrAsc btn btn-outline-success">訂單時間升冪</button>' +
 		 				 '<button type="button" class="OLDescOrAsc btn btn-outline-info">訂單ID降冪</button>' +
 		 				 '<button type="button" class="OLDescOrAsc btn btn-outline-info">訂單ID升冪</button>' +
+// 		 				 '<button type="button" class="btn btn-secondary">Right</button>' +
 		 				
 					  '</div>';
 	$('#forBtnOption').html(contentBtnOpt);
@@ -679,6 +646,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"<th>總金額</th>"+
 			"<th>付款方式</th>"+
 			"<th>結帳時間</th>"+
+// 			"<th>Function</th>"+
 			"<th>Function</th>"+
 			"</tr>";
 			
@@ -694,8 +662,10 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + orderListList[i].amount + "</td>" +
 				"<td>" + orderListList[i].payment + "</td>" +
     	       	"<td>" + orderListList[i].orderDate + "</td>";
+//     	       	"<td>" + orderListList[i].orderDetails[student.name] + "</td>"+
     	       	
       content +=
+//     	  		"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
     	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger'>Delete</a></td>"+
            		"</tr>";
            		
@@ -716,6 +686,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<th>金額</th>" +
 	       				"<th>購買狀態</th>" +
 	       				"<th>排課狀態</th>" +
+// 	       				"<th>function</th>" +
+// 	       				"<th>function</th>" +
 	       				
 	       				"</tr></thead>"+
 	       				"<tbody>";
@@ -733,7 +705,11 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseClass + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.coursePrice + "</td>" +
 	       				"<td><span class='orderWaitText'>未結帳</span><span class='orderNoPText'>未購買</span><span class='orderFinText'>已購買</span><span class='order-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].confirmOrder +"</span></td>" +
+// 	       				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].confirmOrder +"</span></td>" +
 	    				"<td><span class='oDonText'>已排課</span><span class='oDoffText'>未排課</span><span class='arrange-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].arrangeClassList +"</span></td>" +
+// 	    				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].arrangeClassList +"</span></td>" +
+// 	       			  	"<td class='test1'><a type='button' class='btn btn-primary'>Edit</a></td>" +
+// 	      	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-primary'>Delete</a></td>"+
 	       				"</tr>";
 	       	}	
 	      content +="</tbody></table></div></td></tr>"
@@ -844,6 +820,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<th>總金額</th>"+
 				"<th>付款方式</th>"+
 				"<th>結帳時間</th>"+
+//	 			"<th>Function</th>"+
 				"<th>Function</th>"+
 				"</tr>";
 				
@@ -859,8 +836,10 @@ $(document).on('click','.updateCourseAjax',function(e){
 					"<td>" + orderListList[i].amount + "</td>" +
 					"<td>" + orderListList[i].payment + "</td>" +
 	    	       	"<td>" + orderListList[i].orderDate + "</td>";
+//	     	       	"<td>" + orderListList[i].orderDetails[student.name] + "</td>"+
 	    	       	
 	      content +=
+//	     	  		"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
 	    	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger'>Delete</a></td>"+
 	           		"</tr>";
 	           		
@@ -881,6 +860,9 @@ $(document).on('click','.updateCourseAjax',function(e){
 		       				"<th>金額</th>" +
 		       				"<th>購買狀態</th>" +
 		       				"<th>排課狀態</th>" +
+//	 	       				"<th>function</th>" +
+//	 	       				"<th>function</th>" +
+		       				
 		       				"</tr></thead>"+
 		       				"<tbody>";
 		       				
@@ -897,7 +879,11 @@ $(document).on('click','.updateCourseAjax',function(e){
 		       				"<td>" + orderListList[i].orderDetails[j].course.courseClass + "</td>" +
 		       				"<td>" + orderListList[i].orderDetails[j].course.coursePrice + "</td>" +
 		       				"<td><span class='orderWaitText'>未結帳</span><span class='orderNoPText'>未購買</span><span class='orderFinText'>已購買</span><span class='order-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].confirmOrder +"</span></td>" +
+//	 	       				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].confirmOrder +"</span></td>" +
 		    				"<td><span class='oDonText'>已排課</span><span class='oDoffText'>未排課</span><span class='arrange-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].arrangeClassList +"</span></td>" +
+//	 	    				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderListList[i].orderDetails[j].arrangeClassList +"</span></td>" +
+//	 	       			  	"<td class='test1'><a type='button' class='btn btn-primary'>Edit</a></td>" +
+//	 	      	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-primary'>Delete</a></td>"+
 		       				"</tr>";
 		       	}	
 		      content +="</tbody></table></div></td></tr>"
@@ -982,7 +968,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
-		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('購買/排課狀態-OrderDetail')
 		
 		
@@ -996,14 +981,18 @@ $(document).on('click','.updateCourseAjax',function(e){
 			content0 += 
 			"<tr>" +
 			"<th></th>"+
+// 			"<th>多選</th>"+
+// 			"<th>OD_id</th>"+
+// 			"<th>學生id</th>"+
 			"<th>所屬學校</th>"+
 			"<th>學生名稱</th>"+
 			"<th>性別</th>"+
+// 			"<th>方案id</th>"+
 			"<th>方案資訊</th>"+
-			"<th>價錢</th>"+
 			"<th>購買狀態</th>"+
 			"<th>排課狀態</th>"+
-			"<th>Function</th>"+
+// 			"<th>Function</th>"+
+// 			"<th>Function</th>"+
 			"</tr>";
 			
 			var content = "";
@@ -1013,6 +1002,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			
 			for(var i=0; i < orderDetailList.length; i++){
 				content += 
+// 				"<tr><td><input type='checkbox'/></td>" +	
 				"<td></td>" +	
 				"<td class='oDId-id' style='display:none;'>" + orderDetailList[i].id + "</td>" +
 				"<td class='student-id' style='display:none;'>" + orderDetailList[i].student.id + "</td>" +
@@ -1024,6 +1014,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
 				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
 				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
+//     	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
     	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
            		"</tr>";
 			}
@@ -1070,6 +1061,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		var orderId = $(this).parent().siblings('.oDId-id').text();
 		
 		$(this).siblings('.arrange-info').text(1);
+// 		$(this).next().text(1)
 		
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "<c:url value='/findClassStudentListByCourseIdAndClassListIdAjax.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
@@ -1089,6 +1081,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		var orderId = $(this).parent().siblings('.oDId-id').text();
 		
 		$(this).siblings('.arrange-info').text(0);
+// 		$(this).next().text(0)
 		
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "<c:url value='/findClassStudentListByClassListIdAndStudentId.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
@@ -1137,18 +1130,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.classListSelDiv').remove();
 		$('.main-title').text('學員對應班級清單-ClassStudentList')
 		
-		
-		//======Create Btn Option====================	
-		var contentBtnOpt="";		
-		contentBtnOpt += 
-					  '<div class="ClassStudentListBtnGroup btn-group" role="group" aria-label="Basic example">' +
-		 				 '<button type="button" class="CLLDescOrAsc btn btn-outline-info">ID降冪</button>' +
-		 				 '<button type="button" class="CLLDescOrAsc btn btn-outline-info">ID升冪</button>' +
-		 				
-					  '</div>';
-	$('#forBtnOption').html(contentBtnOpt);
-		//======End Of Create Btn Option====================
-		
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllClassStudentListAjax.controller' />", true);
 	xhr.send();
@@ -1158,6 +1139,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			var content0 = "";
 			content0 += 
 			"<tr>" +
+// 			"<td>多選</td>"+
 			"<td>id</td>"+
 			"<td>課程代碼</td>"+
 			"<td>學生名稱</td>"+
@@ -1174,10 +1156,12 @@ $(document).on('click','.updateCourseAjax',function(e){
 			for(var i=0; i < cslList.length; i++){
 				content += 
 				"<tr>"+
+// 				"<td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
 				"<td class='cslId-td'>" + cslList[i].id + "</td>" +
 				"<td>" + cslList[i].classList.classCode + "</td>" +
 				"<td>" + cslList[i].student.name + "</td>" +
 				"<td class='cslStudentNo'>" + cslList[i].studentNo + "</td>" +
+//     	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
 				"<td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
     	       	"<td class='cslDel-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
            		"</tr>";
@@ -1201,101 +1185,30 @@ $(document).on('click','.updateCourseAjax',function(e){
 					console.log('nothing happened')
 				}
 			})
-	
+			
+			//========座號修改=================
+			$('.bxs-edit').click(function(){
+				console.log($(this));
+				var oriStuNo = $(this).parent().siblings('.cslStudentNo').text();
+				contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+oriStuNo+ "'>";
+				$(this).parent().siblings('.cslStudentNo').html(contentEdit);
+				
+				$('.stuNoEdit').blur(function(){
+					var newStuNo = $(this).val();
+					var cslId= $(this).parent().siblings('.cslId-td').text();
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", "<c:url value='/updateClassStudentListByIdAjax.controller?cslId=" + cslId +"&newStuNo=" + newStuNo + "' />", true);
+					xhr.send();
+					
+					var cslStudentNoTd = $(this).parent();
+					$(this).remove();
+					cslStudentNoTd.text(newStuNo);
+					
+				})
+				
+			})
 		}
 	}
-	
-	
-	
-	//=====	ClassStudentListBtn升降冪按鈕功能===========
-	$('.CLLDescOrAsc').click(function(){
-		if($(this).text()=='ID降冪'){
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='/findAllByOrderByIdDescAjax.controller' />", true);
-			xhr.send();
-			
-		}
-		else if($(this).text()=='ID升冪'){
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='/findAllByOrderByIdAscAjax.controller' />", true);
-			xhr.send();
-			
-		}
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				
-				var content0 = "";
-				content0 += 
-				"<tr>" +
-				"<td>id</td>"+
-				"<td>課程代碼</td>"+
-				"<td>學生名稱</td>"+
-				"<td>座號</td>"+
-				"<td>Function</td>"+
-				"<td>Function</td>"+
-				"</tr>";
-				
-				var content = "";
-				var cslList = JSON.parse(xhr.responseText);
-				
-				console.log(cslList);
-				
-				for(var i=0; i < cslList.length; i++){
-					content += 
-					"<tr>"+
-					"<td class='cslId-td'>" + cslList[i].id + "</td>" +
-					"<td>" + cslList[i].classList.classCode + "</td>" +
-					"<td>" + cslList[i].student.name + "</td>" +
-					"<td class='cslStudentNo'>" + cslList[i].studentNo + "</td>" +
-					"<td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
-	    	       	"<td class='cslDel-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
-	           		"</tr>";
-				}
-				var info0 = document.getElementById("thead-title");
-				info0.innerHTML = content0;
-				
-				var info = document.getElementById("content-data");
-				info.innerHTML = content;
-				
-				$('.cslDel-td').click(function(){
-					if(window.confirm('確定刪除嗎?')){
-					var cslId = $(this).siblings('.cslId-td').text();
-					console.log(cslId);
-					var xhr = new XMLHttpRequest();
-					xhr.open("GET", "<c:url value='/deleteClassStudentListByEntityAjax.controller?cslId=" + cslId +"' />", true);
-					xhr.send();
-					$(this).parent().remove();
-					}
-					else{
-						console.log('nothing happened')
-					}
-				})
-					
-			}
-		}
-	})
-	
-	
-	
-	//========座號修改=================
-		$(document).on('click','.bxs-edit',function(){
-			console.log($(this));
-			var oriStuNo = $(this).parent().siblings('.cslStudentNo').text();
-			contentEdit = "<input class='stuNoEdit' type='text' size='3' value='"+oriStuNo+ "'>";
-			$(this).parent().siblings('.cslStudentNo').html(contentEdit);
-			
-			$('.stuNoEdit').blur(function(){
-				var newStuNo = $(this).val();
-				var cslId= $(this).parent().siblings('.cslId-td').text();
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "<c:url value='/updateClassStudentListByIdAjax.controller?cslId=" + cslId +"&newStuNo=" + newStuNo + "' />", true);
-				xhr.send();
-				var cslStudentNoTd = $(this).parent();
-				$(this).remove();
-				cslStudentNoTd.text(newStuNo);
-			})
-		})
-	
 	})	
 
 //========================Room==================
@@ -1304,7 +1217,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
-		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('教室清單-Room')
 		
 		var xhr = new XMLHttpRequest();
@@ -1316,6 +1228,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			var content0 = "";
 			content0 += 
 			"<tr>" +
+// 			"<th>多選</th>"+
 			"<th></th>"+
 			"<th>id</th>"+
 			"<th>教室名稱</th>"+
@@ -1331,6 +1244,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			for(var i=0; i < roomList.length; i++){
 				content += 
 				"<tr>"+
+// 				"<td><input type='checkbox'/></td>" +	
 				"<td></td>"+
 				"<td>" + roomList[i].id + "</td>" +
 				"<td>" + roomList[i].roomName + "</td>" +
@@ -1367,46 +1281,32 @@ $(document).on('click','.updateCourseAjax',function(e){
             $('#sidebar').toggleClass('active');
         });
     });
-	
-	
-	
 //====================ClassList ClassCode Sel===============
+	
+	
 	$(document).on('change','.classCodeSel',function(){
+		console.log("7777")
 		var classListId = $(this).val();
+		
 		if(classListId==0){
 			findAllClassListGo()
 		}
-		
-		var xhrRoom = new XMLHttpRequest();
-		xhrRoom.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
-		xhrRoom.send();
-		
-		var xhrTeacher = new XMLHttpRequest();
-		xhrTeacher.open("GET", "<c:url value='/findAllTeacherAjax.controller' />", true);
-		xhrTeacher.send();
-		
-		var xhrSchool = new XMLHttpRequest();
-		xhrSchool.open("GET", "<c:url value='/findAllSchoolAjax.controller' />", true);
-		xhrSchool.send();
 		
 		var xhrClassList = new XMLHttpRequest();
 		xhrClassList.open("GET", "<c:url value='/findClassListByIdAjax.controller?classListId="+ classListId +"' />", true);
 		xhrClassList.send();
 
-		
+
 		xhrClassList.onreadystatechange = function() {
-		if (xhrClassList.readyState == 4 && xhrClassList.status == 200 &&
-			xhrRoom.readyState == 4 && xhrRoom.status == 200 &&
-			xhrTeacher.readyState == 4 && xhrTeacher.status == 200 &&
-			xhrSchool.readyState == 4 && xhrSchool.status == 200) {
+		if (xhrClassList.readyState == 4 && xhrClassList.status == 200) {
 			var content0 = "";
 			content0 += 
 			"<tr>" +
 			"<td></td>"+
 			"<td>id</td>"+
 			"<td>課程代碼</td>"+
-			"<td>教師</td>"+
 			"<td>班導</td>"+
+			"<td>行政</td>"+
 			"<td>教室</td>"+
 			"<td>分類</td>"+
 			"<td>課程</td>"+
@@ -1418,54 +1318,27 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"</tr>";
 			
 			var oneClassList = JSON.parse(xhrClassList.responseText);
-			var roomList = JSON.parse(xhrRoom.responseText);
-			var teacherList = JSON.parse(xhrTeacher.responseText);
-			var schoolList = JSON.parse(xhrSchool.responseText);
-			
+			console.log(oneClassList);
 			var content = "";
+// 			for(var i=0; i < oneClassList.length; i++){
 			content += 
+// 				"<tr><td><input type='checkbox'/></td>" +	
+// 				"<td>" + 
+// 				"<select class='roomDataSelect'>"+
+// 					"<option value='" +oneClassList.room.id+"'>"+oneClassList.room.roomName+"</option>"
+// 				for(var j=0;j<roomList.length;j++){
+// 	content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
+// 				}
+// 	content +=  "</select>"+
 	
-				"<tr class='accordion-toggle'>" +	
-				"<td><button data-toggle='collapse' data-target='#demo' class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></span></button></td>"+
-    	       	"<td class='classListId'>" + oneClassList.id + "</td>" +
+// 				"</td>" +
+				"<tr data-toggle='collapse' data-target='#demo' class='accordion-toggle'>" +	
+				"<td><button class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></span></button></td>"+
+    	       	"<td>" + oneClassList.id + "</td>" +
     	       	"<td>" + oneClassList.classCode+ "</td>" +
-    	       	
-    	       	
-    	    	"<td>" + "<select class='teacherDataSelect'>";
-				for(var j=0;j<teacherList.length;j++){
-					if(oneClassList.teacher.id==teacherList[j].id){	
-	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].name+"</option>";
-					}else{
-						content += 	"<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
-					}
-					}
-	    		content +=  "</select>"+
-    	    	"</td>" +
-    	    	
-    	    	"<td>" + "<select class='schoolDataSelect'>";
-				for(var j=0;j<schoolList.length;j++){
-					if(oneClassList.school.id==schoolList[j].id){	
-	    		content += 	"<option value='"+ schoolList[j].id +"'selected>"+schoolList[j].name+"</option>";
-					}		
-					else{
-						content += 	"<option value='"+ schoolList[j].id +">"+schoolList[j].name+"</option>";
-					}
-					}
-	    		content +=  "</select>"+
-    	    	"</td>" +
-    	    	
-    	    	"<td>" + "<select class='roomDataSelect'>";
-    	    	for(var j=0;j<roomList.length;j++){
-    	    		if(oneClassList.room.id==roomList[j].id){	
-    	    		content += 	"<option value='"+ roomList[j].id +"'selected>"+roomList[j].roomName+"</option>";
-    	    		}		
-    	    		else{
-    	    			content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
-    	    		}
-    	    		}
-    	    	content +=  "</select>"+
-    	    	"</td>" +
-    	    	
+    	    	"<td>" + oneClassList.teacher.name+ "</td>" +
+    	    	"<td>" + oneClassList.school.name+ "</td>" +
+    	    	"<td>" + oneClassList.room.roomName+ "</td>" +
     	    	"<td class='course-id' style='display:none'>" + oneClassList.course.id +"</td>" +
     	    	"<td>" + oneClassList.course.courseCategory +"班"+"</td>" +
     	       	"<td>" + oneClassList.course.courseSubject +
@@ -1523,41 +1396,12 @@ $(document).on('click','.updateCourseAjax',function(e){
     			
     			var info = document.getElementById("content-data");
     			info.innerHTML = content;
-    			//=========各項下拉式改值============
-    			$('.roomDataSelect').change(function(){
-    				var roomId = $(this).find('option:selected').val();
-    				var classListId = $(this).parent().siblings('.classListId').text();
-    				console.log(classListId)
-    				var xhr = new XMLHttpRequest();
-    				xhr.open("GET", "<c:url value='/updateClssListRoomDataAjax.controller?classListId=" + classListId + "&roomId=" + roomId +"' />", true);
-    				xhr.send();
-    				
-    				console.log('change Success')
-    				
-    			})
-    			
-    			
-    			$('.teacherDataSelect').change(function(){
-    				var teacherId = $(this).find('option:selected').val();
-    				var classListId = $(this).parent().siblings('.classListId').text();
-    				var xhr = new XMLHttpRequest();
-    				xhr.open("GET", "<c:url value='/updateClssListTeacherDataAjax.controller?classListId=" + classListId + "&teacherId=" + teacherId +"' />", true);
-    				xhr.send();
-    				console.log('change Success')
-    			})
-    			
-    			$('.schoolDataSelect').change(function(){
-    				var schoolId = $(this).find('option:selected').val();
-    				var classListId = $(this).parent().siblings('.classListId').text();
-    				var xhr = new XMLHttpRequest();
-    				xhr.open("GET", "<c:url value='/updateClssListSchoolDataAjax.controller?classListId=" + classListId + "&schoolId=" + schoolId +"' />", true);
-    				xhr.send();
-    				console.log('change Success')
-    			})
-    			
-    			
+			
 		}
 	}
+		
+		
+		
 	})
 	
 	
@@ -1578,8 +1422,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 				xhr.send();
 		})
 	})
-	
-	
 //=====================Course Edit Btn===============================
 		
 $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
@@ -1631,8 +1473,111 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	
 	})
 	
+	
+//========ClassList中的studentList Delete Btn function=================	
+	$(document).on('click','.csl-del-btn',function(){
+		
+		var cslId = $(this).parent().siblings('.csl-id').text();
+		var stuId = $(this).parent().siblings('.student-id').text();
+		var courseId = $(this).closest('.foldStudentInfo').prev().find('.course-id').text();
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/delClassStudentListAndUpdateOrderDetailByClassListIdAndStudentId.controller?courseId=" + courseId +"&stuId=" + stuId + "&cslId=" + cslId + "' />", true);
+		xhr.send();
+		
+		$(this).closest('tr').remove();
+		
+	})
+	 
+//=======================暫時不用=======================
+// 	$(document).on('click','#delete-btn',function() {
+// 	var id = $(this).parent().siblings("#course-id").text();
+// 	console.log($(this));
+// 	console.log(id);
+	
+// 	if(window.confirm('確定刪除嗎?')){
+// 		document.location.href = href="${contextRoot}/deleteCourseData.controller?id="+id;
+		
+// 	} 
+// 	else{
+// 		console.log("nothing happened")
+// 	}
+	
+// 	document.location.href = "${contextRoot}/updateRoomData.controller/"
+	//+ id + "/" + roomName + "/" + roomSize;
+// });
+
+	
+	
+//==========將圖片轉換成base64===============
+	var data_64;
+	$('#coursePicForUpload').change(function(e){
+		
+		readURL(this);
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#preview_imgInp").attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	
+	var file=e.target.files[0];
+	console.log($('#coursePic'))
+	console.log(file)
+	var reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onloadend=function(){
+	//轉換成Base64
+		data_64 = reader.result.substring(reader.result.indexOf(",")+1);
+// 		console.log(data_64)
+		$('#coursePic').val(data_64);
+		
+		}
+	})	
+//========Ajax更新Form表單====================
+$(document).on('click','.updateCourseAjax',function(e){
+		var coursePicForUpdateVal = $('#coursePic').val()
+		
+		if(coursePicForUpdateVal==""){
+			var oriPicVal = $('.cPicEdit').attr('src').substr(23);
+			$('#coursePic').val(oriPicVal);
+		}
+		
+		e.preventDefault();
+	    var form = $('form')[0];
+	    var formData = new FormData(form);
+	    $.ajax({
+	        url:'http://localhost:8081/CSMS/updateCourseDataAjax.controller',
+	        type : "POST",
+	        data : formData,
+	        contentType: false,
+	        cache: false,
+	        processData: false,
+	        success : function(data) 
+	        {
+	            console.log(data);
+	        },error: function(data) 
+	        {
+	            console.log('無法送出');
+	        }
+	    })
+	
+	})
+		
+	
+	
+	
+
+
+
+
+
 
 </script>
 

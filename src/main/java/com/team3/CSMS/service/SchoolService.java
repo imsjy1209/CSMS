@@ -1,5 +1,6 @@
 package com.team3.CSMS.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class SchoolService {
 		Optional<School> oneSchool = schoolDao.findById(id);
 		return oneSchool.get();
 		
+	}
+	
+	//find All School--Neil 1023
+	public List<School> findAllSchool() {
+		return schoolDao.findAll();
 	}
 
 }

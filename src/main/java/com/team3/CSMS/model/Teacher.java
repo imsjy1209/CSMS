@@ -1,7 +1,7 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -62,11 +62,12 @@ public class Teacher {
 	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
 	private Date update_at;
 
-	// @JsonIgnoreProperties("Teacher")
-	// @JsonManagedReference
+	
+//  @JsonManagedReference
 	@JsonBackReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL)
-	public Set<Score> score;
+//	@JsonIgnoreProperties("teacher")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
+	public List<Score> score;
 
 	public Teacher() {
 	}
@@ -150,5 +151,14 @@ public class Teacher {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public List<Score> getScore() {
+		return score;
+	}
+
+	public void setScore(List<Score> score) {
+		this.score = score;
+	}
+
 
 }

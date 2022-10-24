@@ -52,6 +52,12 @@ public class PageController {
 		return "cs_course/courseCreate";
 	}
 	
+	//商品Create頁面Ajax-Course(for後台)
+	@GetMapping("/courseCreateAjax.page")
+	public String courseCreateAjax() {
+		return "cs_course/courseCreateTest";
+	}
+	
 	//教室Create頁面-Room(for後台)
 	@GetMapping("/roomCreate.page")
 	public String roomCreatePage() {

@@ -23,6 +23,30 @@ public class OrderListService {
 		return orderListList;
 	}
 	
+	// 找所有訂單紀錄OrderList--依照OrderDate降序o
+	public List<OrderList> findAllByOrderByOrderDateDesc() {
+		List<OrderList> orderListList = orderListDao.findAllByOrderByOrderDateDesc();
+		return orderListList;
+	}
+	
+	// 找所有訂單紀錄OrderList--依照OrderDate升序
+	public List<OrderList> findAllByOrderByOrderDateAsc() {
+		List<OrderList> orderListList = orderListDao.findAllByOrderByOrderDateAsc();
+		return orderListList;
+	}
+	
+	// 找所有訂單紀錄OrderList--依照OrderListId降序
+	public List<OrderList> findAllByOrderByIdDesc() {
+		List<OrderList> orderListList = orderListDao.findAllByOrderByIdDesc();
+		return orderListList;
+	}
+	
+	// 找所有訂單紀錄OrderList--依照OrderListId升序
+	public List<OrderList> findAllByOrderByIdAsc() {
+		List<OrderList> orderListList = orderListDao.findAllByOrderByIdAsc();
+		return orderListList;
+	}
+	
 	//完成訂單(新增一筆付款完成的交易)
 	public void insertOrderList(OrderList orderList) {
 		orderListDao.save(orderList);

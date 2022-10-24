@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Room;
+import com.team3.CSMS.model.School;
+import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.RoomService;
+import com.team3.CSMS.service.SchoolService;
+import com.team3.CSMS.service.TeacherService;
 
 @Controller
 public class ClassListController {
@@ -22,6 +26,12 @@ public class ClassListController {
 	
 	@Autowired
 	private RoomService roomService;
+	
+	@Autowired
+	private SchoolService schoolService;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//顯示頁面
 	@GetMapping("/classListIndexAjax")
@@ -43,6 +53,29 @@ public class ClassListController {
 			
 			ClassList aClassList = classListService.findClassListById(cLid);
 			aClassList.setRoom(aRoom);
+			
+			classListService.insertClassList(aClassList);
+		}	
+		
+		//更改課程班導資料
+		@GetMapping("/updateClssListSchoolDataAjax.controller")
+		public @ResponseBody void updateClssListSchoolDataAjax
+		(@RequestParam(name="classListId")Integer cLid,@RequestParam(name="schoolId")Integer schoolId) {
+			School aSchool = schoolService.findSchoolById(schoolId);
+			
+			ClassList aClassList = classListService.findClassListById(cLid);
+			aClassList.setSchool(aSchool);
+			
+			classListService.insertClassList(aClassList);
+		}
+		
+		//更改課程教師資料
+		@GetMapping("/updateClssListTeacherDataAjax.controller")
+		public @ResponseBody void updateClssListTeacherDataAjax
+		(@RequestParam(name="classListId")Integer cLid,@RequestParam(name="teacherId")Integer teacherId) {
+			Teacher aTeacher = teacherService.findTeacherById(teacherId);
+			ClassList aClassList = classListService.findClassListById(cLid);
+			aClassList.setTeacher(aTeacher);
 			
 			classListService.insertClassList(aClassList);
 		}	

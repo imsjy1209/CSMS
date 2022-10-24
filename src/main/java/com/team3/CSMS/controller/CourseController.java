@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,6 +133,53 @@ public class CourseController {
 				return "redirect:/courseAllPageBackAjax.page";
 			}
 		}
+		
+		
+		
+		//===================Update Course資料-Ajax==================
+				
+				@PostMapping("/updateCourseDataAjax.controller")
+				public @ResponseBody void updateCourseDataAjax(Course oneCourse){
+					System.out.println("gogogogogogo");
+						System.out.println(oneCourse.getCourseCategory());
+						System.out.println(oneCourse.getCourseClass());
+						System.out.println(oneCourse.getCourseGrade());
+						System.out.println(oneCourse.getCourseMember());
+						System.out.println(oneCourse.getCourseOnOff());
+						System.out.println(oneCourse.getCoursePrice());
+						System.out.println(oneCourse.getCourseSemester());
+						System.out.println(oneCourse.getCourseSubject());
+						System.out.println(oneCourse.getCourseTeachTime());
+						System.out.println(oneCourse.getCourseYear());
+						System.out.println(oneCourse.getEndDate());
+						System.out.println(oneCourse.getId());
+						System.out.println(oneCourse.getStartDate());
+						System.out.println(oneCourse.getCoursePic());
+						
+//						Optional<Course> findCourseById = courseService.findCourseById(oneCourse.getId());
+//						Course oneNewC = findCourseById.get();
+//						oneNewC.setCourseMember(oneCourse.getCourseMember());
+//						System.out.println(oneNewC.getCoursePrice());
+//						System.out.println(oneNewC.getCoursePic());
+//						System.out.println("oooooooooooooo");
+						//圖片轉base64
+						
+//						if(!file.isEmpty() && file != null) {
+//							byte[] bytes;
+//							try {
+//								bytes = file.getBytes();
+//								byte[] encodeBase64 = Base64.encodeBase64(bytes);
+//								String base64Encoded = new String(encodeBase64,"UTF-8");
+//								oneNewC.setCoursePic(base64Encoded);
+//							} catch (IOException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//
+//						}
+						courseService.insertCourse(oneCourse);
+						
+				}	
 	
 	//建立Course方案+ClassList
 	@PostMapping("courseDataCreate.controller")

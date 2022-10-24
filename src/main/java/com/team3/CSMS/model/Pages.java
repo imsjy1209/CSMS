@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="pages")
@@ -45,7 +46,8 @@ public class Pages implements Serializable {
 	// 關聯
 	@ManyToOne
 	@JoinColumn(name = "fk_groups_id")
-	@JsonBackReference
+//	@JsonBackReference
+	@JsonIgnoreProperties("pages")
 	private Groups groups;
 	
 	// 建構子
