@@ -8,13 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="users")
@@ -25,31 +26,54 @@ public class Users {
 	@Column(name="users_id")
 	private Integer id;
 	
-	@Column(name="account" ,columnDefinition = "varchar(15)",unique = true, nullable = false)
+	@Column(name="account" , columnDefinition = "varchar(15)",unique = true, nullable = false)
 	private String account;
 	
-	@Column(name="password",columnDefinition = "varchar(30)", nullable = false)
+	@Column(name="password", columnDefinition = "varchar(30)", nullable = false)
 	private String password;
 	
-	@Column(name="accright" ,columnDefinition = "bit", nullable = false)
-	private int accRight;
+	@Column(name="accright" , nullable = false)
+	private Integer accRight; // insert data default 1 (0表示註銷登入權限，1表示有權限登入)
 	
-	@Column(name="isfirst" ,columnDefinition = "bit", nullable = false)
-	private int isFirst;
+	@Column(name="isfirst" , nullable = false)
+	private Integer isFirst; // insert data default 1 (0表示非首次登入，1表示有首次登入)
 	
 	@Column(name="closereason",columnDefinition = "nvarchar(10)")
 	private String closeReason;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
+	@Column(name="create_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name="update_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date update_at; // insert data default getDate() ; update data default getDate()
 
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		} 
+		if (accRight == null) {
+			accRight = 1;
+		}
+		if (isFirst == null) {
+			isFirst = 1;
+		}
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
+	
 	// 關聯
 	@ManyToOne
 	@JoinColumn(name = "fk_groups_id")
@@ -86,19 +110,19 @@ public class Users {
 		this.password = password;
 	}
 
-	public int getAccRight() {
+	public Integer getAccRight() {
 		return accRight;
 	}
 
-	public void setAccRight(int accRight) {
+	public void setAccRight(Integer accRight) {
 		this.accRight = accRight;
 	}
 
-	public int getIsFirst() {
+	public Integer getIsFirst() {
 		return isFirst;
 	}
 
-	public void setIsFirst(int isFirst) {
+	public void setIsFirst(Integer isFirst) {
 		this.isFirst = isFirst;
 	}
 

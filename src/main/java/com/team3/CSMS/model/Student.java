@@ -2,7 +2,6 @@ package com.team3.CSMS.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,12 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -73,17 +75,36 @@ public class Student {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
+	@Column(name="create_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name="update_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date update_at; // insert data default getDate() ; update data default getDate()
 
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		} 
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
+
+	// 建構子
 	public Student() {
 	}
 
+	// getter & setter
 	public Integer getId() {
 		return id;
 	}

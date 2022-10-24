@@ -21,17 +21,34 @@
 
 	<div id=cbList-area>
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
-			<!-- insert的聯絡簿內容放置處 -->
+			<tr>
+    			<th class="table-info" scope="col" style="text-align:center">聯絡簿編號</th>
+    			<td><input type="text" class="form-control" id="cbId" name="cbId" value="${cbBean.id}" readonly /></td>
+    		</tr>
+    		<tr>
+    			<th class="table-info" scope="col" style="text-align:center">建立日期</th>
+    			<td><input type="text" class="form-control" id="createAt" name="createAt" value="${cbBean.create_at}" readonly /></td>
+    		</tr>
+    		<tr>
+    			<th class="table-info" scope="col" style="text-align:center">課程內容</th>
+    			<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="${cbBean.courseContent}" readonly /></td>
+    		</tr>
+    		<tr>
+    			<th class="table-info" scope="col" style="text-align:center">回家作業</th>
+    			<td><input type="text" class="form-control" id="homework" name="homework" value="${cbBean.homework}" readonly /></td>
+    		</tr>
+    		<tr>
+    		<th class="table-info" scope="col" style="text-align:center">考試通知</th>
+    			<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="${cbBean.quizNotice}" readonly /></td>
+    		</tr>			
 		</table>
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
-			<!-- 聯絡簿按鈕放置處 -->
+			<button id="btn-init" type="button" class="btn btn-secondary" disabled>確認送出</button>&nbsp&nbsp
+			<a href="${contextRoot}/ContactBook/T_GoPrevPage?cbId=${cbBean.id}" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>
 		</div>
 	</div>
 </div>
-
-
-
 
 <!-- CDN -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -54,14 +71,14 @@
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
-/* 取得路徑變數@PathVariable("clsListId") */ 
-var clsListId =  ${clsListId};
+/* 取得路徑變數@PathVariable("classListId") */ 
+var clsListId = ${clsListId};
 // console.log(clsListId);
 
-/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
+/* 視窗載入事件：帶入【老師】選定的課程相關資訊 */
 window.onload = function(){ 
 	
-	// (1) 帶入【老師】選定的課程相關資訊
+	// 帶入【老師】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
     xhr1.send();
@@ -94,75 +111,6 @@ window.onload = function(){
     		$('#classInfo').append(clsInfoObj);
     	}
     }
-    
-    // (2)帶入insert的該筆聯絡簿資料
-	var xhr2 = new XMLHttpRequest();
-    xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
-    xhr2.send();
-    xhr2.onreadystatechange = function(){
-    	if (xhr2.readyState == 4 && xhr2.status == 200) {
-    		
-    		var cbList = JSON.parse(xhr2.responseText);  
-     		console.log(cbList); // 得到ContactBookList物件
-    		var cbId = cbList.id;
-    		console.log(cbId);
-        	var createAt = cbList.create_at;
-        	var courseContent = cbList.courseContent;
-        	var homework = cbList.homework;
-        	var quizNotice = cbList.quizNotice;
-        	
-    		var cbListObj = '<tr>';
-    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">聯絡簿編號</th>';
-    		cbListObj += '<td><input type="text" class="form-control" id="cbId" name="cbId" value="' + cbId + '" readonly /></td>';
-    		cbListObj += '</tr>';
-    		
-    		cbListObj += '<tr>';
-    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">建立日期</th>';
-    		cbListObj += '<td><input type="text" class="form-control" id="createAt" name="createAt" value="' + createAt + '" readonly /></td>';
-    		cbListObj += '</tr>';
-    		
-    		cbListObj += '<tr>';
-    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">課程內容</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
-    		if(courseContent != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly  /></td>';
-    		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value=" " readonly /></td>';
-    		}
-    		cbListObj += '</tr>';
-    		
-    		cbListObj += '<tr>';
-    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">回家作業</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
-    		if(homework != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
-    		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value=" " readonly /></td>';
-    		}
-    		cbListObj += '</tr>';
-    		
-    		cbListObj += '<tr>';
-    		cbListObj += '<th class="table-info" scope="col" style="text-align:center">考試通知</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
-    		if(quizNotice != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
-    		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value=" " readonly /></td>';
-    		}
-    		cbListObj += '</tr>';
-    		
-    		$('#cbListEdit').append(cbListObj);
-    		
-    		// (3)帶入「確認送出」按鈕 
-    		UpdateBtnObj = '<button id="btn-init" type="button" class="btn btn-secondary" disabled>確認送出</button>&nbsp&nbsp'
-    		$('#cbListBtnArea').append(UpdateBtnObj);
-    		
-    		// (4)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
-    		$('#cbListBtnArea').append(prevPageBtnObj);
-    	}
-    }
-    
 }
 
 
