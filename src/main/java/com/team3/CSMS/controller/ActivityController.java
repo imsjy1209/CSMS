@@ -35,6 +35,7 @@ import com.team3.CSMS.service.StudentService;
 @SessionAttributes(names = { "student" })
 @Controller
 public class ActivityController {
+
 	@Autowired
 	private ActivityService aService;
 
@@ -65,12 +66,12 @@ public class ActivityController {
 //		}
 		Activity act = new Activity();
 		m.addAttribute("activity", act);
-		return "activityform";
+		return "activity/activityform";
 	}
 
 	@GetMapping(path = "homepage.controller")
 	public String goHomePage(Model m) {
-		return "homepage";
+		return "activity/homepage";
 	}
 
 	@PostMapping("/addActivity")
@@ -80,29 +81,27 @@ public class ActivityController {
 		}
 		aService.insert(act);
 		m.addAttribute("id", act.getId());
-		return "addphoto";
+		return "activity/addphoto";
 	}
-	
+
 	@PostMapping("/addActivityByCkeditor")
-	public String createActByCkeditor(@RequestParam("name") String name,
-			@RequestParam("place") String place,
-			@RequestParam("date") String strdate,
-			@RequestParam("content") String content,
-			Model m) throws ParseException {
-		java.text.SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
-		Date date =  formatter.parse(strdate);
-		Activity activity = new Activity(name,place,date,content);
+	public String createActByCkeditor(@RequestParam("name") String name, @RequestParam("place") String place,
+			@RequestParam("date") String strdate, @RequestParam("content") String content, Model m)
+			throws ParseException {
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(strdate);
+		Activity activity = new Activity(name, place, date, content);
 		aService.insert(activity);
 		m.addAttribute("id", activity.getId());
-		return "addphoto";
+		return "activity/addphoto";
 	}
-	
+
 	@GetMapping("updatepic/{id}")
-	public String updatepic(@PathVariable int id,Model m) {
-		m.addAttribute("id",id);
-		return "addphoto";
+	public String updatepic(@PathVariable int id, Model m) {
+		m.addAttribute("id", id);
+		return "activity/addphoto";
 	}
-	
+
 	@PostMapping("/addActivityPhoto")
 	public String addPhoto(@RequestParam(name = "id", required = true) int id,
 			@RequestParam(name = "file") MultipartFile file, RedirectAttributes redirectAttributes, Model m) {
@@ -110,12 +109,12 @@ public class ActivityController {
 		try {
 			activity.setPhoto_file(file.getBytes());
 			aService.insert(activity);
-			return "homepage";
+			return "activity/homepage";
 		} catch (IOException e) {
 			e.printStackTrace();
 			m.addAttribute("id", id);
 			redirectAttributes.addFlashAttribute("errorMsg", "上傳失敗，請重新上傳");
-			return "addphoto";
+			return "activity/addphoto";
 		}
 	}
 
@@ -132,9 +131,9 @@ public class ActivityController {
 		activity.setName(act.getName());
 		activity.setPlace(act.getPlace());
 		activity.setDate(act.getDate());
-		activity.setContent(act.getContent());		
+		activity.setContent(act.getContent());
 		aService.insert(act);
-		return "homepage";
+		return "activity/homepage";
 	}
 
 	@GetMapping("downloadImage/{id}")
@@ -153,18 +152,17 @@ public class ActivityController {
 		List<Activity> list = aService.getAll();
 		m.addAttribute("list", list);
 
-		return "getAll";
+		return "activity/getAll";
 	}
-	
+
 	@GetMapping("/getAllman")
 	public String getAllman(Model m) {
 
 		List<Activity> list = aService.findAll();
 		m.addAttribute("list", list);
 
-		return "activitygetallman";
+		return "activity/activitygetallman";
 	}
-
 
 	@GetMapping("/getAllajax")
 	public @ResponseBody List<Activity> getAllajax() {
@@ -192,13 +190,13 @@ public class ActivityController {
 	public String joinact(@PathVariable int act_id, @SessionAttribute("student") Student student) {
 		System.out.println(act_id + "" + student);
 		aService.join(act_id, student);
-		return "checkjoin";
+		return "activity/checkjoin";
 	}
 
 	@GetMapping("/quit/{act_id}")
 	public String quitact(@PathVariable int act_id, @SessionAttribute("student") Student student) {
 		aService.quit(act_id, student.getId());
-		return "checkquit";
+		return "activity/checkquit";
 	}
 
 	@GetMapping("/createstu")
@@ -206,13 +204,13 @@ public class ActivityController {
 		Student student = sService.findStudentById(1);
 		m.addAttribute("student", student);
 		System.out.println(student.getGrade() + student.getName());
-		return "createstu";
+		return "activity/createstu";
 	}
 
 	@GetMapping("/deletestu")
 	public String deletestu(SessionStatus status) {
 		status.setComplete();
-		return "deletestu";
+		return "activity/deletestu";
 	}
 
 	@GetMapping("/newfile")
@@ -229,64 +227,66 @@ public class ActivityController {
 	public String findByid(@RequestParam int id, Model m) {
 		Activity activity = aService.findById(id);
 		m.addAttribute("act", activity);
-		return "activitydetail";
+		return "activity/activitydetail";
 	}
 
 	@GetMapping("/updatepage/{id}")
 	public String update(@PathVariable int id, Model m) {
 		Activity activity = aService.findById(id);
-		m.addAttribute("id",activity.getId());
-		m.addAttribute("removed",activity.getRemoved());
+		m.addAttribute("id", activity.getId());
+		m.addAttribute("removed", activity.getRemoved());
 		m.addAttribute("activity", activity);
-		return "activitydetailupd2";
+		return "activity/activitydetailupd2";
 	}
-	
+
 	@PostMapping("/updateCkeditor")
-	public String updateCkeditor(@RequestParam("id") int id,
-			@RequestParam("name") String name,
-			@RequestParam("place") String place,
-			@RequestParam("date") String strdate,
-			@RequestParam("content") String content
-			, Model m) throws ParseException {
+	public String updateCkeditor(@RequestParam("id") int id, @RequestParam("name") String name,
+			@RequestParam("place") String place, @RequestParam("date") String strdate,
+			@RequestParam("content") String content, Model m) throws ParseException {
 //		System.out.println(place+name);
 //		System.out.println(id);
 //		System.out.println(date);
 //		Activity activity = aService.findById(id);
-		
-		
+
 		Activity activity = aService.findById(id);
 		activity.setName(name);
 		activity.setPlace(place);
-		java.text.SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
-		Date date =  formatter.parse(strdate);
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(strdate);
 		activity.setDate(date);
 		activity.setContent(content);
 		aService.insert(activity);
-		return "homepage";
+		return "activity/homepage";
 	}
-	
+
 	@GetMapping("/already/{id}")
 	public String already(@PathVariable int id) {
 		aService.already(id);
 		return "redirect:/getAllman";
 	}
-	
+
 	@GetMapping("/removed/{id}")
 	public String removed(@PathVariable int id) {
 		aService.removed(id);
 		return "redirect:/getAllman";
 	}
-	
+
 	@GetMapping("/getmyact")
-	public String getMyAct(@SessionAttribute("student") Student student,Model m) {
+	public String getMyAct(@SessionAttribute("student") Student student, Model m) {
 		Set<Activity> activities = sService.getMyAct(student.getId());
-		m.addAttribute("activities",activities);
-		return "shommyactivity";
+		m.addAttribute("activities", activities);
+		return "activity/shommyactivity";
 	}
+
 	@GetMapping("getmyact/getact")
 	public String getMyActfindByid(@RequestParam int id, Model m) {
 		Activity activity = aService.findById(id);
 		m.addAttribute("act", activity);
-		return "activitydetailgetMyAct";
+		return "activity/activitydetailgetMyAct";
+	}
+
+	@GetMapping("activity/search")
+	public @ResponseBody List<Activity> search(@RequestParam String name) {
+		return aService.search(name);
 	}
 }

@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>首頁</h1>
-
+<jsp:include page="../layout/navbar.jsp"></jsp:include>
+清除成功,
+${student.name}
 </body>
 </html>

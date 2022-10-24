@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="layout/navbar.jsp"></jsp:include>
-創建成功,
-${student.name}
+<jsp:include page="../layout/navbar.jsp"></jsp:include>
+退出成功
 </body>
 </html>

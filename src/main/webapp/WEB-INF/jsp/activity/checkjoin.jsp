@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="layout/navbar.jsp"></jsp:include>
-退出成功
+<jsp:include page="../layout/navbar.jsp"></jsp:include>
+報名成功
 </body>
 </html>

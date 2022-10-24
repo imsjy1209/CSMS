@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<jsp:include page="layout/navbar.jsp"></jsp:include>
+	<jsp:include page="../layout/navbar.jsp"></jsp:include>
 	<div class="container">
 		<div align="center" style="width: 50%; height: 200px; margin: 0 auto;">
 

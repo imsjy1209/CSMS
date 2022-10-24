@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【老師】聯絡簿編輯</h4>
+	<h4>【校方】聯絡簿編輯</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -19,7 +19,7 @@
 	</div>
 	<br>
 
-	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/T_Update/${classListId}">
+	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/Sc_Update/${classListId}">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
 			<!-- insert的聯絡簿內容放置處 -->
 		</table>
@@ -51,19 +51,25 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+        
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
-/* 取得路徑變數@PathVariable("classListId") */ 
-var clsListId =  ${classListId};
-// console.log(clsListId);
+/* 取得路徑變數@PathVariable("classListId")、("cbId") */ 
+var pvClsListId =  ${classListId};
+console.log(pvClsListId);
+var pvCbId =  ${cbId};
+console.log(pvCbId);
 
-/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
+/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕帶入 */
 window.onload = function(){ 
 	
-	// (1) 帶入【老師】選定的課程相關資訊
+	// (1) 帶入【校方】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
-    xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
+    xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+pvClsListId, true);
     xhr1.send();
     xhr1.onreadystatechange = function(){
     	if (xhr1.readyState == 4 && xhr1.status == 200) {
@@ -95,15 +101,15 @@ window.onload = function(){
     	}
     }
     
-    // (2)帶入insert的該筆聯絡簿資料
+    // (2)帶入select的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
+    xhr2.open("GET", "<c:url value='/schoolClickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
     		
     		var cbList = JSON.parse(xhr2.responseText);  
-     		console.log(cbList); // 得到ContactBookList物件
+     		console.log(cbList); // 得到ContactBook物件
     		var cbId = cbList.id;
     		console.log(cbId);
         	var createAt = cbList.create_at;
@@ -154,18 +160,34 @@ window.onload = function(){
     		$('#cbListEdit').append(cbListObj);
     		
     		// (3)帶入「確認送出」按鈕
-//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/"+clsListId+"/"+courseContent+"/"+homework+"/"+quizNotice+"/"+cbId+"'/>";
-//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/" + clsListId + "'/>";
 			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
-//     		UpdateBtnObj = '<a href="'+teacherUpdateBtnUrl+'" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a>'
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
-    		// (4)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
-			$('#cbListBtnArea').append(prevPageBtnObj);
-    	}
+    		// (4)帶入「取消本件」按鈕
+    		CancelBenObj = '<button type="button" class="btn btn-success" onclick="cancelConfirm()">取消本件</button>&nbsp&nbsp';
+    		$('#cbListBtnArea').append(CancelBenObj);
+    		
+    		// (5)帶入「回上一頁」按鈕
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		$('#cbListBtnArea').append(prevPageBtnObj);
+     	}
     }
-    
+}
+
+function cancelConfirm() {
+	Swal.fire({
+		title: '確定要刪除本件？',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確認',
+		cancelButtonText: '取消'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			window.location.href = "/CSMS/ContactBook/Sc_Cancel?cbId="+pvCbId;
+	   }
+	})
 }
 
 //=======================版面動作=======================
@@ -179,4 +201,3 @@ $(document).ready(function () {
 </script>
 </body>
 </html>
-

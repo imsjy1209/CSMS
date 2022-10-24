@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="layout/navbar.jsp"></jsp:include>
+	<jsp:include page="../layout/navbar.jsp"></jsp:include>
 	<div class="container" align="center"><br>
 	<h2>我的活動</h2><br>
 		<c:forEach var="activity" items="${activities}">

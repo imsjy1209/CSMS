@@ -17,7 +17,7 @@
         <table class="table table-hover" id="schoolList">
             <thead>
               <tr>
-                  <th scope="col">校方人員邊號</th>
+                  <th scope="col">校方人員編號</th>
                   <th scope="col">姓名</th>
                   <th scope="col">職位</th>
                   <th scope="col">權限</th>
@@ -33,7 +33,7 @@
         <table class="table table-hover" id="teacherList">
             <thead>
               <tr>
-                  <th scope="col">教師邊號</th>
+                  <th scope="col">教師編號</th>
                   <th scope="col">姓名</th>
                   <th scope="col">主科</th>
                   <th scope="col">權限</th>
@@ -49,7 +49,7 @@
         <table class="table table-hover" id="studentList">
             <thead>
               <tr>
-                  <th scope="col">學生邊號</th>
+                  <th scope="col">學生編號</th>
                   <th scope="col">姓名</th>
                   <th scope="col">權限</th>
               </tr> 
@@ -64,7 +64,7 @@
         <table class="table table-hover" id="parentList">
             <thead>
               <tr>
-                  <th scope="col">家長邊號</th>
+                  <th scope="col">家長編號</th>
                   <th scope="col">姓名</th>
                   <th scope="col">權限</th>
               </tr> 

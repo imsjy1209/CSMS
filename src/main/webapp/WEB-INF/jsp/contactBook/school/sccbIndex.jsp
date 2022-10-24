@@ -155,13 +155,13 @@ $("#classInfoList").on("change",function(){
 					if (cbList[i].phase == 2) {
 						cb_content +='<td style="color:red">待審核</td>';
 						cb_content +='<td>';
-						cb_content +="<i class='bx bxs-edit bx-tada' style='font-size:28px'></i>&nbsp";
+						cb_content +="<a href='/CSMS/ContactBook/Sc_Edit/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bxs-edit bx-tada' style='font-size:28px'></i></a>";
 						// cb_content +="<i class='bx bxs-trash' style='font-size:28px' ></i>";
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 3) {
-						cb_content +='<td>已通過</td>';
+						cb_content +='<td>已送出</td>';
 						cb_content +='<td>';
-						cb_content +="<i class='bx bxs-bullseye bx-tada bx-flip-horizontal' style='font-size:28px'></i>&nbsp";
+						cb_content +="<a href='/CSMS/ContactBook/Sc_Check/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bx-spreadsheet' style='font-size:28px'></i></a>";
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 4) {
 						cb_content +='<td>已取消</td>';
