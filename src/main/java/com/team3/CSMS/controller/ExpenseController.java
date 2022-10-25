@@ -63,6 +63,23 @@ public class ExpenseController {
 
 		return "expense/try";
 	}
+	
+	
+	//======ExpenseController Neil-1025==================================
+	@GetMapping("/expenseHome.page")
+	public String expenseHome() {
+		return "cs_expense/expenseHomePage";
+	}
+	
+	@GetMapping(path = "/expenseQueryAndCreate.page")
+	public String expenseQueryAndCreate(Model m) {
+		Expense exp = new Expense();
+		m.addAttribute("expense", exp);
+		return "cs_expense/expenseQueryAndCreatePage";
+	}
+	
+	
+	//======End of ExpenseController Neil-1025===========================
 
 	@GetMapping("/expense/selectdate")
 	public @ResponseBody Expense getone(@RequestParam String year, @RequestParam String semester) {

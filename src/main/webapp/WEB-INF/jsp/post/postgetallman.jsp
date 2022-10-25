@@ -7,10 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href='fullcalendar/main.css' rel='stylesheet' />
-<script src='fullcalendar/main.js'></script>
-<script src='fullcalendar/locales-all.js'></script>
-<script src='fullcalendar/moment.js'></script>
+<link href='../fullcalendar/main.css' rel='stylesheet' />
+<script src='../fullcalendar/main.js'></script>
+<script src='../fullcalendar/locales-all.js'></script>
+<script src='../fullcalendar/moment.js'></script>
 <title>Insert title here</title>
 <!--box icons-->
 

@@ -27,7 +27,7 @@
 				<li class="list-group-item"><div align="left"
 						style="float: left;">詳細內容:</div><br>${act.content}</li>
 				<li class="list-group-item">
-				<a href="${contextRoot}/join/${activity.id}" class="card-link">我要報名</a></li>
+				<a href="${pageContext.request.contextPath}/join/${act.id}" class="card-link">我要報名</a></li>
 			</ul>
 		</div>
 	</div>
