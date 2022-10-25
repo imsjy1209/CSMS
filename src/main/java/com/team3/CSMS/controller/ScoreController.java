@@ -88,8 +88,8 @@ public class ScoreController {
 	public @ResponseBody String insertScore(@RequestBody List<ScoreCatchDto> scoreListJsonString) {
 		for (ScoreCatchDto scoreCatchDto : scoreListJsonString) {
 			System.out.println("for earch start");
+			
 			Integer studentId = scoreCatchDto.getStudentId();
-			System.out.println("studentId:" + studentId);
 			Integer classCodeId = scoreCatchDto.getClasscode();
 			Integer frequency = scoreCatchDto.getFrequency();
 			Integer score = scoreCatchDto.getScore();

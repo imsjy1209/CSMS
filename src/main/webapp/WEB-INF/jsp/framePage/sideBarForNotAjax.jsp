@@ -175,7 +175,8 @@ color:black;
             width: 100%;
             align-items: stretch;
         }
-
+        
+/* ========各項功能清單的背景顏色========= */
         #sidebar {
             min-width: 250px;
             max-width: 250px;
@@ -188,6 +189,7 @@ color:black;
             margin-left: -250px;
         }
 
+/* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
             padding: 20px;
             background: #6d7fcc;
@@ -232,7 +234,8 @@ color:black;
             right: 20px;
             transform: translateY(-50%);
         }
-
+        
+/* =============下拉功能的背景顏色============= */
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
@@ -305,21 +308,21 @@ color:black;
             </div>
 
             <ul class="list-unstyled components">
-                <p>Function List</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
+<!--                 <p>Function List</p> -->
+<!--                 <li class="active"> -->
+<!--                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+<!--                     <ul class="collapse list-unstyled" id="homeSubmenu"> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 1</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 2</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 3</a> -->
+<!--                         </li> -->
+<!--                     </ul> -->
+<!--                 </li> -->
                 <li>
                     <a href="#">About</a>
                 </li>
@@ -390,6 +393,19 @@ color:black;
                         </li>
                         <li>
                             <a id="activity-Btn" href="${contextRoot}/findAllActivity.controller">ShowAllActivity(所有活動)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                     <ul class="collapse list-unstyled" id="scoreInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
                         </li>
                     </ul>
                 </li>
