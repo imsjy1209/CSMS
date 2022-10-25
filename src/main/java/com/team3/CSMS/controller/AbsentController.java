@@ -82,13 +82,13 @@ public class AbsentController {
         Absent oneAbsent=absService.findStudentAbsentById(absid);
         oneAbsent.setArrviedOrNot(absOrNot);
         absService.insertAbsent(oneAbsent);
-        // return "redirect:/absentUpdate.page"
+        // return "redirect:/absentUpdate.page";
     }  
     
     // 批量新增absentData 
     //FIXME:跳轉
     @PostMapping("/absentDataInsert")
-    public @ResponseBody void insertAbsent(@RequestBody List<AbsentListDto> AbsentListJsonString){
+    public String insertAbsent(@RequestBody List<AbsentListDto> AbsentListJsonString){
         // for迴圈把json資料單獨讀出 放進自己寫的AbsentListDto裡
         for(AbsentListDto oneAbsentDto:AbsentListJsonString){
             Integer classId =oneAbsentDto.getClassCodeId();
@@ -111,8 +111,8 @@ public class AbsentController {
             //方法二 透過原生語法 把變數個別塞入
             absService.insertAbsentData(classId, studentId, arrivedValue);
             // System.out.println("end of insert");
-            // return "redirect:/absent.page";
         }
+        return "gogogo";
     }
 
 }

@@ -155,6 +155,7 @@
                 data:AbsentListJsonString,
                 success:function(result){
                   // console.log(result)
+                  history.go(0)
                   console.log("okokok")
                 },
                 error:function(err){

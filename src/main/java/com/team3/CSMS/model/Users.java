@@ -95,12 +95,12 @@ public class Users {
 		update_at = new Date();
 	}
 	
-//	// 關聯
-//	@ManyToOne
-//	@JoinColumn(name = "fk_groups_id")
-////	@JsonBackReference
-//	@JsonIgnoreProperties("users")
-//	private Groups groups;
+	// 關聯
+	@ManyToOne
+	@JoinColumn(name = "fk_groups_id")
+	// @JsonBackReference
+	@JsonIgnoreProperties("users")
+	private Groups groups;
 	
 	// 建構子
 	public Users() {
@@ -179,7 +179,7 @@ public class Users {
 //		this.groups = groups;
 //	}
 	
-	// 外來Getter&Setter
+	// 外來Getter&SetterS
 	public Student getStudent() {
 		return student;
 	}

@@ -6,7 +6,7 @@ import com.team3.CSMS.model.Users;
 
 public class UserParentDto implements Serializable{
     private static final long serialVersionUID=1L;
-    
+    private Integer userID;
     private Integer parentId;
     private String parentsName;
     private Integer whitelist;
@@ -14,12 +14,19 @@ public class UserParentDto implements Serializable{
     public UserParentDto(){
     }
     public UserParentDto(Users users){
-        
+        this.userID=users.getId();
         this.parentId=users.getParent().getId();
         this.parentsName=users.getParent().getName();
         this.whitelist=users.getAccRight();
     }
 
+    
+    public Integer getUserID() {
+        return userID;
+    }
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
     public Integer getParentId() {
         return parentId;
     }
