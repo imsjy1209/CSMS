@@ -47,9 +47,6 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/listGoodPhoto">列出圖片</a>
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           學生管理
@@ -83,6 +80,9 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/signout">登出</a>
       </li>
     </ul>
   </div>
