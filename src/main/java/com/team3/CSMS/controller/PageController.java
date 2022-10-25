@@ -1,7 +1,12 @@
 package com.team3.CSMS.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.team3.CSMS.model.ClassList;
 
 @Controller
 public class PageController {
@@ -80,6 +85,12 @@ public class PageController {
 	public String absentCheckPage(){
 		return "cs_absent/absentCheck";
 	}
+
+	
+	@GetMapping("/scoreAdd.page")
+	public String scoreAddPage() {
+		return "cs_score/scoreAdd";}
+
 	// 更改出缺勤
 	@GetMapping("/absentUpdate.page")
 	public String absentUpdatePage(){
@@ -102,5 +113,6 @@ public class PageController {
 	@GetMapping("/userControl.page")
 	public String usersControl(){
 		return "cs_user/userUpdate";
+
 	}
 }

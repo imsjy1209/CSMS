@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -67,9 +68,15 @@ public class Student {
 	@Column(name="grade",columnDefinition = "nvarchar(5)", nullable = false)
 	private String grade;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="fk_parent_id")
+//	@JsonBackReference
+	@JsonIgnoreProperties("student")
 	private Parent parent;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="fk_parent_id")
+//	private Parent parent;
 	
 	@Column(name="relationship",columnDefinition = "varchar(10)", nullable = false)
 	private String relationship;
@@ -99,6 +106,19 @@ public class Student {
 	@PreUpdate
 	public void onUpdate() {
 		update_at = new Date();
+	}
+	
+	public Student(Users users, String name, String gender, String schoolType, String schoolName, String grade,
+			Parent parent, String relationship) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.schoolType = schoolType;
+		this.schoolName = schoolName;
+		this.grade = grade;
+		this.parent = parent;
+		this.relationship = relationship;
 	}
 
 	// 建構子

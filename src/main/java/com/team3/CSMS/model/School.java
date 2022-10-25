@@ -74,7 +74,10 @@ public class School {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
+		if( status == null) {
+			status="在職";
+		}
 	}
     
 	@PreUpdate
@@ -82,6 +85,16 @@ public class School {
 		update_at = new Date();
 	}
 	
+	
+	public School(Users users, String name, String title, Date hiredate, Date resigndate) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.title = title;
+		this.hiredate = hiredate;
+		this.resigndate = resigndate;
+	}
+
 	// 建構子
 	public School() {
 	}

@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -73,12 +74,12 @@ public class Teacher {
 	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
 	private Date update_at; // insert data default getDate() ; update data default getDate()
 
-	
 //  @JsonManagedReference
 	@JsonBackReference
 //	@JsonIgnoreProperties("teacher")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
 	public List<Score> score;
+
 
 	
 	@PrePersist
@@ -88,7 +89,10 @@ public class Teacher {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
+		if( status == null) {
+			status="在職";
+		}
 	}
     
 	@PreUpdate
@@ -96,6 +100,17 @@ public class Teacher {
 		update_at = new Date();
 	}
 	
+	
+	public Teacher(Users users, String name, String title, Date hiredate, Date resigndate, String expertise) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.title = title;
+		this.hiredate = hiredate;
+		this.resigndate = resigndate;
+		this.expertise = expertise;
+	}
+
 	// 建構子
 	public Teacher() {
 	}

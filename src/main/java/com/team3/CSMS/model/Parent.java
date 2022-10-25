@@ -1,13 +1,18 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -58,6 +63,12 @@ public class Parent {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date update_at; // insert data default getDate() ; update data default getDate()
 
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="parent", cascade = CascadeType.ALL)
+//	@JsonManagedReference
+	@JsonIgnoreProperties("parent")
+	private List<Student> student;
+
 	@PrePersist
 	public void onCreate() {
 		if (create_at == null) {
@@ -73,6 +84,17 @@ public class Parent {
 		update_at = new Date();
 	}
 	
+	
+	
+	public Parent(Users users, String name, String gender, String tel, String email) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.tel = tel;
+		this.email = email;
+	}
+
 	public Parent() {
 
 	}
@@ -140,5 +162,14 @@ public class Parent {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public List<Student> getStudent() {
+		return student;
+	}
+
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+
 
 }

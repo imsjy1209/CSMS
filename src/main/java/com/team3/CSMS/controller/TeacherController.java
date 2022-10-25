@@ -22,6 +22,5 @@ public class TeacherController {
 		List<Teacher> teacherList = teacherService.findAllTeacher();
 		return teacherList;
 	}
-	
 
 }

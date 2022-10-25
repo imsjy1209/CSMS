@@ -23,37 +23,27 @@
 }
 </style>
 
-<title>RoomData Create</title>
+<title>score Edit</title>
 </head>
 <body>
 
-	<form action="scoreDataCreate.controller" method="POST"
+	<form action="${contextRoot}/scoreDataUpdateAAA" method="POST"
 		class="row g-3 form1" enctype="multipart/form-data">
-		<h3>scoreData Create</h3>
+		<h3>scoreData Edit</h3>
+		<input type="hidden" name="scoreId" class="form-control" id="scoreId"
+				value="${score1.id}">
 		<div class="col-12">
-			<label for="inputScore" class="form-label">Score</label> <input
-				type="text" name="score" class="form-control" id="inputScore"
-				placeholder="EX:A01">
+			<label for="inputScore" class="form-label">請輸入成績</label>
+			<input type="text" name="score" class="form-control" id="inputScore"
+				value="${score1.score}">
 		</div>
-
-		
-
-
-
-		
-		
-
 		<div class="col-12">
-			<button type="submit" class="btn btn-primary">Create</button>
-			<a type="button" class="btn btn-dark" href="${contextRoot}/findAllScore.controller">Go To All Room Data</a>
-			<a type="button" class="btn btn-warning" href="${contextRoot}/homepage.controller">Go To HomePage</a>
+			<button type="submit" class="btn btn-primary" >Update</button>
+			<a type="button" class="btn btn-dark" href="${contextRoot}/scoreaList.controller">Go To All score Data</a>
 			${msg.ok}
 		</div>
 	</form>
 
-
-</body>
-</html>
 
 <!-- JavaScript Bundle with Popper -->
 <script
@@ -64,8 +54,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
-
-<script>
+<script>	
 	$("#imgInp").change(function() {
 		readURL(this);
 	});
@@ -80,3 +69,5 @@
 		}
 	}
 </script>
+</body>
+</html>

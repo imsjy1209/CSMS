@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<%-- <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script> --%>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -24,6 +25,8 @@
 	
 	<!--box icons-->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
 <title>Welcome</title>
 <style>
         /*
@@ -157,6 +160,41 @@ background-color:red;
 color:azure;
 background-color:green;
 }
+
+.modal-body p{
+color:black;
+/* font-weight: 800; */
+}
+
+
+
+.teachBtn.active{
+background-color: cornflowerblue;
+}
+
+.teachBtn{
+border-radius:50%;
+}
+
+/* .main-title{ */
+/* text-align:center; */
+/* } */
+
+/* .bth-group{ */
+/* padding-left:40%; */
+/* margin-left:40%; */
+/* } */
+
+/* .OrderListBtnGroup{ */
+/*      display: flex; */
+/*      justify-content: center;  */
+/*      align-items: center; */
+
+/* } */
+
+/* .OrderListBtnGroup button{ */
+/*  margin: auto; */
+/* } */
 		
         /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -168,10 +206,12 @@ background-color:green;
             align-items: stretch;
         }
 
+/* ========各項功能清單的背景顏色========= */
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #7386D5;
+/*             background: #7386D5; */
+            background: cornflowerblue;
             color: #fff;
             transition: all 0.3s;
         }
@@ -180,9 +220,11 @@ background-color:green;
             margin-left: -250px;
         }
 
+/* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
             padding: 20px;
-            background: #6d7fcc;
+/*             background: #6d7fcc; */
+            background: cornflowerblue;
             text-align: center;
         }
 
@@ -210,7 +252,8 @@ background-color:green;
         #sidebar ul li.active>a,
         a[aria-expanded="true"] {
             color: #fff;
-            background: #6d7fcc;
+/*             background: #6d7fcc; */
+            background: cornflowerblue;
         }
 
         a[data-toggle="collapse"] {
@@ -225,10 +268,12 @@ background-color:green;
             transform: translateY(-50%);
         }
 
+/* =============下拉功能的背景顏色============= */
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
-            background: #6d7fcc;
+/*             background: #6d7fcc; */
+             background: slategray;
         }
 
         ul.CTAs {
@@ -293,70 +338,127 @@ background-color:green;
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img src="${contextRoot}/image/CSMS1.png" class="csmslogo" alt="">
-                <h5>Back-end System</h5>
+                <h5 style='color:black;font-weight:800;'>Back-End System</h5>
             </div>
 
             <ul class="list-unstyled components">
-                <p>Function List</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
+<!--                 <p>Function List</p> -->
+                
+<!--                 <li class="active"> -->
+<!--                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+<!--                     <ul class="collapse list-unstyled" id="homeSubmenu"> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 1</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 2</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 3</a> -->
+<!--                         </li> -->
+<!--                     </ul> -->
+<!--                 </li> -->
+                
                 <li>
                     <a href="#">About</a>
                 </li>
+                
+                
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a id="course-Btn" href="#">Course(商品)</a>
                         </li>
                         <li>
-                            <a id="classList-Btn" href="#">ClassList(班級)</a>
-                        </li>
-                        <li>
-                            <a id="classRecord-Btn" href="#">ClassRecord(上課紀錄)</a>
-                        </li>
-                        <li>
-                            <a id="classStudentList-Btn" href="#">ClassStudentList(班級學生)</a>
-                        </li>
-                        <li>
-                            <a id="orderList-Btn"  href="#">OrderList(訂單)</a>
+                            <a id="orderList-Btn" href="#">OrderList(訂單)</a>
                         </li>
                          <li>
                             <a id="orderDetail-Btn"  href="#">購買/排課狀態(訂單明細)</a>
                         </li>
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">課程資訊相關</a>
+                     <ul class="collapse list-unstyled" id="studentInfo">
+                        <li>
+                            <a id="classList-Btn" href="#">ClassList(班級)</a>
+                        </li>
+                        <li>
+                            <a id="classStudentList-Btn" href="#">ClassStudentList(班級學生)</a>
+                        </li>
                        <li>
                             <a id="room-Btn" href="#">Room(教室)</a>
                         </li>
+                        <li>
+                            <a id="classRecord-Btn" href="#">ClassRecord(上課紀錄)</a>
+                        </li>
                     </ul>
                 </li>
+                
+                
                 <li>
-                    <a href="#">Portfolio</a>
+                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
+                     <ul class="collapse list-unstyled" id="postInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/showAllPost.controller">PostList(所有公告)</a>
+                        </li>
+                    </ul>
                 </li>
+                
+                
+                 <li>
+                    <a href="#expenseInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">財務相關</a>
+                     <ul class="collapse list-unstyled" id="expenseInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/expenseHome.page">FinancialChart(財務圖表)</a>
+                        </li>
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/expenseQueryAndCreate.page">CostRecord(損益記錄)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#activityInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">活動相關</a>
+                     <ul class="collapse list-unstyled" id="activityInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/createActivity.controller">CreateActivity(建立活動)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/findAllActivity.controller">ShowAllActivity(所有活動)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                     <ul class="collapse list-unstyled" id="scoreInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                
                 <li>
                     <a href="#">Contact</a>
                 </li>
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
+<!--             <ul class="list-unstyled CTAs"> -->
+<!--                 <li> -->
+<!--                     <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a> -->
+<!--                 </li> -->
+<!--                 <li> -->
+<!--                     <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a> -->
+<!--                 </li> -->
+<!--             </ul> -->
         </nav>
 
         <!-- Page Content  -->
