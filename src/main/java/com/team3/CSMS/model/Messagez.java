@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +16,15 @@ public class Messagez {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "messagez_id")
     private Integer id;
-    
-    @OneToOne
+        
+    @ManyToOne
     @JoinColumn(name="fk_parent_id")
     private Parent parent;
+
+    @ManyToOne
+    @JoinColumn(name="fk_school_id")
+    private School school;
+
     // check send to school or not
     @Column(name="toSchool")
     private int toSchool;
@@ -36,23 +41,24 @@ public class Messagez {
     
     @Column(name="readOrNot")
     private int readOrNot;
-
-    // 建構值
+    
+    //-------------建構值--------------
     public Messagez(){
     }
-    public Messagez(Integer id, Parent parent, int toSchool, String typeOfMsg, String titleOfMsg, String whatToSay,
-            int readOrNot) {
+
+    public Messagez(Integer id, Parent parent, School school, int toSchool, String typeOfMsg, String titleOfMsg,
+            String whatToSay, int readOrNot) {
         super();
         this.id = id;
         this.parent = parent;
+        this.school = school;
         this.toSchool = toSchool;
         this.typeOfMsg = typeOfMsg;
         this.titleOfMsg = titleOfMsg;
         this.whatToSay = whatToSay;
         this.readOrNot = readOrNot;
     }
-
-    //getter&setter
+    //--------------------------getter &setter--------------------
     public Integer getId() {
         return id;
     }
@@ -67,6 +73,14 @@ public class Messagez {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public int getToSchool() {
@@ -108,5 +122,8 @@ public class Messagez {
     public void setReadOrNot(int readOrNot) {
         this.readOrNot = readOrNot;
     }
+
+    
+    
 
 }

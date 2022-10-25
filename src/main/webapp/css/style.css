@@ -12,9 +12,6 @@
     text-decoration: none;
 }
 
-.teachBtn.active{
-	background-color:green;
-}
 
 
 
@@ -26,9 +23,9 @@
 
 }
 
-img {
-    width: 100%;
-}
+/* img { */
+/*     width: 100%; */
+/* } */
 
 body {
     color: var(--text-color);
@@ -54,6 +51,16 @@ header {
     z-index: 100;
 }
 
+footer {
+/*     position: fixed; */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
+    z-index: 100;
+}
+
 .nav {
     display: flex;
     align-items: center;
@@ -71,6 +78,9 @@ header {
     font-size: 1.8rem;
     cursor: pointer;
 }
+
+
+
 
 /*Cart*/
 .cart {
@@ -201,6 +211,15 @@ header {
     gap: 1.5rem;
 }
 
+.shop-content-test {
+	margin:auto;
+	width:500px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(auto, 220px));
+    gap: 1.5rem;
+    
+}
+
 .product-box {
     position: relative
 }
@@ -251,17 +270,83 @@ header {
 
 }
 
-.course-info button{
-    font-size: 0.5rem;
-    padding: 0 10px;
-    border-radius: 5px;
-    }
 
 /*Course Info*/
+.course-info button{
+    font-size: 0.3rem;
+    padding: 0 5px;
+    border-radius: 5px;
+    }
+    
+.teachBtn.active{
+	
+	background-color:green;
+	
+}    
+
+
 .course-info{
 font-size: 0.5rem;
 
 }
+
+.btn-group-toggle{
+	margin-left:20px;
+}
+.courseAllBtn{
+	margin-left:20px;
+}
+
+.form-inline{
+	text-align: center;
+	padding-left:380px;
+}
+
+.bx-shopping-bag.active{
+	 background-color:red;
+}
+
+
+
+/*  testttt    */
+    h1{
+      text-align: center;
+      margin:20px 0;
+    }
+
+    #imgdiv{
+      width: 500px;
+      margin:50px auto;
+    }
+
+    #imgdiv img{
+      width: 300px;
+      margin:0 100px;
+    }
+
+    #bigimg{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      background: rgba(0,.3);
+      top: 0;
+      display: none;
+    }
+
+    #bigimg img{
+      width: 1000px;
+      margin:auto;
+      position: fixed;
+      left:0;
+      right:0;
+      top: 80px;
+      cursor: pointer;
+    }
+
+.already-buy-course-area{
+	background-color:yellow;
+}
+
 
 /* Breakpoints / Making Responsive */
 @media (max-width:1080px) {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
-import com.team3.CSMS.dto.ClassListTeacherVerDto;
+//import com.team3.CSMS.dto.ClassListTeacherVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 
 import com.team3.CSMS.dto.ScoreDto2;
@@ -47,7 +47,6 @@ public class ScoreParentController {
 	}
 
 	
-
 	// 【Parent頁面】選擇學生後，帶出該學生在該課堂的歷次考試成績
 	@GetMapping(value = "/findChildScoreList.json", produces = {"application/json;charset=UTF-8"})
 	public @ResponseBody List<ScoreDto2> getChildScoreListByStudentId
@@ -57,7 +56,7 @@ public class ScoreParentController {
 	}
 
 
-	// 找後端全部score
+	// 找全部score
 	@GetMapping("/frontParentAllScore.controller")
 	public @ResponseBody List<Score> findAll() {
 		return scoreService.findAllScore();
@@ -66,7 +65,6 @@ public class ScoreParentController {
 	// 找到所有classcode與Id
 	@GetMapping("/scoreaList3.controller")
 	public String getAll() {
-
 		return "cs_score/scoreParent";
 	}
 

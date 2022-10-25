@@ -33,6 +33,12 @@ public class PageController {
 		return "cs_course/courseIndexAjax";
 	}
 	
+//	//商品All頁面-Course(for前台)
+//	@GetMapping("/courseAllOnPageAjax2.page")
+//	public String courseAllOnPage2() {
+//		return "cs_course/courseIndexAjax2";
+//	}
+	
 	//商品All頁面-Course(for後台)
 	@GetMapping("/courseAllPageBackAjax.page")
 	public String courseAllPageBackAjax() {
@@ -49,6 +55,12 @@ public class PageController {
 	@GetMapping("/courseCreate.page")
 	public String courseCreatePage() {
 		return "cs_course/courseCreate";
+	}
+	
+	//商品Create頁面Ajax-Course(for後台)
+	@GetMapping("/courseCreateAjax.page")
+	public String courseCreateAjax() {
+		return "cs_course/courseCreateTest";
 	}
 	
 	//教室Create頁面-Room(for後台)
@@ -68,14 +80,39 @@ public class PageController {
 	public String roomUpdatePage() {
 		return "cs_room/roomUpdate";
 	}
-	// 點名跳轉
+	// 出缺勤跳轉
 	@GetMapping("/absent.page")
 	public String absentCheckPage(){
 		return "cs_absent/absentCheck";
 	}
+
 	
 	@GetMapping("/scoreAdd.page")
 	public String scoreAddPage() {
-		return "cs_score/scoreAdd";
+		return "cs_score/scoreAdd";}
+
+	// 更改出缺勤
+	@GetMapping("/absentUpdate.page")
+	public String absentUpdatePage(){
+		return "cs_absent/absentUpdate";
+	}
+	
+	// 傳送訊息跳轉
+	// @GetMapping("/messages.page")
+	// public String messagesPage(){
+	// 	return "cs_messagez/messagez";
+	// }
+
+	// 更改個人密碼用
+	@GetMapping("/passw0rdUpdate.page")
+	public String pwdUpdatePage(){
+		return "cs_updateProfile/updatePWD";
+	}
+
+	// 更改成員權限
+	@GetMapping("/userControl.page")
+	public String usersControl(){
+		return "cs_user/userUpdate";
+
 	}
 }

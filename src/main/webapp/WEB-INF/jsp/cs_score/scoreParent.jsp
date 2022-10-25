@@ -6,19 +6,14 @@
 
 <!DOCTYPE html>
 <html>
-
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
 	integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -39,27 +34,21 @@
 </head>
 <body>
 	<div class="topbtn">
-		<!-- 	<a id="showdata" href="#" type="button" class="btn btn-primary ">show data</a> -->
-		<a href="${contextRoot}/frontParentAllScore.controller" type="button"
-			class="btn btn-primary ">新增</a> <a type="button"
+	         <a type="button"
 			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go
 			To HomePage</a>
 	</div>
-	<div class="container">
+	   <div class="container">
 		<h3>All Score Data</h3>
-
-
-
-
 		<span id="hiddenUserId" hidden>15</span>
 		<!-- 改${sessionScope.user.id} -->
 		<div>
+		<!-- 學生選單(一個父母2個小孩 -->
 			<label> <select class="form-control" id="studentList"
 				style="width: 150px">
 					<option value="-1" selected="selected" hidden>請選擇</option>
-			</select>
+			        </select>
 			</label>
-
 		</div>
 		<table class="table table-striped mt-5 " id="scoreTable">
 			<thead id="thead-title">
@@ -70,11 +59,10 @@
 				</tr>
 			</thead>
 			<tbody id="content-data">
-
 			</tbody>
 		</table>
 	</div>
-
+<!-- jsp作業區 -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -89,22 +77,16 @@
 		crossorigin="anonymous"></script>
 
 	<!--####################################################################### -->
-
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
-
-
-</body>
 <script type="text/javascript">
 	window.onload = function() {
 		let xhr = new XMLHttpRequest(); //for classcodeList
 		// let classCodeDate = [];// create a classcode array
 		xhr.open("GET", "<c:url value='/findParentidPage.json'/>", true);
 		xhr.send();
-		xhr.onreadystatechange = function() {
-
-			
+		xhr.onreadystatechange = function() {			
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var parentList = JSON.parse(xhr.responseText);
 				let studentLength = parentList[0].student.length;
@@ -115,25 +97,19 @@
 					console.log("stuId=" + stuId);
 					console.log("name=" + name);
 					$('#studentList').append(opt);
-				}
-				 
+				}				 
 			}
-
 		}
 	}
-
-	//記得改成#studentList
 		$("#studentList").on(
 				"change",
 				function() {
 					//get the select value
 					var studentId = $(this).prop("value");
 					console.log(studentId);
-
 					//get the session user id
 					var sessionUserId = $("#hiddenUserId").text();
 					console.log(sessionUserId);
-
 					//get student score list by classcodeid
 					let xhr2 = new XMLHttpRequest();
 					xhr2.open("GET",       
@@ -146,7 +122,6 @@
 							var scoreStuList = JSON.parse(xhr2.responseText);
 							var scoreStuListLength = scoreStuList.length;
 							$('#scoreTable tbody tr td').remove();
-
 							scolist_data = '<tbody>';
 							for (i = 0; i < scoreStuListLength; i++) {
 								scolist_data += '<tr>';
@@ -164,4 +139,5 @@
 					}
 				});
 </script>
+</body>
 </html>

@@ -1,7 +1,7 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,7 +22,9 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "TEACHER")
@@ -33,6 +37,7 @@ public class Teacher {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id")
+	@JsonIgnoreProperties("teacher")
 	private Users users;
 
 	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
@@ -41,10 +46,16 @@ public class Teacher {
 	@Column(name = "title", columnDefinition = "nvarchar(30)", nullable = false)
 	private String title;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Column(name = "hiredate", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date hiredate;
 
-	@Column(name = "resigndate")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Column(name = "resigndate", columnDefinition = "date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date resigndate;
 
 	@Column(name = "status", columnDefinition = "nvarchar(10)", nullable = false)
@@ -55,20 +66,52 @@ public class Teacher {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
+	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
+	private Date create_at; // insert data default getDate()
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
+	private Date update_at; // insert data default getDate() ; update data default getDate()
 
 //  @JsonManagedReference
 	@JsonBackReference
 //	@JsonIgnoreProperties("teacher")
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL)
-	public Set<Score> score;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
+	public List<Score> score;
 
+
+	
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		}
+		if( status == null) {
+			status="在職";
+		}
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
+	
+	
+	public Teacher(Users users, String name, String title, Date hiredate, Date resigndate, String expertise) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.title = title;
+		this.hiredate = hiredate;
+		this.resigndate = resigndate;
+		this.expertise = expertise;
+	}
+
+	// 建構子
 	public Teacher() {
 	}
 
@@ -152,14 +195,13 @@ public class Teacher {
 		this.update_at = update_at;
 	}
 
-	public Set<Score> getScore() {
+	public List<Score> getScore() {
 		return score;
 	}
 
-	public void setScore(Set<Score> score) {
+	public void setScore(List<Score> score) {
 		this.score = score;
 	}
-	
-	
+
 
 }

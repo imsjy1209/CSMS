@@ -8,7 +8,8 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
-
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -20,24 +21,58 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/">首頁<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${contextRoot}/homepage.controller">首頁<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          活動功能
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="${contextRoot}/activitymain.controller">新增活動(老師)</a>
+          <a class="dropdown-item" href="${contextRoot}/getAllman">管理活動(老師)</a>
+          <a class="dropdown-item" href="${contextRoot}/getAll">瀏覽活動(學生)</a>
+          <a class="dropdown-item" href="${contextRoot}/getmyact">管理活動(學生)</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          財務功能
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="${contextRoot}/expenseform">財務表單</a>
+          <a class="dropdown-item" href="${contextRoot}/trypage">財務圖表</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/absentCheck">出勤表</a>
+        <a class="nav-link" href="${contextRoot}/listGoodPhoto">列出圖片</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/messages/page">最新3筆</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          學生管理
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="${contextRoot}/createstu">得到學生</a>
+          <a class="dropdown-item" href="${contextRoot}/deletestu">清除學生</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          公告系統
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="${contextRoot}/post/postform">新增公告(校方)</a>
+          <a class="dropdown-item" href="${contextRoot}/post/getall">管理公告</a>
+          <a class="dropdown-item" href="${contextRoot}/post/viewbyschool">查看公告(校方)</a>
+          <a class="dropdown-item" href="${contextRoot}/post/viewbyall">查看公告(學生)</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/messages/ajax">Ajax version</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/newPhoto">Upload Photo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/messages/add">列出圖片</a>
-      </li>
-      
      
     </ul>
   </div>
@@ -47,5 +82,6 @@
 
 <script type="text/javascript" src="${contextRoot}/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="${contextRoot}/js/bootstrap.bundle.js"></script>
+
 </body>
 </html>

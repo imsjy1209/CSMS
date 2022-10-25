@@ -10,36 +10,36 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="expense")
+@Table(name = "expense")
 @Component
 public class Expense {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="year")
+
+	@Column(name = "year")
 	private String year;
-	
-	@Column(name="semester")
+
+	@Column(name = "semester")
 	private String semester;
-	
-	@Column(name="income")
+
+	@Column(name = "income")
 	private int income;
-	
-	@Column(name="totalcost")
+
+	@Column(name = "totalcost")
 	private int totalcost;
-	
-	@Column(name="markting")
+
+	@Column(name = "markting")
 	private int markting;
-	
-	@Column(name="personnel")
+
+	@Column(name = "personnel")
 	private int personnel;
-	
-	@Column(name="other")
+
+	@Column(name = "other")
 	private int other;
-	
+
 	public Expense(String year, String semester, int income, int totalcost, int markting, int personnel, int other) {
 		super();
 		this.year = year;
@@ -51,7 +51,21 @@ public class Expense {
 		this.other = other;
 	}
 
+	public Expense(int id, String year, String semester, int income, int totalcost, int markting, int personnel,
+			int other) {
+		super();
+		this.id = id;
+		this.year = year;
+		this.semester = semester;
+		this.income = income;
+		this.totalcost = totalcost;
+		this.markting = markting;
+		this.personnel = personnel;
+		this.other = other;
+	}
+
 	public Expense() {
+
 	}
 
 	public String getYear() {

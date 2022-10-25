@@ -14,15 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "PARENT")
@@ -35,6 +36,7 @@ public class Parent {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id", nullable = false)
+	@JsonIgnoreProperties("parent")
 	private Users users;
 
 	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
@@ -51,18 +53,36 @@ public class Parent {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
-
+	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date update_at; // insert data default getDate() ; update data default getDate()
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="parent", cascade = CascadeType.ALL)
 //	@JsonManagedReference
 	@JsonIgnoreProperties("parent")
 	private List<Student> student;
+
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		} 
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
 	
 	public Parent() {
 

@@ -38,59 +38,49 @@
 </style>
 </head>
 <body>
-	<div class="topbtn">
-		
-	</div>
+	<div class="topbtn"></div>
+	
 	<div class="container">
-	
-	
-	<form action="${contextRoot}/scoreDataCreate.controller" method="POST"
-		class="row g-3 form1" enctype="multipart/form-data">
-		</form>
+<%-- 		<form action="${contextRoot}/scoreDataCreate.controller" method="POST" --%>
+<!-- 			class="row g-3 form1" enctype="multipart/form-data"> -->
+<!-- 		</form> -->
 		<h3>All Score Data</h3>
-		<div>
-			<label> 
-				<select class="form-control" id="classCode" style="width:150px">
-					<option value="-1" selected="selected">請選擇</option>
-				</select>
-			</label>
-			
-		<label>	
-		<div class="col-12">
+	<div>
+	
+	<!-- 課程選單 -->
+	<label> 
+		<select class="form-control" id="classCode" style="width:150px">
+			<option value="-1" selected="selected">請選擇</option>
+		</select>
+	</label>	
+	
+	<!-- 搜尋次數 -->
+	<div>
+		<div style="width:50%">
 			<label for="inputScore" class="form-label"></label>
-			<input type="text" name="score" class="form-control" input placeholder="請輸入次數" id="inputScore"
-				value="${score1.score}">
+			<input type="text" name="score" class="form-control"  placeholder="請輸入次數" id="inputfrequency" size="5" value="${score1.score}">
 		</div>
-		</label>	
-			
-			
-						
-			<div>
-				<p class="info">
-			</div>
-			<div>
-				<button id='selectBtn' class="btn btn-success">搜尋</button>
-			</div>
-		</div>
-		<table class="table table-striped mt-5 " id="scoreTable">
+		<button id='selectBtn' class="btn btn-success">搜尋</button>
+		<button id='send' class="btn btn-success">send</button>
+	</div>
+
+	<div style="width:50%">
+		<table class="table table-bordered" id="scoreTable" style="text-align:center">
 			<thead id="thead-title">
 				<tr>
-
-					<td>id</td>
-					<td>學生姓名</td>
-					<td>請輸入成績</td>
+					<th>id</th>
+					<th>學生姓名</th>
+					<th>請輸入成績</th>
 				</tr>
 			</thead>
-		
-			
-			
-			
 			<tbody id="content-data">
-
+				<!-- 成績資料json載入區 -->
 			</tbody>
 		</table>
+		</div>
 	</div>
 
+	<!-- CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -111,7 +101,7 @@
 		crossorigin="anonymous"></script>
 
 
-</body>
+<!-- jsp作業區 -->
 <script type="text/javascript">
 	window.onload = function() {
 		let xhr = new XMLHttpRequest(); //for classcodeList
@@ -139,12 +129,8 @@
 	ciassListSelect.click(sendClassCodeId);
 	function sendClassCodeId() {
 		let classSelected = document.getElementById("classCode");
-		//get the select value
 		let classCodeIdvalue = classSelected.value;
-// 		console.log(classCodeIdvalue);
-		//for studentList and classinfo
 		let xhr2 = new XMLHttpRequest();
-		// get the information from select value
 		xhr2.open("GET", "<c:url value='/findAllScore2.controller'/>" + "?classCodeId="+ classCodeIdvalue , true);
 		xhr2.send();
 		xhr2.onreadystatechange = function(){
@@ -153,38 +139,61 @@
 	      }
 	    }
 		function displayScoreListAndInfo(responseText){
-// 			console.log("displayScoreListAndInfo start")
 			let dataSource =JSON.parse(responseText);
 			let fcList=dataSource.fcList;
-// 			console.log(dataSource);
-			console.log(fcList.classStudentLists);
-			console.log(fcList.classStudentLists[0]);
- 			console.log(fcList.classStudentLists[0].student.id);
- 			console.log(fcList.classStudentLists[0].student.name);
-// 			console.log(fcList[1]);
  		    let scoreLength=fcList.classStudentLists.length;   
- 		    console.log(scoreLength);
- 
 		    $('#scoreTable tbody tr td').remove();
-// 		     console.log(studentLength);
-
 		    scolist_data='<tbody>';
 		    for (i=0;i<scoreLength; i++){
 		    	scolist_data+='<tr>'		 	    
 		    	scolist_data+='<td>' + fcList.classStudentLists[i].student.id+'</td>'
     			scolist_data+='<td>' + fcList.classStudentLists[i].student.name+'</td>'
-    		//	scolist_data+='<td>' + fcList[i].score+'</td>'
-    		//	scolist_data+="<td style='display:none' class='scoreId'>" +sidto[i].scoreId+"</td>"
-     		//   scolist_data+='<td><input type="text" name="score" class="form-control" id="inputScore"
- 			//	value="${score1.score}"></td>'
-   		   //  scolist_data+='<td><input type="checkbox" checked> </td>'
-		       scolist_data +='</tobody>';
-		  //  $('#scoreTable').append(scolist_data)
+    			scolist_data+='<td><input type="text" name="score" maxlength="4"  size="2" width="5" class="form-control getscore" id="inputScore" value="${score1.score}"></td>'
+		       	scolist_data +='</tobody>';
 		}
  		    scolist_data +='</tobody>';
  		    $('#scoreTable').append(scolist_data);
 		}}
-
+//========================================================================
+	$("#send").click(function(){
+      // ===============傳送absent List=============
+      confirm('確定送出嗎?')
+      let scoreList=[];
+          // 找到classcodeId的值< class="classCodeId">
+          let classCodeId=$("#classCode").val();
+          let frequency=$("#inputfrequency").val();
+        //  console.log(frequency);
+          let studentId;
+          let getscore;
+          // table 裡的每一列
+          $('.getscore').each(function(){
+            // 取的每一列tr 裡面的select有沒有沒有出席的數值
+             let getscore=$(this).val();
+//              console.log("getscore"+getscore);
+            // 找到每一頁隱藏 學生的id
+            let studentId=$(this).parent().prev().prev().text();
+            //console.log("studentId"+studentId);
+            // 建立一個 物件塞入陣列
+            let eachList={"classCodeId":classCodeId,"studentId":studentId,"score":getscore,"frequency":frequency};
+            // 塞入 131的 AbsentList
+            scoreList.push(eachList);
+          })
+          let scoreListJsonString=JSON.stringify(scoreList);
+           console.log(scoreListJsonString);
+          $.ajax({                            
+                url:'http://localhost:8081/CSMS/scoreDataCreate',
+                contentType:'application/json;charset=UTF-8',
+                dataType:null,
+                method:'post',
+                data:scoreListJsonString,
+                success:function(result){
+                  console.log("okokok")
+                },
+                error:function(err){
+                  console.log("ngngngng")
+                }
+	        })
+    })    
 	
 
 	//=======================暫時不用=======================
@@ -195,8 +204,7 @@
 		console.log(id);
 		console.log(roomName);
 		console.log(roomSize);
-		//document.location.href = "${contextRoot}/updateRoomData.controller/"
-		//+ id + "/" + roomName + "/" + roomSize;
 	});
 </script>
+</body>
 </html>

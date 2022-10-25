@@ -1,5 +1,6 @@
 package com.team3.CSMS.dao;
 
+
 import java.util.List;
 
 import javax.servlet.jsp.jstl.sql.Result;
@@ -21,5 +22,8 @@ public interface ParentDao extends JpaRepository<Parent, Integer> {
 			+ "full join [Score] on [Score].[fk_parent_id]=P.[parent_id] "
 			+ "where P.[fk_user_id] = (select [users_id] from [Users] where [users_id] = :sessionUserId)", nativeQuery = true)
 	List<Parent> getChildScoreListByParentId(@Param("sessionUserId") Integer sessionUserId);
+
+ @Query(value="from Parent where name=:name")
+ public Parent searchParent(@Param("name") String name);
 
 }

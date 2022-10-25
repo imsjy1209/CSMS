@@ -22,12 +22,12 @@ public class ScoreService {
 	@Autowired
 	private ScoreDao scoreDao;
 
-	// 找全部
+	// 【校方頁面】找全部
 	public List<Score> findAllScore() {
 		List<Score> scoreList = scoreDao.findAll();
 		return scoreList;
 	}
-	// 找全部後端
+	// 【Parent頁面】找全部score
 	public List<ScoreDto2> findScoreByClassId(Integer classCodeId ,Integer frequency) {
 		List<Score> scoreList = scoreDao.getScoreByclasslistId(classCodeId, frequency);
 		ArrayList<ScoreDto2> scdtoList = new ArrayList<>();

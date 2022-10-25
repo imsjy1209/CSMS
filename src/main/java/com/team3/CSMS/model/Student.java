@@ -2,7 +2,7 @@ package com.team3.CSMS.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,13 +17,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,9 +39,10 @@ public class Student {
 	@Column(name="student_id")
 	private Integer id;
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
-	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
+	//=================update By Neil-1015=================
+	@JsonIgnoreProperties("student")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "student",cascade = CascadeType.ALL)
+	private List<ClassStudentList> classStudentLists ;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
@@ -47,6 +50,7 @@ public class Student {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_user_id")
+	@JsonIgnoreProperties("student")
 	private Users users;
 	
 	@Column(name="name",columnDefinition = "nvarchar(15)", nullable = false)
@@ -79,17 +83,49 @@ public class Student {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="create_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date create_at;
+	@Column(name="create_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="update_at", columnDefinition = "datetime default getDate()", nullable = false)
-	private Date update_at;
+	@Column(name="update_at", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date update_at; // insert data default getDate() ; update data default getDate()
 
+	@PrePersist
+	public void onCreate() {
+		if (create_at == null) {
+			create_at = new Date();
+		}
+		if (update_at == null) {
+			update_at = new Date();
+		} 
+	}
+    
+	@PreUpdate
+	public void onUpdate() {
+		update_at = new Date();
+	}
+	
+	public Student(Users users, String name, String gender, String schoolType, String schoolName, String grade,
+			Parent parent, String relationship) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.schoolType = schoolType;
+		this.schoolName = schoolName;
+		this.grade = grade;
+		this.parent = parent;
+		this.relationship = relationship;
+	}
+
+	// 建構子
 	public Student() {
 	}
 
+	// getter & setter
 	public Integer getId() {
 		return id;
 	}
@@ -106,13 +142,13 @@ public class Student {
 		this.users = users;
 	}
 
-	public Set<ClassStudentList> getClassStudentLists() {
-		return classStudentLists;
-	}
-
-	public void setClassStudentLists(Set<ClassStudentList> classStudentLists) {
-		this.classStudentLists = classStudentLists;
-	}
+//	public Set<ClassStudentList> getClassStudentLists() {
+//		return classStudentLists;
+//	}
+//
+//	public void setClassStudentLists(Set<ClassStudentList> classStudentLists) {
+//		this.classStudentLists = classStudentLists;
+//	}
 
 	public String getName() {
 		return name;
@@ -186,5 +222,23 @@ public class Student {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public List<ClassStudentList> getClassStudentLists() {
+		return classStudentLists;
+	}
+
+	public void setClassStudentLists(List<ClassStudentList> classStudentLists) {
+		this.classStudentLists = classStudentLists;
+	}
+
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+	
+	
 
 }

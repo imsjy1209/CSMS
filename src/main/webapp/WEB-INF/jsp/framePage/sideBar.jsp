@@ -21,6 +21,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+	
+	<!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <title>Welcome</title>
 <style>
         /*
@@ -71,7 +74,7 @@
             border-bottom: 1px dashed #ddd;
             margin: 40px 0;
         }
-        /*On/Off Button Style*/ 
+        /*On/Off Course Button Style*/ 
         .con.active{
 			background-color:green;
  			cursor: default; 
@@ -90,9 +93,70 @@
 		cursor: pointer;
 		}
 		
+		  /*On/Off OrderDetail Button Style*/ 
+        .oDon.active{
+			background-color:green;
+ 			cursor: default; 
+		}
+
+		.oDoff.active{
+ 			background-color:red;
+ 			cursor: default; 
+		}
+		
+		 .oDon{
+			cursor: pointer;
+		}
+
+		.oDoff{
+		cursor: pointer;
+		}
+		
 		.class-studentList:hover{
 		background-color:yellow;
 		}
+		
+		.orderWait.active{
+	background-color:orange;
+}
+.orderNoP.active{
+	background-color:red;
+}
+.orderFin.active{
+	background-color:green;
+}
+
+.bxs-edit{
+	cursor: pointer;
+	    transition: 0.5s;
+}
+.bxs-edit:hover{
+     color:orange;
+}
+
+.bxs-trash:hover{
+     color:red;
+}
+.oDoffText{
+color:azure;
+background-color:red;
+}
+.oDonText{
+color:azure;
+background-color:green;
+}
+.orderWaitText{
+color:azure;
+background-color:orange;
+}
+.orderNoPText{
+color:azure;
+background-color:red;
+}
+.orderFinText{
+color:azure;
+background-color:green;
+}
 		
         /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -119,6 +183,7 @@
         #sidebar .sidebar-header {
             padding: 20px;
             background: #6d7fcc;
+            text-align: center;
         }
 
         #sidebar ul.components {
@@ -188,7 +253,9 @@
             background: #6d7fcc !important;
             color: #fff !important;
         }
-
+        .csmslogo{
+            width: 60%;
+        }
         /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -225,7 +292,8 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>CSMS Back end System</h3>
+                <img src="${contextRoot}/image/CSMS1.png" class="csmslogo" alt="">
+                <h5>Back-end System</h5>
             </div>
 
             <ul class="list-unstyled components">
@@ -264,6 +332,9 @@
                         </li>
                         <li>
                             <a id="orderList-Btn"  href="#">OrderList(訂單)</a>
+                        </li>
+                         <li>
+                            <a id="orderDetail-Btn"  href="#">購買/排課狀態(訂單明細)</a>
                         </li>
                        <li>
                             <a id="room-Btn" href="#">Room(教室)</a>

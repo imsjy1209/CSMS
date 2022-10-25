@@ -13,12 +13,8 @@ public class ScoreParentPageDto implements Serializable {
 	private String courseSubject;
 	private String courseGrade;
 	private Integer courseClass;
-
-
-
 	public ScoreParentPageDto() {
-	}
-	
+	}	
 	public ScoreParentPageDto(ClassList classList) {
 		super();
 		this.classListId = classList.getId();
@@ -29,12 +25,6 @@ public class ScoreParentPageDto implements Serializable {
 		this.courseClass = classList.getCourse().getCourseClass();
 	   
 	}
-
-
-
-
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -1,29 +1,29 @@
 package com.team3.CSMS.controller;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team3.CSMS.dto.ScoreCatchDto;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.ClassList;
-import com.team3.CSMS.model.Course;
-import com.team3.CSMS.model.Room;
+import com.team3.CSMS.model.Parent;
+import com.team3.CSMS.model.School;
 import com.team3.CSMS.model.Score;
+import com.team3.CSMS.model.Student;
+import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ScoreService;
+import com.team3.CSMS.service.StudentService;
 
 @Controller
 public class ScoreController {
@@ -34,21 +34,22 @@ public class ScoreController {
 	@Autowired
 	private ClassListService classListService;
 
-	// 顯示後端頁面
-		@GetMapping("/score")
-		public String showScoreIndexAjax() {
-			return "/cs_score/score";
-		}
-	
-	
-	
-	// 測試
+	@Autowired
+	private StudentService studentService;
+
+	// 顯示校方頁面(有crud功能)
+	@GetMapping("/score")
+	public String showScoreIndexAjax() {
+		return "/cs_score/score";
+	}
+
+	// 顯示校方頁面---的新增按鈕---新增頁面
 	@GetMapping("/scoreAdd")
 	public String showScoreIndexAjax1() {
 		return "/cs_score/scoreAdd";
 	}
 
-	// 找後端全部score
+	// 找全部score
 	@GetMapping("/findAllScore.controller")
 	public @ResponseBody List<Score> findAll() {
 		return scoreService.findAllScore();
@@ -57,7 +58,6 @@ public class ScoreController {
 	// 找到所有classcode與Id
 	@GetMapping("/scoreaList.controller")
 	public String getAll() {
-
 		return "cs_score/score";
 	}
 
@@ -72,28 +72,45 @@ public class ScoreController {
 		return map;
 	}
 
-
-
 	// 更改score
 	@GetMapping("/scoreData/edit")
 	public String editScore(@RequestParam(name = "id") Integer id, Model model) {
 		Score score1 = scoreService.findScoreById(id);
 		model.addAttribute("score1", score1);
 		return "cs_score/scoreUpdate";
-
 	}
 
+	/**
+	 * @param scoreListJsonString
+	 */
 	// 新增score
-	@PostMapping("/scoreDataCreate.controller")
-	public String scoreCreateAction(@RequestParam(name = "score", required = true) int score,
-			                        @RequestParam(name = "frequency", required = true) int frequency) {		
-		scoreService.saveScore(score,frequency);
+	@PostMapping("/scoreDataCreate")
+	public @ResponseBody String insertScore(@RequestBody List<ScoreCatchDto> scoreListJsonString) {
+		for (ScoreCatchDto scoreCatchDto : scoreListJsonString) {
+			System.out.println("for earch start");
+			Integer studentId = scoreCatchDto.getStudentId();
+			System.out.println("studentId:" + studentId);
+			Integer classCodeId = scoreCatchDto.getClasscode();
+			Integer frequency = scoreCatchDto.getFrequency();
+			Integer score = scoreCatchDto.getScore();
+			Student oneStu = studentService.findStudentById(studentId);
+			Parent parentId = oneStu.getParent(); // System.out.println("get parents");
+			ClassList findClassListById = classListService.findClassListById(classCodeId);
+			School schoolId = findClassListById.getSchool(); // System.out.println("get school");
+			Teacher teacher = findClassListById.getTeacher();
+			Score score2 = new Score();
+			score2.setFrequency(frequency);
+			score2.setScore(score);
+			score2.setSchool(schoolId);
+			score2.setTeacher(teacher);
+			score2.setStudent(oneStu);
+			score2.setClasslist(findClassListById);
+			score2.setParent(parentId);
+			scoreService.insertScore(score2);
+			System.out.println("end of insert");
+		}
 		return "cs_score/scoreAdd";
 	}
-	
-	 
-	
-	
 
 	// update score
 	@PostMapping("/scoreDataUpdateAAA")
@@ -110,11 +127,7 @@ public class ScoreController {
 	@GetMapping("/scoreData/delete")
 	public String deleteScore(@RequestParam(name = "id") Integer id) {
 		System.out.println("deleteScore in");
-
 		scoreService.deleteScore(id);
-
 		return "redirect:/score";
-
 	}
-
 }

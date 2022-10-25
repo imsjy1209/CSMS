@@ -60,6 +60,7 @@ public class RoomController {
 			oldRoom.setRoomSize(roomSize);
 			byte[] newByte = file.getBytes();
 			
+			
 			System.out.println(newByte);
 			
 			if(newByte.length!=0){
@@ -67,7 +68,7 @@ public class RoomController {
 			oldRoom.setRoomPic(newByte);
 			}
 			roomService.insertRoom(oldRoom);
-			return "redirect:/roomCreate.page";
+			return "redirect:/courseAllPageBackAjax.page";
 		} catch (IOException e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("errorMsg", "上傳失敗，請重新上傳");

@@ -52,7 +52,7 @@
    <tr>
     <th><input class='check-buy-box' type='checkbox'/></th>
     <th>${item.id}</th>
-   	<td style='color:red;'>未結帳</td>
+   	<td style='color:red;'><span class='courseInfoId' style='display:none ;'>${item.course.id}</span>未結帳</td>
    	<td>${item.student.name}</td>
    	<td>${item.course.courseSubject}${item.course.courseGrade}${item.course.courseClass}年級</td>
    	<td class='course-price'>${item.course.coursePrice}</td>
@@ -60,7 +60,6 @@
    	<td>${item.course.endDate}</td>
    	</tr>
    </c:forEach>
-
 
   </tbody>
 </table>
@@ -112,30 +111,73 @@ $('#goToPay').click(function(){
 		window.alert('請勾選要購買的課程')
 	}
 	else{
-	var studentId=1;
+		
+//現階段先把StudentId寫死，付費方式也先寫死	
+//處理再次確定要購買的課程(Revise confirmOrder from 0 to 2)
+	var studentId=2;
 	var payment="credit_card"
-// 	document.location.href = "${contextRoot}/insertOrderList.controller?amount="+ amount + "&studentId="+studentId + "&payment="+payment;
-	
-// 	console.log($(':checked'))
 	
 	var ODIdList = [];
-	$(':checked').each(function(){
-		var orderDetailId= $(this).parent().next().text();
-// 		console.log(orderDetailId);
-		var eachODId = {"orderDetailId":orderDetailId};
-// 		var eachODId = orderDetailId;
+	$('input:checked').each(function(){
+		var oDId= $(this).parent().next().text();
+		var courseInfoId = $(this).parent().next().next().find('.courseInfoId').text();
+		var eachODId = {"orderDetailId":oDId,"studentInfoId":studentId,"courseInfoId":courseInfoId};
 		ODIdList.push(eachODId);
 	})
-	
-	var 
-// 	console.log(ODIdList);
+	var payment ="credit_card";
 	var ODIdListJsonString = JSON.stringify(ODIdList);
 	console.log(ODIdListJsonString);
+//處理再次確定後不購買的課程(Revise confirmOrder from 0 to 1)
+
+var ODIdListNoPurchase = [];
+	$('input:not(:checked)').each(function(){
+		var oDIdNoPurchase= $(this).parent().next().text();
+		var courseInfoIdNoPurchase = $(this).parent().next().next().find('.courseInfoId').text();
+		var eachODIdNoPurchase = {"orderDetailId":oDIdNoPurchase,"studentInfoId":studentId,"courseInfoId":courseInfoIdNoPurchase};
+		ODIdListNoPurchase.push(eachODIdNoPurchase);
+	})
 	
+	var ODIdListNoPurchaseJsonString = JSON.stringify(ODIdListNoPurchase);
+	console.log(ODIdListNoPurchaseJsonString);
+
+//開始使用Ajax傳送資料
+	//處理不購買的
+	$.ajax({
+		url:'http://localhost:8081/CSMS/updateOrderDetailData.controller',
+		contentType:'application/json;charset=UTF-8',
+		dataType:null,
+		method:'post',
+		data:ODIdListNoPurchaseJsonString,
+		success:function(result){
+			console.log(result)
+			console.log("okokok")
 	
-//開始使用Ajax傳送資料	
-	
-	
+		},
+		error:function(err){
+			console.log(err)
+			console.log("ngngngng")
+		}
+		
+	})
+
+	//處理確定購買的
+	$.ajax({
+		url:'http://localhost:8081/CSMS/updateOrderListAndOrderDetailData.controller?amount='+amount+'&payment='+payment+'&studentId='+studentId,
+		contentType:'application/json;charset=UTF-8',
+		dataType:null,
+		method:'post',
+		data:ODIdListJsonString,
+		success:function(result){
+			console.log(result)
+			console.log("okokok")
+		
+		},
+		error:function(err){
+			console.log(err)
+			console.log("ngngngng")
+		}
+		
+	})
 	
 	}
 })
@@ -180,28 +222,16 @@ $('#cancelAll').click(function(){
 })
 
 
-
-		$('input[type="checkbox"]').click(function() {
-// 				console.log('checkbox', $(this));
+//checkbox被選擇後變色
+$('input[type="checkbox"]').click(function() {
+// 				$(this).parent().parent('tr').attr("style",'none');
+// 				console.log($(this).parent().parent('tr'))
 				let bgColor = 'none';
 				if ($(this).prop('checked')) {
 					bgColor = 'lightblue';
 				}
 				$(this).closest('tr').css('background', bgColor)
 			})
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

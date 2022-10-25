@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
-import com.team3.CSMS.dto.ClassListTeacherVerDto;
+//import com.team3.CSMS.dto.ClassListTeacherVerDto;
 import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.ClassList;
@@ -50,7 +50,7 @@ public class ScoreStudentController {
 		return scdtoList;
 	}
 
-	// 找後端全部score
+	// 找全部score
 	@GetMapping("/frontAllScore.controller")
 	public @ResponseBody List<Score> findAll() {
 		return scoreStudentService.findAllScore();

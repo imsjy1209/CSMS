@@ -13,9 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -67,7 +64,7 @@ public class Score {
 //	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_teacher_id")
-	@JsonIgnoreProperties("score")
+//	@JsonIgnoreProperties("score")
 	private Teacher teacher;
 	
 	@Column(name = "frequency")

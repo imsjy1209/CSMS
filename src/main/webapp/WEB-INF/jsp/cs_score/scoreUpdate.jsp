@@ -37,20 +37,13 @@
 			<input type="text" name="score" class="form-control" id="inputScore"
 				value="${score1.score}">
 		</div>
-
-
 		<div class="col-12">
-<%-- 			<button type="submit" class="btn btn-primary" formaction="${contextRoot}/score">Update</button> --%>
 			<button type="submit" class="btn btn-primary" >Update</button>
 			<a type="button" class="btn btn-dark" href="${contextRoot}/scoreaList.controller">Go To All score Data</a>
-<%-- 			<a type="button" class="btn btn-warning" href="${contextRoot}/homepage.controller">Go To HomePage</a> --%>
 			${msg.ok}
 		</div>
 	</form>
 
-
-</body>
-</html>
 
 <!-- JavaScript Bundle with Popper -->
 <script
@@ -61,10 +54,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
-
-<script>
-
-	
+<script>	
 	$("#imgInp").change(function() {
 		readURL(this);
 	});
@@ -79,3 +69,5 @@
 		}
 	}
 </script>
+</body>
+</html>
