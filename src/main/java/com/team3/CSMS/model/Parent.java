@@ -73,6 +73,17 @@ public class Parent {
 		update_at = new Date();
 	}
 	
+	
+	
+	public Parent(Users users, String name, String gender, String tel, String email) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.tel = tel;
+		this.email = email;
+	}
+
 	public Parent() {
 
 	}

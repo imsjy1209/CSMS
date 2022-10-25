@@ -42,6 +42,11 @@ public class LoginController {
 		return "register/registerform";
 	}
 	
+	@GetMapping("register/edit")
+	public String edit() {
+		return "register/manageusers";
+	}
+	
 	@GetMapping("register/addschool")
 	public String addschool(
 			@RequestParam("account") String account,
@@ -97,6 +102,22 @@ public class LoginController {
 		Parent parent = pSer.searchParentByname(parentname);
 		Student student = new Student(users,name,gender,schoolType,schoolName,grade,parent,relationship);
 		stSer.insert(student);
+		return "register/registerform";
+	}
+	
+	@GetMapping("register/addParent")
+	public String addParent(
+			@RequestParam("account") String account,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("gender") String gender,
+			@RequestParam("tel") String tel,
+			@RequestParam("email") String email) throws ParseException {
+		Groups groups = gSer.findById(5);
+		Users users = new Users(account,password,groups);
+		uSer.insert(users);
+		Parent parent = new Parent(users,name,gender,tel,email);
+		pSer.insert(parent);
 		return "register/registerform";
 	}
 	

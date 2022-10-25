@@ -46,9 +46,7 @@ table {
 		<h2>公告管理</h2>
 		<br>
 		<div class="container" align="center">
-			<span id="button"><i class='bx bxs-calendar'
-				onclick='myFunction1()' style="font-size: 30px"></i></span>
-			<div id="a"></div>
+			
 			<br> <br>
 
 			<table border="1">

@@ -38,7 +38,7 @@ public class PostController {
 			@RequestParam("article") String article) {
 		Post post = new Post(userType, topic, article);
 		pser.insert(post);
-		return "post/homepage";
+		return "activity/homepage";
 	}
 
 	@GetMapping("post/getall")
