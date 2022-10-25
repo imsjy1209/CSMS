@@ -42,7 +42,7 @@
 		<div class="col-12">
 <%-- 			<button type="submit" class="btn btn-primary" formaction="${contextRoot}/score">Update</button> --%>
 			<button type="submit" class="btn btn-primary" >Update</button>
-			<a type="button" class="btn btn-dark" href="${contextRoot}/score">Go To All score Data</a>
+			<a type="button" class="btn btn-dark" href="${contextRoot}/scoreaList.controller">Go To All score Data</a>
 <%-- 			<a type="button" class="btn btn-warning" href="${contextRoot}/homepage.controller">Go To HomePage</a> --%>
 			${msg.ok}
 		</div>

@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ClassListDao;
 import com.team3.CSMS.dto.ClassInfoDto;
+import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
 import com.team3.CSMS.dto.ClassListParentVerDto;
 import com.team3.CSMS.dto.ClassListSchoolVerDto;
 import com.team3.CSMS.dto.ClassListStudentVerDto;
 import com.team3.CSMS.dto.ClassListTeacherVerDto;
+
 import com.team3.CSMS.model.ClassList;
 
 @Service
@@ -36,8 +39,25 @@ public class ClassListService {
 		}
 		else return null;
 	}
-		
-		//找單筆課程資訊ClassList
+	//文萱新增	
+//	public ClassList findClassListById1(Integer id) {
+//		Optional<ClassList> oneClassList1 = classListDao.findById(id);
+//		ClassList aClassList1 = oneClassList1.get();
+//		return aClassList1;
+//	}	
+	
+	// 【Score】學生頁面上方課程選單
+	public List<ClassInfoForStudentScorePageDto> getClassInfoByClassCodeIdAndStudentId(Integer sessionUserId){
+		List<ClassList> clList = classListDao.getClassInfoByClassCodeIdAndStudentId(sessionUserId);
+		ArrayList<ClassInfoForStudentScorePageDto> dtoList = new ArrayList<>();
+		for (ClassList clOne : clList) {
+			ClassInfoForStudentScorePageDto cltDto = new ClassInfoForStudentScorePageDto(clOne);
+			dtoList.add(cltDto);
+		}
+		return dtoList;
+	}
+	
+	//找單筆課程資訊ClassList
 		public ClassList findClassListById(Integer id) {
 			Optional<ClassList> oneClassList = classListDao.findById(id);
 			ClassList aClassList = oneClassList.get();
@@ -50,7 +70,7 @@ public class ClassListService {
 		}
 		
 
-
+	// 課堂資訊
 	public List<ClassInfoDto> getClassInfoByClassCodeId(Integer classCodeId) {
 		List<ClassList> clList = classListDao.getClassInfoByClassCodeId(classCodeId);
 		ArrayList<ClassInfoDto> dtoList = new ArrayList<>();

@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "TEACHER")
@@ -62,9 +63,9 @@ public class Teacher {
 	@Column(name = "update_at", columnDefinition = "datetime default getDate()", nullable = false)
 	private Date update_at;
 
-	// @JsonIgnoreProperties("Teacher")
-	// @JsonManagedReference
+//  @JsonManagedReference
 	@JsonBackReference
+//	@JsonIgnoreProperties("teacher")
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL)
 	public Set<Score> score;
 
@@ -150,5 +151,15 @@ public class Teacher {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public Set<Score> getScore() {
+		return score;
+	}
+
+	public void setScore(Set<Score> score) {
+		this.score = score;
+	}
+	
+	
 
 }

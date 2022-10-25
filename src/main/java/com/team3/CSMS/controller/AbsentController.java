@@ -41,6 +41,7 @@ public class AbsentController {
         List<ClassList> clList = clService.findAll();
         return clList;
     }
+    
     //取得 上課資訊 & 學生清單
     @GetMapping(value = "/clInfo.json",
                 produces = {"application/json;charset=UTF-8"})

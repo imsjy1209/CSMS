@@ -8,7 +8,7 @@ import com.team3.CSMS.model.Score;
 
 public class ScoreDto  implements Serializable{
     private static final long serialVersionUID = 1L;
-    
+    private int studentId;
     private String student;
     private String classlist;
     private int frequency;
@@ -19,28 +19,19 @@ public class ScoreDto  implements Serializable{
     
     public ScoreDto(){
     }
-    public ScoreDto(Score Score){ 
+    public ScoreDto(Score score){ 
         super();
-        this.student=Score.getStudent().getName();
-        this.classlist=Score.getClasslist().getClassCode();
-        this.school=Score.getSchool().getName();
-       //this.parent=Score.getParent().getName();
-       // this.teacher=Score.getTeacher().getName();
-        
+        this.studentId=score.getSchool().getId();
+        this.student=score.getStudent().getName();
+        this.classlist=score.getClasslist().getClassCode();
+        this.score=score.getScore();
+        this.school=score.getSchool().getName();
     }
-    // public ClassInfoDto(String teacherName, String classroom, String subject, String schoolType, String grade) {
-    //     super();
-    //     this.teacherName = teacherName;
-    //     this.classroom = classroom;
-    //     this.subject = subject;
-    //     this.schoolType = schoolType;
-    //     this.grade = grade;
-    // }
-	public int getScore() {
-		return score;
+	public int getStudentId() {
+		return studentId;
 	}
-	public void setScore(int score) {
-		this.score = score;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 	public String getStudent() {
 		return student;
@@ -54,32 +45,23 @@ public class ScoreDto  implements Serializable{
 	public void setClasslist(String classlist) {
 		this.classlist = classlist;
 	}
-	public String getSchool() {
-		return school;
-	}
-	public void setSchool(String school) {
-		this.school = school;
-	}
-//	public String getParent() {
-//		return parent;
-//	}
-//	public void setParent(String parent) {
-//		this.parent = parent;
-//	}
-//	public String getTeacher() {
-//		return teacher;
-//	}
-//	public void setTeacher(String teacher) {
-//		this.teacher = teacher;
-//	}
 	public int getFrequency() {
 		return frequency;
 	}
 	public void setFrequency(int frequency) {
 		this.frequency = frequency;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
 	}
 
 }

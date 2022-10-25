@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,7 +23,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -61,9 +64,15 @@ public class Student {
 	@Column(name="grade",columnDefinition = "nvarchar(5)", nullable = false)
 	private String grade;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="fk_parent_id")
+//	@JsonBackReference
+	@JsonIgnoreProperties("student")
 	private Parent parent;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="fk_parent_id")
+//	private Parent parent;
 	
 	@Column(name="relationship",columnDefinition = "varchar(10)", nullable = false)
 	private String relationship;
