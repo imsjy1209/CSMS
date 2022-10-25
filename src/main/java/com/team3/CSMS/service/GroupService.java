@@ -7,29 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team3.CSMS.dao.GroupDao;
 import com.team3.CSMS.dao.TeacherDao;
+import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Teacher;
 
 @Service
 @Transactional
-public class TeacherService {
+public class GroupService {
 	
 	@Autowired
-	private TeacherDao teacherDao;
+	private GroupDao gDao;
 	
 	//find teacher by id--Neil 1015
-	public Teacher findTeacherById(Integer id) {
-		Optional<Teacher> oneTeacher = teacherDao.findById(id);
+	public Groups findById(Integer id) {
+		Optional<Groups> oneTeacher = gDao.findById(id);
 		return oneTeacher.get();
 		
 	}
 	
 	//find All Teacher--Neil 1023
-	public List<Teacher> findAllTeacher(){
-		return teacherDao.findAll();
+	public List<Groups> findAllTeacher(){
+		return gDao.findAll();
 	}
-	public void insert(Teacher p) {
-		teacherDao.save(p);
+	public void insert(Groups p) {
+		gDao.save(p);
 	}
 }

@@ -159,6 +159,7 @@
           function updatePwdFunction(){
             //FIXME: 要改成透過session 找到那個人的密碼, 互動視窗資料不會清除
             //TODO: 在取得網頁時就要抓到user_id和舊密碼
+
             let userId=8;
           	
             var xhr = new XMLHttpRequest();
@@ -401,8 +402,6 @@
     		            }
     			}
     		}
-          	
-
         }
     			
     			

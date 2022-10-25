@@ -19,4 +19,6 @@ public interface UserDao extends JpaRepository<Users,Integer> {
     @Query(value="select * from Users where fk_groups_id= :groupId",nativeQuery = true)
     List<Users> getUsersFromGroupId(@Param("groupId")Integer groupId);
 
+    @Query(value="from Users where account = :account and password = :password")
+    Users checkLogin(@Param("account")String account,@Param("password")String password);
 }

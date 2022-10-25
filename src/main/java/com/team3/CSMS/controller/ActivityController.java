@@ -32,7 +32,7 @@ import com.team3.CSMS.model.Student;
 import com.team3.CSMS.service.ActivityService;
 import com.team3.CSMS.service.StudentService;
 
-@SessionAttributes(names = { "student" })
+//@SessionAttributes(names = { "student" })
 @Controller
 public class ActivityController {
 

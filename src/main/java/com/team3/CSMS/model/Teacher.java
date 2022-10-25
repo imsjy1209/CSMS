@@ -88,7 +88,10 @@ public class Teacher {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
+		if( status == null) {
+			status="在職";
+		}
 	}
     
 	@PreUpdate
@@ -96,6 +99,17 @@ public class Teacher {
 		update_at = new Date();
 	}
 	
+	
+	public Teacher(Users users, String name, String title, Date hiredate, Date resigndate, String expertise) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.title = title;
+		this.hiredate = hiredate;
+		this.resigndate = resigndate;
+		this.expertise = expertise;
+	}
+
 	// 建構子
 	public Teacher() {
 	}

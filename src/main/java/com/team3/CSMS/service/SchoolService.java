@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.SchoolDao;
 import com.team3.CSMS.model.School;
+import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -28,5 +29,8 @@ public class SchoolService {
 	public List<School> findAllSchool() {
 		return schoolDao.findAll();
 	}
-
+	public void insert(School p) {
+		schoolDao.save(p);
+	}
+	
 }
