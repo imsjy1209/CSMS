@@ -14,6 +14,7 @@
 	<div class="container">
 		<div align="center">
 			<h1>活動頁面</h1>
+			${users.groups}
 			<br> 搜尋活動 : <input type="text" id="name">
 			<button id="btn01">查詢</button>
 			<button id="btn02">清除查詢</button>

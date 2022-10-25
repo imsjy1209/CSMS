@@ -21,8 +21,9 @@
 	<jsp:include page="../layout/navbar.jsp"></jsp:include>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<div class="container" align="center">
-		<h3>損益紀錄</h3>
-		<br> 
+		<h3>註冊頁面</h3>
+		<br>
+		選擇對象: 
 		<select id="type">
 			<option value="2">導師</option>
 			<option value="3">講師</option>
@@ -77,7 +78,18 @@
 							htmlSeg += "(選填)關係: <input name='relationship'><br><br>";
 							htmlSeg += "<input type='submit' value='上傳'>"
 							htmlSeg += "</form>"
-						}
+						}if (type == "5") {
+							htmlSeg += "建立家長帳號<br><br>"
+								htmlSeg += "<form action=${pageContext.request.contextPath}/register/addParent method=get>";
+								htmlSeg += "帳號: <input name='account'><br><br>";
+								htmlSeg += "密碼: <input name='password'><br><br>";
+								htmlSeg += "名字: <input name='name'><br><br>";
+								htmlSeg += "性別: <input name='gender'><br><br>";
+								htmlSeg += "電話: <input name='tel'><br><br>";
+								htmlSeg += "信箱: <input name='email'><br><br>";
+								htmlSeg += "<input type='submit' value='上傳'>"
+								htmlSeg += "</form>"
+							}
 				dataArea.innerHTML = htmlSeg;
 				$(function() {
 					$("#datepicker").datepicker({

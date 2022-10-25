@@ -80,4 +80,12 @@ public class UserService {
         }
         return parentDtoList;
         }
+      
+      public Users checkLogin(String account,String password) {
+    	  Users users = userDao.checkLogin(account, password);
+    	  if (users != null) {
+  			return users;
+  		}
+  		return null;
+      }
 }

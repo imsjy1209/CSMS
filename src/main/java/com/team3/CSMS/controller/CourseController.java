@@ -140,21 +140,21 @@ public class CourseController {
 				
 				@PostMapping("/updateCourseDataAjax.controller")
 				public @ResponseBody void updateCourseDataAjax(Course oneCourse){
-					System.out.println("gogogogogogo");
-						System.out.println(oneCourse.getCourseCategory());
-						System.out.println(oneCourse.getCourseClass());
-						System.out.println(oneCourse.getCourseGrade());
-						System.out.println(oneCourse.getCourseMember());
-						System.out.println(oneCourse.getCourseOnOff());
-						System.out.println(oneCourse.getCoursePrice());
-						System.out.println(oneCourse.getCourseSemester());
-						System.out.println(oneCourse.getCourseSubject());
-						System.out.println(oneCourse.getCourseTeachTime());
-						System.out.println(oneCourse.getCourseYear());
-						System.out.println(oneCourse.getEndDate());
-						System.out.println(oneCourse.getId());
-						System.out.println(oneCourse.getStartDate());
-						System.out.println(oneCourse.getCoursePic());
+//					System.out.println("gogogogogogo");
+//						System.out.println(oneCourse.getCourseCategory());
+//						System.out.println(oneCourse.getCourseClass());
+//						System.out.println(oneCourse.getCourseGrade());
+//						System.out.println(oneCourse.getCourseMember());
+//						System.out.println(oneCourse.getCourseOnOff());
+//						System.out.println(oneCourse.getCoursePrice());
+//						System.out.println(oneCourse.getCourseSemester());
+//						System.out.println(oneCourse.getCourseSubject());
+//						System.out.println(oneCourse.getCourseTeachTime());
+//						System.out.println(oneCourse.getCourseYear());
+//						System.out.println(oneCourse.getEndDate());
+//						System.out.println(oneCourse.getId());
+//						System.out.println(oneCourse.getStartDate());
+//						System.out.println(oneCourse.getCoursePic());
 						
 //						Optional<Course> findCourseById = courseService.findCourseById(oneCourse.getId());
 //						Course oneNewC = findCourseById.get();

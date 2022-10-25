@@ -25,6 +25,56 @@ public class PostController {
 	public String postform() {
 		return "post/postform";
 	}
+	
+	//========PostController-Neil 1024===============================================
+	@GetMapping("/showAllPost.controller")
+	public String showAllPost(Model m) {
+		List<Post> list = pser.getAll();
+		m.addAttribute("list", list);
+		return "cs_post/allPostPage";
+	}
+	
+	//=====編輯按鈕跳轉用======
+	@GetMapping("/updatePost/{id}")
+	public String updatePost(@PathVariable int id, Model m) {
+		Post post = pser.findById(id);
+		m.addAttribute("post", post);
+		m.addAttribute("id", post.getId());
+		m.addAttribute("post", post);
+		return "cs_post/postUpdatePage1";
+	}
+	
+	//=====編輯後Submit跳轉用======
+	@PostMapping("/updatePostFin")
+	public String updatePostFin(@RequestParam("id") int id, @RequestParam("topic") String topic,
+			@RequestParam("userType") int userType, @RequestParam("article") String article, Model m)
+			throws ParseException {
+		Post post = pser.findById(id);
+		post.setTopic(topic);
+		post.setUserType(userType);
+		post.setArticle(article);
+		post.setUpdate_at(new Date());
+		pser.insert(post);
+		return "redirect:/showAllPost.controller";
+	}
+	
+	//====公告上下架============
+	@GetMapping("/postChangeToOn/{id}")
+	public String postChangeToOn(@PathVariable int id) {
+		pser.already(id);
+		return "redirect:/showAllPost.controller";
+	}
+
+	@GetMapping("/postChangeToOff/{id}")
+	public String postChangeToOff(@PathVariable int id) {
+		pser.removed(id);
+		return "redirect:/showAllPost.controller";
+	}
+	
+	//
+
+	
+	//========End Of PostController-Neil 1024========================================
 
 	@GetMapping("post/detail/{id}")
 	public String postdetail(@PathVariable int id, Model m) {
@@ -38,7 +88,7 @@ public class PostController {
 			@RequestParam("article") String article) {
 		Post post = new Post(userType, topic, article);
 		pser.insert(post);
-		return "post/homepage";
+		return "activity/homepage";
 	}
 
 	@GetMapping("post/getall")

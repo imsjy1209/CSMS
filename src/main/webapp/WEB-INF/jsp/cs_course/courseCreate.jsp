@@ -124,6 +124,7 @@
 				type="file" name="coursePic" class="form-control" id="imgInp"
 				accept="image/gif, image/jpeg, image/png">
 		</div>
+		
 		<div class="col-md-6">
 			Picture Preview <img id="preview_imgInp" src="#" />
 		</div>

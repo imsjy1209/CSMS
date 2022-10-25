@@ -1,5 +1,6 @@
 package com.team3.CSMS.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,6 +33,9 @@ public class StudentService {
 	}
 	public void insert(Student p) {
 		studentDao.save(p);
+	}
+	public List<Student> findall(){
+		return studentDao.findAll();
 	}
 	
 }

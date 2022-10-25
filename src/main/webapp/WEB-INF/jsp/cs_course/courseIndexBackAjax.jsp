@@ -134,18 +134,19 @@
 
 
 
-			<h3 class='main-title'>Main Info</h3>
-<!--             <div class="row"> -->
+		
+<!-- 	<div class="container">		 -->
+		<h3 class='main-title'>Main Info</h3>
 			<div id="forSelect">
 			
 			</div>
-			
+	
 			<div id="forBtnOption">
 			
 			</div>
             <div class="bigDiv">
  				<div class="col-xs-6">
-           			<table id="table" class="table table-striped mt-5 ">
+           			<table id="table" class="table table-striped mt-5">
 			
 					<thead id="thead-title">
 				
@@ -156,11 +157,14 @@
 					</tbody>
 			
 			
-		</table>
-</div>
+					</table>
+				</div>
  
  
-   </div>         
+   			</div>         
+<!--        </div> -->
+       
+<!--  ===============for side bar============  -->
        </div>
     </nav>
 
@@ -225,12 +229,16 @@
 						"<td class='courseClassInfo'>" + courseList[i].courseClass + "年級</td>" +
 						"<td class='courseSubjectInfo'>" + courseList[i].courseSubject + "</td>" +
 	    	       		"<td class='coursePriceInfo'>" + courseList[i].coursePrice + "</td>" +
-	    	       		"<td class='courseTeachTimeInfo'>" + courseList[i].courseTeachTime + "</td>" +
+	    	       		
+	    	       		"<td class='courseTeachTimeBoxGroup'><p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p></td>" +
+	    	       		
+	    	       		"<td style='display:none;' class='courseTeachTimeInfo'>" + courseList[i].courseTeachTime + "</td>" +
+	    	       		
 	    	       		"<td class='courseMemberInfo'>" + courseList[i].courseMember + "</td>" +
 	    	       		"<td class='startDateInfo'>" + courseList[i].startDate + "</td>" +
 	    	       		"<td class='endDateInfo'>" + courseList[i].endDate + "</td>" +
 	    	       		"<td><button class='con'>ON</button><button class='coff'>OFF</button></td>" +
-	    	       		"<td class='cPic-td'>" + "<img alt='img' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
+	    	       		"<td class='cPic-td'>" + "<img alt='I am Pic' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
 	    	       		"<td><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
 						"<td class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
 			        "</tr>";
@@ -240,6 +248,24 @@
 				
 				var info = document.getElementById("content-data");
 				info.innerHTML = content;
+				
+				//===上課日期的燈控=========
+				var ctt = $('.courseTeachTimeInfo');
+//	 			console.log(ctt.eq(0).val());
+				var cttlength = ctt.length;
+				
+				//第幾個courseTeachTime
+				for(var j=0; j < cttlength; j++){
+					var cttValue = ctt.eq(j).text();
+					
+					//第j個courseTeachTime的第z個星期是否有上課
+					for(var z=0;z<7;z++){
+					var onOrOff = cttValue.substr(z,1);
+						if(onOrOff==1){
+							ctt.eq(j).siblings('.courseTeachTimeBoxGroup').find('button').eq(z).addClass('active');
+						}
+					}
+				}
 		
 				//=========上下架的燈控=========
 				var onlist = $(".con");
@@ -314,15 +340,14 @@
 		}
 	
 	var file=e.target.files[0];
-	console.log($('#coursePic'))
-	console.log(file)
 	var reader = new FileReader();
 	reader.readAsDataURL(file);
 	reader.onloadend=function(){
 	//轉換成Base64
 		data_64 = reader.result.substring(reader.result.indexOf(",")+1);
-// 		console.log(data_64)
-		$('#coursePic').val(data_64);
+		console.log(data_64)
+		
+		$('#coursePic').val(data_64); //==把base64塞在一個Input
 		
 		}
 	})	
@@ -366,21 +391,24 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.ClassStudentListBtnGroup').remove();
 		$('.main-title').text('班級資訊-ClassList')
+		
+
 	})
 	
 	
 	function findAllClassListGo(){
+		
 		//======Create ClassCode Select====================	
-	var contentSel="";		
-		contentSel += "<div class='classListSelDiv form-group row'>" +
-						"<div class='col-sm-2 courseGrade'>" +
-							"<label class='my-1 mr-2' for='inlineFormCustomSelectPref'>班級代碼</label>"+
-  								"<select class='classCodeSel custom-select my-1 mr-sm-2' id='inlineFormCustomSelectPref'>"+
+		var contentSel="";		
+			contentSel += "<div class='classListSelDiv form-group row'>" +
+							"<div class='col-sm-2 courseGrade'>" +
+								"<label class='my-1 mr-2' for='inlineFormCustomSelectPref'>班級代碼</label>"+
+	  								"<select class='classCodeSel custom-select my-1 mr-sm-2' id='inlineFormCustomSelectPref'>"+
 
-  								"</select>" +
-						"</div>";
-	$('#forSelect').html(contentSel);
-			//======End Of Create ClassCode Select==============	
+	  								"</select>" +
+							"</div>";
+		$('#forSelect').html(contentSel);
+				//======End Of Create ClassCode Select==============		
 	
 	
 	var xhr = new XMLHttpRequest();
@@ -445,7 +473,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].expertise + "-"+teacherList[j].name+"</option>";
 					}
 					else{
-						content += 	"<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
+						content += 	"<option value='"+ teacherList[j].id +"'>"+teacherList[j].expertise + "-"+ teacherList[j].name+"</option>";
 						}
 					}
 				
@@ -1367,37 +1395,28 @@ $(document).on('click','.updateCourseAjax',function(e){
         });
     });
 	
-	
-	
 //====================ClassList ClassCode Sel===============
 	$(document).on('change','.classCodeSel',function(){
+		console.log('qqqqqqqqqqqqq')
 		var classListId = $(this).val();
+		console.log(classListId)
+		
 		if(classListId==0){
 			findAllClassListGo()
 		}
 		
-		var xhrRoom = new XMLHttpRequest();
-		xhrRoom.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
-		xhrRoom.send();
-		
-		var xhrTeacher = new XMLHttpRequest();
-		xhrTeacher.open("GET", "<c:url value='/findAllTeacherAjax.controller' />", true);
-		xhrTeacher.send();
-		
-		var xhrSchool = new XMLHttpRequest();
-		xhrSchool.open("GET", "<c:url value='/findAllSchoolAjax.controller' />", true);
-		xhrSchool.send();
-		
+// 		var xhrRoom = new XMLHttpRequest();
+// 		var xhrTeacher = new XMLHttpRequest();
+// 		var xhrSchool = new XMLHttpRequest();
 		var xhrClassList = new XMLHttpRequest();
-		xhrClassList.open("GET", "<c:url value='/findClassListByIdAjax.controller?classListId="+ classListId +"' />", true);
-		xhrClassList.send();
 
-		
 		xhrClassList.onreadystatechange = function() {
-		if (xhrClassList.readyState == 4 && xhrClassList.status == 200 &&
-			xhrRoom.readyState == 4 && xhrRoom.status == 200 &&
-			xhrTeacher.readyState == 4 && xhrTeacher.status == 200 &&
-			xhrSchool.readyState == 4 && xhrSchool.status == 200) {
+		if (xhrClassList.readyState == 4 && xhrClassList.status == 200
+// 				&&
+// 			xhrRoom.readyState == 4 && xhrRoom.status == 200 &&
+// 			xhrTeacher.readyState == 4 && xhrTeacher.status == 200 &&
+// 			xhrSchool.readyState == 4 && xhrSchool.status == 200
+			) {
 			var content0 = "";
 			content0 += 
 			"<tr>" +
@@ -1417,53 +1436,57 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"</tr>";
 			
 			var oneClassList = JSON.parse(xhrClassList.responseText);
-			var roomList = JSON.parse(xhrRoom.responseText);
-			var teacherList = JSON.parse(xhrTeacher.responseText);
-			var schoolList = JSON.parse(xhrSchool.responseText);
+// 			var roomList = JSON.parse(xhrRoom.responseText);
+// 			var teacherList = JSON.parse(xhrTeacher.responseText);
+// 			var schoolList = JSON.parse(xhrSchool.responseText);
 			
 			var content = "";
 			content += 
 	
 				"<tr class='accordion-toggle'>" +	
-				"<td><button data-toggle='collapse' data-target='#demo' class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></span></button></td>"+
+				"<td><button data-toggle='collapse' data-target='#demo' class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></button></td>"+
     	       	"<td class='classListId'>" + oneClassList.id + "</td>" +
     	       	"<td>" + oneClassList.classCode+ "</td>" +
     	       	
-    	       	
-    	    	"<td>" + "<select class='teacherDataSelect'>";
-				for(var j=0;j<teacherList.length;j++){
-					if(oneClassList.teacher.id==teacherList[j].id){	
-	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].name+"</option>";
-					}else{
-						content += 	"<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
-					}
-					}
-	    		content +=  "</select>"+
-    	    	"</td>" +
+    	       	"<td>" + oneClassList.teacher.expertise+"-"+ oneClassList.teacher.name+ "</td>" +
+//     	    	"<td>" + "<select class='teacherDataSelect'>";
+// 				for(var j=0;j<teacherList.length;j++){
+// 					if(oneClassList.teacher.id==teacherList[j].id){	
+// 	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].name+"</option>";
+// 					}else{
+// 						content +="<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
+// 					}
+// 					}
+// 	    		content +=  "</select>"+
+//     	    	"</td>" +
     	    	
-    	    	"<td>" + "<select class='schoolDataSelect'>";
-				for(var j=0;j<schoolList.length;j++){
-					if(oneClassList.school.id==schoolList[j].id){	
-	    		content += 	"<option value='"+ schoolList[j].id +"'selected>"+schoolList[j].name+"</option>";
-					}		
-					else{
-						content += 	"<option value='"+ schoolList[j].id +">"+schoolList[j].name+"</option>";
-					}
-					}
-	    		content +=  "</select>"+
-    	    	"</td>" +
     	    	
-    	    	"<td>" + "<select class='roomDataSelect'>";
-    	    	for(var j=0;j<roomList.length;j++){
-    	    		if(oneClassList.room.id==roomList[j].id){	
-    	    		content += 	"<option value='"+ roomList[j].id +"'selected>"+roomList[j].roomName+"</option>";
-    	    		}		
-    	    		else{
-    	    			content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
-    	    		}
-    	    		}
-    	    	content +=  "</select>"+
-    	    	"</td>" +
+    	    	"<td>" + oneClassList.school.name+ "</td>" +
+//     	    	"<td>" + "<select class='schoolDataSelect'>";
+// 				for(var j=0;j<schoolList.length;j++){
+// 					if(oneClassList.school.id==schoolList[j].id){	
+// 	    		content += 	"<option value='"+ schoolList[j].id +"' selected>"+schoolList[j].name+"</option>";
+// 					}		
+// 					else{
+// 						content +="<option value='"+ schoolList[j].id +">"+schoolList[j].name+"</option>";
+// 					}
+// 					}
+// 	    		content +=  "</select>"+
+//     	    	"</td>" +
+    	    	
+    	    	
+    	    	"<td>" + oneClassList.room.roomName+ "</td>" +
+//     	    	"<td>" + "<select class='roomDataSelect'>";
+//     	    	for(var j=0;j<roomList.length;j++){
+//     	    		if(oneClassList.room.id==roomList[j].id){	
+//     	    		content +="<option value='"+ roomList[j].id +"' selected>"+roomList[j].roomName+"</option>";
+//     	    		}		
+//     	    		else{
+//     	    			content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
+//     	    		}
+//     	    		}
+//     	    	content +=  "</select>"+
+//     	    	"</td>" +
     	    	
     	    	"<td class='course-id' style='display:none'>" + oneClassList.course.id +"</td>" +
     	    	"<td>" + oneClassList.course.courseCategory +"班"+"</td>" +
@@ -1522,6 +1545,8 @@ $(document).on('click','.updateCourseAjax',function(e){
     			
     			var info = document.getElementById("content-data");
     			info.innerHTML = content;
+    			
+		}// End Of Finish Ajax
     			//=========各項下拉式改值============
     			$('.roomDataSelect').change(function(){
     				var roomId = $(this).find('option:selected').val();
@@ -1555,8 +1580,17 @@ $(document).on('click','.updateCourseAjax',function(e){
     			})
     			
     			
-		}
+		
 	}
+// 		xhrRoom.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
+// 		xhrRoom.send();
+// 		xhrTeacher.open("GET", "<c:url value='/findAllTeacherAjax.controller' />", true);
+// 		xhrTeacher.send();
+// 		xhrSchool.open("GET", "<c:url value='/findAllSchoolAjax.controller' />", true);
+// 		xhrSchool.send();
+		xhrClassList.open("GET", "<c:url value='/findClassListByIdAjax.controller?classListId="+ classListId +"' />", true);
+		xhrClassList.send();
+		
 	})
 	
 	
