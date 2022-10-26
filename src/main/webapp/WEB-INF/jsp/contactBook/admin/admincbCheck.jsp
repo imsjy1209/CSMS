@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿查詢</h4>
+	<h4>【Admin】聯絡簿查詢</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -72,10 +72,10 @@ var pvClsListId =  ${classListId};
 var pvCbId =  ${cbId};
 // console.log(pvCbId);
 
-/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「回上一頁」按鈕 (4)帶入聯絡簿簽名紀錄資料 */
+/* 視窗載入事件：(1)帶入【Admin】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「回上一頁」按鈕 (4)帶入聯絡簿簽名紀錄資料 */
 window.onload = function(){ 
 	
-	// (1) 帶入【校方】選定的課程相關資訊
+	// (1) 帶入【Admin】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+pvClsListId, true);
     xhr1.send();
@@ -168,7 +168,7 @@ window.onload = function(){
     		$('#cbListEdit').append(cbListObj);
     		
     		// (3)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Ad_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
     }

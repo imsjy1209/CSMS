@@ -103,7 +103,7 @@ window.onload = function(){
     
     // (2)帶入select的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "<c:url value='/schoolClickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
+    xhr2.open("GET", "<c:url value='/clickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
@@ -133,7 +133,7 @@ window.onload = function(){
     		if(courseContent != null){
     			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -143,7 +143,7 @@ window.onload = function(){
     		if(homework != null){
     			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -153,7 +153,7 @@ window.onload = function(){
     		if(quizNotice != null){
     			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -176,7 +176,8 @@ window.onload = function(){
 
 function cancelConfirm() {
 	Swal.fire({
-		title: '確定要刪除本件？',
+		title: '確定要取消本件？',
+		text: '取消後本件即無法繼續編輯',
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',

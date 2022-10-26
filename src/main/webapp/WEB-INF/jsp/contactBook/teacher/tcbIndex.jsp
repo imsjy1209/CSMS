@@ -21,22 +21,9 @@
   	</div>
   	<br>
   	<br>
-<!-- 	<div> -->
-<!-- 		<label for="exampleFormControlSelect1">建立聯絡簿：</label> -->
-<!-- 		<table id="add_cbList" class="table table-borderless" style="text-align:center"> -->
-<!-- 			<tr> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder=""/></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder="課程內容" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="hw" name="hw" placeholder="回家作業" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="quiz" name="quiz" placeholder="考試通知" /></td> -->
-<!-- 			  <td><a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">新增</a></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
 	<div id="btn-area">
 		<button id="btn-init" type="button" class="btn btn-secondary" disabled>建立聯絡簿</button>
 	</div>
-
 	<br>
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">

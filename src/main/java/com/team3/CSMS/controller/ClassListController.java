@@ -61,7 +61,6 @@ public class ClassListController {
 		public @ResponseBody ClassList findClassListByIdAjax(@RequestParam(name="classListId")Integer classListId) {
 			ClassList oneClassList = classListService.findById(classListId);
 			 return oneClassList;
-		}
-		
+		}		
 
 }

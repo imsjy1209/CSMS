@@ -8,12 +8,10 @@
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
  <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿首頁
-</h4>
+	<h4>【Admin】聯絡簿首頁</h4>
 	<br>
 	<div class="form-group">
   		<label for="exampleFormControlSelect1">選擇課程：</label>
@@ -23,11 +21,14 @@
   	</div>
   	<br>
   	<br>
+	<div id="btn-area">
+		<button id="btn-init" type="button" class="btn btn-secondary" disabled>建立聯絡簿</button>
+	</div>
 	<br>
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">
   			<thead  id="cbList-title">
-    			<tr>
+    			<tr> <!-- style="display: none -->
 				     <th class="table-info" scope="col">編號</th>
 				     <th class="table-info" scope="col">建立日期</th>
 				     <th class="table-info" scope="col">課程代號</th>
@@ -40,13 +41,10 @@
 				     <th class="table-info" scope="col">操作</th>
 			    </tr>
 			</thead>
-
 		</table>
   	</div>
   	
 </div>
-	
-
 
 <!-- CDN -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -71,24 +69,28 @@
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
-/* 視窗載入事件：帶入【校方】課程選單 */
-window.onload = function(){ 
+/* 視窗載入事件：帶入【Admin】課程選單、聯絡簿清單 */
+window.onload = function() { 
+	// (1) 列出課程選單
 	var xhr1 = new XMLHttpRequest();
-    xhr1.open("GET", "<c:url value='/allSchoolClassList.json'/>", true);
+    xhr1.open("GET", "<c:url value='/allAdminClassList.json'/>", true);
     xhr1.send();
     xhr1.onreadystatechange = function(){
     	if (xhr1.readyState == 4 && xhr1.status == 200) {
     		var clsInfoList = JSON.parse(xhr1.responseText);
+    		// console.log(clsInfoList);
 	        if (clsInfoList.length > 0){
 		        for (let i = 0; i < clsInfoList.length; i++) {
-		        	var clslistId = clsInfoList[i].classListId;
+		        	
+		        	var clslistId = clsInfoList[i].id;
 		        	var clscode = clsInfoList[i].classCode;
-		        	var category = clsInfoList[i].courseCategory;
-		        	var subject = clsInfoList[i].courseSubject;
-		        	var grade = clsInfoList[i].courseGrade;
-		        	var level = clsInfoList[i].courseClass;
-		        	var itemStr = '【'+clscode+'】&nbsp&nbsp&nbsp'+category+'班&nbsp&nbsp-&nbsp&nbsp'+subject+'&nbsp&nbsp-&nbsp&nbsp'+grade+level+'年級';
-		        	var optObj = '<option value=\"'+clslistId+'\">'+itemStr+'</option>';
+		        	var category = clsInfoList[i].course.courseCategory;
+		        	var subject = clsInfoList[i].course.courseSubject;
+		        	var grade = clsInfoList[i].course.courseGrade;
+		        	var level = clsInfoList[i].course.courseClass;
+		        	
+		        	var itemStr1 = '【'+clscode+'】&nbsp&nbsp&nbsp'+category+'班&nbsp&nbsp-&nbsp&nbsp'+subject+'&nbsp&nbsp-&nbsp&nbsp'+grade+level+'年級';
+		        	var optObj = '<option value=\"'+clslistId+'\">'+itemStr1+'</option>';
 		        	$('#classInfoList').append(optObj);
 	        	}
 	        } else {
@@ -99,22 +101,29 @@ window.onload = function(){
     }
 } 
 
-/* 選單change事件：依選到的項目(classListId)帶出對應的聯絡簿清單 */	
-$("#classInfoList").on("change",function(){
+/* 選單change事件 */	
+$("#classInfoList").change(function(){
 	
 	// 抓選到的option的value屬性值(classListId=?)
 	var selectedClassListId = $(this).prop("value"); 
-	// console.log($(this).prop("value"));
+	console.log("selectedClassListId = "+ selectedClassListId);
+
+	// 新增enable的button、移除disable的button
+	var EnableBtnUrl = "<c:url value='/ContactBook/Ad_Create/"+selectedClassListId+"'/>";
+	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	$("#btn-area").append(EnableBtn); 
+	$("#btn-init").remove();
 	
-	// 找出對應contactBookList
+	// 依選到的項目(classListId)帶出對應的聯絡簿清單
 	var xhr2 = new XMLHttpRequest();
-	xhr2.open("GET","<c:url value='/schoolContactBookList.json'/>"+"?classListId="+selectedClassListId,true); 
-	xhr2.send();                    
-  	xhr2.onreadystatechange = function(){
-  		if(xhr2.readyState == 4 && xhr2.status == 200){
-  			var cbList = JSON.parse(xhr2.responseText);
-  			
-  			// 先清除還在畫面上的聯絡簿表格
+	xhr2.open("GET","<c:url value='/getAdminContactBookByclassListId.json'/>"+"?classListId="+selectedClassListId,true); 
+	xhr2.send();    
+	xhr2.onreadystatechange = function(){
+		if(xhr2.readyState == 4 && xhr2.status == 200){
+			var cbList = JSON.parse(xhr2.responseText);
+			console.log(cbList);
+			
+			// 先清除還在畫面上的聯絡簿表格
   			$('#cbList tbody tr td').remove(); 
   			
   			// 再加入新篩選的聯絡簿表格
@@ -152,16 +161,22 @@ $("#classInfoList").on("change",function(){
 		  	    	}
 		  	    	
 		  	   		// cb_content +='<td>' + cbList[i].phase + '</td>';
-					if (cbList[i].phase == 2) {
-						cb_content +='<td style="color:red">待審核</td>';
+		  	   		if (cbList[i].phase == 1) {
+						cb_content +='<td style="color:red">編輯中</td>';
 						cb_content +='<td>';
-						cb_content +="<a href='/CSMS/ContactBook/Sc_Edit/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bxs-edit bx-tada' style='font-size:28px'></i></a>";
+						cb_content +="<a href='/CSMS/ContactBook/Ad_Edit/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bxs-edit bx-tada' style='font-size:28px'></i></a>";
+						// cb_content +="<i class='bx bxs-trash' style='font-size:28px' ></i>";
+						cb_content +='</td>';
+					} else if (cbList[i].phase == 2) {
+						cb_content +='<td style="color:blue">審核中</td>';
+						cb_content +='<td>';
+						cb_content +="<a href='/CSMS/ContactBook/Ad_Edit/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bxs-edit bx-tada' style='font-size:28px'></i></a>";
 						// cb_content +="<i class='bx bxs-trash' style='font-size:28px' ></i>";
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 3) {
 						cb_content +='<td>已送出</td>';
 						cb_content +='<td>';
-						cb_content +="<a href='/CSMS/ContactBook/Sc_Check/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bx-spreadsheet' style='font-size:28px'></i></a>";
+						cb_content +="<a href='/CSMS/ContactBook/Ad_Check/"+selectedClassListId+"/"+cbList[i].cb_id+"'><i class='bx bx-spreadsheet' style='font-size:28px'></i></a>";
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 4) {
 						cb_content +='<td>已取消</td>';
@@ -183,9 +198,9 @@ $("#classInfoList").on("change",function(){
   	}
 });
 
-// cb_content +='<a href="#" type="button" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="false">刪除</a>';
-//=======================版面動作=======================
 
+//=======================版面動作=======================
+	
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -193,6 +208,5 @@ $(document).ready(function () {
 });
 
 </script>
-
 </body>
 </html>

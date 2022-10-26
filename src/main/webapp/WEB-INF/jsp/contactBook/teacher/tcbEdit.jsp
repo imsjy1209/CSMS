@@ -26,8 +26,6 @@
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
 			<!-- 聯絡簿按鈕放置處 -->
-<!-- 			<a href="/ContactBook/T_Update/" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a> -->
-<!-- 			<a href="/ContactBook/T_GoPrevPage?cbId=cbId" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a> -->
 		</div>
 	</form>
 </div>
@@ -51,12 +49,45 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+		
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
 /* 取得路徑變數@PathVariable("classListId") */ 
 var clsListId =  ${classListId};
 // console.log(clsListId);
+
+$("#sidebar").find("a").on("click",function(event){
+	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
+	//SweetAlert本來有但後來故障了@@
+	// 	Swal.fire({
+		//  title: '案件尚未送出',
+		//  text: '如確認欲離開，請點「回上一頁」按鈕',
+		//  icon: 'warning',
+		//  showCancelButton: true,
+		//  confirmButtonColor: '#3085d6,
+		//  confirmButtonText: '確認'
+	// 	})();
+	
+});
+
+
+$("#content>nav").find("a").on("click",function(){
+	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
+	//SweetAlert本來有但後來故障了@@
+	// 	Swal.fire({
+		//  title: '案件尚未送出',
+		//  text: '如確認欲離開，請點「回上一頁」按鈕',
+		//  icon: 'warning',
+		//  showCancelButton: true,
+		//  confirmButtonColor: '#3085d6,
+		//  confirmButtonText: '確認'
+	// 	})();
+})
+
 
 /* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
@@ -127,7 +158,7 @@ window.onload = function(){
     		if(courseContent != null){
     			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -137,7 +168,7 @@ window.onload = function(){
     		if(homework != null){
     			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
@@ -147,17 +178,14 @@ window.onload = function(){
     		if(quizNotice != null){
     			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" placeholder="請填寫" /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		$('#cbListEdit').append(cbListObj);
     		
     		// (3)帶入「確認送出」按鈕
-//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/"+clsListId+"/"+courseContent+"/"+homework+"/"+quizNotice+"/"+cbId+"'/>";
-//     		var teacherUpdateBtnUrl = "<c:url value='/ContactBook/T_Update/" + clsListId + "'/>";
 			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
-//     		UpdateBtnObj = '<a href="'+teacherUpdateBtnUrl+'" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">確認送出</a>'
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕

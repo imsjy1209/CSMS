@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿修改</h4>
+	<h4>【Admin】聯絡簿修改</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -45,7 +45,7 @@
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
 			<button id="btn-init" type="button" class="btn btn-secondary" disabled>確認送出</button>&nbsp&nbsp
-			<a href="${contextRoot}/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>
+			<a href="${contextRoot}/ContactBook/Ad_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>
 		</div>
 	</div>
 </div>

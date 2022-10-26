@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿查詢</h4>
+	<h4>【Admin】聯絡簿編輯</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -19,29 +19,15 @@
 	</div>
 	<br>
 
-	<div id="cbList-area">
+	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/Ad_Update/${classListId}">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
-			<!-- 聯絡簿內容放置處 -->
-		</table>
-		<br>
-		<table id="cbsListEdit" class="table table-bordered" style="text-align:center">
-			<thead  id="cbsList-title">
-				<tr>
-				     <th class="table-success" scope="col">紀錄編號</th>
-				     <th class="table-success" scope="col">座號</th>
-				     <th class="table-success" scope="col">學生姓名</th>
-				     <th class="table-success" scope="col">家長姓名</th>
-				     <th class="table-success" scope="col">關係</th>
-				     <th class="table-success" scope="col">家長簽名</th>
-			    </tr>
-			</thead>
-			<!-- 聯絡簿簽名紀錄內容放置處 -->
+			<!-- insert的聯絡簿內容放置處 -->
 		</table>
 		<br><br>
 		<div id="cbListBtnArea" style="text-align:center">
 			<!-- 聯絡簿按鈕放置處 -->
 		</div>
-	</div>
+	</form>
 </div>
 
 
@@ -63,27 +49,29 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+        
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
-/* 取得路徑變數@PathVariable("classListId")、("cbId") */ 
-var pvClsListId =  ${classListId};
-// console.log(pvClsListId);
-var pvCbId =  ${cbId};
-// console.log(pvCbId);
+/* 取得路徑變數@PathVariable("classListId") */ 
+var clsListId =  ${classListId};
+// console.log(clsListId);
 
-/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「回上一頁」按鈕 (4)帶入聯絡簿簽名紀錄資料 */
+/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕帶入 */
 window.onload = function(){ 
 	
 	// (1) 帶入【校方】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
-    xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+pvClsListId, true);
+    xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
     xhr1.send();
     xhr1.onreadystatechange = function(){
     	if (xhr1.readyState == 4 && xhr1.status == 200) {
     		
     		var clsInfoList = JSON.parse(xhr1.responseText);
-    		// console.log(clsInfoList); // 得到ClassList物件
+    		console.log(clsInfoList); // 得到ClassList物件
     		var clscode = clsInfoList.classCode;
         	var category = clsInfoList.course.courseCategory;
         	var subject = clsInfoList.course.courseSubject;
@@ -111,13 +99,13 @@ window.onload = function(){
     
     // (2)帶入select的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "<c:url value='/clickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
+	xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
     		
     		var cbList = JSON.parse(xhr2.responseText);  
-     		// console.log(cbList); // 得到ContactBook物件
+     		console.log(cbList); // 得到ContactBookList物件
     		var cbId = cbList.id;
     		console.log(cbId);
         	var createAt = cbList.create_at;
@@ -137,76 +125,46 @@ window.onload = function(){
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">課程內容</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
     		if(courseContent != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="' + courseContent + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" value="" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="courseContent" name="courseContent" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">回家作業</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
     		if(homework != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="' + homework + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" value="" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="homework" name="homework" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		cbListObj += '<tr>';
     		cbListObj += '<th class="table-info" scope="col" style="text-align:center">考試通知</th>';
-    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
+    		// cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
     		if(quizNotice != null){
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="' + quizNotice + '" /></td>';
     		} else {
-    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" value="" readonly /></td>';
+    			cbListObj += '<td><input type="text" class="form-control" id="quizNotice" name="quizNotice" maxlength="50" placeholder="請填寫" /></td>';
     		}
     		cbListObj += '</tr>';
     		
     		$('#cbListEdit').append(cbListObj);
     		
-    		// (3)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		// (3)帶入「確認送出」按鈕
+			UpdateBtnObj = '<input type="submit" class="btn btn-danger" value="確認送出" />&nbsp&nbsp';
+    		$('#cbListBtnArea').append(UpdateBtnObj);
+    		
+    		// (4)帶入「回上一頁」按鈕
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Ad_D_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
     }
-    
- 	// (4)帶入聯絡簿簽名紀錄資料
-	var xhr3 = new XMLHttpRequest();
-    xhr3.open("GET", "<c:url value='/oneContactBookEachParentSign.json'/>"+"?cbId="+pvCbId, true);
-    xhr3.send();
-    xhr3.onreadystatechange = function(){
-    	if (xhr3.readyState == 4 && xhr3.status == 200) {
-    		
-    		var cbsList = JSON.parse(xhr3.responseText);  
-    		console.log(cbsList); // 得到ContactBookSign物件
-    		
-    		cbsListObj ='<tbody id="cbsList-data">';
-    		for (var i = 0 ; i < cbsList.length ; i++) {
-    			cbsListObj +='<tr>';
-    			cbsListObj +='<td>' + cbsList[i].id + '</td>';
-    			cbsListObj +='<td>' + cbsList[i].student.classStudentLists[0].studentNo + '</td>';
-    			cbsListObj +='<td>' + cbsList[i].student.name + '</td>';
-    			cbsListObj +='<td>' + cbsList[i].student.parent.name + '</td>';
-    			cbsListObj +='<td>' + cbsList[i].student.relationship + '</td>';
-    			
-    			// cbsListObj +='<td>' + cbsList[i].parentSign + '</td>';
-    			if (cbsList[i].parentSign == 0) {
-    				cbsListObj +='<td style="color:red">未簽名</td>';
-    			} else {
-    				cbsListObj +='<td>已簽名</td>';
-    			}
-    			
-    			cbsListObj +='</tr>';
-    		}
-    		cbsListObj +='</tbody>';
-    		$('#cbsListEdit').append(cbsListObj);
-    	}
-    }
 }
-
 
 //=======================版面動作=======================
 
