@@ -72,7 +72,15 @@ public class CourseController {
 			Course courseForUpdataOnOrOff = oneCourse.get();
 			courseForUpdataOnOrOff.setCourseOnOff(onOrOff);
 			courseService.insertCourse(courseForUpdataOnOrOff);
-		}	
+		}
+		//更改Course授課日期資料
+		@GetMapping("/updateCourseTeachTime.controller")
+		public @ResponseBody void updateCourseTeachTime(@RequestParam(name="id") Integer id,@RequestParam(name="teachTime") String teachTime, Model model) {
+			Optional<Course> oneCourse = courseService.findCourseById(id);
+			Course courseForUpdataOnOrOff = oneCourse.get();
+			courseForUpdataOnOrOff.setCourseTeachTime(teachTime);
+			courseService.insertCourse(courseForUpdataOnOrOff);
+		}		
 	
 	
 	//更改Course資料1
@@ -140,6 +148,8 @@ public class CourseController {
 				
 				@PostMapping("/updateCourseDataAjax.controller")
 				public @ResponseBody void updateCourseDataAjax(Course oneCourse){
+					System.out.println(oneCourse.getStartDate());
+					System.out.println(oneCourse.getEndDate());
 						courseService.insertCourse(oneCourse);
 						
 				}	

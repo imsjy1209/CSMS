@@ -20,6 +20,10 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 	rel='stylesheet'>
 	
+<!-- 【Sweet Alert】 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js" integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+	
+	
 <!-- <link rel="stylesheet" -->
 <!-- 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" -->
 <!-- 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" -->
@@ -46,7 +50,7 @@ padding-right:15px!important;
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
       </div>
@@ -165,17 +169,17 @@ padding-right:15px!important;
 		</div>
 </footer>			
 	
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
- integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-  crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
+<!--  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!--   crossorigin="anonymous"></script> -->
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
- integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-  crossorigin="anonymous"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
+<!--  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
+<!--   crossorigin="anonymous"></script> -->
   
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
- integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-  crossorigin="anonymous"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
+<!--  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
+<!--   crossorigin="anonymous"></script> -->
 	
 
 <!--####################################################################### -->				
@@ -183,6 +187,9 @@ padding-right:15px!important;
 <!-- 	<script src="js/main.js"></script> -->
 
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 	
 <script type="text/javascript">
@@ -698,11 +705,18 @@ $(".shop-content").on('click','.add-cart',function(){
 	var price = $(this).siblings(".price").text();
 	var productImg = $(this).siblings(".product-img").attr("src");
 	
-	$(this).addClass('active');
+	
+	var thisClassVal = $(this).attr('class');
+	if(thisClassVal == 'bx bx-shopping-bag add-cart active'){
+	}
+	else{
 	var thisCourseMem = $(this).siblings('.course-member').text();
 	var keyVal = thisCourseMem.substr(5);
 	var newKeyVal = Number(keyVal)-1;
 	$(this).siblings('.course-member').text("尚餘人數:" + newKeyVal);
+	}
+	
+	$(this).addClass('active');
 	
 	addProductToCart(title,course_id, price, productImg);
     updatetotal();
@@ -784,11 +798,43 @@ function addProductToCart(title,course_id, price, productImg) {
 
 	for (var i = 0; i < $(".cart-product-title").length; i++) {
 	    if ($(".cart-product-title")[i].innerText == title) {
-	        alert('購物車中已有此商品');
+// 	        alert('購物車中已有此商品');
+
+//====購物車已有此商品的警示==========
+		Swal.fire({
+  		icon: 'warning',
+ 		title: 'Oops...',
+  		text: '購物車中已有此商品!',
+//   		footer: '<a href="">Why do I have this issue?</a>'
+		})
+//====End of購物車已有此商品的警示==========
+
 	        return;
 	    }
 	}
-	alert('已成功新增了一項課程到購物車')
+// 	alert('已成功新增了一項課程到購物車')
+	
+	//===新增成功alert======
+	const Toast = Swal.mixin({
+  	toast: true,
+  	position: 'top-end',
+  	showConfirmButton: false,
+  	timer: 1000,
+  	timerProgressBar: true,
+  	didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+ 	 }
+	})
+
+	Toast.fire({
+	  icon: 'success',
+ 	 title: '新增了一項課程到購物車'
+	})
+	//===End of 新增成功alert======
+		
+		
+	
 	var cartTotal = "";
 	var cartCount = $('.badge-pill').text();
 	cartTotal = Number(cartCount)+1

@@ -4,13 +4,22 @@
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> --%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<!-- 【Sweet Alert】 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js" integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 
 <jsp:include page="../framePage/sideBar.jsp"></jsp:include>
 
-<div class="modal fade bd-example-modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="bd-example-modal-xl modal-dialog modal-dialog-centered" role="document">
-    <div class="bd-example-modal-xl modal-content">
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
       <div class="modal-header">
+      
         <h5 class="modal-title" id="exampleModalCenterTitle">Course Edit</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
@@ -82,15 +91,14 @@
 		</div>
 		
         <div class="col-md-5">
-			<label for="startDate" class="form-label">開課日期</label> <input
-				type="text" name="startDate" class="form-control formSD" id="startDate"
-				value="">
+			<label for="startDate" class="form-label">開課日期</label>
+			<input type="text" name="startDate" class="form-control formSD datepicker" id="startDate" value="">
+<!-- 			<input type="text" class="form-control" name="date" id="date1" style='width:70%'> -->
 		</div>
 		
         <div class="col-md-5">
-			<label for="endDate" class="form-label">結課日期</label> <input
-				type="text" name="endDate" class="form-control formED" id="endDate"
-				value="">
+			<label for="endDate" class="form-label">結課日期</label>
+			<input type="text" name="endDate" class="form-control formED datepicker" id="endDate" value="">
 		</div>
 		
         <div class="col-md-4">
@@ -122,18 +130,12 @@
 		</div>
 	</form>
         
-        
-        
-        
       </div>
       <div class="modal-footer">
       </div>
     </div>
   </div>
 </div>
-
-
-
 		
 <!-- 	<div class="container">		 -->
 		<h3 class='main-title'>Main Info</h3>
@@ -171,15 +173,23 @@
 </body>    
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<!--   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     
 
-
 <script type="text/javascript">
 
-
+$(function() {
+	$(".datepicker").datepicker({
+// 		appendText : "(西元年-月-日)",
+		altField : "#datepicker",
+		altFormat : "yy-mm-dd",
+		dateFormat : "yy-mm-dd"
+	});
+});
+  
+    
 //======================Course=======================
 	$('#course-Btn').click(function(){
 		showAllCourse();
@@ -279,6 +289,60 @@
 						offlist.eq(i).addClass('active');
 					}
 				}
+				
+				//=========授課日期的變更===========
+				$('.teachBtn').click(function(){
+				var thisBtnClass = $(this).attr('class')
+				var nowId = $(this).parent().parent().siblings('#course-id').text();
+				var newTT="";
+				
+				if(thisBtnClass=='teachBtn active'){
+					$(this).removeClass('active')
+				}
+				
+				else{
+					$(this).addClass('active')
+				}
+				
+				var allBtn = $(this).parent().find('button')
+				allBtn.each(function(){
+					var eachTeachTimeBtnClass = $(this).attr('class')
+					if(eachTeachTimeBtnClass=='teachBtn active')
+						newTT+="1";
+					else
+						newTT+="0";
+				})
+					
+				console.log(newTT)
+				console.log(nowId)
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/updateCourseTeachTime.controller?id=" + nowId + "&teachTime=" + newTT + "' />", true);
+				xhr.send();
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
+				
+				})
+				
+				
+				
 				//=========上下架的變更=========
 				$(".con").click(function(){
 				var onOrOffVal = $(this).parent().siblings('.onOrOff-td').children().val();
@@ -292,6 +356,26 @@
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "<c:url value='/updateCourseDataOnOrOff.controller?id=" + nowId + "&onOrOff=1' />", true);
 					xhr.send();
+					
+					//===更改成功alert======
+					const Toast = Swal.mixin({
+				  	toast: true,
+				  	position: 'top-end',
+				  	showConfirmButton: false,
+				  	timer: 1000,
+				  	timerProgressBar: true,
+				  	didOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				 	 }
+					})
+
+					Toast.fire({
+					  icon: 'success',
+				 	 title: '已將此商品上架'
+					})
+					//===End of 更改成功alert======
+					
 				}
 				
 				})
@@ -307,6 +391,27 @@
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "<c:url value='/updateCourseDataOnOrOff.controller?id=" + nowId + "&onOrOff=0' />", true);
 					xhr.send();
+					
+					//===更改成功alert======
+					const Toast = Swal.mixin({
+				  	toast: true,
+				  	position: 'top-end',
+				  	showConfirmButton: false,
+				  	timer: 1000,
+				  	timerProgressBar: true,
+				  	didOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				 	 }
+					})
+
+					Toast.fire({
+					  icon: 'success',
+				 	 title: '已將此商品下架'
+					})
+					//===End of 更改成功alert======
+					
+					
 				}
 				})
 				
@@ -372,6 +477,26 @@ $(document).on('click','.updateCourseAjax',function(e){
 	        processData: false,
 	        success : function(data) 
 	        {
+	        	
+	    		//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已成功更新商品資訊'
+				})
+				//===End of 更改成功alert======
+					
 	            console.log(data);
 	        },error: function(data) 
 	        {
@@ -537,6 +662,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				
 				console.log('change Success')
 				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
+				
 			})
 			
 			$('.teacherDataSelect').change(function(){
@@ -546,6 +690,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				xhr.open("GET", "<c:url value='/updateClssListTeacherDataAjax.controller?classListId=" + classListId + "&teacherId=" + teacherId +"' />", true);
 				xhr.send();
 				console.log('change Success')
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
 			})
 			
 			$('.schoolDataSelect').change(function(){
@@ -555,6 +718,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				xhr.open("GET", "<c:url value='/updateClssListSchoolDataAjax.controller?classListId=" + classListId + "&schoolId=" + schoolId +"' />", true);
 				xhr.send();
 				console.log('change Success')
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
 			})
 			
 
@@ -578,6 +760,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 					var cslNewMem = $(this).parent();
 					$(this).remove();
 					cslNewMem.text(clMemVal);
+					
+					//===更改成功alert======
+					const Toast = Swal.mixin({
+				  	toast: true,
+				  	position: 'top-end',
+				  	showConfirmButton: false,
+				  	timer: 1000,
+				  	timerProgressBar: true,
+				  	didOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				 	 }
+					})
+
+					Toast.fire({
+					  icon: 'success',
+				 	 title: '已更改成功'
+					})
+					//===End of 更改成功alert======
 					
 				})
 				
@@ -814,6 +1015,26 @@ $(document).on('click','.updateCourseAjax',function(e){
 					xhr.open("GET", "<c:url value='/deleteOrderListByIdAjax.controller?orderListId="+orderListId+"' />", true);
 					xhr.send();
 					$(this).parent().remove();
+					
+					//===更改成功alert======
+					const Toast = Swal.mixin({
+				  	toast: true,
+				  	position: 'top-end',
+				  	showConfirmButton: false,
+				  	timer: 1000,
+				  	timerProgressBar: true,
+				  	didOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				 	 }
+					})
+
+					Toast.fire({
+					  icon: 'success',
+				 	 title: '已刪除成功'
+					})
+					//===End of 更改成功alert======
+					
 					}
 					else{
 						console.log('nothing happened')
@@ -978,6 +1199,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 						xhr.open("GET", "<c:url value='/deleteOrderListByIdAjax.controller?orderListId="+orderListId+"' />", true);
 						xhr.send();
 						$(this).parent().remove();
+						
+						//===更改成功alert======
+						const Toast = Swal.mixin({
+					  	toast: true,
+					  	position: 'top-end',
+					  	showConfirmButton: false,
+					  	timer: 1000,
+					  	timerProgressBar: true,
+					  	didOpen: (toast) => {
+					    toast.addEventListener('mouseenter', Swal.stopTimer)
+					    toast.addEventListener('mouseleave', Swal.resumeTimer)
+					 	 }
+						})
+
+						Toast.fire({
+						  icon: 'success',
+					 	 title: '已刪除成功'
+						})
+						//===End of 更改成功alert======
 						}
 						else{
 							console.log('nothing happened')
@@ -1101,6 +1341,26 @@ $(document).on('click','.updateCourseAjax',function(e){
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "<c:url value='/findClassStudentListByCourseIdAndClassListIdAjax.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
 		xhr.send();
+		
+		//===更改成功alert======
+		const Toast = Swal.mixin({
+	  	toast: true,
+	  	position: 'top-end',
+	  	showConfirmButton: false,
+	  	timer: 1000,
+	  	timerProgressBar: true,
+	  	didOpen: (toast) => {
+	    toast.addEventListener('mouseenter', Swal.stopTimer)
+	    toast.addEventListener('mouseleave', Swal.resumeTimer)
+	 	 }
+		})
+
+		Toast.fire({
+		  icon: 'success',
+	 	 title: '已排班成功'
+		})
+		//===End of 更改成功alert======
+		
 		}else{
 			console.log('nothing happened');
 		}
@@ -1121,6 +1381,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 		xhr.open("GET", "<c:url value='/findClassStudentListByClassListIdAndStudentId.controller?studentId=" + studentId + "&courseId=" + courseId + "&orderId=" + orderId +"' />", true);
 		xhr.send();
 		
+		//===更改成功alert======
+		const Toast = Swal.mixin({
+	  	toast: true,
+	  	position: 'top-end',
+	  	showConfirmButton: false,
+	  	timer: 1000,
+	  	timerProgressBar: true,
+	  	didOpen: (toast) => {
+	    toast.addEventListener('mouseenter', Swal.stopTimer)
+	    toast.addEventListener('mouseleave', Swal.resumeTimer)
+	 	 }
+		})
+
+		Toast.fire({
+		  icon: 'success',
+	 	 title: '移除排班成功'
+		})
+		//===End of 更改成功alert======
+		
 		}else{
 			console.log('nothing happened')
 			}
@@ -1136,6 +1415,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				xhr.open("GET", "<c:url value='/deleteOrderDetailByIdAjax.controller?id=" + oDidDel + "' />", true);
 				xhr.send();
 				$(this).parent().remove();
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已刪除成功'
+				})
+				//===End of 更改成功alert======
 				
 		 	} 
 		 	else{
@@ -1320,6 +1618,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				var cslStudentNoTd = $(this).parent();
 				$(this).remove();
 				cslStudentNoTd.text(newStuNo);
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更新'
+				})
+				//===End of 更改成功alert======
 			})
 		})
 	
@@ -1558,6 +1875,25 @@ $(document).on('click','.updateCourseAjax',function(e){
     				
     				console.log('change Success')
     				
+    				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
+    				
     			})
     			
     			
@@ -1568,6 +1904,25 @@ $(document).on('click','.updateCourseAjax',function(e){
     				xhr.open("GET", "<c:url value='/updateClssListTeacherDataAjax.controller?classListId=" + classListId + "&teacherId=" + teacherId +"' />", true);
     				xhr.send();
     				console.log('change Success')
+    				
+    				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
     			})
     			
     			$('.schoolDataSelect').change(function(){
@@ -1577,6 +1932,25 @@ $(document).on('click','.updateCourseAjax',function(e){
     				xhr.open("GET", "<c:url value='/updateClssListSchoolDataAjax.controller?classListId=" + classListId + "&schoolId=" + schoolId +"' />", true);
     				xhr.send();
     				console.log('change Success')
+    				
+    				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
     			})
     			
     			
@@ -1609,6 +1983,25 @@ $(document).on('click','.updateCourseAjax',function(e){
 				var xhr = new XMLHttpRequest();
 				xhr.open("GET", "<c:url value='/updateClassStudentListByIdAjax.controller?cslId=" + cslId +"&newStuNo=" + newStuNo + "' />", true);
 				xhr.send();
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+				//===End of 更改成功alert======
 		})
 	})
 	
@@ -1617,6 +2010,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		
 $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 	showAllCourse();
+// 	history.go(0);
 	console.log('7777777')
 })
 	$(document).on('click','.courseEditBtn',function(){
