@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team3.CSMS.model.Activity;
 import com.team3.CSMS.model.Student;
+import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.ActivityService;
 import com.team3.CSMS.service.StudentService;
 
@@ -57,7 +58,8 @@ public class ActivityController {
 	
 	//==============ActivityController-Neil 1025====================
 	@GetMapping("/findAllActivity.controller")
-	public String findAllActivity(Model m) {
+	public String findAllActivity(@SessionAttribute("teacher") Teacher teacher,Model m) {
+		System.out.println(teacher.getName());
 		List<Activity> list = aService.findAll();
 		m.addAttribute("list", list);
 		return "cs_activity/allActivity";
