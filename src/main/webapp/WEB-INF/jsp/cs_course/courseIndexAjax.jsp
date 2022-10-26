@@ -654,12 +654,6 @@ function functionGoGo(){
 
 
 //===========照片點擊後放大===========
-// $(document).on('click','img',function(){
-// 	$(this).height(800);
-// 	$(this).width(700);
-// 	console.log("gottttttt uuuuuuuuuu")
-// })
-
 
 $(document).on('click','img',function(){
 	$('#exampleModalCenter').modal('show')

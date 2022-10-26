@@ -1,6 +1,8 @@
 package com.team3.CSMS.model;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,14 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -27,6 +29,26 @@ public class Users {
 	@Column(name="users_id")
 	private Integer id;
 	
+	// 學生外來
+	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
+	private Student student;
+	
+	// 老師外來
+	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
+	private Teacher teacher;
+
+	// 校方外蘭
+	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
+	private School school;
+
+	// 家長外來
+	@OneToOne(mappedBy = "users")
+	@JsonIgnoreProperties("users")
+	private Parent parent;
+
 	@Column(name="account" , columnDefinition = "varchar(15)",unique = true, nullable = false)
 	private String account;
 	
@@ -41,6 +63,10 @@ public class Users {
 	
 	@Column(name="closereason",columnDefinition = "nvarchar(10)")
 	private String closeReason;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="fk_groups_id")
+	private Groups groups;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -75,12 +101,27 @@ public class Users {
 		update_at = new Date();
 	}
 	
-	// 關聯
-	@ManyToOne
-	@JoinColumn(name = "fk_groups_id")
-	@JsonBackReference
-	private Groups groups;
+
+
+
 	
+	public Users(String account, String password, Groups groups) {
+		super();
+		this.account = account;
+		this.password = password;
+		this.groups = groups;
+	}
+
+	
+	
+	public Groups getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Groups groups) {
+		this.groups = groups;
+	}
+
 	// 建構子
 	public Users() {
 	}
@@ -150,12 +191,45 @@ public class Users {
 		this.update_at = update_at;
 	}
 
-	public Groups getGroups() {
-		return groups;
+//	public Groups getGroups() {
+//		return groups;
+//	}
+//
+//	public void setGroups(Groups groups) {
+//		this.groups = groups;
+//	}
+	
+	// 外來Getter&SetterS
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setGroups(Groups groups) {
-		this.groups = groups;
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
 	}
 	
 }

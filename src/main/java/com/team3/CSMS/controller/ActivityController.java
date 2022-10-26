@@ -32,7 +32,7 @@ import com.team3.CSMS.model.Student;
 import com.team3.CSMS.service.ActivityService;
 import com.team3.CSMS.service.StudentService;
 
-@SessionAttributes(names = { "student" })
+//@SessionAttributes(names = { "student" })
 @Controller
 public class ActivityController {
 
@@ -53,6 +53,92 @@ public class ActivityController {
 
 		return "getAllstu";
 	}
+	
+	
+	//==============ActivityController-Neil 1025====================
+	@GetMapping("/findAllActivity.controller")
+	public String findAllActivity(Model m) {
+		List<Activity> list = aService.findAll();
+		m.addAttribute("list", list);
+		return "cs_activity/allActivity";
+	}
+	
+	@GetMapping(path = "/createActivity.controller")
+	public String createActivity(Model m) {
+		Activity act = new Activity();
+		m.addAttribute("activity", act);
+		return "cs_activity/createActivity";
+		
+	}
+	
+	//===新增活動========
+	@PostMapping("/createActivityWithCkeditor.controller")
+	public String createActivityWithCkeditor(@RequestParam("name") String name, @RequestParam("place") String place,
+			@RequestParam("date") String strdate, @RequestParam("contentDetail") String content, Model m)
+			throws ParseException {
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(strdate);
+		Activity activity = new Activity(name, place, date, content);
+		aService.insert(activity);
+		m.addAttribute("id", activity.getId());
+		System.out.println("finished");
+		return "cs_activity/addActivityPhoto";
+	}
+	
+	//===上傳活動照片=======
+	@PostMapping("/createActivityPhoto.controller")
+	public String createActivityPhoto(@RequestParam(name = "id", required = true) int id,
+			@RequestParam(name = "file") MultipartFile file, RedirectAttributes redirectAttributes, Model m) {
+		Activity activity = aService.findById(id);
+		try {
+			activity.setPhoto_file(file.getBytes());
+			aService.insert(activity);
+			return "redirect:/findAllActivity.controller";
+		} catch (IOException e) {
+			e.printStackTrace();
+			m.addAttribute("id", id);
+			redirectAttributes.addFlashAttribute("errorMsg", "上傳失敗，請重新上傳");
+			return "cs_activity/addActivityPhoto";
+		}
+	}
+	
+	@GetMapping("updatePicPageController/{id}")
+	public String updatePicPageController(@PathVariable int id, Model m) {
+		m.addAttribute("id", id);
+		return "cs_activity/addActivityPhoto";
+	}
+	
+	
+	//===更改活動頁面======
+	@GetMapping("/updateActivityPage/{id}")
+	public String updateActivityPage(@PathVariable int id, Model m) {
+		Activity activity = aService.findById(id);
+		m.addAttribute("id", activity.getId());
+		m.addAttribute("removed", activity.getRemoved());
+		m.addAttribute("activity", activity);
+		return "cs_activity/updateActivity";
+	}
+	
+	//===更改活動內容資料Controller===
+	@PostMapping("/updateActivityWithCkeditor.controller")
+	public String updateActivityWithCkeditor(@RequestParam("id") int id, @RequestParam("name") String name,
+			@RequestParam("place") String place, @RequestParam("date") String strdate,
+			@RequestParam("contentForUpdate") String content, Model m) throws ParseException {
+
+		Activity activity = aService.findById(id);
+		activity.setName(name);
+		activity.setPlace(place);
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(strdate);
+		activity.setDate(date);
+		activity.setContent(content);
+		aService.insert(activity);
+		return "redirect:/findAllActivity.controller";
+	}
+	
+	
+	//==============End of ActivityController-Neil 1025===============
+	
 
 //	@PostMapping("/updateallstu")
 //	public String updateallstu() {

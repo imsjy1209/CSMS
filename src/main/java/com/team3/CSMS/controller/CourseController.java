@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,6 +133,16 @@ public class CourseController {
 				return "redirect:/courseAllPageBackAjax.page";
 			}
 		}
+		
+		
+		
+		//===================Update Course資料-Ajax==================
+				
+				@PostMapping("/updateCourseDataAjax.controller")
+				public @ResponseBody void updateCourseDataAjax(Course oneCourse){
+						courseService.insertCourse(oneCourse);
+						
+				}	
 	
 	//建立Course方案+ClassList
 	@PostMapping("courseDataCreate.controller")

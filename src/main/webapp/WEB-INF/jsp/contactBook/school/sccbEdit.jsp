@@ -6,6 +6,8 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+ <!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	
 <!-- CONTENT -->
 <div class="container">	

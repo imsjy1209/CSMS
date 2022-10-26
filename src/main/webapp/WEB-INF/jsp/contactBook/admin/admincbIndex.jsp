@@ -28,7 +28,7 @@
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">
   			<thead  id="cbList-title">
-    			<tr> <!-- style="display: none -->
+    			<tr> 
 				     <th class="table-info" scope="col">編號</th>
 				     <th class="table-info" scope="col">建立日期</th>
 				     <th class="table-info" scope="col">課程代號</th>
@@ -108,9 +108,10 @@ $("#classInfoList").change(function(){
 	var selectedClassListId = $(this).prop("value"); 
 	console.log("selectedClassListId = "+ selectedClassListId);
 
-	// 新增enable的button、移除disable的button
+	// 先移除在畫面上的按鈕，再新增enable的button、移除disable的button
 	var EnableBtnUrl = "<c:url value='/ContactBook/Ad_Create/"+selectedClassListId+"'/>";
-	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' id='removeMe' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	$("#removeMe").remove();
 	$("#btn-area").append(EnableBtn); 
 	$("#btn-init").remove();
 	

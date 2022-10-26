@@ -1,7 +1,12 @@
 package com.team3.CSMS.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.team3.CSMS.model.ClassList;
 
 @Controller
 public class PageController {
@@ -52,6 +57,12 @@ public class PageController {
 		return "cs_course/courseCreate";
 	}
 	
+	//商品Create頁面Ajax-Course(for後台)
+	@GetMapping("/courseCreateAjax.page")
+	public String courseCreateAjax() {
+		return "cs_course/courseCreateTest";
+	}
+	
 	//教室Create頁面-Room(for後台)
 	@GetMapping("/roomCreate.page")
 	public String roomCreatePage() {
@@ -74,6 +85,12 @@ public class PageController {
 	public String absentCheckPage(){
 		return "cs_absent/absentCheck";
 	}
+
+	
+	@GetMapping("/scoreAdd.page")
+	public String scoreAddPage() {
+		return "cs_score/scoreAdd";}
+
 	// 更改出缺勤
 	@GetMapping("/absentUpdate.page")
 	public String absentUpdatePage(){
@@ -89,7 +106,13 @@ public class PageController {
 	// 更改個人密碼用
 	@GetMapping("/passw0rdUpdate.page")
 	public String pwdUpdatePage(){
-		return "cd_updateProfile/updatePWD";
+		return "cs_updateProfile/updatePWD";
 	}
 
+	// 更改成員權限
+	@GetMapping("/userControl.page")
+	public String usersControl(){
+		return "cs_user/userUpdate";
+
+	}
 }

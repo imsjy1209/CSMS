@@ -35,6 +35,7 @@ public class Parent {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id", nullable = false)
+	@JsonIgnoreProperties("parent")
 	private Users users;
 
 	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
@@ -61,7 +62,8 @@ public class Parent {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date update_at; // insert data default getDate() ; update data default getDate()
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="parent", cascade = CascadeType.ALL)
+//	@JsonManagedReference
 	@JsonIgnoreProperties("parent")
 	private List<Student> student;
 
@@ -78,6 +80,15 @@ public class Parent {
 	@PreUpdate
 	public void onUpdate() {
 		update_at = new Date();
+	}
+	
+	public Parent(Users users, String name, String gender, String tel, String email) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.tel = tel;
+		this.email = email;
 	}
 
 	public Parent() {
@@ -147,5 +158,14 @@ public class Parent {
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
+
+	public List<Student> getStudent() {
+		return student;
+	}
+
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+
 
 }

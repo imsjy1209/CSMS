@@ -159,7 +159,8 @@
     $('.abs').change(function(){
     // get student id
     let absentid=$(this).parent().siblings('.absid ').text();
-    let absOrNot=document.getElementById("abs").value;
+    let absOrNot=$(this).val();
+    console.log(absOrNot);
     let xhr3 = new XMLHttpRequest();
     // get the information from select value
     xhr3.open("GET","<c:url value='/updateStudentOrNotByID'/>"+"?absid="+absentid+"&absOrNot="+absOrNot,true); 

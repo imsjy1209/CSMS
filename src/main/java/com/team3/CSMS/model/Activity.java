@@ -59,7 +59,7 @@ public class Activity {
 	@Column(name = "added", columnDefinition = "datetime")
 	private Date added;
 	
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(name="student_activity",
 	joinColumns = {@JoinColumn(name="fk_act_id",referencedColumnName = "activity_id")},
 	inverseJoinColumns= {@JoinColumn(name="fk_stu_id",referencedColumnName="student_id")})

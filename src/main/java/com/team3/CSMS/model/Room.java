@@ -61,7 +61,4 @@ public class Room {
 		this.roomSize = roomSize;
 	}
 
-	
-	
-	
 }

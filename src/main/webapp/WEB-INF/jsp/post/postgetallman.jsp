@@ -7,10 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href='fullcalendar/main.css' rel='stylesheet' />
-<script src='fullcalendar/main.js'></script>
-<script src='fullcalendar/locales-all.js'></script>
-<script src='fullcalendar/moment.js'></script>
+<link href='../fullcalendar/main.css' rel='stylesheet' />
+<script src='../fullcalendar/main.js'></script>
+<script src='../fullcalendar/locales-all.js'></script>
+<script src='../fullcalendar/moment.js'></script>
 <title>Insert title here</title>
 <!--box icons-->
 
@@ -46,9 +46,7 @@ table {
 		<h2>公告管理</h2>
 		<br>
 		<div class="container" align="center">
-			<span id="button"><i class='bx bxs-calendar'
-				onclick='myFunction1()' style="font-size: 30px"></i></span>
-			<div id="a"></div>
+			
 			<br> <br>
 
 			<table border="1">

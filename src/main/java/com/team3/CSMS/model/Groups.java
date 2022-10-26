@@ -2,24 +2,20 @@ package com.team3.CSMS.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "groups")
@@ -61,10 +57,11 @@ public class Groups implements Serializable {
 		update_at = new Date();
 	}
 
-	// 關聯
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
-	@JsonManagedReference
-	private Set<Users> users;
+//	// 關聯
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
+////	@JsonManagedReference
+//	@JsonIgnoreProperties("groups")
+//	private Set<Users> users;
 	
 	// 移除Pages Model，刪除關聯部分
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groups", cascade = CascadeType.ALL)
@@ -108,13 +105,13 @@ public class Groups implements Serializable {
 		this.update_at = update_at;
 	}
 
-	public Set<Users> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<Users> users) {
-		this.users = users;
-	}
+//	public Set<Users> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<Users> users) {
+//		this.users = users;
+//	}
 
 //	public Set<Pages> getPages() {
 //		return pages;

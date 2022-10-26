@@ -109,7 +109,8 @@ $("#classInfoList").on("change",function(){
 	
 	// 新增enable的button、移除disable的button
 	var EnableBtnUrl = "<c:url value='/ContactBook/T_Edit/"+selectedClassListId+"'/>";
-	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' id='removeMe' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	$("#removeMe").remove();
 	$("#btn-area").append(EnableBtn); 
 	$("#btn-init").remove();
 	

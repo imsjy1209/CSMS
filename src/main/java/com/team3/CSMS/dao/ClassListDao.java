@@ -2,12 +2,10 @@ package com.team3.CSMS.dao;
 
 import java.util.List;
 
-// import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-// import com.team3.CSMS.dto.StudentListDto;
 import com.team3.CSMS.model.ClassList;
 
 public interface ClassListDao extends JpaRepository<ClassList, Integer>{
@@ -18,6 +16,27 @@ public interface ClassListDao extends JpaRepository<ClassList, Integer>{
 	"and course.endDate >= GETDATE() "+
     "and [cl].classList_id = :classCodeId ", nativeQuery = true)
     List<ClassList> getClassInfoByClassCodeId(@Param("classCodeId") Integer classCodeId);
+    
+    // 【Score】學生課堂資訊
+    @Query(value="SELECT * from [ClassList] as cl "+
+    "inner join [Room] as room on room.[room_id] = cl.[fk_room_id] "+
+    "inner join [Course] as course on course.[course_id] = [cl].[fk_course_id] "+
+    "inner join [ClassStudentList] as cls on cls.[fk_classlist_id] = cl.[classList_id] "+
+    "inner join [Student] as s on cls.[fk_student_id]=s.[student_id]"+
+    "WHERE cls.[fk_student_id] = (select [student_id] from Student where [fk_user_id] = :sessionUserId)"
+     , nativeQuery = true)
+    List<ClassList> getClassInfoByClassCodeIdAndStudentId(@Param("sessionUserId") Integer sessionUserId); 
+    
+    
+//	 【Score】家長查詢學生課堂資訊
+    @Query(value="SELECT * from [ClassList] as cl "+
+    "inner join [Room] as room on room.[room_id] = cl.[fk_room_id] "+
+    "inner join [Course] as course on course.[course_id] = [cl].[fk_course_id] "+
+    "inner join [ClassStudentList] as cls on cls.[fk_classlist_id] = cl.[classList_id] "+
+    "inner join [Student] as s on cls.[fk_student_id]=s.[student_id]"+
+    "WHERE s.[fk_parent_id] = (select [parent_id] from Parent where [fk_user_id] = :sessionUserId)"
+    , nativeQuery = true)
+    List<ClassList> getClassInfoByClassCodeIdAndParentId(@Param("sessionUserId") Integer sessionUserId); 
     
     /* 聯絡簿課程選單使用：列出該帳號可以選的所有課程 */
     // 老師課程選單By account

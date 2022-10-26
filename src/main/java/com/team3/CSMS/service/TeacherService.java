@@ -1,5 +1,6 @@
 package com.team3.CSMS.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.TeacherDao;
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Teacher;
 
 @Service
@@ -22,5 +24,12 @@ public class TeacherService {
 		return oneTeacher.get();
 		
 	}
-
+	
+	//find All Teacher--Neil 1023
+	public List<Teacher> findAllTeacher(){
+		return teacherDao.findAll();
+	}
+	public void insert(Teacher p) {
+		teacherDao.save(p);
+	}
 }

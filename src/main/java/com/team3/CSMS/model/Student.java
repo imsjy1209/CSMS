@@ -29,70 +29,61 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
-@Table(name="STUDENT")
+@Table(name = "STUDENT")
 public class Student {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="student_id")
+	@Column(name = "student_id")
 	private Integer id;
-	
-	//=================update By Neil-1015=================
+
+	// =================update By Neil-1015=================
 	@JsonIgnoreProperties("student")
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "student",cascade = CascadeType.ALL)
-	private List<ClassStudentList> classStudentLists ;
-	
-	//=================update By Neil-1015=================
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student",cascade = CascadeType.ALL)
-//	private Set<ClassStudentList> classStudentLists = new LinkedHashSet<ClassStudentList>();
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL)
+	private List<ClassStudentList> classStudentLists;
+
 	@JsonIgnore
 	@ManyToMany(mappedBy = "students")
-	private Set<Activity> activities=new HashSet<Activity>();
-	
+	private Set<Activity> activities = new HashSet<Activity>();
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_user_id")
+	@JoinColumn(name = "fk_user_id")
+	@JsonIgnoreProperties("student")
 	private Users users;
-	
-	@Column(name="name",columnDefinition = "nvarchar(15)", nullable = false)
+
+	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
 	private String name;
-	
-	@Column(name="gender",columnDefinition = "nvarchar(5)", nullable = false)
+
+	@Column(name = "gender", columnDefinition = "nvarchar(5)", nullable = false)
 	private String gender;
-	
-	@Column(name="schooltype",columnDefinition = "nvarchar(5)", nullable = false)
+
+	@Column(name = "schooltype", columnDefinition = "nvarchar(5)", nullable = false)
 	private String schoolType;
-	
-	@Column(name="schoolname",columnDefinition = "nvarchar(10)", nullable = false)
+
+	@Column(name = "schoolname", columnDefinition = "nvarchar(10)", nullable = false)
 	private String schoolName;
-	
-	@Column(name="grade",columnDefinition = "nvarchar(5)", nullable = false)
+
+	@Column(name = "grade", columnDefinition = "nvarchar(5)", nullable = false)
 	private String grade;
-	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="fk_parent_id")
-//	private Parent parent;
-	
-	 @ManyToOne
-	 @JoinColumn(name="fk_parent_id")
-	 @JsonIgnoreProperties("student")
-	 private Parent parent;
-	
-	@Column(name="relationship",columnDefinition = "varchar(10)", nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "fk_parent_id")
+	@JsonIgnoreProperties("student")
+	private Parent parent;
+
+	@Column(name = "relationship", columnDefinition = "varchar(10)", nullable = false)
 	private String relationship;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="create_at", columnDefinition = "datetime", nullable = false)
+	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date create_at; // insert data default getDate()
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="update_at", columnDefinition = "datetime", nullable = false)
+	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date update_at; // insert data default getDate() ; update data default getDate()
 
@@ -103,12 +94,25 @@ public class Student {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
 	}
-    
+
 	@PreUpdate
 	public void onUpdate() {
 		update_at = new Date();
+	}
+
+	public Student(Users users, String name, String gender, String schoolType, String schoolName, String grade,
+			Parent parent, String relationship) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.gender = gender;
+		this.schoolType = schoolType;
+		this.schoolName = schoolName;
+		this.grade = grade;
+		this.parent = parent;
+		this.relationship = relationship;
 	}
 
 	// 建構子
@@ -175,7 +179,7 @@ public class Student {
 	public String getGrade() {
 		return grade;
 	}
-	
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
@@ -208,7 +212,6 @@ public class Student {
 		return update_at;
 	}
 
-
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
 	}
@@ -228,7 +231,5 @@ public class Student {
 	public void setActivities(Set<Activity> activities) {
 		this.activities = activities;
 	}
-	
-	
 
 }

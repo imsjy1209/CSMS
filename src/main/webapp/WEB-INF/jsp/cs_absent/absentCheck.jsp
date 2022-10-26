@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
 <jsp:include page="../framePage/sideBar.jsp"></jsp:include>
 
 <div class="container">
@@ -155,6 +156,7 @@
                 data:AbsentListJsonString,
                 success:function(result){
                   // console.log(result)
+                  history.go(0)
                   console.log("okokok")
                 },
                 error:function(err){

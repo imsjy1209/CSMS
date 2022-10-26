@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "SCHOOL")
@@ -30,6 +31,7 @@ public class School {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id")
+	@JsonIgnoreProperties("school")
 	private Users users;
 
 	@Column(name = "name", columnDefinition = "nvarchar(15)", nullable = false)
@@ -72,7 +74,10 @@ public class School {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
+		if( status == null) {
+			status="在職";
+		}
 	}
     
 	@PreUpdate
@@ -80,6 +85,16 @@ public class School {
 		update_at = new Date();
 	}
 	
+	
+	public School(Users users, String name, String title, Date hiredate, Date resigndate) {
+		super();
+		this.users = users;
+		this.name = name;
+		this.title = title;
+		this.hiredate = hiredate;
+		this.resigndate = resigndate;
+	}
+
 	// 建構子
 	public School() {
 	}

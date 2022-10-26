@@ -8,6 +8,8 @@
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
  <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ <!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 	
 <!-- CONTENT -->

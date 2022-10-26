@@ -46,10 +46,24 @@ public class ClassStudentListController {
 			 model.addAttribute("cslList", cslList);
 			 return "cs_classStudentList/classStudentListIndex";
 		}
-	//找全部班級對應學生清單
+	//找全部班級對應學生清單-Ajax
 		@GetMapping(value = "/findAllClassStudentListAjax.controller",produces = {"application/json;charset=UTF-8"})
 		public @ResponseBody List<ClassStudentList> findAllClassStudentListAjax(Model model) {
 			 List<ClassStudentList> cslList = classStudentListService.findAllClassStudentList();
+			 return cslList;
+		}
+		
+		//找全部班級對應學生清單-Ajax OrderById Asc
+		@GetMapping(value = "/findAllByOrderByIdAscAjax.controller",produces = {"application/json;charset=UTF-8"})
+		public @ResponseBody List<ClassStudentList> findAllByOrderByIdAscAjax(Model model) {
+			 List<ClassStudentList> cslList = classStudentListService.findAllByOrderByIdAsc();
+			 return cslList;
+		}
+		
+		//找全部班級對應學生清單-Ajax OrderById Desc
+		@GetMapping(value = "/findAllByOrderByIdDescAjax.controller",produces = {"application/json;charset=UTF-8"})
+		public @ResponseBody List<ClassStudentList> findAllByOrderByIdDescAjax(Model model) {
+			 List<ClassStudentList> cslList = classStudentListService.findAllByOrderByIdDesc();
 			 return cslList;
 		}
 		

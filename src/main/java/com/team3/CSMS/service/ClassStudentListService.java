@@ -22,11 +22,11 @@ public class ClassStudentListService {
     
     //找到學生清單
     public List<StudentListDto> getStudentListByClassCodeId(Integer classCodeId){
-        if(classStudentListDao==null){
-            System.out.println("i am null");
-        }else {
-            System.out.println("im not null");
-        }
+        // if(classStudentListDao==null){
+        //     System.out.println("i am null");
+        // }else {
+        //     System.out.println("im not null");
+        // }
         List<ClassStudentList> csList=classStudentListDao.getStudentListByCodeId(classCodeId);
         ArrayList<StudentListDto> dtoList=new ArrayList<>();
         for(ClassStudentList csl:csList){
@@ -38,6 +38,18 @@ public class ClassStudentListService {
 	// 找所有班級對應學生清單ClassStudentList
 	public List<ClassStudentList> findAllClassStudentList() {
 		List<ClassStudentList> cslList = classStudentListDao.findAll();
+		return cslList;
+	}
+	
+	// 找所有班級對應學生清單ClassStudentList OrderByIdDesc
+	public List<ClassStudentList> findAllByOrderByIdDesc() {
+		List<ClassStudentList> cslList = classStudentListDao.findAllByOrderByIdDesc();
+		return cslList;
+	}
+	
+	// 找所有班級對應學生清單ClassStudentList OrderByIdAsc
+	public List<ClassStudentList> findAllByOrderByIdAsc() {
+		List<ClassStudentList> cslList = classStudentListDao.findAllByOrderByIdAsc();
 		return cslList;
 	}
 	

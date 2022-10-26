@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> --%>
+	pageEncoding="UTF-8"
+	import="java.util.*,com.team3.CSMS.model.Activity"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<%-- <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script> --%>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -21,6 +23,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+	
+	<!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <title>Welcome</title>
 <style>
         /*
@@ -71,7 +77,95 @@
             border-bottom: 1px dashed #ddd;
             margin: 40px 0;
         }
+        /*On/Off Course Button Style*/ 
+        .con.active{
+			background-color:green;
+ 			cursor: default; 
+		}
 
+		.coff.active{
+ 			background-color:red;
+ 			cursor: default; 
+		}
+		
+		 .con{
+			cursor: pointer;
+		}
+
+		.coff{
+		cursor: pointer;
+		}
+		
+		  /*On/Off OrderDetail Button Style*/ 
+        .oDon.active{
+			background-color:green;
+ 			cursor: default; 
+		}
+
+		.oDoff.active{
+ 			background-color:red;
+ 			cursor: default; 
+		}
+		
+		 .oDon{
+			cursor: pointer;
+		}
+
+		.oDoff{
+		cursor: pointer;
+		}
+		
+		.class-studentList:hover{
+		background-color:yellow;
+		}
+		
+		.orderWait.active{
+	background-color:orange;
+}
+.orderNoP.active{
+	background-color:red;
+}
+.orderFin.active{
+	background-color:green;
+}
+
+.bxs-edit{
+	cursor: pointer;
+	    transition: 0.5s;
+}
+.bxs-edit:hover{
+     color:orange;
+}
+
+.bxs-trash:hover{
+     color:red;
+}
+.oDoffText{
+color:azure;
+background-color:red;
+}
+.oDonText{
+color:azure;
+background-color:green;
+}
+.orderWaitText{
+color:azure;
+background-color:orange;
+}
+.orderNoPText{
+color:azure;
+background-color:red;
+}
+.orderFinText{
+color:azure;
+background-color:green;
+}
+
+.modal-body p{
+color:black;
+/* font-weight: 800; */
+}
+		
         /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -81,7 +175,8 @@
             width: 100%;
             align-items: stretch;
         }
-
+        
+/* ========各項功能清單的背景顏色========= */
         #sidebar {
             min-width: 250px;
             max-width: 250px;
@@ -94,9 +189,11 @@
             margin-left: -250px;
         }
 
+/* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
             padding: 20px;
             background: #6d7fcc;
+            text-align: center;
         }
 
         #sidebar ul.components {
@@ -137,7 +234,8 @@
             right: 20px;
             transform: translateY(-50%);
         }
-
+        
+/* =============下拉功能的背景顏色============= */
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
@@ -166,7 +264,9 @@
             background: #6d7fcc !important;
             color: #fff !important;
         }
-
+        .csmslogo{
+            width: 60%;
+        }
         /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -203,67 +303,127 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>CSMS Back end System</h3>
+                <img src="${contextRoot}/image/CSMS1.png" class="csmslogo" alt="">
+                <h5>Back-End System</h5>
             </div>
 
             <ul class="list-unstyled components">
-                <p>Function List</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
+<!--                 <p>Function List</p> -->
+<!--                 <li class="active"> -->
+<!--                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+<!--                     <ul class="collapse list-unstyled" id="homeSubmenu"> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 1</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 2</a> -->
+<!--                         </li> -->
+<!--                         <li> -->
+<!--                             <a href="#">Home 3</a> -->
+<!--                         </li> -->
+<!--                     </ul> -->
+<!--                 </li> -->
                 <li>
                     <a href="#">About</a>
                 </li>
+                
+                
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">Course(商品)</a>
+                            <a id="course-Btn" href="${contextRoot}/courseAllPageBackAjax.page">Course(商品)</a>
                         </li>
                         <li>
-                            <a href="#">ClassList(班級)</a>
+                            <a id="orderList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">OrderList(訂單)</a>
                         </li>
-                        <li>
-                            <a href="#">ClassRecord(上課紀錄)</a>
-                        </li>
-                        <li>
-                            <a href="#">ClassStudentList(班級學生)</a>
-                        </li>
-                        <li>
-                            <a href="#">OrderList(訂單)</a>
-                        </li>
-                       <li>
-                            <a href="#">Room(教室)</a>
+                         <li>
+                            <a id="orderDetail-Btn"  href="${contextRoot}/courseAllPageBackAjax.page">購買/排課狀態(訂單明細)</a>
                         </li>
                     </ul>
                 </li>
+                
+                
                 <li>
-                    <a href="#">Portfolio</a>
+                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">課程資訊相關</a>
+                     <ul class="collapse list-unstyled" id="studentInfo">
+                        <li>
+                            <a id="classList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">ClassList(班級)</a>
+                        </li>
+                        <li>
+                            <a id="classStudentList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">ClassStudentList(班級學生)</a>
+                        </li>
+                       <li>
+                            <a id="room-Btn" href="${contextRoot}/courseAllPageBackAjax.page">Room(教室)</a>
+                        </li>
+                        <li>
+                            <a id="classRecord-Btn" href="${contextRoot}/courseAllPageBackAjax.page">ClassRecord(上課紀錄)</a>
+                        </li>
+                    </ul>
                 </li>
+                
+                
+                <li>
+                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
+                     <ul class="collapse list-unstyled" id="postInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/showAllPost.controller">PostList(所有公告)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#expenseInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">財務相關</a>
+                     <ul class="collapse list-unstyled" id="expenseInfo">
+                        <li>
+                            <a id="expense-Btn" href="${contextRoot}/expenseHome.page">FinancialChart(財務圖表)</a>
+                        </li>
+                        <li>
+                            <a id="expense-Btn" href="${contextRoot}/expenseQueryAndCreate.page">CostRecord(損益記錄)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a href="#activityInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">活動相關</a>
+                     <ul class="collapse list-unstyled" id="activityInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/createActivity.controller">CreateActivity(建立活動)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/findAllActivity.controller">ShowAllActivity(所有活動)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                     <ul class="collapse list-unstyled" id="scoreInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
+                        </li>
+                    </ul>
+                </li>
+                
                 <li>
                     <a href="#">Contact</a>
                 </li>
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
+<!--             <ul class="list-unstyled CTAs"> -->
+<!--                 <li> -->
+<!--                     <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a> -->
+<!--                 </li> -->
+<!--                 <li> -->
+<!--                     <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a> -->
+<!--                 </li> -->
+<!--             </ul> -->
+
         </nav>
 
         <!-- Page Content  -->
@@ -300,38 +460,3 @@
                     </div>
                 </div>
             </nav>
-
-</body>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-		crossorigin="anonymous"></script>
-		
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-		crossorigin="anonymous"></script>
-		
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-		crossorigin="anonymous"></script>
-
-
-<script type="text/javascript">
-
-//=======================版面動作=======================
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-});
-
-
-</script>
-
-</html>
