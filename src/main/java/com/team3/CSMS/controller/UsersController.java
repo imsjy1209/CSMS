@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -189,4 +190,15 @@ public class UsersController {
 		return "login/login";
 	}
 
+    @GetMapping("/users/open/{id}")
+    public String openAccount(@PathVariable int id){
+    	userService.open(id);
+    	return"register/manageusers";
+    }
+    @GetMapping("/users/close/{id}")
+    public String closeAccount(@PathVariable int id){
+    	System.out.println("close"+id);
+    	userService.close(id);
+    	return"register/manageusers";
+    }
 }

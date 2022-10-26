@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ClassListDao;
@@ -14,7 +13,6 @@ import com.team3.CSMS.dto.AllClassListStudentVerDto;
 import com.team3.CSMS.dto.AllClassListTeacherVerDto;
 import com.team3.CSMS.dto.ClassInfoDto;
 import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
-import com.team3.CSMS.dto.ClassListParentVerDto;
 
 import com.team3.CSMS.model.ClassList;
 
@@ -84,7 +82,7 @@ public class ClassListService {
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 老師課程選單By account
 	public List<AllClassListTeacherVerDto> getAllClassInfoListByTeacherAccount(String sessionAccount) {
-		List<ClassList> clList = classListDao.getAllClassInfoListByTeacherAccount(sessionAccount); // 寫BA001sessionAccount
+		List<ClassList> clList = classListDao.getAllClassInfoListByTeacherAccount(sessionAccount);
 		ArrayList<AllClassListTeacherVerDto> dtoList = new ArrayList<>();
 		for (ClassList clOne : clList) {
 			AllClassListTeacherVerDto cltDto = new AllClassListTeacherVerDto(clOne);
@@ -121,19 +119,6 @@ public class ClassListService {
 		ArrayList<AllClassListParentVerDto> dtoList = new ArrayList<>();
 		for (ClassList clOne : clList) {
 			AllClassListParentVerDto clpDto = new AllClassListParentVerDto(clOne);
-			dtoList.add(clpDto);
-		}
-		return dtoList;
-	}
-	
-	/* 課程選單選了哪一項(可能要刪) */
-	// 列出家長課程選單By account, classListId, studentId
-	public List<ClassListParentVerDto> getClassInfoListByParentAccount(String sessionAccount, Integer classListId,
-			Integer studentId) {
-		List<ClassList> clList = classListDao.getClassInfoListByParentAccount(sessionAccount, classListId, studentId);
-		ArrayList<ClassListParentVerDto> dtoList = new ArrayList<>();
-		for (ClassList clOne : clList) {
-			ClassListParentVerDto clpDto = new ClassListParentVerDto(clOne);
 			dtoList.add(clpDto);
 		}
 		return dtoList;

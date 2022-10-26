@@ -6,7 +6,9 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
-	
+ <!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <!-- CONTENT -->
 <div class="container">	
 	<h4>【校方】聯絡簿查詢</h4>
@@ -111,7 +113,7 @@ window.onload = function(){
     
     // (2)帶入select的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "<c:url value='/schoolClickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
+    xhr2.open("GET", "<c:url value='/clickOneContactBook.json'/>"+"?cbId="+pvCbId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
@@ -175,7 +177,7 @@ window.onload = function(){
     
  	// (4)帶入聯絡簿簽名紀錄資料
 	var xhr3 = new XMLHttpRequest();
-    xhr3.open("GET", "<c:url value='/schoolContactBookParentSign.json'/>"+"?cbId="+pvCbId, true);
+    xhr3.open("GET", "<c:url value='/oneContactBookEachParentSign.json'/>"+"?cbId="+pvCbId, true);
     xhr3.send();
     xhr3.onreadystatechange = function(){
     	if (xhr3.readyState == 4 && xhr3.status == 200) {

@@ -101,7 +101,7 @@ table {
 	}
 	function displayData01(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table border='1' <tr><th>名字</th><th>職位</th><th>聘用日期</th><th>在職情況</th></tr>"
+		var htmlSeg = "<table border='1' <tr><th>名字</th><th>職位</th><th>聘用日期</th><th>在職情況</th><th>帳號啟動</th><th>帳號ID</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];
@@ -110,6 +110,12 @@ table {
 				htmlSeg += "<td>" + obj.title + "</td>";
 				htmlSeg += "<td>" + obj.hiredate + "</td>";
 				htmlSeg += "<td>" + obj.status + "</td>";
+				if(obj.users.accRight == "1"){
+					htmlSeg += "<td>開啟</td>";	
+				}else{
+					htmlSeg += "<td>關閉</td>";
+				}
+				htmlSeg += "<td>" + obj.users.id + "</td>";
 				htmlSeg += "</tr>";
 			}
 		} else {
@@ -120,7 +126,7 @@ table {
 	}
 	function displayData02(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table border='1' <tr><th>名字</th><th>職位</th><th>專長</th><th>聘用日期</th><th>在職情況</th></tr>"
+		var htmlSeg = "<table border='1' <tr><th>名字</th><th>職位</th><th>專長</th><th>聘用日期</th><th>在職情況</th><th>帳號啟動</th><th>帳號ID</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];
@@ -130,6 +136,12 @@ table {
 				htmlSeg += "<td>" + obj.expertise + "</td>";
 				htmlSeg += "<td>" + obj.hiredate + "</td>";
 				htmlSeg += "<td>" + obj.status + "</td>";
+				if(obj.users.accRight == "1"){
+					htmlSeg += "<td>開啟</td>";	
+				}else{
+					htmlSeg += "<td>關閉</td>";
+				}
+				htmlSeg += "<td>" + obj.users.id + "</td>";
 				htmlSeg += "</tr>";
 			}
 		} else {
@@ -140,7 +152,7 @@ table {
 	}
 	function displayData03(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table border='1' <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th></tr>"
+		var htmlSeg = "<table border='1' <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th><th>帳號啟動</th><th>帳號ID</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];
@@ -152,6 +164,12 @@ table {
 				htmlSeg += "<td>" + obj.grade + "</td>";
 				htmlSeg += "<td>" + obj.parent.name + "</td>";
 				htmlSeg += "<td>" + obj.relationship + "</td>";
+				if(obj.users.accRight == "1"){
+					htmlSeg += "<td>開啟</td>";	
+				}else{
+					htmlSeg += "<td>關閉</td>";
+				}
+				htmlSeg += "<td>" + obj.users.id + "</td>";
 				htmlSeg += "</tr>";
 			}
 		} else {
@@ -162,7 +180,7 @@ table {
 	}
 	function displayData04(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table border='1' <tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th></tr>"
+		var htmlSeg = "<table border='1' <tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>帳號啟動</th><th>帳號ID</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];
@@ -171,6 +189,12 @@ table {
 				htmlSeg += "<td>" + obj.gender + "</td>";
 				htmlSeg += "<td>" + obj.tel + "</td>";
 				htmlSeg += "<td>" + obj.email + "</td>";
+				if(obj.users.accRight == "1"){
+					htmlSeg += "<td>開啟</td>";	
+				}else{
+					htmlSeg += "<td>關閉</td>";
+				}
+				htmlSeg += "<td>" + obj.users.id + "</td>";
 				htmlSeg += "</tr>";
 			}
 		} else {

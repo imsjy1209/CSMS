@@ -21,22 +21,9 @@
   	</div>
   	<br>
   	<br>
-<!-- 	<div> -->
-<!-- 		<label for="exampleFormControlSelect1">建立聯絡簿：</label> -->
-<!-- 		<table id="add_cbList" class="table table-borderless" style="text-align:center"> -->
-<!-- 			<tr> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder=""/></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder="課程內容" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="hw" name="hw" placeholder="回家作業" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="quiz" name="quiz" placeholder="考試通知" /></td> -->
-<!-- 			  <td><a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">新增</a></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
 	<div id="btn-area">
 		<button id="btn-init" type="button" class="btn btn-secondary" disabled>建立聯絡簿</button>
 	</div>
-
 	<br>
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">
@@ -122,7 +109,8 @@ $("#classInfoList").on("change",function(){
 	
 	// 新增enable的button、移除disable的button
 	var EnableBtnUrl = "<c:url value='/ContactBook/T_Edit/"+selectedClassListId+"'/>";
-	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	var EnableBtn = "<a href='"+EnableBtnUrl+"' type='button' class='btn btn-success' id='removeMe' tabindex='-1' role='button' aria-disabled='true'>建立聯絡簿</a>";
+	$("#removeMe").remove();
 	$("#btn-area").append(EnableBtn); 
 	$("#btn-init").remove();
 	

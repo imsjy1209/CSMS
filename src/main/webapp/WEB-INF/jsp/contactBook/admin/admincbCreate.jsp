@@ -9,7 +9,7 @@
 	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【老師】聯絡簿編輯</h4>
+	<h4>【Admin】聯絡簿編輯</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -19,7 +19,7 @@
 	</div>
 	<br>
 
-	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/T_Update/${classListId}">
+	<form id=cbList-area method="post" action="${contextRoot}/ContactBook/Ad_Update/${classListId}">
 		<table id="cbListEdit" class="table table-bordered" style="text-align:center">
 			<!-- insert的聯絡簿內容放置處 -->
 		</table>
@@ -52,7 +52,7 @@
 		
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
         integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
-		
+        
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
@@ -60,39 +60,10 @@
 var clsListId =  ${classListId};
 // console.log(clsListId);
 
-$("#sidebar").find("a").on("click",function(event){
-	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
-	//SweetAlert本來有但後來故障了@@
-	// 	Swal.fire({
-		//  title: '案件尚未送出',
-		//  text: '如確認欲離開，請點「回上一頁」按鈕',
-		//  icon: 'warning',
-		//  showCancelButton: true,
-		//  confirmButtonColor: '#3085d6,
-		//  confirmButtonText: '確認'
-	// 	})();
-	
-});
-
-
-$("#content>nav").find("a").on("click",function(){
-	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
-	//SweetAlert本來有但後來故障了@@
-	// 	Swal.fire({
-		//  title: '案件尚未送出',
-		//  text: '如確認欲離開，請點「回上一頁」按鈕',
-		//  icon: 'warning',
-		//  showCancelButton: true,
-		//  confirmButtonColor: '#3085d6,
-		//  confirmButtonText: '確認'
-	// 	})();
-})
-
-
-/* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
+/* 視窗載入事件：(1)帶入【校方】選定的課程相關資訊 (2)帶入select的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕帶入 */
 window.onload = function(){ 
 	
-	// (1) 帶入【老師】選定的課程相關資訊
+	// (1) 帶入【校方】選定的課程相關資訊
 	var xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "<c:url value='/findClsInfoByClassListId.json'/>"+"?classListId="+clsListId, true);
     xhr1.send();
@@ -126,9 +97,9 @@ window.onload = function(){
     	}
     }
     
-    // (2)帶入insert的該筆聯絡簿資料
+    // (2)帶入select的該筆聯絡簿資料
 	var xhr2 = new XMLHttpRequest();
-    xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
+	xhr2.open("POST", "<c:url value='/insertTheClassListIdIntoContactBook.json'/>"+"?classListId="+clsListId, true);
     xhr2.send();
     xhr2.onreadystatechange = function(){
     	if (xhr2.readyState == 4 && xhr2.status == 200) {
@@ -189,11 +160,10 @@ window.onload = function(){
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
-			$('#cbListBtnArea').append(prevPageBtnObj);
-    	}
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Ad_D_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		$('#cbListBtnArea').append(prevPageBtnObj);
+     	}
     }
-    
 }
 
 //=======================版面動作=======================
@@ -207,4 +177,3 @@ $(document).ready(function () {
 </script>
 </body>
 </html>
-
