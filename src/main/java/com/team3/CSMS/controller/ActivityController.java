@@ -58,8 +58,7 @@ public class ActivityController {
 	
 	//==============ActivityController-Neil 1025====================
 	@GetMapping("/findAllActivity.controller")
-	public String findAllActivity(@SessionAttribute("teacher") Teacher teacher,Model m) {
-		System.out.println(teacher.getName());
+	public String findAllActivity(Model m) {
 		List<Activity> list = aService.findAll();
 		m.addAttribute("list", list);
 		return "cs_activity/allActivity";
