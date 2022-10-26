@@ -57,13 +57,15 @@
     </div>
     <div class="tab-pane fade" id="nav-parents" role="tabpanel" aria-labelledby="nav-parents-tab">
         <table class="table table-hover" id="parentList">
-            <thead>
-              <tr>
-                  <th scope="col">家長編號</th>
-                  <th scope="col">姓名</th>
-                  <th scope="col">權限</th>
-              </tr> 
-            </thead>
+          <thead> 
+            <tr>
+              <th scope='col'>名字</th>
+              <th scope='col'>職位</th>
+              <th scope='col'>聘用日期</th>
+              <th scope='col'>在職情況</th>
+              <th scope='col'>登入權限</th>
+            </tr>
+          </thead>"
             <tbody id="pLbody">
 
             </tbody>
@@ -249,19 +251,22 @@ function getParentList(){
 
 $(document).on('change','.prop',function () {
   $('.prop').change(function(){
-      // console.log("1");
+      console.log("1");
       // console.log($(this));
       // get student id
       let userId=$(this).parent().siblings('.userID ').text();
-      // console.log(usId);
+      console.log(usId);
       let permission=$(this).val();
-      // console.log(permission);
+      console.log(permission);
       let xhr3 = new XMLHttpRequest();
       // get the information from select value
       xhr3.open("GET","<c:url value='/updateUsersPermisson'/>"+"?userId="+userId+"&permission="+permission,true); 
       xhr3.send();
     })
 })
+
+
+
 //=======================版面動作=======================
   $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {

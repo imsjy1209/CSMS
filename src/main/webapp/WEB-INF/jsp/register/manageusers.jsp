@@ -24,7 +24,8 @@ table {
 
 .box {
 	width: 650px;
-	height: 650px border:1px solid gray;
+	height: 650px ;
+	border:1px solid gray;
 	box-shadow: 5px 10px 7px gray;
 	padding: 20px;
 }
