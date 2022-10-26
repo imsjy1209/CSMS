@@ -21,4 +21,12 @@ public interface UserDao extends JpaRepository<Users,Integer> {
 
     @Query(value="from Users where account = :account and password = :password")
     Users checkLogin(@Param("account")String account,@Param("password")String password);
+    
+    @Modifying
+    @Query(value="update users set accRight=1 where users_id=:id",nativeQuery = true)
+    public void open(@Param("id") int id);
+    
+    @Modifying
+    @Query(value="update users set accRight=0 where users_id=:id",nativeQuery = true)
+    public void close(@Param("id") int id);
 }

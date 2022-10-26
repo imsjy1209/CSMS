@@ -115,4 +115,9 @@ public class PageController {
 		return "cs_user/userUpdate";
 
 	}
+
+	@GetMapping("/controlUser")
+	public String Control() {
+		return "/register/controllUser";
+	}
 }

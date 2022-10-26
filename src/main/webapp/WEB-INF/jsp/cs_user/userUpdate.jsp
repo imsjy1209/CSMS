@@ -57,22 +57,21 @@
     </div>
     <div class="tab-pane fade" id="nav-parents" role="tabpanel" aria-labelledby="nav-parents-tab">
         <table class="table table-hover" id="parentList">
-            <thead>
-              <tr>
-                  <th scope="col">家長編號</th>
-                  <th scope="col">姓名</th>
-                  <th scope="col">權限</th>
-              </tr> 
-            </thead>
+          <thead> 
+            <tr>
+              <th scope='col'>名字</th>
+              <th scope='col'>職位</th>
+              <th scope='col'>聘用日期</th>
+              <th scope='col'>在職情況</th>
+              <th scope='col'>登入權限</th>
+            </tr>
+          </thead>"
             <tbody id="pLbody">
 
             </tbody>
           </table>
     </div>
   </div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -94,13 +93,7 @@ crossorigin="anonymous"></script>
 
 <script>
 // 校方人員 分頁按鈕
-$("#nav-school-tab").click(getSchoolList);
-$("#nav-teacher-tab").click(getTeacherList);
-$("#nav-student-tab").click(getStudentList);
-$("#nav-parents-tab").click(getParentList);
-
-function getSchoolList(){
-  // console.log("school");
+window.onload=function(){
   let xhr = new XMLHttpRequest();
     xhr.open("GET","<c:url value='/getSchoolList.page'/>",true);
     xhr.send();
@@ -112,6 +105,7 @@ function getSchoolList(){
         $('#sLbody').html('');
         schoolList.forEach(object => {
           schoolBody +='<tr><td>'+object.schoolId+'</td>';
+          schoolBody +='<td class="userID" hidden>'+object.userID+'</td>';
           schoolBody +='<td>' +object.schoolName+'</td>';
           schoolBody +='<td>'+object.title+'</td>';
           let propermissionText;
@@ -120,7 +114,43 @@ function getSchoolList(){
           }else{
             propermissionText="Enable";
           }
-          schoolBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          schoolBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected' hidden>"+propermissionText +"</option>"
+          schoolBody+="<option value='0' >Disable</option>"
+          schoolBody+="<option value='1' >Enable</option>"
+          schoolBody +='<td></td></tr>';
+        });
+        $('#sLbody').append(schoolBody);
+        }
+      }
+}
+
+$("#nav-school-tab").click(getSchoolList);
+$("#nav-teacher-tab").click(getTeacherList);
+$("#nav-student-tab").click(getStudentList);
+$("#nav-parents-tab").click(getParentList);
+
+function getSchoolList(){
+  // console.log("school");
+  let xhr = new XMLHttpRequest();
+    xhr.open("GET","<c:url value='/getSchoolList.page'/>",true);
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState==4 && xhr.status == 200){
+        let schoolList = JSON.parse(xhr.responseText);
+        let schoolBody;
+        $('#sLbody').html('');
+        schoolList.forEach(object => {
+          schoolBody +='<tr><td>'+object.schoolId+'</td>';
+          schoolBody +='<td>' +object.schoolName+'</td>';
+          schoolBody +='<td>'+object.title+'</td>';
+          schoolBody +='<td class="userID" hidden>'+object.userID+'</td>';
+          let propermissionText;
+          if (object.whitelist==0){
+            propermissionText="Disable";
+          }else{
+            propermissionText="Enable";
+          }
+          schoolBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected' hidden>"+propermissionText +"</option>"
           schoolBody+="<option value='0' >Disable</option>"
           schoolBody+="<option value='1' >Enable</option>"
           schoolBody +='<td></td></tr>';
@@ -143,6 +173,7 @@ function getTeacherList(){
         teacherList.forEach(object => {
           teacherBody +='<tr><td>'+object.teacherId+'</td>';
           teacherBody +='<td>' +object.teacherName+'</td>';
+          teacherBody +='<td class="userID" hidden>'+object.userID+'</td>'
           teacherBody +='<td>'+object.subject+'</td>';
           let propermissionText;
           if (object.whitelist==0){
@@ -150,7 +181,7 @@ function getTeacherList(){
           }else{
             propermissionText="Enable";
           }
-          teacherBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          teacherBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected' hidden>"+propermissionText +"</option>"
           teacherBody+="<option value='0' >Disable</option>"
           teacherBody+="<option value='1' >Enable</option>"
           teacherBody +='<td></td></tr>';
@@ -173,15 +204,16 @@ function getStudentList(){
         studentList.forEach(object => {
           studentBody +='<tr><td>'+object.studentID+'</td>';
           studentBody +='<td>' +object.studentName+'</td>';
+          studentBody +='<td class="userID" hidden>'+object.userID+'</td>'
           let propermissionText;
           if (object.whitelist==0){
             propermissionText="Disable";
           }else{
             propermissionText="Enable";
           }
-          studentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
-          studentBody+="<option value='0' >Disable</option>"
-          studentBody+="<option value='1' >Enable</option>"
+          studentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected' hidden>"+propermissionText +"</option>"
+          studentBody+="<option value='0'>Disable</option>"
+          studentBody+="<option value='1'>Enable</option>"
           studentBody +='<td></td></tr>';
         });
         $('#stubody').append(studentBody);
@@ -200,13 +232,14 @@ function getParentList(){
         parentList.forEach(object => {
           parentBody +='<tr><td>'+object.parentId+'</td>';
           parentBody +='<td>' +object.parentsName+'</td>';
+          parentBody +='<td class="userID" hidden>'+object.userID+'</td>'
           let propermissionText;
           if (object.whitelist==0){
             propermissionText="Disable";
           }else{
             propermissionText="Enable";
           }
-          parentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected'>"+propermissionText +"</option>"
+          parentBody+="<td><select class='prop' id='prop' name='prop'><option value='"+object.whitelist+"' selected='selected' hidden>"+propermissionText +"</option>"
           parentBody+="<option value='0' >Disable</option>"
           parentBody+="<option value='1' >Enable</option>"
           parentBody +='<td></td></tr>';
@@ -215,6 +248,24 @@ function getParentList(){
         }
       }
 }
+
+$(document).on('change','.prop',function () {
+  $('.prop').change(function(){
+      console.log("1");
+      // console.log($(this));
+      // get student id
+      let userId=$(this).parent().siblings('.userID ').text();
+      console.log(usId);
+      let permission=$(this).val();
+      console.log(permission);
+      let xhr3 = new XMLHttpRequest();
+      // get the information from select value
+      xhr3.open("GET","<c:url value='/updateUsersPermisson'/>"+"?userId="+userId+"&permission="+permission,true); 
+      xhr3.send();
+    })
+})
+
+
 
 //=======================版面動作=======================
   $(document).ready(function () {

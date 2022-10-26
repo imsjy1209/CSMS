@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,22 +17,25 @@ import com.team3.CSMS.dto.UserParentDto;
 import com.team3.CSMS.dto.UserSchoolDto;
 import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.dto.UserStudentDto;
+
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.School;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.model.Users;
+import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.UserService;
 
 @SessionAttributes(names = {"users","school","teacher","student","parent"})
 @Controller
 public class UsersController {
 	
-	
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ParentService parentService;
     
     // 透過ID找到個資
     @GetMapping(value = "/userProfile.json",
@@ -61,7 +64,29 @@ public class UsersController {
     		return null;
     	}
     }
-    
+    //===============更改家長電話byid===============
+    @PostMapping(value="/updateUsersPhoneAjax.controller")
+    public @ResponseBody Parent updateUsersPhoneAjax(@RequestParam(name="userId")Integer userId,
+                                                    @RequestParam(name="newPhone")String newPhone,
+                                                    @RequestParam(name="oldCheckPwd")String oldCheckPwd){
+            System.out.println("====================controller in");                                            
+            Users oneUsers = userService.findUsersById(userId);
+            Integer parentId=oneUsers.getParent().getId();
+            Parent oneParent=parentService.findById(parentId);
+            String oldPwd = oneUsers.getPassword();
+            System.out.println("====================if start"); 
+            if(oldPwd.equals(oldCheckPwd)) {
+                oneParent.setTel(newPhone);;
+                parentService.insert(oneParent);
+    //    		model.addAttribute("msg","OK");
+                return oneParent;
+            }
+            else {
+    //    		model.addAttribute("msg","NG");
+                return null;
+            }                                            
+            
+            }
     
     //透過 身分類別找到 使用者清單
     @GetMapping(value = "/GroupProfile.json",
@@ -106,6 +131,17 @@ public class UsersController {
     List <UserParentDto> upDto=userService.getParentFromGroupId(groupId);
     return upDto;
     }
+
+
+    // 更改人員權限
+    @GetMapping(value="/updateUsersPermisson")
+    public @ResponseBody void updateUserPermisson (@RequestParam(name="userId")Integer userId,@RequestParam(name="permission") Integer permission){
+        Users users=userService.findUsersById(userId);
+        users.setAccRight(permission);
+        userService.insert(users);
+        // return "redirect:/absentUpdate.page"
+    }  
+
     
     @GetMapping("login")
     public String login() {
@@ -153,4 +189,16 @@ public class UsersController {
 		m.addAttribute("LoginError","已登出");
 		return "login/login";
 	}
+
+    @GetMapping("/users/open/{id}")
+    public String openAccount(@PathVariable int id){
+    	userService.open(id);
+    	return"register/manageusers";
+    }
+    @GetMapping("/users/close/{id}")
+    public String closeAccount(@PathVariable int id){
+    	System.out.println("close"+id);
+    	userService.close(id);
+    	return"register/manageusers";
+    }
 }

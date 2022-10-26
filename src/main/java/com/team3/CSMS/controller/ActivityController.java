@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team3.CSMS.model.Activity;
 import com.team3.CSMS.model.Student;
+import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.ActivityService;
 import com.team3.CSMS.service.StudentService;
 

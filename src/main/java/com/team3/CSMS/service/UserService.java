@@ -88,4 +88,12 @@ public class UserService {
   		}
   		return null;
       }
+      
+      //開關帳號權限
+      public void open(int id) {
+    	  userDao.open(id);
+      }
+      public void close(int id) {
+    	  userDao.close(id);
+      }
 }

@@ -16,13 +16,28 @@ public interface ContactBookSignDao extends JpaRepository<ContactBookSign, Integ
 	@Query(value = "delete from ContactBookSign where [fk_cb_id] = :cbId", nativeQuery = true)
     void deleteContactBookSignByCbId(@Param("cbId") Integer cbId);
     
-    // 【校方】單筆查看：以fk_cb_id查詢ContactBookSign資料
-    @Query(value = "select *  from [ContactBookSign] as CBS "
+    // 【校方】【Admin】單筆查看：以fk_cb_id查詢ContactBookSign資料
+    @Query(value = "select * from [ContactBookSign] as CBS "
     		+ "inner join [Student] as S on S.[student_id] = CBS.[fk_student_id] "
     		+ "inner join [Parent] as P on P.[parent_id]  = S.[fk_parent_id] "
     		+ "inner join [ClassStudentList] as CSL on CSL.[fk_student_id] = S.[student_id] "
     		+ "where [fk_cb_id] = :cbId order by [studentNo] asc", nativeQuery = true)
     List<ContactBookSign> findContactBookSignByCbId(@Param("cbId") Integer cbId);
+    
+    // 【家長】以classListId查詢ContactBookSign資料
+    @Query(value = "select * from [ContactBookSign] as CBS "
+    		+ "inner join [ContactBook] as CB on CBS.[fk_cb_id] = CB.[cb_id] "
+    		+ "where [fk_classlist_id] = :classListId and [fk_student_id] = :studentId and [phase] = 3 "
+    		+ "order by CB.[create_at] desc, CB.[cb_id] desc", nativeQuery = true)
+    List<ContactBookSign> findParentContactBookByclassListIdAndStudentId
+    (@Param("classListId") Integer classListId, @Param("studentId") Integer studentId);
+    
+    // 【Admin】以classListId查詢ContactBookSign資料
+    @Query(value = "select * from [ContactBookSign] as CBS "
+    		+ "inner join [ContactBook] as CB on CBS.[fk_cb_id] = CB.[cb_id] "
+    		+ "where [fk_classlist_id] = :classListId "
+    		+ "order by CB.[create_at] desc, CB.[cb_id] desc", nativeQuery = true)
+    List<ContactBookSign> findAdminContactBookSignByclassListId(@Param("classListId") Integer classListId);
     
 }
 
