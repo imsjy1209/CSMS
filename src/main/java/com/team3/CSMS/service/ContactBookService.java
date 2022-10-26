@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.ContactBookDao;
+import com.team3.CSMS.dto.ContactBookListAdminVerDto;
 import com.team3.CSMS.dto.ContactBookListParentVerDto;
 import com.team3.CSMS.dto.ContactBookListSchoolVerDto;
 import com.team3.CSMS.dto.ContactBookListStudentVerDto;
@@ -59,7 +60,6 @@ public class ContactBookService {
 	// (1) 【共用】以id單筆查詢(此處id為cb_id)	
 	// (2) 【共用】儲存一個Entity物件
 
-	
 	// 老師點「回上一頁」：delete當下這筆資料
 	public void deleteThisContactBookData(ContactBook cbBean) {
 		cbDao.delete(cbBean);
@@ -111,6 +111,22 @@ public class ContactBookService {
 		}
 		return dtoList;
 	}
+
+	//------------------------- Admin -------------------------
+	// Admin找聯絡簿By classListId
+	public List<ContactBookListAdminVerDto> getAdminContactBookListByClassListId(Integer classListId){
+		List<ContactBook> cbList = cbDao.getAdminContactBookListByClassListId(classListId);
+		ArrayList<ContactBookListAdminVerDto> dtoList = new ArrayList<>();
+		for (ContactBook cbOne : cbList) {
+			ContactBookListAdminVerDto cltDto = new ContactBookListAdminVerDto(cbOne);
+			dtoList.add(cltDto);
+		}
+		return dtoList;
+	}
 	
+	
+	
+
+
 	
 }

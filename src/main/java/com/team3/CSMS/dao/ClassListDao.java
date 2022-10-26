@@ -83,64 +83,6 @@ public interface ClassListDao extends JpaRepository<ClassList, Integer>{
     		+ "and C.[startDate] <= CONVERT(date, getDate()) and C.[endDate] >= CONVERT(date, getDate())"
     		, nativeQuery = true)
     List<ClassList> getAllClassInfoListByParentAccount(@Param("sessionAccount") String sessionAccount);
-
-    /* 聯絡簿清單使用：課程選單選了哪一項(可能要改) */
-    // 老師課程選單By account, classListId
-    @Query(value = "select * from [ClassList] as CL "
-    		+ "inner join [Course] as C on CL.[fk_course_id] = C.[course_id] "
-    		+ "where fk_teacher_id = (select [teacher_id] from Teacher "
-    		+ "where [fk_user_id] = (select [users_id] from USERS "
-    		+ "where [account] = :sessionAccount)) "
-    		+ "and CL.[classList_id] = :classListId "
-    		+ "and C.[startDate] <= CONVERT(date, getDate()) and C.[endDate] >= CONVERT(date, getDate())"
-    		, nativeQuery = true)
-    List<ClassList> getClassInfoListByTeacherAccount
-    (@Param("sessionAccount") String sessionAccount, @Param("classListId") Integer classListId);
-    
-    // 校方課程選單By account, classListId
-    @Query(value = "select * from [ClassList] as CL "
-    		+ "inner join [Course] as C on CL.[fk_course_id] = C.[course_id] "
-    		+ "where fk_school_id = (select [school_id] from School "
-    		+ "where [fk_user_id] = (select [users_id] from USERS "
-    		+ "where [account] = :sessionAccount)) "
-    		+ "and CL.[classList_id] = :classListId "
-    		+ "and C.[startDate] <= CONVERT(date, getDate()) and C.[endDate] >= CONVERT(date, getDate())"
-    		, nativeQuery = true)
-    List<ClassList> getClassInfoListBySchoolAccount
-    (@Param("sessionAccount") String sessionAccount, @Param("classListId") Integer classListId);
-    
-    // 學生課程選單By account, classListId
-    @Query(value = "select * from [ClassList] as CL "
-    		+ "inner join [Course] as C on CL.[fk_course_id] = C.[course_id] "
-    		+ "inner join [ClassStudentList] as CSL on CSL.[fk_classlist_id] = CL.[classlist_id] "
-    		+ "inner join [Student] as S on S.[student_id] = CSL.[fk_student_id] "
-    		+ "where fk_student_id = (select student_id from Student "
-    		+ "where fk_user_id = (select [users_id] from USERS "
-    		+ "where [account] = :sessionAccount)) "
-    		+ "and CL.[classList_id] = :classListId "
-    		+ "and C.[startDate] <= CONVERT(date, getDate()) and C.[endDate] >= CONVERT(date, getDate())"
-    		, nativeQuery = true)
-    List<ClassList> getClassInfoListByStudentAccount
-    (@Param("sessionAccount") String sessionAccount, @Param("classListId") Integer classListId);
-    
-    // 家長課程選單By account, classListId, studentId
-    @Query(value = "select * from [ClassList] as CL "
-    		+ "inner join [Course] as C on CL.[fk_course_id] = C.[course_id] "
-    		+ "inner join [ClassStudentList] as CSL on CSL.[fk_classlist_id] = CL.[classlist_id] "
-    		+ "inner join [Student] as S on S.[student_id] = CSL.[fk_student_id] "
-    		+ "inner join [Parent] as P on P.[parent_id] = S.[fk_parent_id] "
-    		+ "where fk_parent_id = (select parent_id from Parent "
-    		+ "where fk_user_id = (select [users_id] from USERS "
-    		+ "where [account] = :sessionAccount)) "
-    		+ "and CL.[classList_id] = :classListId "
-    		+ "and S.[student_id] = :studentId "
-    		+ "and C.[startDate] <= CONVERT(date, getDate()) and C.[endDate] >= CONVERT(date, getDate())"
-    		, nativeQuery = true)
-    List<ClassList> getClassInfoListByParentAccount
-    (@Param("sessionAccount") String sessionAccount, @Param("classListId") Integer classListId,
-     @Param("studentId") Integer studentId);
-    
-    
     
     //find ClassList by CourseId--Neil 1015
     @Query(value = "from ClassList where fk_course_id = ?1")
