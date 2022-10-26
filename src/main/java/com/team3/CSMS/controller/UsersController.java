@@ -71,7 +71,7 @@ public class UsersController {
             System.out.println("====================controller in");                                            
             Users oneUsers = userService.findUsersById(userId);
             Integer parentId=oneUsers.getParent().getId();
-            Parent oneParent=parentService.findParentById(parentId);
+            Parent oneParent=parentService.findById(parentId);
             String oldPwd = oneUsers.getPassword();
             System.out.println("====================if start"); 
             if(oldPwd.equals(oldCheckPwd)) {

@@ -101,23 +101,9 @@ public class Users {
 		update_at = new Date();
 	}
 	
-<<<<<<< HEAD
-	// 關聯
-	@ManyToOne
-	@JoinColumn(name = "fk_groups_id")
-	// @JsonBackReference
-	@JsonIgnoreProperties("users")
-	private Groups groups;
-=======
-	
 
-//	// 關聯
-//	@ManyToOne
-//	@JoinColumn(name = "fk_groups_id")
-////	@JsonBackReference
-//	@JsonIgnoreProperties("users")
-//	private Groups groups;
->>>>>>> e2e7b1bb7186e1e48710810c0f7e84f065c943bb
+
+
 	
 	public Users(String account, String password, Groups groups) {
 		super();
