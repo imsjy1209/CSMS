@@ -6,21 +6,30 @@ import com.team3.CSMS.model.Users;
 
 public class UserTeacherDto implements Serializable{
     private static final long serialVersionUID=1L;
-
+    
+    private Integer userID;
     private Integer teacherId;
     private String teacherName;
     private String subject;
     private Integer whiteList;
 
     public UserTeacherDto(){
-        
     }
-
+    
     public UserTeacherDto( Users users){
+        this.userID=users.getId();
         this.teacherId=users.getTeacher().getId();
         this.teacherName=users.getTeacher().getName();
         this.subject=users.getTeacher().getExpertise();
         this.whiteList=users.getAccRight();
+    }
+
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public Integer getTeacherId() {

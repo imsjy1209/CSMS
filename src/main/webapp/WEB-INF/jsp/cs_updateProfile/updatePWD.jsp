@@ -56,12 +56,12 @@
             </div>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Launch demo modal
-            </button>
+            <input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2"  value="change contact" id ="changect">
+
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
+            <div class="modal fade" id="exampleModa2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+				<!-- <div class="modal-dialog" role="document"> -->
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">更改電話</h5>
@@ -76,59 +76,28 @@
                     <input type="text" id="phonePwd" name="phonePwd" value=""
                       placeholder="請輸入現在使用的密碼" maxlength="30" size="20"
                       autocomplete="off" aria-invalid="false"><br> <span
-                      id="h">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
-                      id="phoneSpan" class="">&nbsp</span>
+                      id="h">密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
+                      id="phonePwdSpan" class="">&nbsp</span>
                     </div>
                     <div>
                       <label for="phone" class="t1"><b>電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
                       </label>
                       <input type="text" id="phone" name="phone" value=""
-                      placeholder="請輸入電話號碼" maxlength="30" size="20">
+                      placeholder="請輸入電話號碼" maxlength="10" size="20">
+					  <br> <span
+                      id="h">電話：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
+                      id="phoneSpan" class="">&nbsp</span>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+					<input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2"  value="change contact" id ="sendPhone">
+                    <!-- <button type="button" class="btn btn-primary" id="savePhone">Save changes</button> -->
                   </div>
                 </div>
               </div>
             </div>  
-						<!-- <div class="g2">
-							<div class="title2">
-								<h4>▰ 密碼修改</h4>
-							</div>
-							<form class="form" method="post" action="/Project/TeaherPwd">
-							<div class="d1">
-								<label for="idPwd1" class="t1"> <b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-								</label> 
-                <input type="text" id="idPwd1" name="password1" value=""
-									placeholder="請輸入現在使用的密碼" maxlength="30" size="20"
-									autocomplete="off" aria-invalid="false"><br> <span
-									id="h">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
-									id="idsp1" class="">&nbsp</span>
-							</div>
-							<div class="d2">
-								<label for="idPwd2" class="t2"> <b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-								</label> <input type="text" id="idPwd2" name="password2" value=""
-									placeholder="請輸入新密碼" maxlength="30" size="20"
-									autocomplete="off" aria-invalid="false"><br> <span
-									id="h">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
-									id="idsp2" class="">&nbsp</span>
-							</div>
-							<div class="d3">
-								<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp&nbsp</b>
-								</label> <input type="text" id="idPwd3" name="password3" value=""
-									placeholder="請再次輸入新密碼" maxlength="30" size="20"
-									autocomplete="off" aria-invalid="false"><br> <span
-									id="h">確認密碼：&nbsp&nbsp&nbsp&nbsp</span><span id="idsp3"
-									class="">&nbsp</span>
-							</div>
-							<div class="d4">
-                <button type="button" class="btnn" id="btn" disabled>變更密碼</button>
-							</div>
-            </form>
-          </div> -->
-          <!-- <input type="submit" value="變更密碼" id="btn" disabled /> -->
+						
 <!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
 <!--       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
 <!--       crossorigin="anonymous"></script> -->
@@ -154,23 +123,80 @@
 
         <script>
         window.onload=function(){
-        	updatePwdFunction();
+        	updateProfileFunction();
         }
-          function updatePwdFunction(){
-            //FIXME: 要改成透過session 找到那個人的密碼, 互動視窗資料不會清除
-            //TODO: 在取得網頁時就要抓到user_id和舊密碼
-
-            let userId=8;
+          function updateProfileFunction(){
+		    //FIXME: 要改成透過session
+            // let userId=8;
+			let userId=45;//家長有電話 email
           	
             var xhr = new XMLHttpRequest();
     		xhr.open("GET", "<c:url value='/userProfile.json?userId=" +  userId + " '/>", true);
     		xhr.send();
-    		
     		xhr.onreadystatechange = function() {
-    			if (xhr.readyState == 4 && xhr.status == 200) {
-    				var userProfile = JSON.parse(xhr.responseText);
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var userProfile = JSON.parse(xhr.responseText);
     				var prevPwd = userProfile.password;
-    				console.log(prevPwd)
+					// 家長 按鈕觸發
+					if (userProfile.parent!=null){
+						$("#changect").attr("type","button");
+						console.log(prevPwd);
+						console.log(userProfile.parent.tel);
+
+						let oldCellPhone=userProfile.parent.tel;
+						$("#phone").val(oldCellPhone)
+						// 更改電話的密碼跳脫事件
+						$("#phonePwd").blur(phonePwdCheck);
+						//檢查密碼
+						function phonePwdCheck() {
+							if($("#phonePwd").val().length<8){
+								$("#phonePwdSpan").html('❌ 密碼長度不正確');
+								$("#phonePwdSpan").css('color',"#56282D")
+							}if($("#phonePwd").val()==prevPwd){
+								$("#phonePwdSpan").html('✔  正確');
+								$("#phonePwdSpan").css('color',"#01B468")
+							}else{
+								$("#phonePwdSpan").html('❌ 密碼不正確');
+								$("#phonePwdSpan").css('color',"#56282D")
+							}
+						}
+						//電話號碼長度檢查
+						$("#phone").blur(telephonecheck);
+						function telephonecheck(){
+							let phonelength=$("#phone").val().length
+							if(phonelength<10){
+								$("#phoneSpan").html('❌電話長度不正確');
+								$("#phoneSpan").css('color',"#56282D");
+								$("#sendPhone").attr("type","hidden");
+							}else{
+								$("#phoneSpan").html('✔  正確');
+								$("#phoneSpan").css('color','#01B468')
+								$("#sendPhone").attr("type","button");
+							}
+						}
+						$("#sendPhone").click(changetele);
+						function changetele() {
+							let newPhone = $("#phone").val();
+							let oldCheckPwd = $('#phonePwd').val();
+							console.log();
+							let xhr3 = new XMLHttpRequest(); //for classcodeList
+							xhr3.open("POST","<c:url value='/updateUsersPhoneAjax.controller?userId="+ userId + "&newPhone=" + newPhone +"&oldCheckPwd=" + oldCheckPwd+"'/>",true);
+							xhr3.send();
+							xhr3.onreadystatechange = function(){
+							if (xhr3.readyState==4 && xhr3.status == 200){
+    		                  let result = JSON.parse(xhr3.responseText);
+							  	window.alert('電話修改成功')
+								  $("#exampleModa2").modal('hide');
+								  updatePhoneFunction() //FIXME:不確定要不要修正 by 冬冬
+								  $("#phonePwd").val('');
+								  $("#phonePwdSpan").text('');
+								  $("#phone").val('');
+								  $("#phoneSpan").text('');
+								}
+						}
+						}
+					}
+    				
     				
     		        // 開始改密碼
     		          function enableBtn() {
@@ -234,10 +260,9 @@
     		            }
     		            enableBtn();
     		          }
-    		            
-    		          //   /* 新密碼 */
-    		          //   // 離開焦點使用checkPwd2()
-    		            // document.getElementById("idPwd2").addEventListener("blur", checkPwd2);
+    		          	// /* 新密碼 */
+    		          	// 離開焦點使用checkPwd2()
+    		        	// document.getElementById("idPwd2").addEventListener("blur", checkPwd2);
     		            $("#idPwd2").blur(checkPwd2);
     		            function checkPwd2() {
     		            let pwd1 = document.getElementById("idPwd1");
@@ -325,7 +350,6 @@
     		            }
     		          /* 確認密碼 */
     		          // 離開焦點使用checkPwd3()
-    		          // document.getElementById("idPwd3").addEventListener("blur", checkPwd3);
     		          $("#idPwd3").blur(checkPwd3)
     		          function checkPwd3() {
     		            let pwd1 = document.getElementById("idPwd1");
@@ -368,27 +392,24 @@
     		            // 按確認後送出新密碼
     		           
     		          }
-    		          // FIXME: 怪怪ㄉ 按件好像會垮住
     		          $(".btnn").click(changePwd); 
     		           
     		            function changePwd(){
-    		              let userId =8;
-    		              var newPwd = $("#idPwd3").val();//FIXME: 改query寫法
+    		              let userId =8;//FIXME: 純註記 要改成session
+    		              var newPwd = $("#idPwd3").val();
     		              var userKeyInPrevPwd = $('#idPwd1').val();
-//     		              TODO: post請求 把新密碼往後丟
     		              let xhr2 = new XMLHttpRequest(); //for classcodeList
     		              xhr2.open("POST","<c:url value='/updateUsersPwdAjax.controller?userId="+ userId + "&newPwd=" + newPwd +"&userKeyInPrevPwd=" + userKeyInPrevPwd+"'/>",true);
     		              xhr2.send();
-    		              
     		              xhr2.onreadystatechange = function(){
     		                if (xhr2.readyState==4 && xhr2.status == 200){
     		                  let result = JSON.parse(xhr2.responseText);
 //     		                  console.log(result)
 //     		                  console.log(result.password)
 // 							  console.log("ttttt")
-							  window.alert('修改成功')
+							  window.alert('密碼修改成功')
 							  $('#exampleModalCenter').modal('hide')
-							  updatePwdFunction()
+							  updatePwdFunction() //FIXME:不確定要不要修正2 by 冬冬
 							  $('#idPwd1').val("");
 							  $('#idPwd2').val("");
 							  $('#idPwd3').val("");

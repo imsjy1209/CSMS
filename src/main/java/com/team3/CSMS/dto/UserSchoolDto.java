@@ -10,15 +10,24 @@ public class UserSchoolDto implements Serializable{
     private String SchoolName;
     private String title;
     private Integer whitelist;
-
+    private Integer userID;
     public UserSchoolDto(){
-  
+        
     }
     public UserSchoolDto(Users users){
+        this.userID=users.getId();
         this.schoolId=users.getSchool().getId();
         this.SchoolName=users.getSchool().getName();
         this.title=users.getSchool().getTitle();
         this.whitelist=users.getAccRight();
+    }
+
+    
+    public Integer getUserID() {
+        return userID;
+    }
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
     public Integer getSchoolId() {
         return schoolId;

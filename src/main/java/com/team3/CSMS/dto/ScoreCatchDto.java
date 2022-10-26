@@ -11,6 +11,9 @@ public class ScoreCatchDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@JsonProperty("studentId")
 	private int studentId; // Student table 列印學生id
+
+	//====Neil Update-1025======
+
 	@JsonProperty("classCodeId")
 	private int classcode; // 連 ClassList table 列印科目代號 1
 	@JsonProperty("frequency")

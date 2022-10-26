@@ -1,17 +1,16 @@
 package com.team3.CSMS.dao;
 
-
+ 
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-
 import javax.servlet.jsp.jstl.sql.Result;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ContactBook;
-import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Score;
 
 public interface ParentDao extends JpaRepository<Parent, Integer> {
@@ -23,7 +22,8 @@ public interface ParentDao extends JpaRepository<Parent, Integer> {
 			+ "where P.[fk_user_id] = (select [users_id] from [Users] where [users_id] = :sessionUserId)", nativeQuery = true)
 	List<Parent> getChildScoreListByParentId(@Param("sessionUserId") Integer sessionUserId);
 
- @Query(value="from Parent where name=:name")
- public Parent searchParent(@Param("name") String name);
+	@Query(value="from Parent where name=:name")
+	public Parent searchParent(@Param("name") String name);
+
 
 }

@@ -433,6 +433,18 @@ border-radius:50%;
                     </ul>
                 </li>
                 
+                <li>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                     <ul class="collapse list-unstyled" id="scoreInfo">
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
+                        </li>
+                        <li>
+                            <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
+                        </li>
+                    </ul>
+                </li>
+                
                 
                 <li>
                     <a href="#">Contact</a>
