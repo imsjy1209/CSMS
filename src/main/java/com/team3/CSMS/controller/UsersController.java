@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -208,20 +209,18 @@ public class UsersController {
     	// if(users.getIsFirst() == 1){
         //     return "users/firstlogin";
         // }     
-        if(users !=null) {
-			m.addAttribute("users",users);
-		} else {
-			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
-			return "login/login";
-		}
-        if(users.getAccRight()==0){
-            m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
-			status.setComplete();
+        if(users == null) {
+        	m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
+			return "login/login";		
+		} else if(users.getAccRight() ==0){
+			m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
             return "login/login";
-        }
-        if(users.getIsFirst()==1){
-            return "users/firstlogin";
-        }
+		}else if(users.getIsFirst() == 1) {
+			m.addAttribute("users",users);
+			return "login/firstLogin";
+		}else {
+			m.addAttribute("users",users);
+		}
     	Groups groups = users.getGroups();
     	Integer id = groups.getId();
     	switch(id) {
@@ -249,6 +248,16 @@ public class UsersController {
             break;     
     	}
     	return "cs_studentHomePage/studentHomepage";
+    }
+    
+    @PostMapping(value = "users/updateFirstLogin")
+    public String updateFirstLogin
+    (@SessionAttribute("users") Users users,@RequestParam(name="newPassword")String newPwd,Model model,SessionStatus status) {
+    	users.setPassword(newPwd);
+    	users.setIsFirst(0);
+    	userService.insert(users);
+    	status.setComplete();
+    	return"redirect:/login";
     }
     
     @GetMapping("/CSMSHomePage")
