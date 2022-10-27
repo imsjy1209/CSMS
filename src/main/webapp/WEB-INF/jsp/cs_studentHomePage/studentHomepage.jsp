@@ -85,7 +85,7 @@
 		<div class="aside" style="border: 5px solid red;">
 			<div class="absCheckIcon hoverLight" id="absCheckIcon">
 				<!-- 出席 button 的 data-target 要改-->
-				<button type="button" class="" data-toggle="modal" data-target="#">
+				<button type="button" class="" data-toggle="modal" data-target="#two">
 					<img src="${contextRoot}/image/absCheck.png" title="出席" alt="" style="border: 1px solid red;">
 				</button>
 			</div>
@@ -119,12 +119,32 @@
 				</div>
 
 				<!-- Button trigger modal -->
-				<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+				
 
 				</button>
 
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>test</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- end of modal -->
+				<div class="modal fade" id="two" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
