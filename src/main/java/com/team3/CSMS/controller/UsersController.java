@@ -154,20 +154,17 @@ public class UsersController {
     	// if(users.getIsFirst() == 1){
         //     return "users/firstlogin";
         // }     
-        if(users !=null) {
-			m.addAttribute("users",users);
-		} else {
-			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
-			return "login/login";
-		}
-        if(users.getAccRight()==0){
-            m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
-			status.setComplete();
+        if(users == null) {
+        	m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
+			return "login/login";		
+		} else if(users.getAccRight() ==0){
+			m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
             return "login/login";
-        }
-        if(users.getIsFirst()==1){
-            return "users/firstlogin";
-        }
+		}else if(users.getIsFirst() == 1) {
+			return "users/firstlogin";
+		}else {
+			m.addAttribute("users",users);
+		}
     	Groups groups = users.getGroups();
     	Integer id = groups.getId();
     	switch(id) {
