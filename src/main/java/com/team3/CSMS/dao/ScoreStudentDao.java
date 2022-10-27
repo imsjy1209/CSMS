@@ -17,4 +17,9 @@ public interface ScoreStudentDao extends JpaRepository<Score, Integer> {
 	List<Score> getScoreByclasslistIdAndStudentId(@Param("classCodeId") Integer classCodeId,
 			@Param("sessionUserId") Integer sessionUserId);
 
+
+	
+
+
+
 }

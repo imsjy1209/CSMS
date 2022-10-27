@@ -48,7 +48,7 @@
 				</select>
 			</label>			
 			<div>
-				<p class="info">
+				<p class="info">jwechiwhudiew</p>
 			</div>
 		</div>
 		<table class="table table-striped mt-5 " id="scoreTable">
