@@ -41,6 +41,7 @@
 		</div>
     
 		<button id='selectBtn' class="btn btn-success">搜尋</button>
+		&nbsp
 		<button id='send' class="btn btn-success">send</button>
 	</div>
 

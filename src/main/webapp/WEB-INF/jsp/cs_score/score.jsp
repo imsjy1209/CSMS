@@ -23,7 +23,8 @@
 
 <div class="container">
 	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>All Score Data</h3>
-
+           
+			<br>
 	<div class="topbtn">
 	</div>
 	
@@ -44,8 +45,13 @@
 					<option value="2">第2次</option>
 			                </select>
 			</label>
+			<br>
+			
+			<br>
 			<div>
 				<button id='selectBtn' class="btn btn-success">搜尋</button>
+			     
+			     &nbsp 	     
 				<a href="${contextRoot}/scoreAdd" type="button"
 			class="btn btn-primary" >新增</a>
 			</div>

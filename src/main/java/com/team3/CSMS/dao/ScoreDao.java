@@ -52,7 +52,4 @@ public interface ScoreDao extends JpaRepository<Score, Integer> {
 	List<Score> getChildScoreListByStudentId(@Param("studentId") Integer studentId);
 	
 
-
-	
-
 }
