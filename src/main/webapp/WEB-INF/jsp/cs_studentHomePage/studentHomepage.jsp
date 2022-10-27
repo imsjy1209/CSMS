@@ -85,29 +85,36 @@
 		<div class="aside" style="border: 5px solid red;">
 			<div class="absCheckIcon hoverLight" id="absCheckIcon">
 				<!-- 出席 button 的 data-target 要改-->
-				<button type="button" class="" data-toggle="modal" data-target="#two">
+				<button type="button" class="" data-toggle="modal" data-target="#absentMID">
 					<img src="${contextRoot}/image/absCheck.png" title="出席" alt="" style="border: 1px solid red;">
 				</button>
 			</div>
 
 			<div class="lessonIcon hoverLight" id="lessonIcon">
 				<!-- 課程 button 的 data-target 要改-->
-				<button type="button" class="" data-toggle="modal" data-target="#">
+				<button type="button" class="" data-toggle="modal" data-target="#courseMID">
 					<img src="${contextRoot}/image/lesson.png" title="課程" style="border: 1px solid red;">
 				</button>
 			</div>
 
 			<div class="activeIcon hoverLight" id="activeIcon">
 				<!-- 活動 button 的 data-target 要改-->
-				<button type="button" class="" data-toggle="modal" data-target="#">
+				<button type="button" class="" data-toggle="modal" data-target="#activityMID">
 					<img src="${contextRoot}/image/active.png" title="活動" alt="" style="border: 1px solid red;">
 				</button>
 			</div>
 
 			<div class="scoreIcon hoverLight" id="scoreIcon">
 				<!-- 分數 button 的 data-target 要改-->
-				<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+				<button type="button" class="" data-toggle="modal" data-target="#scoreMID">
 					<img src="${contextRoot}/image/score.png" title="分數" alt="" style="border: 1px solid red;">
+				</button>
+			</div>
+
+			<div class="scoreIcon hoverLight" id="contactBookMID">
+				<!-- 分數 button 的 data-target 要改-->
+				<button type="button" class="" data-toggle="modal" data-target="#scoreMID">
+					<img src="${contextRoot}/image/contactbook.png" title="聯絡簿" alt="" style="border: 1px solid red;">
 				</button>
 			</div>
 
@@ -117,14 +124,8 @@
 					<h1>左邊目前只有第三個按鈕有接modal</h1>
 
 				</div>
-
-				<!-- Button trigger modal -->
-				
-
-				</button>
-
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+				<!-- Modal for Absent -->
+				<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
@@ -135,7 +136,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>test</p>
+								<p>absentMID test</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -144,7 +145,9 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
-				<div class="modal fade" id="two" tabindex="-1" role="dialog"
+
+				<!-- Modal for Course -->
+				<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
@@ -156,6 +159,72 @@
 							</div>
 							<div class="modal-body">
 								<p>test</p>
+								<p>courseMID test</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- end of modal -->
+				<!-- Modal for Activity -->
+				<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>activityMID test</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- end of modal -->
+				
+				<!-- Modal for Score -->
+				<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>scoreMID test</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- end of modal -->
+				
+				<!-- Modal for ContactBook -->
+				<div class="modal fade" id="contactBookMID" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>contactBookMID test</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
