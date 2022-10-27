@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active navSch" id="nav-school-tab" data-toggle="tab" href="#nav-school" role="tab" aria-controls="nav-school" aria-selected="true">校方</a>

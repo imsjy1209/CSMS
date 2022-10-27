@@ -327,6 +327,14 @@ color:black;
                     <a href="#">About</a>
                 </li>
                 
+                <li>
+                    <a href="#accessInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a>
+                     <ul class="collapse list-unstyled" id="accessInfo">
+                        <li>
+                            <a id="right-Btn" href="${contextRoot}/controlUser">AccessManager(更改權限)</a>
+                        </li>
+                    </ul>
+                </li>
                 
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
@@ -361,6 +369,19 @@ color:black;
                         </li>
                     </ul>
                 </li>
+                
+                <li>
+                    <a href="#absentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">出缺勤相關</a>
+                     <ul class="collapse list-unstyled" id="absentInfo">
+                        <li>
+                            <a id="absent-Btn" href="${contextRoot}/absentUpdate.page">AdviseAbsent(更改出缺勤)</a>
+                        </li>
+                        <li>
+                            <a id="absent-Btn" href="${contextRoot}/absent.page">CreateAbsent(輸入出缺勤)</a>
+                        </li>
+                    </ul>
+                </li>
+                
                 
                 
                 <li>
