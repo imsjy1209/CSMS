@@ -61,22 +61,22 @@ var clsListId =  ${classListId};
 // console.log(clsListId);
 
 $("#sidebar").find("a").on("click",function(event){
-	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
+	alert("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
 	//SweetAlert本來有但後來故障了@@
-	// 	Swal.fire({
-		//  title: '案件尚未送出',
-		//  text: '如確認欲離開，請點「回上一頁」按鈕',
-		//  icon: 'warning',
-		//  showCancelButton: true,
-		//  confirmButtonColor: '#3085d6,
-		//  confirmButtonText: '確認'
-	// 	})();
+// 		Swal.fire({
+// 		 title: '案件尚未送出',
+// 		 text: '如確認欲離開，請點「回上一頁」按鈕',
+// 		 icon: 'warning',
+// 		 showCancelButton: true,
+// 		 confirmButtonColor: '#3085d6,
+// 		 confirmButtonText: '確認'
+// 		})();
 	
 });
 
 
 $("#content>nav").find("a").on("click",function(){
-	console.log("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
+	alert("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
 	//SweetAlert本來有但後來故障了@@
 	// 	Swal.fire({
 		//  title: '案件尚未送出',

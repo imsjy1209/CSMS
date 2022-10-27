@@ -33,14 +33,14 @@
 </style>
 </head>
 <body>
-	<div class="topbtn">
-             <a type="button"
-			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go
-			To HomePage</a>
+<!-- 	<div class="topbtn"> -->
+<!--              <a type="button" -->
+<%-- 			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go --%>
+<!-- 			To HomePage</a> -->
 	</div>
 	<div class="container">
 		<h3>All Score Data</h3>	
-		<span id="hiddenUserId" hidden>15</span><!-- 改${sessionScope.user.id} -->
+<%-- 		<span id="hiddenUserId" hidden>${sessionScope.Users.id}</span><!-- 改${sessionScope.user.id} --> --%>
 		<div>
 			<label> 
 				<select class="form-control" id="classCode" style="width:150px">
@@ -109,7 +109,7 @@
 		var sessionUserId = $("#hiddenUserId").text();
 		console.log(sessionUserId);
 		let xhr2 = new XMLHttpRequest();
-		xhr2.open("GET", "<c:url value='/findStudentPersonalScoreList.json'/>" + "?classCodeId="+ classCodeId + "&sessionUserId=" + sessionUserId, true);
+		xhr2.open("GET", "<c:url value='/findStudentPersonalScoreList.json'/>" + "?classCodeId="+ classCodeId, true);
 		xhr2.send();
 		xhr2.onreadystatechange = function(){
 		    if(xhr2.readyState == 4 && xhr2.status == 200){

@@ -23,9 +23,10 @@
 <div class="container">
 	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-check-square'></i>Create Score Data</h3>
 
-	<div class="topbtn"></div>
+	<div class="topbtn" topbtn></div>
 	
 	<!-- 課程選單 -->
+		<div  >
 	<label> 
 		<select class="form-control" id="classCode" style="width:150px">
 			<option value="-1" selected="selected">請選擇</option>
@@ -33,11 +34,12 @@
 	</label>	
 	
 	<!-- 搜尋次數 -->
-	<div>
+	<div ">
 		<div style="width:20%">
 			<label for="inputScore" class="form-label"></label>
 			<input type="text" name="score" class="form-control"  placeholder="請輸入次數" id="inputfrequency" size="5" value="${score1.score}">
 		</div>
+    
 		<button id='selectBtn' class="btn btn-success">搜尋</button>
 		<button id='send' class="btn btn-success">send</button>
 	</div>

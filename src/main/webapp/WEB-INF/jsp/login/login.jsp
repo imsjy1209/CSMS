@@ -37,9 +37,10 @@
     <input type="password" placeholder="Enter Password" name="pwd" required>
     <p>${LoginError}</p>
     <button type="submit">Login</button>
+    <button type="button" id="test"></button>
   </div>
-
 </form>
-
+<script>
+</script>
 </body>
 </html>

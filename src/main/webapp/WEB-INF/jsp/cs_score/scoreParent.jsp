@@ -33,10 +33,10 @@
 </style>
 </head>
 <body>
-	<div class="topbtn">
-	         <a type="button"
-			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go
-			To HomePage</a>
+<!-- 	<div class="topbtn"> -->
+<!-- 	         <a type="button" -->
+<%-- 			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go --%>
+<!-- 			To HomePage</a> -->
 	</div>
 	   <div class="container">
 		<h3>All Score Data</h3>
