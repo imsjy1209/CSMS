@@ -149,14 +149,25 @@ public class UsersController {
     }
     
     @PostMapping("users/checklogin")
-    public String checkLogin(@RequestParam(name="username") String username,@RequestParam(name="pwd") String pwd,Model m) {
+    public String checkLogin(@RequestParam(name="username") String username,@RequestParam(name="pwd") String pwd,SessionStatus status,Model m) {
     	Users users = userService.checkLogin(username, pwd);
-    	if(users !=null) {
+    	// if(users.getIsFirst() == 1){
+        //     return "users/firstlogin";
+        // }     
+        if(users !=null) {
 			m.addAttribute("users",users);
 		} else {
 			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
 			return "login/login";
 		}
+        if(users.getAccRight()==0){
+            m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
+			status.setComplete();
+            return "login/login";
+        }
+        if(users.getIsFirst()==1){
+            return "users/firstlogin";
+        }
     	Groups groups = users.getGroups();
     	Integer id = groups.getId();
     	switch(id) {
