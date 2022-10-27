@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -161,7 +162,8 @@ public class UsersController {
 			m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
             return "login/login";
 		}else if(users.getIsFirst() == 1) {
-			return "users/firstlogin";
+			m.addAttribute("users",users);
+			return "login/firstLogin";
 		}else {
 			m.addAttribute("users",users);
 		}
@@ -189,6 +191,16 @@ public class UsersController {
             break;     
     	}
     	return "activity/homepage";
+    }
+    
+    @PostMapping(value = "users/updateFirstLogin")
+    public String updateFirstLogin
+    (@SessionAttribute("users") Users users,@RequestParam(name="newPassword")String newPwd,Model model,SessionStatus status) {
+    	users.setPassword(newPwd);
+    	users.setIsFirst(0);
+    	userService.insert(users);
+    	status.setComplete();
+    	return"redirect:/login";
     }
     
     @GetMapping("/CSMSHomePage")
