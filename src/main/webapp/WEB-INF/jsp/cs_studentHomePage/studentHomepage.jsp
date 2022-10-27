@@ -65,7 +65,7 @@
 	</div>
 	<div class="lessonIcon hoverLight" id="lessonIcon">
 		<!-- 課程 button 的 data-target 要改-->
-		<button type="button" class="" data-toggle="modal" data-target="#">
+		<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenterCourse">
 			<img src="${contextRoot}/image/lesson.png" title="課程" style="border: 1px solid red;">
 		</button>
 	</div>
@@ -93,7 +93,7 @@
   </button>
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="exampleModalCenterCourse" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterCourse" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -103,7 +103,12 @@
 		  </button>
 		</div>
 		<div class="modal-body">
-		  <p>test</p>
+		  <p>${student.name}</p>
+	 <c:forEach var="post" items="${aOrderDetailList}">
+	 <p>${post.course.courseSubject}</p>
+	 <p>${post.course.courseGrade}</p>
+	 <p>${post.course.courseClass}</p>
+	 </c:forEach>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

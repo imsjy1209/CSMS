@@ -58,5 +58,12 @@ public class OrderDetailService {
 	public OrderDetail findByStudentIsAndCourseIs(Student student,Course course) {
 		return orderDetailDao.findByStudentIsAndCourseIs(student, course);
 	}
+	
+	//===找訂單明細By Student==================
+	public List<OrderDetail> findByStudentIs(Student student){
+		return orderDetailDao.findByStudentIs(student);
+	}
+	
+	
 
 }

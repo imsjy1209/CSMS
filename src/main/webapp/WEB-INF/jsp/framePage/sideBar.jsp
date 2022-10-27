@@ -190,6 +190,12 @@ cursor: pointer;
 transition: 0.2s;
 }
 
+.pn:hover{
+cursor: pointer;
+      font-weight: 900;
+       color: orange; 
+}
+
 /* .main-title{ */
 /* text-align:center; */
 /* } */
@@ -377,6 +383,15 @@ transition: 0.2s;
                     <a href="#">About</a>
                 </li>
                 
+               <li>
+                    <a href="#registerInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">註冊相關</a>
+                     <ul class="collapse list-unstyled" id="registerInfo">
+                        <li>
+                            <a id="register-Btn" href="${contextRoot}/createRegister.page">Register(新增註冊)</a>
+                        </li>
+                    </ul>
+                </li>
+                
 <!--                <li> -->
 <!--                     <a href="#accessInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a> -->
 <!--                      <ul class="collapse list-unstyled" id="accessInfo"> -->
@@ -456,7 +471,17 @@ transition: 0.2s;
 <!--                         </li> -->
 <!--                     </ul> -->
 <!--                 </li> -->
-                
+                 <li>
+                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">聯絡簿相關</a>
+                     <ul class="collapse list-unstyled" id="contactBookInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
+                        </li>
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
+                        </li>
+                    </ul>
+                </li>
                 
                 <li>
                     <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>

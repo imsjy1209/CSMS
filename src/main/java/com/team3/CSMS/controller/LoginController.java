@@ -42,6 +42,88 @@ public class LoginController {
 		return "register/registerform";
 	}
 	
+	//==============Neil 1027=================
+	@GetMapping("/createRegister.page")
+	public String createRegister() {
+		return "cs_register/createRegisterForm";
+	}
+	
+	@GetMapping("register/addschool2")
+	public String addschoolFin(
+			@RequestParam("account") String account,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("title") String title,
+			@RequestParam("hiredate") String hiredate,
+			@RequestParam("resigndate") String resigndate) throws ParseException {
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(hiredate);
+		Date date1 = formatter.parse(resigndate);
+		Groups groups = gSer.findById(2);
+		Users users = new Users(account,password,groups);
+		uSer.insert(users);
+		School school = new School(users,name,title,date,date1);
+		sSer.insert(school);
+		return "cs_register/createRegisterForm";
+	}
+	
+	@GetMapping("register/addteacher2")
+	public String addteacherFin(
+			@RequestParam("account") String account,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("title") String title,
+			@RequestParam("hiredate") String hiredate,
+			@RequestParam("resigndate") String resigndate,
+			@RequestParam("expertise") String expertise) throws ParseException {
+		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = formatter.parse(hiredate);
+		Date date1 = formatter.parse(resigndate);
+		Groups groups = gSer.findById(3);
+		Users users = new Users(account,password,groups);
+		uSer.insert(users);
+		Teacher teacher = new Teacher(users,name,title,date,date1,expertise);
+		tSer.insert(teacher);
+		return "cs_register/createRegisterForm";
+	}
+	@GetMapping("register/addStudent2")
+	public String addStudentFin(
+			@RequestParam("account") String account,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("gender") String gender,
+			@RequestParam("schoolType") String schoolType,
+			@RequestParam("schoolName") String schoolName,
+			@RequestParam("grade") String grade,
+			@RequestParam("parentname") String parentname,
+			@RequestParam("relationship") String relationship) throws ParseException {
+		Groups groups = gSer.findById(4);
+		Users users = new Users(account,password,groups);
+		uSer.insert(users);
+		Parent parent = pSer.searchParentByname(parentname);
+		Student student = new Student(users,name,gender,schoolType,schoolName,grade,parent,relationship);
+		stSer.insert(student);
+		return "cs_register/createRegisterForm";
+	}
+	
+	@GetMapping("register/addParent2")
+	public String addParentFin(
+			@RequestParam("account") String account,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("gender") String gender,
+			@RequestParam("tel") String tel,
+			@RequestParam("email") String email) throws ParseException {
+		Groups groups = gSer.findById(5);
+		Users users = new Users(account,password,groups);
+		uSer.insert(users);
+		Parent parent = new Parent(users,name,gender,tel,email);
+		pSer.insert(parent);
+		return "cs_register/createRegisterForm";
+	}
+	//==============End of Neil 1027==================
+	
+	
 	@GetMapping("register/edit")
 	public String edit() {
 		return "register/manageusers";

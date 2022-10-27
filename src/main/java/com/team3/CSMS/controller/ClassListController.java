@@ -94,6 +94,19 @@ public class ClassListController {
 		public @ResponseBody ClassList findClassListByIdAjax(@RequestParam(name="classListId")Integer classListId) {
 			ClassList oneClassList = classListService.findById(classListId);
 			 return oneClassList;
-		}		
+		}	
+		
+		//=====Del ClassList By Id=================
+		@GetMapping("/deleteClssListByIdAjax.controller")
+		public @ResponseBody void deleteClssListByIdAjax
+		(@RequestParam(name="clId")Integer clId) {
+			ClassList oneClassList = classListService.findById(clId);
+			oneClassList.setCourse(null);
+			oneClassList.setRoom(null);
+			oneClassList.setSchool(null);
+			oneClassList.setTeacher(null);
+			oneClassList.setClassStudentLists(null);
+			classListService.deleteClassList(oneClassList);
+		}	
 
 }
