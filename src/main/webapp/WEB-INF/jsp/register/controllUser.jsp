@@ -41,18 +41,19 @@ table {
 </head>
 <body> -->
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 	<!-- <jsp:include page="../layout/navbar.jsp"></jsp:include> -->
+	
 	<div align="center">
 		<div class="container" align="center">
-			<nav>
+				<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				  <a class="nav-item nav-link active navSch" id="navSchool" data-toggle="tab" href="#nav-school" role="tab" aria-controls="nav-school" aria-selected="true">校方</a>
 				  <a class="nav-item nav-link navTea" id="navTeacher" data-toggle="tab" href="#nav-teacher" role="tab" aria-controls="nav-teacher" aria-selected="false">教師</a>
 				  <a class="nav-item nav-link navStu" id="navStudent" data-toggle="tab" href="#nav-student" role="tab" aria-controls="nav-student" aria-selected="false">學生</a>
 				  <a class="nav-item nav-link navPar" id="navParents" data-toggle="tab" href="#nav-parents" role="tab" aria-controls="nav-parents" aria-selected="false">家長</a>
 				</div>
-			  </nav>
+			  	</nav>
 			<br> <br>
 			<div class="tab-content" >
 				<div class="tab-pane fade show active" id="dataArea" role="tabpanel" aria-labelledby="nav-school-tab">
@@ -60,6 +61,8 @@ table {
 				</div>
 			</div>
 	</div>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -222,7 +225,7 @@ table {
 	}
 	function displayData04(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table class='table table-hover'>s <tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>登入權限</th></tr>"
+		var htmlSeg = "<table class='table table-hover'><tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>登入權限</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];

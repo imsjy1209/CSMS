@@ -5,7 +5,7 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
 <div class="container">
 <h1>出缺勤</h1>
