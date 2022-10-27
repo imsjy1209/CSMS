@@ -71,7 +71,8 @@ padding-right:15px!important;
 	
 	
 		<div class="nav container">
-			<a href="#" class="logo">CramSchool</a>
+			<a href="${pageContext.request.contextPath}/CSMSHomePage" class="logo">CramSchool</a>
+			<i class='bx bxs-user' >${student.name}</i>
 			<div><i class='bx bx-cart' style='font-size:48px;' id="cart-icon"></i><span class="badge badge-primary badge-pill">0</span></div>
 			
 			<!--Cart-->
@@ -164,8 +165,8 @@ padding-right:15px!important;
 <footer>
 <!-- 		<div id="already-buy-course-area" class="already-buy-course-area"> -->
 <h3>已擁有的課程</h3>
+<span id="stuSessionId" style="display:none">${student.id}</span>
 <div class="shop-content-test" id="already-buy-course-area">
-		12345
 		</div>
 </footer>			
 	
@@ -507,7 +508,8 @@ $(".searchAllBtn").click(function(){
 	})
 
 $(function(){
-	var stuIdForFindAlreadyBuy =2;
+	var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
+// 	var stuIdForFindAlreadyBuy =2;
 	var xhr = new XMLHttpRequest();
 	
 	if(stuIdForFindAlreadyBuy!=null){
@@ -603,7 +605,7 @@ $(function(){
 
 function functionGoGo(){
 		//start testttttttttttttttttt
-		var stuIdForFindAlreadyBuy =2;
+		var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
 		console.log(stuIdForFindAlreadyBuy)
 		var xhrTest = new XMLHttpRequest();
 		xhrTest.open("GET", "<c:url value='/findByStudentIsAndConfirmOrderIsAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
@@ -775,8 +777,7 @@ $(document).on('click','.btn-buy',function(){
     var father = $(this).siblings('.cart-content').children();
     for(var i=0;i<father.length;i++){
 	var courseId = father.eq(i).find('.detail-box').find('span').text();
-	var studentId=2;
-	
+	var studentId =$('#stuSessionId').text();
 	 console.log(courseId);
 	 console.log(studentId);
 	 

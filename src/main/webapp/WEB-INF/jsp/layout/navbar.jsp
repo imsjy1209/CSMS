@@ -94,13 +94,15 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
+     <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/courseAllOnPageAjax.page">購買課程</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/signout">登出</a>
       </li>
     </ul>
   </div>
 </nav>
-
 
 
 <script type="text/javascript" src="${contextRoot}/js/jquery-3.6.1.min.js"></script>

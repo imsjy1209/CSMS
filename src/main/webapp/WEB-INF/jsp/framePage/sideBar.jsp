@@ -382,13 +382,16 @@ transition: 0.2s;
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a id="course-Btn" href="#">Course(商品)</a>
+                            <a id="courseCreate-Btn" href="#">CourseCreate(建立商品)</a>
+                        </li>
+                        <li>
+                            <a id="course-Btn" href="#">Course(商品列表)</a>
                         </li>
                         <li>
                             <a id="orderList-Btn" href="#">OrderList(訂單)</a>
                         </li>
                          <li>
-                            <a id="orderDetail-Btn"  href="#">購買/排課狀態(訂單明細)</a>
+                            <a id="orderDetail-Btn"  href="#">Purchase/Arrange(訂單明細)</a>
                         </li>
                     </ul>
                 </li>
