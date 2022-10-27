@@ -4,32 +4,35 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
 <div class="container">
 <h1>更改出缺勤</h1>
 
 <BR/>
+
 <div class="form-group">
-  <form class="form-inline" action="">
-  <label for="exampleFormControlSelect1">選擇班級&nbsp&nbsp</label>
-  <select class="" id="classCode" name="classCode">
-    <option value="-1" selected="selected" hidden>selected</option>
-  </select>
-  <label for="">&nbsp&nbsp輸入日期&nbsp&nbsp&nbsp</label>
-  <input type="text" name="days" placeholder="ex:20221010" id="days">&nbsp&nbsp
-</form>
+ 	 <form class="form-inline" action="">
+  		<label for="exampleFormControlSelect1">選擇班級&nbsp&nbsp</label>
+  		<select class="" id="classCode" name="classCode">
+    		<option value="-1" selected="selected" hidden>selected</option>
+  		</select>
+  		<label for="">&nbsp&nbsp輸入日期&nbsp&nbsp&nbsp</label>
+  		<input type="text" name="days" placeholder="ex:20221010" id="days">&nbsp&nbsp
+	</form>
 </div>
 
-<div>
-  <p id="classInfo">
-  </p>
-</div>
+	<div>
+  		<p id="classInfo">
+  		</p>
+	</div>
+	
 <form class="form-inline" action="">
   <i style='font-size:36px;' class='bx bx-search-alt bx-flashing' ></i>
    <input class="form-control mr-sm-2" type="search" value="" placeholder="Search" aria-label="Search">
    <button id="mohuBtn" class="btn btn-outline-success my-2 my-sm-0">Search</button>
  </form></br>
+ 
 <form:form>
 <table class="table table-hover" id="studentList">
     <thead>
@@ -49,6 +52,7 @@
     </tbody>
   </table>
 </form:form>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -168,6 +172,7 @@
 
     })
   }//end of funtion displayStudentListAndInfox
+  
   }
 
   //=======================版面動作=======================

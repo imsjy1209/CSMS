@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.team3.CSMS.dto.AllClassListParentVerDto;
 import com.team3.CSMS.dto.AllClassListSchoolVerDto;
@@ -26,6 +27,7 @@ import com.team3.CSMS.dto.ContactBookSignParentVerDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.model.ContactBookSign;
+import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.ContactBookSignService;
@@ -42,7 +44,7 @@ public class ContactBookController {
 	@Autowired
 	private ContactBookSignService cbsService;
 
-	//------------------------- 老師 -------------------------  進度：大致已完成，要加入session微調/測試
+	//------------------------- 老師 -------------------------  進度：已完成 (有加入session測試)
 	/* 進入聯絡簿系統 */
 	// 【老師】聯絡簿首頁
 	@GetMapping("/ContactBook/T_Index")
@@ -53,19 +55,17 @@ public class ContactBookController {
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 【老師】課程選單
 	@GetMapping(value = "/allTeacherClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListTeacherVerDto> getAllTeacherClassList(String sessionAccount) { // BA001
-		// 預想：
-		// LoginController會寫@SessionAttributes(names = {"account"}) -- 延伸：聽說每個controller都要寫，否則會取不到(待查)
-		// getAttribute() -- 抓session的account資料餵給json -- how?? 忘記了 要查一下~~
-		List<AllClassListTeacherVerDto> aclTDto = clService.getAllClassInfoListByTeacherAccount("BA001"); // 之後要改回sessionAccount
+	public @ResponseBody List<AllClassListTeacherVerDto> getAllTeacherClassList(@SessionAttribute("users") Users users) { 
+		System.out.println("teacher's sessionAccount = " + users.getAccount()); // BA001
+		List<AllClassListTeacherVerDto> aclTDto = clService.getAllClassInfoListByTeacherAccount(users.getAccount()); // sessionAccount
 		return aclTDto;
 	}
 
 	/* 依課程篩選後之聯絡簿清單 */
 	// 【老師】課程選單對應聯絡簿清單
 	@GetMapping(value = "/teacherContactBookList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<ContactBookListTeacherVerDto> getTeacherContactBookList(@RequestParam("classListId") Integer classListId) { // 1	
-		List<ContactBookListTeacherVerDto> cblTDto = cbService.getTeacherContactBookListByClassListId(classListId);
+	public @ResponseBody List<ContactBookListTeacherVerDto> getTeacherContactBookList(@RequestParam("classListId") Integer classListId) { 	
+		List<ContactBookListTeacherVerDto> cblTDto = cbService.getTeacherContactBookListByClassListId(classListId); // 1
 		return cblTDto;
 	}
 
@@ -142,7 +142,7 @@ public class ContactBookController {
 //		return "redirect:/ContactBook/T_Index";
 //	}
 	
-	//------------------------- 校方 -------------------------  進度：已完成，要加入session微調/測試
+	//------------------------- 校方 -------------------------  進度：已完成 (有加入session測試)
 	/* 進入聯絡簿系統 */
 	// 【校方】聯絡簿首頁
 	@GetMapping("/ContactBook/Sc_Index")
@@ -153,8 +153,9 @@ public class ContactBookController {
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 【校方】課程選單
 	@GetMapping(value = "/allSchoolClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListSchoolVerDto> getAllSchoolClassList(String sessionAccount) { // AA002
-		List<AllClassListSchoolVerDto> aclSDto = clService.getAllClassInfoListBySchoolAccount("AA002"); // 之後要改回sessionAccount
+	public @ResponseBody List<AllClassListSchoolVerDto> getAllSchoolClassList(@SessionAttribute("users") Users users) {
+		System.out.println("school's sessionAccount = " + users.getAccount()); // AA002
+		List<AllClassListSchoolVerDto> aclSDto = clService.getAllClassInfoListBySchoolAccount(users.getAccount()); // sessionAccount
 		return aclSDto;
 	}
 	
@@ -234,7 +235,7 @@ public class ContactBookController {
 		return "redirect:/ContactBook/Sc_Index";
 	}
 	
-	//------------------------- 學生 -------------------------  進度：已完成，要加入session微調/測試
+	//------------------------- 學生 -------------------------  進度：已完成 (有加入session測試)
 	/* 進入聯絡簿系統 */
 	// 【學生】聯絡簿首頁
 	@GetMapping("/ContactBook/St_Index")
@@ -245,8 +246,9 @@ public class ContactBookController {
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 【學生】課程選單
 	@GetMapping(value = "/allStudentClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListStudentVerDto> getAllStudentClassList(String sessionAccount) { // CA001
-		List<AllClassListStudentVerDto> aclStuDto = clService.getAllClassInfoListByStudentAccount("CA001"); // 之後要改回sessionAccount
+	public @ResponseBody List<AllClassListStudentVerDto> getAllStudentClassList(@SessionAttribute("users") Users users) {
+		System.out.println("student's sessionAccount = " + users.getAccount()); // CA001
+		List<AllClassListStudentVerDto> aclStuDto = clService.getAllClassInfoListByStudentAccount(users.getAccount()); // sessionAccount
 		return aclStuDto;
 	}
 	
@@ -258,7 +260,7 @@ public class ContactBookController {
 		return cblStuDto;
 	}
 	
-	//------------------------- 家長 -------------------------  進度：已完成，要加入session微調/測試
+	//------------------------- 家長 -------------------------  進度：已完成 (有加入session測試)
 	/* 進入聯絡簿系統 */	
 	// 【家長】聯絡簿首頁
 	@GetMapping("/ContactBook/P_Index")
@@ -269,8 +271,9 @@ public class ContactBookController {
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 【家長】課程選單
 	@GetMapping(value = "/allParentClassList.json", produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody List<AllClassListParentVerDto> getAllParentClassList(String sessionAccount) { // DA001
-		List<AllClassListParentVerDto> aclPDto = clService.getAllClassInfoListByParentAccount("DA001"); // 之後要改回sessionAccount
+	public @ResponseBody List<AllClassListParentVerDto> getAllParentClassList(@SessionAttribute("users") Users users) { 
+		System.out.println("student's sessionAccount = " + users.getAccount()); // DA001
+		List<AllClassListParentVerDto> aclPDto = clService.getAllClassInfoListByParentAccount(users.getAccount()); // sessionAccount
 		return aclPDto;
 	}
 	

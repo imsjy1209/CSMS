@@ -41,25 +41,27 @@ table {
 </head>
 <body> -->
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 	<!-- <jsp:include page="../layout/navbar.jsp"></jsp:include> -->
+	
 	<div align="center">
 		<div class="container" align="center">
-			<nav>
+				<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				  <a class="nav-item nav-link active navSch" id="navSchool" data-toggle="tab" href="#nav-school" role="tab" aria-controls="nav-school" aria-selected="true">校方</a>
 				  <a class="nav-item nav-link navTea" id="navTeacher" data-toggle="tab" href="#nav-teacher" role="tab" aria-controls="nav-teacher" aria-selected="false">教師</a>
 				  <a class="nav-item nav-link navStu" id="navStudent" data-toggle="tab" href="#nav-student" role="tab" aria-controls="nav-student" aria-selected="false">學生</a>
 				  <a class="nav-item nav-link navPar" id="navParents" data-toggle="tab" href="#nav-parents" role="tab" aria-controls="nav-parents" aria-selected="false">家長</a>
 				</div>
-			  </nav>
-			<br><br>
+
 			<div class="tab-content" >
 				<div class="tab-pane fade show active" id="dataArea" role="tabpanel" aria-labelledby="nav-school-tab">
 					  
 				</div>
 			</div>
 	</div>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -126,6 +128,7 @@ table {
 	}
 	function displayData01(data) {
 		var school = JSON.parse(data);
+		
 		var htmlSeg = "<table class='table table-hover'><thead> <tr><th scope='col'>名字</th><th scope='col'>職位</th><th scope='col'>聘用日期</th><th scope='col'>在職情況</th><th scope='col'>登入權限</th></tr></thead>"
 		if (school.length > 0) {
 			for (var x = 0; x < school.length; x++) {
@@ -192,6 +195,7 @@ table {
 
 	function displayData03(data) {
 		var parents = JSON.parse(data);
+		console.log(parents);
 		var htmlSeg = "<table class='table table-hover'> <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th><th>登入權限</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {

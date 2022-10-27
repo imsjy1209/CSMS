@@ -270,6 +270,7 @@
 			<div id="forBtnOption">
 			
 			</div>
+			
             <div class="bigDiv">
  				<div class="col-xs-6">
            			<table id="table" class="table table-striped mt-5">
@@ -285,9 +286,13 @@
 			
 					</table>
 				</div>
- 
- 
-   			</div>         
+   			</div>
+<!--  ====================End of bigDiv================ -->
+
+			<div class="forDonDon">
+			
+			</div>
+   			         
 <!--        </div> -->
        
 <!--  ===============for side bar============  -->
@@ -368,6 +373,7 @@ $(function() {
 			$('.OrderListBtnGroup').remove();
 			$('.classListSelDiv').remove();
 			$('.ClassStudentListBtnGroup').remove();
+			$('.forDonDon').remove();
 			$('.main-title').text('課程商品-Course')
 	})
 		function showAllCourse(){
@@ -711,6 +717,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('班級資訊-ClassList')
 		
 
@@ -1009,6 +1016,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('上課紀錄-ClassRecord')
 		
 		var xhr = new XMLHttpRequest();
@@ -1071,8 +1079,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//======前置作業==========
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('訂單總表-OrderList')
-
 		
 		
 		//======Create Btn Option====================	
@@ -1446,6 +1454,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('購買/排課狀態-OrderDetail')
 		
 		
@@ -1656,6 +1665,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		//=========前置作業========
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('學員對應班級清單-ClassStudentList')
 		
 		
@@ -1845,6 +1855,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.absentContent').remove();
 		$('.main-title').text('教室清單-Room')
 		
 		var xhr = new XMLHttpRequest();
@@ -2255,6 +2266,574 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		}
 	}
 	})
+//=====================Absent Insert===============================	
+	$('#absentCreate-Btn').click(function(){
+		//=========前置作業 for empty bigDiv========
+		$('.OrderListBtnGroup').remove();
+		$('.classListSelDiv').remove();
+		$('.ClassStudentListBtnGroup').remove();
+		$('#thead-title').html("");
+		$('#content-data').html("");
+		$('.main-title').text('輸入出缺勤-InsertAbsentData')
+		
+		//=========生成非Ajax元素===============
+		var contentAbsent = "";	
+		contentAbsent+=
+		'<div class="container absentContent">'+
+		'<div class="form-group">'+
+		  '<label for="exampleFormControlSelect1">chose class</label>'+
+		  '<select class="form-control classCodeId" id="classCode" name="classCode">'+
+		    '<option value="-1" selected="selected" hidden>selected</option>'+
+		  '</select>'+
+		'</div>'+
+
+		'<div>'+
+		  '<p id="classInfo">'+
+		  '</p>'+
+		'</div>'+
+
+			'<table class="table table-hover" id="studentList">'+
+		    '<thead>'+
+		      '<tr>'+
+		        '<th scope="col">出席</th>'+
+		        '<th scope="col">坐號</th>'+
+		        '<th scope="col">姓名</th>'+
+		      '</tr> '+
+		    '</thead>'+
+		    '<tbody>'+
+		      '<tr>'+
+		      '</tr>'+
+		    '</tbody>'+
+		    '<button type="button" class="btn btn-primary mb-2" id="send">send</button>'+
+		  	'</table>'+
+		'</div>';
+		$('.forDonDon').html(contentAbsent);
+		
+		//=========Ajax Get 元素1=========
+	    let xhr = new XMLHttpRequest(); //for classcodeList
+	    let classCodeDate = [];// create a classcode array
+	    xhr.open("GET","<c:url value='/clCodeList.json'/>",true);
+	    xhr.send();
+	    xhr.onreadystatechange = function(){
+	      if (xhr.readyState==4 && xhr.status == 200){
+	        let classcodes = JSON.parse(xhr.responseText);
+	        let id;
+	        let clscode;
+	        // insert option to select
+	        for (let i = 0;i<classcodes.length;i++){
+	          id=classcodes[i].id;
+	          clscode=classcodes[i].classCode;
+	          let opt='<option value=\"'+id+'\">'+clscode+'</option>';
+	          $('#classCode').append(opt);
+	        }
+	      }
+	    }
+	    
+	  //=========Ajax Get 元素2=========
+	    let classcodeSelect=$("#classCode"); // 取得select
+	    //select change event
+	    classcodeSelect.change(sendIdAndGetStudentListAndInfo);
+	    function sendIdAndGetStudentListAndInfo(){
+	      let classSelected =document.getElementById("classCode");
+	      //get the select value
+	      let classCodeIdvalue = classSelected.value;
+	      //for studentList and classinfo
+	      let xhr2 = new XMLHttpRequest();
+	      // get the information from select value
+	      xhr2.open("GET","<c:url value='/clInfo.json'/>"+"?classCodeId="+classCodeIdvalue,true); 
+	      xhr2.send();
+	      xhr2.onreadystatechange = function(){
+	        if(xhr2.readyState == 4 && xhr2.status == 200){
+	          displayStudentListAndInfo(xhr2.responseText);//當選擇改變時找出對應資訊和學生清單
+	        }
+	      }
+	    }
+	    
+	    // insert class info and student list
+	    function displayStudentListAndInfo (responseText){
+	    // console.log($(".classCodeId").val());
+	    let dataSource =JSON.parse(responseText);
+	    let stuList=dataSource.slDto;
+	    let teacher=dataSource.cliDto[0].teacherName;
+	    let clsRoom=dataSource.cliDto[0].classroom;
+	    let subject=dataSource.cliDto[0].subject;
+	    let school=dataSource.cliDto[0].schoolType;
+	    let grade=dataSource.cliDto[0].grade;
+	    // insert class info
+	    let  classInfo=$("#classInfo");
+	    classInfo.html(" 教室: "+clsRoom+" 課程內容: "+school+'&nbsp&nbsp&nbsp&nbsp'+grade+'&nbsp&nbsp&nbsp&nbsp'+subject+'&nbsp'+" 老師: "+teacher)
+	    // insert students list
+	    let studentLength=stuList.length;
+	    $('#studentList tbody tr td').remove();
+	    stulist_data="<tbody>";
+	      for (i=0;i<studentLength; i++){
+	        stulist_data+="<tr>"
+	          stulist_data+="<td><select name='absOrNot' id='absOrNot' class='absOrNot'>"
+	            stulist_data+="<option value='0'>缺席</option>"
+	            stulist_data+="<option value='1'selected='selected'>出席</option>"
+	            stulist_data+="<option value='2'>請假</option>"
+	            stulist_data+="</select></td>"
+	            stulist_data+="<td>" +stuList[i].studentSitID +"</td>"
+	            stulist_data+="<td style='display:none' class='stuId'>" +stuList[i].studentId +"</td>"
+	            stulist_data+="<td>" +stuList[i].studentName +"</td>"
+	            stulist_data+="<tr>"
+	            }
+	            stulist_data +="</tobody>";
+	            $('#studentList').append(stulist_data);
+	          }//end of funtion displayStudentListAndInfo
+		
+	    $("#send").click(function(){
+	        // ===============傳送absent List=============
+	        confirm('確定送出嗎?')
+	        let AbsentList=[];
+	            // 找到classcodeId的值< class="classCodeId">
+	            let classCodeId=$(".classCodeId").val();
+	            let studentId;
+	            let absOrNot;
+	            // table 裡的每一列
+	            $('.absOrNot').each(function(){
+	              // 取的每一列tr 裡面的select有沒有沒有出席的數值
+	              let absOrNot=$(this).val();
+	              // 找到每一頁隱藏 學生的id
+	              let studentId=$(this).parent().next().next().text();
+	              // 建立一個 物件塞入陣列
+	              let eachList={"classCodeId":classCodeId,"studentId":studentId,"absOrNot":absOrNot};
+	              // 塞入 131的 AbsentList
+	              AbsentList.push(eachList);
+	            })
+	            let AbsentListJsonString=JSON.stringify(AbsentList);
+	            // console.log(AbsentListJsonString);
+	            $.ajax({                            
+	                  url:'http://localhost:8081/CSMS/absentDataInsert',
+	                  contentType:'application/json;charset=UTF-8',
+	                  dataType:null,
+	                  method:'post',
+	                  //  data: 要改
+	                  data:AbsentListJsonString,
+	                  success:function(result){
+	                    // console.log(result)
+	                    history.go(0)
+	                    console.log("okokok")
+	                  },
+	                  error:function(err){
+	                    // console.log(err)
+	                    console.log("ngngngng")
+	                  }
+	  	        })
+	      })    
+	})//====End Of Absent Insert=======
+	
+	
+	
+	
+//=====================Absent Update===============================	
+	$('#absentUpdate-Btn').click(function(){
+		//=========前置作業 for empty bigDiv========
+		$('.OrderListBtnGroup').remove();
+		$('.classListSelDiv').remove();
+		$('.ClassStudentListBtnGroup').remove();
+		$('#thead-title').html("");
+		$('#content-data').html("");
+		$('.main-title').text('更改出缺勤-AbsentUpdate')
+		
+		//=========生成非Ajax元素===============
+		var contentAbsent = "";
+		contentAbsent+=
+		'<div class="container absentContent">'+
+		'<div class="form-group">'+
+		 	 '<form class="form-inline" action="">'+
+		  		'<label for="exampleFormControlSelect1">選擇班級&nbsp&nbsp</label>'+
+		  		'<select class="" id="classCode" name="classCode">'+
+		    		'<option value="-1" selected="selected" hidden>selected</option>'+
+		  		'</select>'+
+		  		'<label for="">&nbsp&nbsp輸入日期&nbsp&nbsp&nbsp</label>'+
+		  		'<input type="text" name="days" placeholder="ex:20221010" id="days">&nbsp&nbsp'+
+			'</form>'+
+		'</div>'+
+
+			'<div>'+
+		  		'<p id="classInfo">'+
+		  		'</p>'+
+			'</div>'+
+			
+		'<form class="form-inline" action="">'+
+		  '<i style="font-size:36px;" class="bx bx-search-alt bx-flashing" ></i>'+
+		   '<input class="form-control mr-sm-2" type="search" value="" placeholder="Search" aria-label="Search">'+
+		   '<button id="mohuBtn" class="btn btn-outline-success my-2 my-sm-0">Search</button>'+
+		 '</form></br>'+
+		 
+		'<form:form>'+
+		'<table class="table table-hover" id="studentList">'+
+		    '<thead>'+
+		      '<tr>'+
+		        '<th scope="col">坐號</th>'+
+		        '<th scope="col">姓名</th>'+
+		        '<th scope="col">出席</th>'+
+
+		      '</tr> '+
+		    '</thead>'+
+		    '<tbody>'+
+		      '<tr>'+
+		        '<td><input type="checkbox" checkes></td>'+
+		        '<td>22</td>'+
+		        '<td>謝冬冬</td>'+
+		     '</tr>'+
+		    '</tbody>'+
+		  '</table>'+
+		'</form:form>'+
+		'</div>';
+		
+		$('.forDonDon').html(contentAbsent);
+		
+		
+		//=========Ajax Get 元素=========
+			
+		let xhr = new XMLHttpRequest(); //for classcodeList
+	    let classCodeDate = [];// create a classcode array
+	    xhr.open("GET","<c:url value='/clCodeList.json'/>",true);
+	    xhr.send();
+	    xhr.onreadystatechange = function(){
+	      if (xhr.readyState==4 && xhr.status == 200){
+	        let classcodes = JSON.parse(xhr.responseText);
+	        let id;
+	        let clscode;
+	        // insert option to select
+	        
+	        for (let i = 0;i<classcodes.length;i++){
+	          id=classcodes[i].id;
+	          clscode=classcodes[i].classCode;
+	          let opt='<option value=\"'+id+'\">'+clscode+'</option>';
+	          $('#classCode').append(opt);
+	        }
+	      }
+	    }
+	    
+	    
+	    let daysblur=$("#days")
+		  let classcodeSelect=$("#classCode"); // 取得select
+		  //select change event
+		  classcodeSelect.change(sendIdAndGetStudentListAndInfo);
+		  daysblur.blur(sendIdAndGetStudentListAndInfo);
+
+		  function sendIdAndGetStudentListAndInfo(){
+		    let classSelected =document.getElementById("classCode");
+		    let days=document.getElementById("days");
+		    let daysvalue=days.value;
+		    //get the select value
+		    let classCodeIdvalue = classSelected.value;
+		    //for studentList and classinfo
+		    let xhr2 = new XMLHttpRequest();
+		    // get the information from select value
+		    xhr2.open("GET","<c:url value='/getAbsentData.json'/>"+"?classCodeId="+classCodeIdvalue+"&days="+daysvalue,true); 
+		    xhr2.send();
+		    xhr2.onreadystatechange = function(){
+		      if(xhr2.readyState == 4 && xhr2.status == 200){
+		        displayAbsentListAndInfo(xhr2.responseText);//當選擇改變時找出對應資訊和學生清單
+		      }
+		    }
+		    // insert class info and Absent list
+		    function displayAbsentListAndInfo (responseText){
+		    let dataSource =JSON.parse(responseText);
+		    let abListLength=dataSource.abList.length;
+		    let teacher=dataSource.cliDto[0].teacherName;
+		    let clsRoom=dataSource.cliDto[0].classroom;
+		    let subject=dataSource.cliDto[0].subject;
+		    let school=dataSource.cliDto[0].schoolType;
+		    let grade=dataSource.cliDto[0].grade;
+		    // insert class info
+		    $('#classInfo').remove();
+		    let  classInfo=$("#classInfo");
+		    classInfo.html(" 教室: "+clsRoom+" 課程內容: "+school+'&nbsp&nbsp&nbsp&nbsp'+grade+'&nbsp&nbsp&nbsp&nbsp'+subject+'&nbsp'+" 老師: "+teacher)
+		    // insert students list
+		    $('#studentList tbody tr td').remove();
+		    //判斷職相等
+		      stulist_data="<tbody>";
+		    for (i=0;i<abListLength; i++){
+		        stulist_data+="<tr>"
+		        // console.log(dataSource.abList[i].id);
+		        let absid=dataSource.abList[i].id;
+		        stulist_data+="<td>" +dataSource.abList[i].student.classStudentLists[0].studentNo +"</td>"
+		        stulist_data+="<td style='display:none' class='absid  '>"+absid +"</td>"
+		        stulist_data+="<td>" +dataSource.abList[i].student.name+"</td>"
+		        // console.log(dataSource.abList[i].arrviedOrNot)
+		        let InorOut=dataSource.abList[i].arrviedOrNot
+		        let absesntText;
+		        if (InorOut==0){
+		          absesntText="缺席";
+		        } else if(InorOut==1){
+		          absesntText="出席";
+		        } else if (InorOut==2){
+		          absesntText="請假";
+		        }
+		        stulist_data+="<td><select class='abs' id='abs' name='abs'><option value='"+InorOut+"' selected='selected' hidden>"+absesntText+"</option>"
+		        stulist_data+="<option value='0' >缺席</option>"
+		        stulist_data+="<option value='1' >出席</option>"
+		        stulist_data+="<option value='2' >請假</option>"
+		        stulist_data+="</select></td></tr>"
+		    }
+
+		    stulist_data +='</tobody>';
+		    $('#studentList').append(stulist_data)
+
+		    // absent select change event
+		    $('.abs').change(function(){
+		    // get student id
+		    let absentid=$(this).parent().siblings('.absid ').text();
+		    let absOrNot=$(this).val();
+		    console.log(absOrNot);
+		    let xhr3 = new XMLHttpRequest();
+		    // get the information from select value
+		    xhr3.open("GET","<c:url value='/updateStudentOrNotByID'/>"+"?absid="+absentid+"&absOrNot="+absOrNot,true); 
+		    xhr3.send();
+
+		    })
+		  }//end of funtion displayStudentListAndInfox
+		  
+		  }	
+	    
+	  }) 
+	  
+	  
+	  //=============Access Manage==========================
+		  $('#test2Info').click(function(){
+				//=========前置作業========
+				$('.OrderListBtnGroup').remove();
+				$('.classListSelDiv').remove();
+				$('.ClassStudentListBtnGroup').remove();
+				$('.absentContent').remove();
+				$('.main-title').text('權限管理-AccessManage')
+			  
+				
+		//===非Ajax生成的元素====
+		var contentAccess = "";
+		contentAccess+=
+		'<div class="container" align="center">'+
+			'<nav>'+
+			'<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
+				  '<a class="nav-item nav-link active navSch" id="navSchool" data-toggle="tab" href="#nav-school" role="tab" aria-controls="nav-school" aria-selected="true">校方</a>'+
+				  '<a class="nav-item nav-link navTea" id="navTeacher" data-toggle="tab" href="#nav-teacher" role="tab" aria-controls="nav-teacher" aria-selected="false">教師</a>'+
+				  '<a class="nav-item nav-link navStu" id="navStudent" data-toggle="tab" href="#nav-student" role="tab" aria-controls="nav-student" aria-selected="false">學生</a>'+
+				  '<a class="nav-item nav-link navPar" id="navParents" data-toggle="tab" href="#nav-parents" role="tab" aria-controls="nav-parents" aria-selected="false">家長</a>'+
+				'</div>'+
+			'</nav>'+
+			'<br><br>'+
+			'<div class="tab-content" >'+
+				'<div class="tab-pane fade show active" id="dataArea" role="tabpanel" aria-labelledby="nav-school-tab">'+
+					  
+				'</div>'+
+			'</div>'+
+		'</div>';
+		
+		$('.forDonDon').html(contentAccess);	  
+		
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', "<c:url value='/findAllSchoolAjax.controller' />" , true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// console.log(xhr.responseText);
+					dataArea.innerHTML = displayData01(xhr.responseText);
+				}
+			}
+		
+		
+		navSchool.onclick = function() {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', "<c:url value='/findAllSchoolAjax.controller' />" , true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// console.log(xhr.responseText);
+					dataArea.innerHTML = displayData01(xhr.responseText);
+				}
+			}
+		}
+		navTeacher.onclick = function() {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', "<c:url value='/findAllTeacherAjax.controller' />" , true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// console.log(xhr.responseText);
+					dataArea.innerHTML = displayData02(xhr.responseText);
+				}
+			}
+		}
+		navStudent.onclick = function() {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', "<c:url value='/findAllStudentAjax.controller' />" , true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// console.log(xhr.responseText);
+					dataArea.innerHTML = displayData03(xhr.responseText);
+				}
+			}
+		}
+		navParents.onclick = function() {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', "<c:url value='/findAllParentAjax.controller' />" , true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// console.log(xhr.responseText);
+					dataArea.innerHTML = displayData04(xhr.responseText);
+				}
+			}
+		}
+		function displayData01(data) {
+			var school = JSON.parse(data);
+			var htmlSeg = "<table class='table table-hover'><thead> <tr><th scope='col'>名字</th><th scope='col'>職位</th><th scope='col'>聘用日期</th><th scope='col'>在職情況</th><th scope='col'>登入權限</th></tr></thead>"
+			if (school.length > 0) {
+				for (var x = 0; x < school.length; x++) {
+					var obj = school[x];
+					let userID=obj.users.id
+					let permissionValue=obj.users.accRight
+					let permissionText;
+					if (permissionValue==0){
+							permissionText="Disable";
+						}else{
+							permissionText="Enable";
+						}
+					
+					htmlSeg += "<tbody id='sLbody'>"
+					htmlSeg += "<tr>"
+					htmlSeg += "<td>" + obj.name + "</td>";
+					htmlSeg += "<td>" + obj.title + "</td>";
+					htmlSeg += "<td>" + obj.hiredate + "</td>";
+					htmlSeg += "<td>" + obj.status + "</td>";
+					htmlSeg +="<td class='userID' hidden>"+userID+"</td>";
+					htmlSeg += "<td> <select class='prop' id='prop' name='prop'> <option value='"+permissionValue+"' selected='selected' hidden>"+permissionText +"</option>"
+					htmlSeg += "<option value='0' >Disable</option> <option value='1' >Enable</option> </td>"
+					htmlSeg += "</tr></tbody>";
+				}
+			} else {
+				htmlSeg += "<tr><td colspan='5' align='center' >查無資料</td></tr>";
+			}
+			htmlSeg += "</table>";
+			return htmlSeg;
+		}
+		function displayData02(data) {
+			var parents = JSON.parse(data);
+			var htmlSeg = "<table class='table table-hover' <tr><th>名字</th><th>職位</th><th>專長</th><th>聘用日期</th><th>在職情況</th><th>登入權限</th></tr>"
+			if (parents.length > 0) {
+				for (var x = 0; x < parents.length; x++) {
+					var obj = parents[x];
+					let userID=obj.users.id
+					let permissionValue=obj.users.accRight
+					let permissionText;
+					if (permissionValue==0){
+							permissionText="Disable";
+						}else{
+							permissionText="Enable";
+						}
+					htmlSeg += "<tbody id='sLbody'>"
+					htmlSeg += "<tr>"
+					htmlSeg += "<td>" + obj.name + "</td>";
+					htmlSeg += "<td>" + obj.title + "</td>";
+					htmlSeg += "<td>" + obj.expertise + "</td>";
+					htmlSeg += "<td>" + obj.hiredate + "</td>";
+					htmlSeg += "<td>" + obj.status + "</td>";
+					htmlSeg +="<td class='userID' hidden>"+userID+"</td>";
+					htmlSeg += "<td> <select class='prop' id='prop' name='prop'> <option value='"+permissionValue+"' selected='selected' hidden>"+permissionText +"</option>"
+					htmlSeg += "<option value='0' >Disable</option> <option value='1' >Enable</option> </td>"
+					htmlSeg += "</tr></tbody>";
+				}
+			} else {
+				htmlSeg += "<tr><td colspan='5' align='center' >查無資料</td></tr>";
+			}
+			htmlSeg += "</table>";
+			return htmlSeg;
+		}
+		function displayData03(data) {
+			var parents = JSON.parse(data);
+			var htmlSeg = "<table class='table table-hover'> <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th><th>登入權限</th></tr>"
+			if (parents.length > 0) {
+				for (var x = 0; x < parents.length; x++) {
+					var obj = parents[x];
+					let userID=obj.users.id
+					let permissionValue=obj.users.accRight
+					let permissionText;
+					if (permissionValue==0){
+							permissionText="Disable";
+						}else{
+							permissionText="Enable";
+						}
+					htmlSeg += "<tbody id='sLbody'>"
+					htmlSeg += "<tr>";
+					htmlSeg += "<td>" + obj.name + "</td>";
+					htmlSeg += "<td>" + obj.gender + "</td>";
+					htmlSeg += "<td>" + obj.schoolType + "</td>";
+					htmlSeg += "<td>" + obj.schoolName + "</td>";
+					htmlSeg += "<td>" + obj.grade + "</td>";
+					htmlSeg += "<td>" + obj.parent.name + "</td>";
+					htmlSeg += "<td>" + obj.relationship + "</td>";
+					htmlSeg +="<td class='userID' hidden>"+userID+"</td>";
+					htmlSeg += "<td> <select class='prop' id='prop' name='prop'> <option value='"+permissionValue+"' selected='selected' hidden>"+permissionText +"</option>"
+					htmlSeg += "<option value='0' >Disable</option> <option value='1' >Enable</option> </td>"
+					htmlSeg += "</tr></tbody>";
+				}
+			} else {
+				htmlSeg += "<tr><td colspan='5' align='center' >查無資料</td></tr>";
+			}
+			htmlSeg += "</table>";
+			return htmlSeg;
+		}
+		function displayData04(data) {
+			var parents = JSON.parse(data);
+			var htmlSeg = "<table class='table table-hover'><tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>登入權限</th></tr>"
+			if (parents.length > 0) {
+				for (var x = 0; x < parents.length; x++) {
+					var obj = parents[x];
+					let userID=obj.users.id
+					let permissionValue=obj.users.accRight
+					let permissionText;
+					if (permissionValue==0){
+							permissionText="Disable";
+						}else{
+							permissionText="Enable";
+						}
+					htmlSeg += "<tbody id='sLbody'>"
+					htmlSeg += "<tr>";
+					htmlSeg += "<td>" + obj.name + "</td>";
+					htmlSeg += "<td>" + obj.gender + "</td>";
+					htmlSeg += "<td>" + obj.tel + "</td>";
+					htmlSeg += "<td>" + obj.email + "</td>";
+					htmlSeg +="<td class='userID' hidden>"+userID+"</td>";
+					htmlSeg += "<td> <select class='prop' id='prop' name='prop'> <option value='"+permissionValue+"' selected='selected' hidden>"+permissionText +"</option>"
+					htmlSeg += "<option value='0' >Disable</option> <option value='1' >Enable</option> </td>"
+					htmlSeg += "</tr></tbody>";
+				}
+			} else {
+				htmlSeg += "<tr><td colspan='5' align='center' >查無資料</td></tr>";
+			}
+			htmlSeg += "</table>";
+			return htmlSeg;
+		}
+		// FIXME: 好像會有點卡住
+		$(document).on('change','.prop',function () {
+	  	// $('.prop').change(function(){
+	      console.log("select change");
+	      // console.log($(this));
+	      // get student id
+	      let userId=$(this).parent().siblings('.userID ').text();
+	      let permission=$(this).val();
+	      console.log(permission);
+	      let xhr3 = new XMLHttpRequest();
+	      // get the information from select value
+	      xhr3.open("GET","<c:url value='/updateUsersPermisson'/>"+"?userId="+userId+"&permission="+permission,true); 
+	      xhr3.send();
+		})  
+			
+		
+		
+		
+		
+		
+		})
+		  
+		  
+	
 	
 
 </script>
