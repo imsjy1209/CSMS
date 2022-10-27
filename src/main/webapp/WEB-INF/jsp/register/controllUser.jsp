@@ -126,6 +126,7 @@ table {
 	}
 	function displayData01(data) {
 		var school = JSON.parse(data);
+		
 		var htmlSeg = "<table class='table table-hover'><thead> <tr><th scope='col'>名字</th><th scope='col'>職位</th><th scope='col'>聘用日期</th><th scope='col'>在職情況</th><th scope='col'>登入權限</th></tr></thead>"
 		if (school.length > 0) {
 			for (var x = 0; x < school.length; x++) {
@@ -192,6 +193,7 @@ table {
 
 	function displayData03(data) {
 		var parents = JSON.parse(data);
+		console.log(parents);
 		var htmlSeg = "<table class='table table-hover'> <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th><th>登入權限</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
