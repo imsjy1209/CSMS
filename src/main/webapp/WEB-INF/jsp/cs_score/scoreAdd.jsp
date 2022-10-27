@@ -34,7 +34,7 @@
 	</label>	
 	
 	<!-- 搜尋次數 -->
-	<div class="form-group row">
+	<div ">
 		<div style="width:20%">
 			<label for="inputScore" class="form-label"></label>
 			<input type="text" name="score" class="form-control"  placeholder="請輸入次數" id="inputfrequency" size="5" value="${score1.score}">
