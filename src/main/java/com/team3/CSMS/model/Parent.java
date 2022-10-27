@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -56,13 +55,12 @@ public class Parent {
 	@Column(name = "create_at", columnDefinition = "datetime", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date create_at; // insert data default getDate()
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Column(name = "update_at", columnDefinition = "datetime", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date update_at; // insert data default getDate() ; update data default getDate()
-
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="parent", cascade = CascadeType.ALL)
 //	@JsonManagedReference
@@ -76,15 +74,13 @@ public class Parent {
 		}
 		if (update_at == null) {
 			update_at = new Date();
-		} 
+		}
 	}
-    
+
 	@PreUpdate
 	public void onUpdate() {
 		update_at = new Date();
 	}
-	
-	
 	
 	public Parent(Users users, String name, String gender, String tel, String email) {
 		super();

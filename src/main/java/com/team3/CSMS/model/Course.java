@@ -53,16 +53,16 @@ public class Course {
 	@Column(name="coursemember", nullable = false)
 	private int courseMember;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="startdate", columnDefinition = "datetime", nullable = false)
-	@JsonFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date startDate;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="enddate", nullable = false, columnDefinition = "datetime")
-	@JsonFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
 	private Date endDate;
 	
 	@Column(name="courseonoff" ,columnDefinition = "bit", nullable = false)

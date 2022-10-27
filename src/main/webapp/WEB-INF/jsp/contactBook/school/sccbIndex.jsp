@@ -8,6 +8,8 @@
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
  <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ <!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 	
 <!-- CONTENT -->
@@ -165,8 +167,10 @@ $("#classInfoList").on("change",function(){
 						cb_content +='</td>';
 					} else if (cbList[i].phase == 4) {
 						cb_content +='<td>已取消</td>';
+						cb_content +='<td></td>';
 					} else {
-						cb_content +='<td>系統發生問題，請通知系統管理員</td>';
+						cb_content +='<td>Error</td>';
+						cb_content +='<td></td>';
 					}
 					cb_content +='<tr>';
   				}

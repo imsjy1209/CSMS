@@ -183,6 +183,11 @@ public class UsersController {
     	return "activity/homepage";
     }
     
+    @GetMapping("/CSMSHomePage")
+    public String goToHomePage() {
+    	return "activity/homepage";
+    }
+    
     @GetMapping("/signout")
 	public String deletestu(SessionStatus status,Model m) {
 		status.setComplete();

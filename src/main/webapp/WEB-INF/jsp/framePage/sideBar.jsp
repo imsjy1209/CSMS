@@ -11,7 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<%-- <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script> --%>
+
+
+<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -22,6 +24,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+	
+
 	
 	<!--box icons-->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -166,14 +170,24 @@ color:black;
 /* font-weight: 800; */
 }
 
+.teachBtn:hover{
+background-color: orange;
+}
+.teachBtn.active:hover{
+background-color: orange;
+}
 
 
 .teachBtn.active{
 background-color: cornflowerblue;
+transition: 0.2s;
+
 }
 
 .teachBtn{
 border-radius:50%;
+cursor: pointer;
+transition: 0.2s;
 }
 
 /* .main-title{ */
@@ -368,13 +382,16 @@ border-radius:50%;
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a id="course-Btn" href="#">Course(商品)</a>
+                            <a id="courseCreate-Btn" href="#">CourseCreate(建立商品)</a>
+                        </li>
+                        <li>
+                            <a id="course-Btn" href="#">Course(商品列表)</a>
                         </li>
                         <li>
                             <a id="orderList-Btn" href="#">OrderList(訂單)</a>
                         </li>
                          <li>
-                            <a id="orderDetail-Btn"  href="#">購買/排課狀態(訂單明細)</a>
+                            <a id="orderDetail-Btn"  href="#">Purchase/Arrange(訂單明細)</a>
                         </li>
                     </ul>
                 </li>
