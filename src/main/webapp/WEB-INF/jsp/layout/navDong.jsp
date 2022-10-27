@@ -11,15 +11,18 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 <style>
-  .csmslogo{
-            width:15%;
-        }
-        
+  .csmslogo {
+      width:15%;
+  }
+  
+  #navbar {
+  	  background-color: cornflowerblue;
+  }      
 </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color:cornflowerblue;">
   <a class="navbar-brand" href="#" ><img src="${contextRoot}/image/navbarLogo.png" alt="" srcset="" class="csmslogo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
