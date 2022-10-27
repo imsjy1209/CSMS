@@ -65,6 +65,21 @@ public class CourseController {
 			courseService.deleteCourse(courseForDelete);
 			return "redirect:/courseAllPageBackAjax.page";
 		}
+		
+		//刪除Course資料-ajax
+		@GetMapping("/deleteCourseDataAjax.controller")
+		public @ResponseBody void deleteCourseDataAjax(@RequestParam(name="id") Integer id, Model model) {
+			ClassList oneClassList = classListService.findClassListByCourseId(id);
+			oneClassList.setCourse(null);
+			oneClassList.setRoom(null);
+			oneClassList.setSchool(null);
+			oneClassList.setTeacher(null);
+			classListService.deleteClassList(oneClassList);
+			
+			Optional<Course> oneCourse = courseService.findCourseById(id);
+			Course courseForDelete = oneCourse.get();
+			courseService.deleteCourse(courseForDelete);
+		}
 	//更改Course上下架資料
 		@GetMapping("/updateCourseDataOnOrOff.controller")
 		public @ResponseBody void updateCourseDataOnOrOff(@RequestParam(name="id") Integer id,@RequestParam(name="onOrOff") Integer onOrOff, Model model) {
@@ -72,7 +87,15 @@ public class CourseController {
 			Course courseForUpdataOnOrOff = oneCourse.get();
 			courseForUpdataOnOrOff.setCourseOnOff(onOrOff);
 			courseService.insertCourse(courseForUpdataOnOrOff);
-		}	
+		}
+		//更改Course授課日期資料
+		@GetMapping("/updateCourseTeachTime.controller")
+		public @ResponseBody void updateCourseTeachTime(@RequestParam(name="id") Integer id,@RequestParam(name="teachTime") String teachTime, Model model) {
+			Optional<Course> oneCourse = courseService.findCourseById(id);
+			Course courseForUpdataOnOrOff = oneCourse.get();
+			courseForUpdataOnOrOff.setCourseTeachTime(teachTime);
+			courseService.insertCourse(courseForUpdataOnOrOff);
+		}		
 	
 	
 	//更改Course資料1
@@ -137,11 +160,45 @@ public class CourseController {
 		
 		
 		//===================Update Course資料-Ajax==================
-				
 				@PostMapping("/updateCourseDataAjax.controller")
 				public @ResponseBody void updateCourseDataAjax(Course oneCourse){
+					System.out.println(oneCourse.getStartDate());
+					System.out.println(oneCourse.getEndDate());
 						courseService.insertCourse(oneCourse);
-						
+				}	
+				
+		//===================Create Course資料-Ajax==================
+				@PostMapping("/createCourseDataAjax.controller")
+				public @ResponseBody void createCourseDataAjax(@RequestParam(name="courseYear") int courseYear,
+						@RequestParam(name="courseSemester") String courseSemester,
+						@RequestParam(name="courseCategory") String courseCategory,
+						@RequestParam(name="courseSubject") String courseSubject,
+						@RequestParam(name="courseGrade") String courseGrade,
+						@RequestParam(name="courseClass") int courseClass,
+						@RequestParam(name="coursePrice") int coursePrice,
+						@RequestParam(name="courseTeachTime") String courseTeachTime,
+						@RequestParam(name="courseMember") int courseMember,
+						@RequestParam(name="startDate") Date startDate,
+						@RequestParam(name="endDate") Date endDate,
+						@RequestParam(name="courseOnOff") int courseOnOff
+//						@RequestParam(name="coursePic") String coursePic
+						){
+					System.out.println("ttttttttttttttttt");
+					Course course1 = new Course();
+					course1.setCourseCategory(courseCategory);
+					course1.setCourseClass(courseClass);
+					course1.setCourseGrade(courseGrade);
+					course1.setCourseMember(courseMember);
+					course1.setCourseOnOff(courseOnOff);
+					course1.setCoursePrice(coursePrice);
+					course1.setCourseSemester(courseSemester);
+					course1.setCourseSubject(courseSubject);
+					course1.setCourseTeachTime(courseTeachTime);
+					course1.setCourseYear(courseYear);
+					course1.setEndDate(endDate);
+					course1.setStartDate(startDate);
+//					course1.setCoursePic(coursePic);
+						courseService.insertCourse(course1);
 				}	
 	
 	//建立Course方案+ClassList
@@ -160,6 +217,8 @@ public class CourseController {
 			@RequestParam(name="endDate", required = true) Date endDate,
 			@RequestParam(name="courseOnOff", required = true) int courseOnOff,
 			@RequestParam(name="coursePic") MultipartFile file,RedirectAttributes redirectAttributes){
+		System.out.println(startDate);
+		System.out.println(endDate);
 		Course course1 = new Course();
 		try {
 			course1.setCourseCategory(courseCategory);
@@ -221,7 +280,7 @@ public class CourseController {
 				
 				ClassList newClassList = new ClassList();
 				newClassList.setClassCode(classCode);
-				newClassList.setClassMember(99);
+				newClassList.setClassMember(0);
 				newClassList.setRoom(oneRoom);
 				newClassList.setSchool(oneSchool);
 				newClassList.setTeacher(oneTeacher);
@@ -235,6 +294,100 @@ public class CourseController {
 			return "redirect:/courseCreate.page";
 		}
 	}
+	
+	//建立Course方案+ClassList
+		@PostMapping("/courseDataCreate2.controller")
+		public String courseDataCreate2(
+				@RequestParam(name="courseYear", required = true) int courseYear,
+				@RequestParam(name="courseSemester", required = true) String courseSemester,
+				@RequestParam(name="courseCategory", required = true) String courseCategory,
+				@RequestParam(name="courseSubject", required = true) String courseSubject,
+				@RequestParam(name="courseGrade", required = true) String courseGrade,
+				@RequestParam(name="courseClass", required = true) int courseClass,
+				@RequestParam(name="coursePrice", required = true) int coursePrice,
+				@RequestParam(name="courseTeachTime", required = true) String courseTeachTime,
+				@RequestParam(name="courseMember", required = true) int courseMember,
+				@RequestParam(name="startDate", required = true) Date startDate,
+				@RequestParam(name="endDate", required = true) Date endDate,
+				@RequestParam(name="courseOnOff", required = true) int courseOnOff,
+				@RequestParam(name="coursePic") MultipartFile file,RedirectAttributes redirectAttributes){
+			System.out.println(startDate);
+			System.out.println(endDate);
+			Course course1 = new Course();
+			try {
+				course1.setCourseCategory(courseCategory);
+				course1.setCourseClass(courseClass);
+				course1.setCourseGrade(courseGrade);
+				course1.setCourseMember(courseMember);
+				course1.setCourseOnOff(courseOnOff);
+				course1.setCoursePrice(coursePrice);
+				course1.setCourseSemester(courseSemester);
+				course1.setCourseSubject(courseSubject);
+				course1.setCourseTeachTime(courseTeachTime);
+				course1.setCourseYear(courseYear);
+				course1.setEndDate(endDate);
+				course1.setStartDate(startDate);
+				
+				//圖片轉base64
+				if(!file.isEmpty() && file != null) {
+					byte[] bytes = file.getBytes();
+					byte[] encodeBase64 = Base64.encodeBase64(bytes);
+					String base64Encoded = new String(encodeBase64,"UTF-8");
+					course1.setCoursePic(base64Encoded);
+				}
+				courseService.insertCourse(course1);
+				
+				String classCode = "";
+				if(courseSubject.equals("國文")) {
+					
+					classCode += "CH" + courseYear;
+					System.out.println(classCode);
+					ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+					String firstClassCodeStr = oneClassList.getClassCode();
+					String oldClassCodeStr = firstClassCodeStr.substring(6);
+					Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+					classCode += "0" + (newClassCode+1);
+				}	
+				else if(courseSubject.equals("英文")){
+					classCode += "EN" + courseYear;
+					System.out.println(classCode);
+					ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+					String firstClassCodeStr = oneClassList.getClassCode();
+					String oldClassCodeStr = firstClassCodeStr.substring(6);
+					Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+					classCode += "0" + (newClassCode+1);
+				}
+				
+				else if(courseSubject.equals("數學")) {
+					classCode += "MA" + courseYear;
+					System.out.println(classCode);
+					ClassList oneClassList = classListService.findLatestClassListByClassCode(classCode);
+					String firstClassCodeStr = oneClassList.getClassCode();
+					String oldClassCodeStr = firstClassCodeStr.substring(6);
+					Integer newClassCode = Integer.valueOf(oldClassCodeStr);
+					classCode += "0" + (newClassCode+1);
+					
+				}
+					Room oneRoom = roomService.findRoomById(4);
+					School oneSchool = schoolService.findSchoolById(1);
+					Teacher oneTeacher = teacherService.findTeacherById(1);
+					
+					ClassList newClassList = new ClassList();
+					newClassList.setClassCode(classCode);
+					newClassList.setClassMember(0);
+					newClassList.setRoom(oneRoom);
+					newClassList.setSchool(oneSchool);
+					newClassList.setTeacher(oneTeacher);
+					newClassList.setCourse(course1);
+					classListService.insertClassList(newClassList);
+				
+				return "redirect:/courseAllPageBackAjax.page";
+			} catch (IOException e) {
+				e.printStackTrace();
+				redirectAttributes.addFlashAttribute("errorMsg", "上傳失敗，請重新上傳");
+				return "redirect:/courseAllPageBackAjax.page";
+			}
+		}
 	
 	//商品總total頁面(for後台)--Ajax
 	@GetMapping("/AllCourseBackAjax.page")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
 //import com.team3.CSMS.dto.ClassListTeacherVerDto;
@@ -19,6 +20,7 @@ import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Score;
+import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.ClassListService;
 import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.ScoreService;
@@ -36,13 +38,15 @@ public class ScoreParentController {
 	// 進入【Parent頁面】
 	@GetMapping("/frontParentscore")
 	public String showScoreIndexAjax() {
+		
 		return "/cs_score/scoreParent";
 	}
 
 	// 【Parent頁面】上方學生選單
 	@GetMapping(value = "/findParentidPage.json", produces = {"application/json;charset=UTF-8"})
-	public @ResponseBody List<Parent> getChildScoreListByParentId(Integer sessionUserId){ 
-		List<Parent> pList = parentService.getChildScoreListByParentId(45); // 之後要改回sessionUserId
+	public @ResponseBody List<Parent> getChildScoreListByParentId(@SessionAttribute("users") Users user){ 
+		System.out.println(user.getId());
+		List<Parent> pList = parentService.getChildScoreListByParentId(user.getId()); // 之後要改回sessionUserId
 		return pList;
 	}
 

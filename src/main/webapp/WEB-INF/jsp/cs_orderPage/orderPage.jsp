@@ -31,7 +31,9 @@
 </head>
 <body>
 
+
 <div class="container">
+<h3><i class='bx bxs-user' >${student.name}</i></h3>
 <table class="table table-hover">
   <thead>
     <tr>

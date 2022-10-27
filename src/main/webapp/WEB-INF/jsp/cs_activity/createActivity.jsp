@@ -34,6 +34,7 @@
 				<div class="col-sm-3">
 					<label class="my-1 mr-2" for="exampleInputPassword1">日期:</label>
 					<input type="text" class="form-control" name="date" id="datepicker" style='width:70%'>
+					
 				</div>
 	</div>	
 				<div class="form-group">

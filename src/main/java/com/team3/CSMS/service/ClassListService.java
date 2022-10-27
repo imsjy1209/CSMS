@@ -129,6 +129,11 @@ public class ClassListService {
 		return classListDao.findClassListByCourseId(courseId);
 	}
 	
+	 //delete ClassList by CourseId--Neil 1026
+	public void deleteClassList(ClassList classList) {
+		classListDao.delete(classList);
+	}
+	
 	//模糊查詢+OrderByClassCode
 	public ClassList findLatestClassListByClassCode (String name){
 		return classListDao.findLatestClassListByClassCode(name);
