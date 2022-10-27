@@ -120,4 +120,9 @@ public class PageController {
 	public String Control() {
 		return "/register/controllUser";
 	}
+	// 測試用
+	@GetMapping("/student.Homepage")
+	public String testme(){
+		return "/cs_studentHomePage/studentHomepage";	}
+		
 }

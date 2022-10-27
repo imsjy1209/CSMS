@@ -53,7 +53,7 @@ table {
 				  <a class="nav-item nav-link navPar" id="navParents" data-toggle="tab" href="#nav-parents" role="tab" aria-controls="nav-parents" aria-selected="false">家長</a>
 				</div>
 			  </nav>
-			<br> <br>
+			<br><br>
 			<div class="tab-content" >
 				<div class="tab-pane fade show active" id="dataArea" role="tabpanel" aria-labelledby="nav-school-tab">
 					  
@@ -78,6 +78,7 @@ table {
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 	<script>
+
 	navSchool.onclick = function() {
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', "<c:url value='/findAllSchoolAjax.controller' />" , true);
@@ -111,6 +112,7 @@ table {
 			}
 		}
 	}
+
 	navParents.onclick = function() {
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', "<c:url value='/findAllParentAjax.controller' />" , true);
@@ -136,7 +138,7 @@ table {
 					}else{
 						permissionText="Enable";
 					}
-				
+					
 				htmlSeg += "<tbody id='sLbody'>"
 				htmlSeg += "<tr>"
 				htmlSeg += "<td>" + obj.name + "</td>";
@@ -154,6 +156,7 @@ table {
 		htmlSeg += "</table>";
 		return htmlSeg;
 	}
+
 	function displayData02(data) {
 		var parents = JSON.parse(data);
 		var htmlSeg = "<table class='table table-hover' <tr><th>名字</th><th>職位</th><th>專長</th><th>聘用日期</th><th>在職情況</th><th>登入權限</th></tr>"
@@ -186,6 +189,7 @@ table {
 		htmlSeg += "</table>";
 		return htmlSeg;
 	}
+
 	function displayData03(data) {
 		var parents = JSON.parse(data);
 		var htmlSeg = "<table class='table table-hover'> <tr><th>名字</th><th>性別</th><th>教育階段</th><th>就讀學校</th><th>年級</th><th>父母</th><th>關係</th><th>登入權限</th></tr>"
@@ -220,9 +224,10 @@ table {
 		htmlSeg += "</table>";
 		return htmlSeg;
 	}
+
 	function displayData04(data) {
 		var parents = JSON.parse(data);
-		var htmlSeg = "<table class='table table-hover'>s <tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>登入權限</th></tr>"
+		var htmlSeg = "<table class='table table-hover'><tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th><th>登入權限</th></tr>"
 		if (parents.length > 0) {
 			for (var x = 0; x < parents.length; x++) {
 				var obj = parents[x];
@@ -251,20 +256,20 @@ table {
 		htmlSeg += "</table>";
 		return htmlSeg;
 	}
-	// FIXME: 好像會有點卡住
 	$(document).on('change','.prop',function () {
-  	// $('.prop').change(function(){
-      console.log("select change");
-      // console.log($(this));
-      // get student id
       let userId=$(this).parent().siblings('.userID ').text();
       let permission=$(this).val();
-      console.log(permission);
       let xhr3 = new XMLHttpRequest();
       // get the information from select value
       xhr3.open("GET","<c:url value='/updateUsersPermisson'/>"+"?userId="+userId+"&permission="+permission,true); 
       xhr3.send();
 	})
+	//=======================版面動作=======================
+	$(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 	
 	</script>
 </body>

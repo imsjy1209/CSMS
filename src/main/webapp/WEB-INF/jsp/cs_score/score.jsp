@@ -25,10 +25,6 @@
 	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>All Score Data</h3>
 
 	<div class="topbtn">
-		<a href="${contextRoot}/scoreAdd" type="button"
-			class="btn btn-primary" >新增</a>
-		<a type="button" class="btn btn-warning"
-			href="${contextRoot}/homepage.controller">Go To HomePage</a>
 	</div>
 	
 
@@ -48,14 +44,13 @@
 					<option value="2">第2次</option>
 			                </select>
 			</label>
-
-<!-- 			<div> -->
-<!-- 				<p class="info"> -->
-<!-- 			</div> -->
 			<div>
 				<button id='selectBtn' class="btn btn-success">搜尋</button>
+				<a href="${contextRoot}/scoreAdd" type="button"
+			class="btn btn-primary" >新增</a>
 			</div>
-		</div>
+
+		
 		  <table class="table table-striped mt-5 " id="scoreTable">
 			<thead id="thead-title">
 				<tr>
