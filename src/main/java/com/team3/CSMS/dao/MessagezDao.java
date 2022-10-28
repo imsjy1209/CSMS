@@ -19,10 +19,10 @@ public interface MessagezDao extends JpaRepository<Messagez, Integer> {
 			+ "  where Student.student_id=:id group by School.name",nativeQuery = true)
 	public List<String>getTeacherName(@Param("id") int id);
 	
-	@Query(value="from Messagez where school=:school")
+	@Query(value="from Messagez where school=:school and toSchool=0")
 	public List<Messagez> getAllBySchool(@Param("school") School school);
 	
-	@Query(value="from Messagez where parent=:parent")
+	@Query(value="from Messagez where parent=:parent and toSchool=1")
 	public List<Messagez> getAllByParent(@Param("parent") Parent parent);
 }
 
