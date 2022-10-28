@@ -18,6 +18,7 @@ import com.team3.CSMS.model.School;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.service.MessageService;
+import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.SchoolService;
 
 @Controller
@@ -27,6 +28,8 @@ public class MessageController {
 	private MessageService mSer;
 	@Autowired
 	private SchoolService sSer;
+	@Autowired
+	private ParentService pSer;
 	
 	@GetMapping("message")
 	public String test() {
@@ -53,31 +56,44 @@ public class MessageController {
 		School school = sSer.getTeacherByName(name);
 		Messagez messagez = new Messagez(parent,school,0,type,topic,article);
 		mSer.insert(messagez);
-		return"message/messagez";
+		return"redirect:/message/getallByParent";
 	}
 	@PostMapping("message/addMessageBySchool")
-	public String sendMessageBySchool(@SessionAttribute("parent") Parent parent,
-			@RequestParam("school") String name,
-			@RequestParam("topic") String topic,
+	public String sendMessageBySchool(@SessionAttribute("school") School school,
+			@RequestParam("parentid") int id,
+			@RequestParam("titleOfMsg") String titleOfMsg,
 			@RequestParam("article") String article,
-			@RequestParam("type") String type) {
-		School school = sSer.getTeacherByName(name);
-		Messagez messagez = new Messagez(parent,school,1,type,topic,article);
+			@RequestParam("typeOfMsg") String typeOfMsg) {
+		Parent parent = pSer.findById(id);
+		Messagez messagez = new Messagez(parent,school,1,typeOfMsg,titleOfMsg,article);
 		mSer.insert(messagez);
-		return"message/messagez";
+		return"redirect:/message/getallBySchool";
 	}
 	@GetMapping("message/getallBySchool")
 	public String getallBySchool(@SessionAttribute("school")School school,Model m) {		
 		List<Messagez> list = mSer.getAllBySchool(school);
 		m.addAttribute("list",list);
-		return "message/getallbyschool";
+		return "message/school//getallbyschool";
 	}
 	
 	@GetMapping("message/getallByParent")
 	public String getallByParent(@SessionAttribute("parent")Parent parent,Model m) {		
 		List<Messagez> list = mSer.getAllByParent(parent);
 		m.addAttribute("list",list);
-		return "message/getallbyparent";
+		return "message/parent/getallbyparent";
+	}
+	
+	@GetMapping("message/viewmessage")
+	public String viewmessage(@RequestParam int id,Model m) {
+		Messagez messagez = mSer.findById(id);
+		m.addAttribute("message",messagez);
+		return "message/school/messagedetail";
+	}
+	@GetMapping("message/viewmessagebyparent")
+	public String viewmessagebyparent(@RequestParam int id,Model m) {
+		Messagez messagez = mSer.findById(id);
+		m.addAttribute("message",messagez);
+		return "message/parent/messagedetailbyparent";
 	}
 	
 //	@GetMapping("/a")

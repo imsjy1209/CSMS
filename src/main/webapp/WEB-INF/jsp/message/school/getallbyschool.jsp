@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+	<jsp:include page="../../layout/navbar.jsp"></jsp:include>
 	<div class="container">
 		<div align="center">
 			<h1>活動頁面</h1>
@@ -32,7 +32,7 @@
 								<td>${message.titleOfMsg}
 								<td>${message.typeOfMsg}
 								<td align="center"><a
-									href="${contextRoot}/updatepage/${message.id}"><i
+									href="${contextRoot}/message/viewmessage?id=${message.id}"><i
 										class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i></a>
 									<c:choose>
 										<c:when test="${message.readOrNot == 0}">
