@@ -226,6 +226,7 @@ cursor: pointer;
             align-items: stretch;
         }
 
+        
 /* ========各項功能清單的背景顏色========= */
         #sidebar {
             min-width: 250px;
@@ -239,6 +240,7 @@ cursor: pointer;
         #sidebar.active {
             margin-left: -250px;
         }
+        
 
 /* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
