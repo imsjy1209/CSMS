@@ -124,12 +124,6 @@
 					<h1>左邊目前只有第三個按鈕有接modal</h1>
 
 				</div>
-
-				<!-- Button trigger modal -->
-				<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
-
-				</button>
-
 				<!-- Modal for Absent -->
 				<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -151,7 +145,7 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
-				
+
 				<!-- Modal for Course -->
 				<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -164,6 +158,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
+								<p>test</p>
 								<p>courseMID test</p>
 							</div>
 							<div class="modal-footer">
@@ -173,7 +168,6 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
-				
 				<!-- Modal for Activity -->
 				<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -239,7 +233,6 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
-				
 			</div>
 		</div>	
 	</div>

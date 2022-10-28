@@ -62,7 +62,7 @@ public class Parent {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date update_at; // insert data default getDate() ; update data default getDate()
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="parent", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="parent", cascade = CascadeType.ALL)
 //	@JsonManagedReference
 	@JsonIgnoreProperties("parent")
 	private List<Student> student;

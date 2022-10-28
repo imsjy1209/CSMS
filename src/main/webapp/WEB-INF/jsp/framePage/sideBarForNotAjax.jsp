@@ -328,6 +328,15 @@ color:black;
                 </li>
                 
                 <li>
+                    <a href="#registerInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">註冊相關</a>
+                     <ul class="collapse list-unstyled" id="registerInfo">
+                        <li>
+                            <a id="register-Btn" href="${contextRoot}/createRegister.page">Register(新增註冊)</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
                     <a href="#accessInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a>
                      <ul class="collapse list-unstyled" id="accessInfo">
                         <li>
@@ -339,6 +348,10 @@ color:black;
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
+                         <li>
+                            <a id="courseCreate-Btn" href="${contextRoot}/courseAllPageBackAjax.page">CourseCreate(建立商品)</a>
+                        </li>
+                        
                         <li>
                             <a id="course-Btn" href="${contextRoot}/courseAllPageBackAjax.page">Course(商品)</a>
                         </li>
@@ -382,6 +395,17 @@ color:black;
                     </ul>
                 </li>
                 
+                <li>
+                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">聯絡簿相關</a>
+                     <ul class="collapse list-unstyled" id="contactBookInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
+                        </li>
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
+                        </li>
+                    </ul>
+                </li>
                 
                 
                 <li>

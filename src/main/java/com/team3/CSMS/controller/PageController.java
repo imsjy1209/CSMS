@@ -124,5 +124,10 @@ public class PageController {
 	@GetMapping("/student.Homepage")
 	public String testme(){
 		return "/cs_studentHomePage/studentHomepage";	}
-		
+	
+
+	@GetMapping("/youAreFirst")
+	public String firstLogin(){
+		return "/login/firstLogin";
+	}
 }
