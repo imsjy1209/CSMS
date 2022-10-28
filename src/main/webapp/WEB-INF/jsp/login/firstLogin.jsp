@@ -13,27 +13,30 @@
 <title>Login</title>
 <style>
 body{
-	background-color: cornflowerblue;
+	background-color: cornflowerblue;	
 }
-/* .parentDiv{
+.parentDiv{
 	border:  1px solid red;
-} */
-/* .childDiv{
-	background-color: #d5e1a3;
+	display: flex; 
+  	align-items: stretch ; 
+} 
+.childDiv{
   	display: flex; 
-  	height: 300px;
-  	align-items: center; 
-} */
+  	align-items: stretch ; 
+}
 
 
 
 </style>
 </head>
 
-<body>
-	<div class="container">
+<body class="parentDiv">
+	<div class="picDiv">
+		<img src="${contextRoot}/image/LoginLogo.png" alt="" srcset="">
+	</div>
+	<div class="childDiv">
 		<img src="" alt="">
-		<div class="childDiv">
+		<div >
 			<div>
 				<h1>
 					<i class='bx bxs-lock-open' >密碼修改</i>
@@ -266,7 +269,6 @@ body{
 			}
 			enableBtn();
 			// 按確認後送出新密碼
-
 		}
 	</script>
 </body>
