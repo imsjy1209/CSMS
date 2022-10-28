@@ -33,4 +33,8 @@ public class SchoolService {
 		schoolDao.save(p);
 	}
 	
+	public School getTeacherByName(String name) {
+		return schoolDao.getTeacherByName(name);
+	}
+	
 }
