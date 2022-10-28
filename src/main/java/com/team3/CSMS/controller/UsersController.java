@@ -23,11 +23,13 @@ import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.School;
+import com.team3.CSMS.model.Score;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
+import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.UserService;
 
 @SessionAttributes(names = {"users","school","teacher","student","parent"})
@@ -42,6 +44,8 @@ public class UsersController {
     
     @Autowired
     private OrderDetailService orderDetailService;
+    @Autowired
+    private ScoreStudentService scoreStudentService;
     
     // 透過ID找到個資
     @GetMapping(value = "/userProfile.json",
@@ -241,6 +245,9 @@ public class UsersController {
             
             List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
             m.addAttribute("aOrderDetailList",aOrderDetailList);
+            
+            List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student);
+            m.addAttribute("scoreforStudent",scoreforStudent);
             break;
         case 5:
         	Parent parent = users.getParent();

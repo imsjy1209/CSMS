@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Score;
+import com.team3.CSMS.model.Student;
 
 public interface ScoreStudentDao extends JpaRepository<Score, Integer> {
 
@@ -16,9 +17,12 @@ public interface ScoreStudentDao extends JpaRepository<Score, Integer> {
 			+ "(select [student_id] from Student where [fk_user_id] = :sessionUserId)", nativeQuery = true)
 	List<Score> getScoreByclasslistIdAndStudentId(@Param("classCodeId") Integer classCodeId,
 			@Param("sessionUserId") Integer sessionUserId);
-
-
 	
+	//HQL: from Score
+	//SQL: select * from score 
+	//bean裡面對應的Student 變數名稱 private Student student;
+	@Query(value="from Score where student= :student")
+	List<Score> scoreforStudent(@Param("student") Student student);
 
 
 

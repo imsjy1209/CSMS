@@ -124,6 +124,12 @@
 					<h1>左邊目前只有第三個按鈕有接modal</h1>
 
 				</div>
+
+				<!-- Button trigger modal -->
+				<button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+
+				</button>
+
 				<!-- Modal for Absent -->
 				<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -145,7 +151,7 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
-
+				
 				<!-- Modal for Course -->
 				<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -158,7 +164,6 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>test</p>
 								<p>courseMID test</p>
 							</div>
 							<div class="modal-footer">
@@ -168,6 +173,7 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
+				
 				<!-- Modal for Activity -->
 				<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -196,13 +202,25 @@
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<h5 class="modal-title" id="exampleModalCenterTitle">成績</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
-								<p>scoreMID test</p>
+							<div class="modal-body">						
+<!-- 								<p>scoreMID test</p> -->
+                             
+								<c:forEach var="post" items="${scoreforStudent}">
+							<table>
+								<tr>
+								    <td>名字:${post.student.name}</td>  &nbsp&nbsp&nbsp&nbsp
+								    <td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
+								    <td>第${post.frequency}次考試</td>&nbsp&nbsp&nbsp&nbsp
+								 	<td>${post.score}分</td>							    	
+							    </tr>	
+							</table>												
+								</c:forEach>
+							
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -233,12 +251,13 @@
 						</div>
 					</div>
 				</div><!-- end of modal -->
+				
 			</div>
 		</div>	
 	</div>
 			<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 			<script>
-
+	
 			</script>
 		</body>
 
