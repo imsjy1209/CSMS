@@ -11,90 +11,122 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 <style>
-  .csmslogo {
-      width:15%;
-  }
-  
-  #navbar {
-  	  background-color: cornflowerblue;
-  }      
+
+/* navbar header */
+#navbar {
+	background-color: cornflowerblue;
+	box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.7);
+}
+
+/* Logo */
+#navbar-brand {
+	width:70px;
+}
+
+.csmslogo {
+	width: 100%;
+}
+
+/* 單一選單 */
+li{
+	height: 200%;
+	font-size: 18px; 
+}
+
+.nav-item {
+	margin-left: 50px;
+}
+
+/* hover加文字底線 */
+li:hover {
+	border-bottom: 2px solid yellow;
+}
+
+.navbar-right {
+	float:right;
+	width:20%;
+}
+
+.navbar-right>li{
+	color:white;
+	vertical-align：middle;
+}		    
+
+
 </style>
 </head>
 <body>
 
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color:cornflowerblue;">
-  <a class="navbar-brand" href="#" ><img src="${contextRoot}/image/navbarLogo.png" alt="" srcset="" class="csmslogo"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/homepage.controller">首頁<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          活動功能
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="${contextRoot}/activitymain.controller">新增活動(老師)</a>
-          <a class="dropdown-item" href="${contextRoot}/getAllman">管理活動(老師)</a>
-          <a class="dropdown-item" href="${contextRoot}/getAll">瀏覽活動(學生)</a>
-          <a class="dropdown-item" href="${contextRoot}/getmyact">管理活動(學生)</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          財務功能
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="${contextRoot}/expenseform">財務表單</a>
-          <a class="dropdown-item" href="${contextRoot}/trypage">財務圖表</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          學生管理
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="${contextRoot}/createstu">得到學生</a>
-          <a class="dropdown-item" href="${contextRoot}/deletestu">清除學生</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          公告系統
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="${contextRoot}/post/postform">新增公告(校方)</a>
-          <a class="dropdown-item" href="${contextRoot}/post/getall">管理公告</a>
-          <a class="dropdown-item" href="${contextRoot}/post/viewbyschool">查看公告(校方)</a>
-          <a class="dropdown-item" href="${contextRoot}/post/viewbyall">查看公告(學生)</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          註冊系統
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="${contextRoot}/register/form">新增帳號(校方)</a>
-          <a class="dropdown-item" href="${contextRoot}/register/edit">管控帳號(校方)</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item test">
-        <a class="nav-link" href="${contextRoot}/signout">登出</a>
-      </li>
-    </ul>
-  </div>
+<nav id="navbar" class="navbar sticky-top navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+	<!-- Logo -->
+	<div id="navbar-brand">
+	  	<a class="navbar-brand" href="${contextRoot}/homepage.controller" >
+	  		<img src="${contextRoot}/image/navbarLogo.png" alt="" class="csmslogo" title="回首頁" />
+	  	</a>
+  	</div>
+ 	 <!-- 功能選單 -->
+  	<div class="navbar-nav-scroll" id="navbarNav" style="width:100%;">
+  	   
+	    <ul class="navbar-nav bd-navbar-nav navbar-light flex-row navbar-left" style="width:70%;float:left;">
+	    
+	      <li class="nav-item dropdown font-weight-bold">
+	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	          出缺勤相關
+	        </a>
+	        <div class="dropdown-menu">
+	        	<a class="dropdown-item" href="#">出缺勤紀錄查詢</a>
+	        </div>
+	      </li>
+	      
+	      <li class="nav-item dropdown font-weight-bold">
+	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	        	課程相關
+	        </a>
+	        <div class="dropdown-menu">
+	          <a class="dropdown-item" href="#">報名課程查詢</a>
+	        </div>
+	      </li>
+	      
+	      <li class="nav-item dropdown font-weight-bold">
+	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	        	活動相關
+	        </a>
+	        <div class="dropdown-menu">
+	          <a class="dropdown-item" href="${contextRoot}/getAll">活動總覽</a>
+	          <a class="dropdown-item" href="${contextRoot}/getmyact">我的活動紀錄</a>
+	        </div>
+	      </li>
+	      
+	      <li class="nav-item dropdown font-weight-bold">
+	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	        	公告相關
+	        </a>
+	        <div class="dropdown-menu">
+	          <a class="dropdown-item" href="${contextRoot}/post/viewbyall">查看公告</a>
+	        </div>
+	      </li>
+	      
+	      <li class="nav-item dropdown font-weight-bold">
+	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	        	電子聯絡簿
+	        </a>
+	        <div class="dropdown-menu">
+	          <a class="dropdown-item" href="${contextRoot}/post/viewbyall">查看聯絡簿</a>
+	        </div>
+	      </li>
+	      
+	    </ul>
+	    <!-- 靠右 -->
+		<ul class="nav navbar-nav navbar-right">
+		    <li class="nav-item active">
+	        	 <i class='bx bxs-user-circle' style="font-size:25px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
+	      	</li>
+	      	<li class="nav-item active">
+	      		<i class='bx bx-log-out bx-rotate-180' style="font-size:25px;line-height:40px"></i><b>&nbsp;登出</b>
+	      	</li>
+      	</ul>
+	</div>
+
 </nav>
 
 

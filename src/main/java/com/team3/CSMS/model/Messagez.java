@@ -1,5 +1,7 @@
 package com.team3.CSMS.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="messagez")
@@ -35,6 +44,12 @@ public class Messagez {
     @Column(name="titleOfMsg")
     private String titleOfMsg;
     
+    @Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@Column(name = "timeOfMsg", columnDefinition = "datetime", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	private Date create_at; // insert data default getDate()
+    
     //SQL nvarchar(max)
     @Column(name="whatToSay")
     private String whatToSay;
@@ -46,7 +61,27 @@ public class Messagez {
     public Messagez(){
     }
 
-    public Messagez(Integer id, Parent parent, School school, int toSchool, String typeOfMsg, String titleOfMsg,
+    @PrePersist
+	public void onCreate() {
+    	if (create_at == null) {
+			create_at = new Date();
+		}
+		
+	}
+    
+    public Messagez(Parent parent, School school, int toSchool, String typeOfMsg, String titleOfMsg, String whatToSay) {
+		super();
+		this.parent = parent;
+		this.school = school;
+		this.toSchool = toSchool;
+		this.typeOfMsg = typeOfMsg;
+		this.titleOfMsg = titleOfMsg;
+		this.whatToSay = whatToSay;
+	}
+
+
+
+	public Messagez(Integer id, Parent parent, School school, int toSchool, String typeOfMsg, String titleOfMsg,
             String whatToSay, int readOrNot) {
         super();
         this.id = id;

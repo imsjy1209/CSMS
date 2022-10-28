@@ -1,21 +1,17 @@
 package com.team3.CSMS.controller;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
 import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
-//import com.team3.CSMS.dto.ClassListTeacherVerDto;
-import com.team3.CSMS.dto.ContactBookListTeacherVerDto;
 import com.team3.CSMS.dto.ScoreDto2;
-import com.team3.CSMS.model.ClassList;
-import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Score;
 import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.ClassListService;
@@ -65,5 +61,13 @@ public class ScoreStudentController {
 
 		return "cs_score/scoreStudent";
 	}
-
+	
+	// for StudentHompage
+	@PostMapping(value = "/sendtoHomepage")
+	public String  sendtoHomepage(
+			@RequestParam("classCodeId") Integer classCodeId, @SessionAttribute("users") Users user,Model m) {
+		List<ScoreDto2> scdtoList = scoreStudentService.getScoreByclasslistIdAndStudentId(classCodeId, user.getId());
+		m.addAttribute("scdtoList",scdtoList);
+		return "/cs_student/studentHomepage";
+	}
 }

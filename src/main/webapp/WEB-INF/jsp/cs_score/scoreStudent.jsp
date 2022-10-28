@@ -47,9 +47,6 @@
 					<option value="-1" selected="selected" hidden>請選擇</option>
 				</select>
 			</label>			
-			<div>
-				<p class="info">
-			</div>
 		</div>
 		<table class="table table-striped mt-5 " id="scoreTable">
 			<thead id="thead-title">

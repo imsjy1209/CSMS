@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ScoreStudentDao;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.Score;
+import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -33,6 +34,11 @@ public class ScoreStudentService {
 			scdtoList.add(scDto);
 		}
 		return scdtoList;
+	}
+	
+	//
+	public List<Score> getScoreforStudent(Student student){
+		return scoreStudentDao.scoreforStudent(student);
 	}
 
 }
