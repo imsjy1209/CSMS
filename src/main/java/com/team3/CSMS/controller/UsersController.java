@@ -18,7 +18,7 @@ import com.team3.CSMS.dto.UserParentDto;
 import com.team3.CSMS.dto.UserSchoolDto;
 import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.dto.UserStudentDto;
-
+import com.team3.CSMS.model.Absent;
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.Parent;
@@ -27,6 +27,7 @@ import com.team3.CSMS.model.Score;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.model.Users;
+import com.team3.CSMS.service.AbsentService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.ScoreStudentService;
@@ -47,6 +48,8 @@ public class UsersController {
     @Autowired
     private ScoreStudentService scoreStudentService;
     
+    @Autowired
+    private AbsentService absentService;
     // 透過ID找到個資
     @GetMapping(value = "/userProfile.json",
                 produces = {"application/json;charset=UTF-8"})
@@ -242,11 +245,11 @@ public class UsersController {
         case 4:
             Student student = users.getStudent();
             m.addAttribute("student",student);
-            
             List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
-            m.addAttribute("aOrderDetailList",aOrderDetailList);
-            
+            List<Absent> personalAbsent=absentService.selectAbsentByStudent(student);
             List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student);
+            m.addAttribute("aOrderDetailList",aOrderDetailList);
+            m.addAttribute("personalAbsent", personalAbsent);
             m.addAttribute("scoreforStudent",scoreforStudent);
             break;
         case 5:
