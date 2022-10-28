@@ -162,10 +162,6 @@ button {
 
 				</div>
 
-				<!-- Button trigger modal -->
-				<button type="button" class="" data-toggle="modal"
-					data-target="#exampleModalCenter"></button>
-
 				<!-- Modal for Absent -->
 				<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -193,6 +189,7 @@ button {
 				</div>
 				<!-- end of modal -->
 
+
 				<!-- Modal for Course -->
 				<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -207,6 +204,7 @@ button {
 								</button>
 							</div>
 							<div class="modal-body">
+								<p>test</p>
 								<p>courseMID test</p>
 							</div>
 							<div class="modal-footer">
@@ -219,6 +217,7 @@ button {
 					</div>
 				</div>
 				<!-- end of modal -->
+
 
 				<!-- Modal for Activity -->
 				<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
@@ -301,6 +300,7 @@ button {
 					</div>
 				</div>
 				<!-- end of modal -->
+
 			</div>
 		</div>
 	</div>

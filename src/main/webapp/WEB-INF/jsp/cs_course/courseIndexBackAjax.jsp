@@ -15,6 +15,38 @@
 
 <jsp:include page="../framePage/sideBar.jsp"></jsp:include>
 
+<!-- For AccessMan中的Stu分頁=>show ParentInfo -->
+<!-- For AccessMan中的Stu分頁=>show ParentInfo -->
+<!-- For AccessMan中的Stu分頁=>show ParentInfo -->
+
+<!-- <div class="modal fade bd-example-modal-lg parentInfoForStu" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> -->
+<!--   <div class="modal-dialog modal-lg"> -->
+<!--     <div class="modal-content parentInfoForStuContent"> -->
+<!--       ... -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+
+
+<div class="modal fade parentInfoForStu" id="exampleModalCenter555" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+<!--       <div class="modal-header"> -->
+<!--         <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--           <span aria-hidden="true">&times;</span> -->
+<!--         </button> -->
+<!--       </div> -->
+      <div class="modal-body parentInfoForStuContent">
+        ...
+      </div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+<!--       </div> -->
+    </div>
+  </div>
+</div>
 
 <!-- ====更改商品資訊的Modal==== -->
 <!-- ====更改商品資訊的Modal==== -->
@@ -842,7 +874,7 @@ $(document).on('click','.updateCourseAjax',function(e){
     	       	"<td>" + classListList[i].course.startDate + "</td>" +
     	       	"<td>" + classListList[i].course.endDate + "</td>" +
     	       	"<td class='test1'><i style='font-size:36px;' class='classList-edit-btn bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger classListDelBtn'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -984,6 +1016,34 @@ $(document).on('click','.updateCourseAjax',function(e){
 					//===End of 更改成功alert======
 					
 				})
+				
+			})
+			
+			$('.classListDelBtn').click(function(){
+				var cllIdForDel = $(this).parent().siblings('.classListId').text()
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/deleteClssListByIdAjax.controller?clId=" + cllIdForDel + "' />", true);
+				xhr.send();
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已刪除成功'
+				})
+				//===End of 更改成功alert======
+					$(this).parent().parent().remove();
 				
 			})
 			
@@ -1928,19 +1988,10 @@ $(document).on('click','.updateCourseAjax',function(e){
 		if(classListId==0){
 			findAllClassListGo()
 		}
-		
-// 		var xhrRoom = new XMLHttpRequest();
-// 		var xhrTeacher = new XMLHttpRequest();
-// 		var xhrSchool = new XMLHttpRequest();
 		var xhrClassList = new XMLHttpRequest();
 
 		xhrClassList.onreadystatechange = function() {
-		if (xhrClassList.readyState == 4 && xhrClassList.status == 200
-// 				&&
-// 			xhrRoom.readyState == 4 && xhrRoom.status == 200 &&
-// 			xhrTeacher.readyState == 4 && xhrTeacher.status == 200 &&
-// 			xhrSchool.readyState == 4 && xhrSchool.status == 200
-			) {
+		if (xhrClassList.readyState == 4 && xhrClassList.status == 200) {
 			var content0 = "";
 			content0 += 
 			"<tr>" +
@@ -1960,10 +2011,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"</tr>";
 			
 			var oneClassList = JSON.parse(xhrClassList.responseText);
-// 			var roomList = JSON.parse(xhrRoom.responseText);
-// 			var teacherList = JSON.parse(xhrTeacher.responseText);
-// 			var schoolList = JSON.parse(xhrSchool.responseText);
-			
 			var content = "";
 			content += 
 	
@@ -1973,44 +2020,10 @@ $(document).on('click','.updateCourseAjax',function(e){
     	       	"<td>" + oneClassList.classCode+ "</td>" +
     	       	
     	       	"<td>" + oneClassList.teacher.expertise+"-"+ oneClassList.teacher.name+ "</td>" +
-//     	    	"<td>" + "<select class='teacherDataSelect'>";
-// 				for(var j=0;j<teacherList.length;j++){
-// 					if(oneClassList.teacher.id==teacherList[j].id){	
-// 	    		content += 	"<option value='"+ teacherList[j].id +"' selected>"+teacherList[j].name+"</option>";
-// 					}else{
-// 						content +="<option value='"+ teacherList[j].id +"'>"+teacherList[j].name+"</option>";
-// 					}
-// 					}
-// 	    		content +=  "</select>"+
-//     	    	"</td>" +
-    	    	
-    	    	
     	    	"<td>" + oneClassList.school.name+ "</td>" +
-//     	    	"<td>" + "<select class='schoolDataSelect'>";
-// 				for(var j=0;j<schoolList.length;j++){
-// 					if(oneClassList.school.id==schoolList[j].id){	
-// 	    		content += 	"<option value='"+ schoolList[j].id +"' selected>"+schoolList[j].name+"</option>";
-// 					}		
-// 					else{
-// 						content +="<option value='"+ schoolList[j].id +">"+schoolList[j].name+"</option>";
-// 					}
-// 					}
-// 	    		content +=  "</select>"+
-//     	    	"</td>" +
     	    	
     	    	
     	    	"<td>" + oneClassList.room.roomName+ "</td>" +
-//     	    	"<td>" + "<select class='roomDataSelect'>";
-//     	    	for(var j=0;j<roomList.length;j++){
-//     	    		if(oneClassList.room.id==roomList[j].id){	
-//     	    		content +="<option value='"+ roomList[j].id +"' selected>"+roomList[j].roomName+"</option>";
-//     	    		}		
-//     	    		else{
-//     	    			content += 	"<option value='"+ roomList[j].id +"'>"+roomList[j].roomName+"</option>";
-//     	    		}
-//     	    		}
-//     	    	content +=  "</select>"+
-//     	    	"</td>" +
     	    	
     	    	"<td class='course-id' style='display:none'>" + oneClassList.course.id +"</td>" +
     	    	"<td>" + oneClassList.course.courseCategory +"班"+"</td>" +
@@ -2601,6 +2614,8 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 				$('.classListSelDiv').remove();
 				$('.ClassStudentListBtnGroup').remove();
 				$('.absentContent').remove();
+				$('#thead-title').html("");
+				$('#content-data').html("");
 				$('.main-title').text('權限管理-AccessManage')
 			  
 				
@@ -2668,6 +2683,35 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 					// console.log(xhr.responseText);
 					dataArea.innerHTML = displayData03(xhr.responseText);
 				}
+				
+				
+				//====點擊學生分頁中的家長名稱====
+					$('.pn').click(function(){
+					var stuPn = $(this).text();
+					var stuPg = $(this).siblings('.pg').text();
+					var stuPt = $(this).siblings('.pt').text();
+					var stuPe = $(this).siblings('.pe').text();
+					
+					var contentPInfo = "";
+					contentPInfo +=
+						"<table class='table table-hover pInfo'><tr><th>名字</th><th>性別</th><th>電話</th><th>信箱</th></tr>"
+						contentPInfo += "<tbody id='pInfo'>";
+							contentPInfo += "<tr>";
+							contentPInfo += "<td>" + stuPn + "</td>";
+							contentPInfo += "<td>" + stuPg + "</td>";
+							contentPInfo += "<td>" + stuPt + "</td>";
+							contentPInfo += "<td>" + stuPe + "</td>";
+							contentPInfo += "</tr></tbody>";
+							contentPInfo += "</table>";
+					$('.parentInfoForStuContent').html(contentPInfo);	
+							
+					$('.parentInfoForStu').modal('show')
+						
+					
+					
+					})
+					
+				
 			}
 		}
 		navParents.onclick = function() {
@@ -2766,7 +2810,12 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 					htmlSeg += "<td>" + obj.schoolType + "</td>";
 					htmlSeg += "<td>" + obj.schoolName + "</td>";
 					htmlSeg += "<td>" + obj.grade + "</td>";
-					htmlSeg += "<td>" + obj.parent.name + "</td>";
+					htmlSeg += "<td class='pn'>" + obj.parent.name + "</td>";
+					
+					htmlSeg += "<td class='pg' style='display:none;'>" + obj.parent.gender + "</td>";
+					htmlSeg += "<td class='pt' style='display:none;'>" + obj.parent.tel + "</td>";
+					htmlSeg += "<td class='pe' style='display:none;'>" + obj.parent.email + "</td>";
+					
 					htmlSeg += "<td>" + obj.relationship + "</td>";
 					htmlSeg +="<td class='userID' hidden>"+userID+"</td>";
 					htmlSeg += "<td> <select class='prop' id='prop' name='prop'> <option value='"+permissionValue+"' selected='selected' hidden>"+permissionText +"</option>"
@@ -2825,11 +2874,6 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 	      xhr3.send();
 		})  
 			
-		
-		
-		
-		
-		
 		})
 		  
 		  
