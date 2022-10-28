@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 		<!DOCTYPE html>
 		<html>
 
@@ -136,11 +137,30 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>absentMID test</p>
+								<p>${student.name}</p>
+								<table>
+									<thead>
+										<tr><th>日期</th><th>課程</th><th>出席狀況</th></tr>
+									</thead>
+									<tbody>
+										<c:forEach var="personalAbsent" items="${personalAbsent}">
+											<tr>
+												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${personalAbsent.dayz}"/></td>
+												<td> ${personalAbsent.classList.course.courseSubject} </td>
+												<td>
+													<c:choose>
+														<c:when test="${personalAbsent.arrviedOrNot == 0}">缺席</c:when>
+														<c:when test="${personalAbsent.arrviedOrNot == 1}">出席</c:when>
+														<c:when test="${personalAbsent.arrviedOrNot == 2}">請假</c:when>
+													</c:choose>
+												</td>
+											</tr>
+										</c:forEach>
+								</tbody>
+								</table>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
 							</div>
 						</div>
 					</div>

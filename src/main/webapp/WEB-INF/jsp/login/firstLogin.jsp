@@ -12,64 +12,75 @@
 	rel='stylesheet'>
 <title>Login</title>
 <style>
-html, body {
-	height: 100%;
-	padding: 0;
-	margin: 0;
+body{
+	background-color: cornflowerblue;
 }
+/* .parentDiv{
+	border:  1px solid red;
+} */
+/* .childDiv{
+	background-color: #d5e1a3;
+  	display: flex; 
+  	height: 300px;
+  	align-items: center; 
+} */
+
+
+
 </style>
 </head>
 
 <body>
-	<div class="mainDiv">
-		<div class="modal-header">
-			<box-icon name='lock-open' type='solid'>密碼修改</box-icon>
-		</div>
-
-		<!-- FIXME: -->
-		<form class="form" method="post" action="../users/updateFirstLogin">
-			<div class="d1">
-				<label for="idPwd1" class="t1"> <b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-				</label> <input readonly type="text" id="idPwd1" name="old" value="${users.password}"
+	<div class="container">
+		<img src="" alt="">
+		<div class="childDiv">
+			<div>
+				<h1>
+					<i class='bx bxs-lock-open' >密碼修改</i>
+				</h1>
+			</div>
+			<form class="form" method="post" action="../users/updateFirstLogin">
+				<div class="">
+					<label for="idPwd1" class="t1"> <b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+					</label> <input readonly type="text" id="idPwd1" name="old" value="${users.password}"
 					placeholder="" maxlength="30" size="20"
 					autocomplete="off" aria-invalid="false"><br> <span
 					id="h">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
 					id="idsp1" class="">&nbsp</span>
-			</div>
-
-			<div class="d2">
-				<label for="idPwd2" class="t2"> <b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-				</label> <input type="text" id="idPwd2" name="newPassword" value=""
+				</div>
+				
+				<div class="">
+					<label for="idPwd2" class="t2"> <b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+					</label> <input type="text" id="idPwd2" name="newPassword" value=""
 					placeholder="請輸入新密碼" maxlength="30" size="20" autocomplete="off"
 					aria-invalid="false"><br> <span id="h">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span
 					id="idsp2" class="">&nbsp</span>
-			</div>
-
-			<div class="d3">
-				<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp&nbsp</b>
-				</label> <input type="text" id="idPwd3" name="" value=""
+				</div>
+				
+				<div class="">
+					<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp&nbsp</b>
+					</label> <input type="text" id="idPwd3" name="" value=""
 					placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off"
 					aria-invalid="false"><br> <span id="h">確認密碼：&nbsp&nbsp&nbsp&nbsp</span><span
 					id="idsp3" class="">&nbsp</span>
-			</div>
-			<div class="d4 modal-footer">
-				<button type="submit" class="btn btn-primary btnn" id="btn">變更密碼</button>
+				</div>
+				<div class="">
+					<button type="submit" class="btn btn-primary btnn" id="btn">變更密碼</button>
 			</div>
 		</form>
 	</div>
+</div>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
 		window.onload = function() {
 			enableBtn();
 		}
 		function enableBtn() {
-			// FIXME: 需要接一個舊的密碼    
-			// let prevPwd;
 			let btn = document.getElementById("btn");
 			if ($("#idPwd1").attr("aria-invalid") == "true"
 					&& $("#idPwd2").attr("aria-invalid") == "true"
@@ -116,14 +127,7 @@ html, body {
 				msg1.append = "❌ 請輸入密碼";
 				msg1.style.color = "red";
 				$(this).attr("aria-invalid", "false");
-
-			}// FIXME: 這裡有一個舊密碼的判斷
-			// else if (pwd1Value != prevPwd) {
-			//   msg1.innerHTML = "❌ 舊密碼與現在使用的密碼不同";
-			//   msg1.style.color = "red";
-			//   $(this).attr("aria-invalid", "false");
-			//   // console.log(this);
-			// }
+			}
 			else {
 				msg1.innerHTML = "✔ 正確";
 				msg1.style.color = "green";
