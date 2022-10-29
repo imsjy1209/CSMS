@@ -9,8 +9,8 @@
 <body>
 
 
-	<footer class="footer mt-auto py-2">
-		<div class="container">
+	<footer class="footer mt-auto py-2" >
+		<div class="container" style="color:#214461">
 			Copyright &copy 2022 CSMS Corporation. All rights reserved.
 		</div>
 	</footer>

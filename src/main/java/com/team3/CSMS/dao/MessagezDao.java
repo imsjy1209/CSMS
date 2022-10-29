@@ -3,6 +3,7 @@ package com.team3.CSMS.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -19,10 +20,15 @@ public interface MessagezDao extends JpaRepository<Messagez, Integer> {
 			+ "  where Student.student_id=:id group by School.name",nativeQuery = true)
 	public List<String>getTeacherName(@Param("id") int id);
 	
-	@Query(value="from Messagez where school=:school")
+	@Query(value="from Messagez where school=:school and toSchool=0")
 	public List<Messagez> getAllBySchool(@Param("school") School school);
 	
-	@Query(value="from Messagez where parent=:parent")
+	@Query(value="from Messagez where parent=:parent and toSchool=1")
 	public List<Messagez> getAllByParent(@Param("parent") Parent parent);
+	
+	//已讀方法
+	@Modifying
+	@Query(value="update Messagez set readOrNot =1 where id=:id")
+	public void readOrNot(@Param("id") int id);
 }
 
