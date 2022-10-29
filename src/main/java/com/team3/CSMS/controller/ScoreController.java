@@ -1,9 +1,7 @@
 package com.team3.CSMS.controller;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.team3.CSMS.dto.ScoreCatchDto;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.ClassList;
@@ -42,6 +39,17 @@ public class ScoreController {
 	public String showScoreIndexAjax() {
 		return "/cs_score/score";
 	}
+	
+	// 顯示校方頁面----及格
+	@GetMapping("/passscore")
+	public String showScoreIndexAjax2() {
+		return "/cs_score/scorePass";
+	}
+	// 顯示校方頁面---不及格
+		@GetMapping("/notPassscore")
+		public String showScoreIndexAjax3() {
+			return "/cs_score/scoreNotPass";
+		}
 
 	// 顯示校方頁面---的新增按鈕---新增頁面
 	@GetMapping("/scoreAdd")
@@ -72,6 +80,32 @@ public class ScoreController {
 		return map;
 	}
 
+	// 透過classCodeId找及格score
+	@GetMapping("/findPassScore.controller")
+	public @ResponseBody Map<String, Object> getPassScoreInformationById(Integer classCodeId, Integer frequency) {
+		Map<String, Object> map = new HashMap<>();
+		List<ScoreDto2> sidto = scoreService.findPassScoreByclasslistId(classCodeId, frequency);
+		ClassList fcList = classListService.findClassListById(classCodeId);
+		map.put("sidto", sidto);
+		map.put("fcList", fcList);
+		return map;
+	}
+
+	
+	// 透過classCodeId找不及格score
+		@GetMapping("/findNotPassScore.controller")
+		public @ResponseBody Map<String, Object> getNotPassScoreInformationById(Integer classCodeId, Integer frequency) {
+			Map<String, Object> map = new HashMap<>();
+			List<ScoreDto2> sidto = scoreService.findNotPassScoreByclasslistId(classCodeId, frequency);
+			ClassList fcList = classListService.findClassListById(classCodeId);
+			map.put("sidto", sidto);
+			map.put("fcList", fcList);
+			return map;
+		}
+	
+	
+	
+	
 	// 更改score
 	@GetMapping("/scoreData/edit")
 	public String editScore(@RequestParam(name = "id") Integer id, Model model) {
