@@ -1,6 +1,11 @@
 package com.team3.CSMS.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +18,9 @@ import com.team3.CSMS.model.OrderList;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.service.OrderListService;
 import com.team3.CSMS.service.StudentService;
+
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Controller
 public class OrderListController {
@@ -87,5 +95,39 @@ public class OrderListController {
 			
 			orderListService.insertOrderList(newOrderList);
 		}
+		
+	//==================轉向綠界==================
+		@GetMapping("/changeToEcpayPage.controller")
+	    @ResponseBody
+	    public String testEcpay(@RequestParam(name="amount")String amount) {
+
+	        AllInOne all = new AllInOne(" ");
+			AioCheckOutALL obj = new AioCheckOutALL();
+			
+			UUID uid = UUID.randomUUID();
+			obj.setMerchantTradeNo(uid.toString().replaceAll("-", "").substring(0, 20));
+//			obj.setMerchantTradeNo("testComp12enenenen2");
+			
+			Date dNow = new Date( );
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss");			
+			obj.setMerchantTradeDate(ft.format(dNow));
+//			obj.setMerchantTradeDate("2017/01/01 08:05:23");
+			
+			obj.setTotalAmount(amount);
+//			obj.setTotalAmount("50");
+			
+			obj.setTradeDesc("test Description");
+			obj.setItemName("TestItem");
+			
+			
+			// ============跳轉頁面待更新==============
+			obj.setReturnURL("http://localhost:8081/CSMS/courseAllOnPageAjax.page");
+			obj.setNeedExtraPaidInfo("N");
+			obj.setClientBackURL("http://localhost:8081/CSMS/courseAllOnPageAjax.page");
+			String form = all.aioCheckOut(obj, null);
+			return form;
+	    }
+		
+		
 
 }

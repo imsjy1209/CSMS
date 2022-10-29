@@ -76,6 +76,27 @@ public class AbsentController {
         map.put("abList", abList);
         return map;
     }
+    
+    
+    //透過Id和日期及學生姓名來查出缺勤表-Neil
+    @GetMapping(value = "/getAbsentDataAjax.controller",
+            produces = {"application/json;charset=UTF-8"})
+    public @ResponseBody Map<String,Object> getAbsentDataAjax
+    (@RequestParam("classCodeId")Integer classCodeId,@RequestParam("days")String days,@RequestParam(name="studentName")String studentName){
+    System.out.println(classCodeId);
+    System.out.println(days);
+    System.out.println(studentName);
+    Map<String,Object> map = new HashMap<>();
+    List<ClassInfoDto> cliDto=clService.getClassInfoByClassCodeId(classCodeId);
+    List<Absent> abList = absService.findStuMohu(classCodeId, days, "%"+studentName+"%");
+//    List<Absent> abList=absService.searchAbsent(classCodeId, days);
+    // List<AbsentDataDto> abList=absService.searchAbsent(classCodeId, days);
+    map.put("cliDto", cliDto);
+    map.put("abList", abList);
+    return map;
+}
+    
+    
     // 透過ID更改學生出缺情狀況
     //FIXME:跳轉
     @GetMapping(value="/updateStudentOrNotByID")

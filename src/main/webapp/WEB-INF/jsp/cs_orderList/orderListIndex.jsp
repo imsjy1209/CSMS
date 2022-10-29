@@ -19,74 +19,10 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	crossorigin="anonymous">
-<title>Welcome</title>
-<style>
-.topbtn {
-	text-align: center;
-	width: 500px;
-	margin: auto;
-}
-
-.container {
-	width: 1500px;
-	margin: auto;
-}
-</style>
-</head>
 <body>
-	<div class="topbtn">
-		<a href="${contextRoot}/roomCreate.page" type="button"
-			class="btn btn-primary ">Go To CreateFormPage</a> <a type="button"
-			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go
-			To HomePage</a>
-	</div>
-	<div class="container">
-		<h3>All ClassStudentListI Data</h3>
-		<table class="table table-striped mt-5 ">
-			<thead>
-				<tr>
-					<td>多選</td>
-					<td>id</td>
-					<td>學生名稱</td>
-					<td>總金額</td>
-					<td>付款方式</td>
-					<td>結帳時間</td>
-					<td>orderDetail</td>
-					<td>Function</td>
-					<td>Function</td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${orderListList}" var="item">
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td>${item.id}</td>
-						<td>${item.student.name}</td>
-						<td>${item.amount}</td>
-						<td>${item.payment}</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.orderDate}" /></td>
-						
-						<c:forEach items="${item.orderDetails}" var="detail">
-						<tr>
-    						<td>${detail.student.name}</td>
-    						</tr>
-						</c:forEach>
-						<td class=" test1"><a type="button"
-							href="${contextRoot}/roomData/edit?id=${item.id}"
-							class="btn btn-warning">Edit</a></td>
-						<td class=" test2"><a onclick="return confirm('確定刪除嗎?')"
-							type="button" href="${contextRoot}/roomData/delete?id=${item.id}"
-							class="btn btn-danger">Delete</a></td>
-					</tr>
-				</c:forEach>
 
-			</tbody>
-		</table>
-	</div>
+<h1>okokok</h1>
+
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -106,36 +42,7 @@
 
 </body>
 <script>
-	$(".test1").on("click", function() {
-		let roomSize = $(this).prev().prev().children("input").val()
-		let roomName = $(this).prev().prev().prev().children("input").val()
-		let id = $(this).prev().prev().prev().prev().text();
-		console.log(id);
-		console.log(roomName);
-		console.log(roomSize);
 
-		//document.location.href = "${contextRoot}/updateRoomData.controller/"
-		//+ id + "/" + roomName + "/" + roomSize;
 
-	});
-
-	//=======================刪除資料=======================
-
-	$('input[type="checkbox"]').click(function() {
-		console.log('checkbox', $(this));
-		// $(this).closest('tr').css('background', 'lightblue')
-
-		// $('input:checked').closest('tr').css('background', 'lightblue');
-
-		// $('input:not(:checked)').closest('tr').css('background', 'none');
-
-		let bgColor = 'none';
-		if ($(this).prop('checked')) {
-			bgColor = 'lightblue';
-		}
-
-		$(this).closest('tr').css('background', bgColor)
-
-	})
 </script>
 </html>

@@ -3,12 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+	<!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
 <link rel="stylesheet"
@@ -33,7 +38,7 @@
 
 
 <div class="container">
-<h3><i class='bx bxs-user' >${student.name}</i></h3>
+<h3><i class='bx bxs-user' ></i><span >${student.name}</span><span class="stuId" style='display:none;'>${student.id}</span></h3>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -116,7 +121,7 @@ $('#goToPay').click(function(){
 		
 //現階段先把StudentId寫死，付費方式也先寫死	
 //處理再次確定要購買的課程(Revise confirmOrder from 0 to 2)
-	var studentId=2;
+	var studentId= $('.stuId').text();
 	var payment="credit_card"
 	
 	var ODIdList = [];
@@ -182,6 +187,10 @@ var ODIdListNoPurchase = [];
 	})
 	
 	}
+	
+	window.location.href='${contextRoot}/changeToEcpayPage.controller?amount='+amount;
+	
+	
 })
 
 

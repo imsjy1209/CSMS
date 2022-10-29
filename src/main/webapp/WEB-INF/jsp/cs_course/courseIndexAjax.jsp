@@ -772,7 +772,7 @@ $(document).on('click','.cart-remove',function(){
 $(document).on('click','.btn-buy',function(){
 //	buyButtonClicked();
 
-    alert('轉移到結帳頁面')
+
     
     var father = $(this).siblings('.cart-content').children();
     for(var i=0;i<father.length;i++){
@@ -788,10 +788,35 @@ $(document).on('click','.btn-buy',function(){
 	 var cartContent = document.getElementsByClassName('cart-content')[0]
 	 cartContent.removeChild(cartContent.firstChild);
 	
-}
-    updatetotal();
-  	document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+	}
+    
+    xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		    //===跳轉中alert======
+			const Toast = Swal.mixin({
+		  	toast: true,
+		  	position: 'top-end',
+		  	showConfirmButton: false,
+		  	timer: 3000,
+		  	timerProgressBar: true,
+		  	didOpen: (toast) => {
+		    toast.addEventListener('mouseenter', Swal.stopTimer)
+		    toast.addEventListener('mouseleave', Swal.resumeTimer)
+		 	 }
+			})
 
+			Toast.fire({
+			  icon: 'success',
+		 	 title: '跳轉到結帳頁面中...'
+			})
+//===End of 跳轉中alert======
+			
+			 updatetotal();
+			 document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+		}
+    }
+    
+   
 })
 
 

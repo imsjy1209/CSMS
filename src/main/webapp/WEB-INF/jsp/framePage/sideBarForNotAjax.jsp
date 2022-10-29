@@ -340,7 +340,7 @@ color:black;
                     <a href="#accessInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a>
                      <ul class="collapse list-unstyled" id="accessInfo">
                         <li>
-                            <a id="right-Btn" href="${contextRoot}/controlUser">AccessManager(更改權限)</a>
+                            <a id="right-Btn" href="${contextRoot}/courseAllPageBackAjax.page">AccessManager(更改權限)</a>
                         </li>
                     </ul>
                 </li>
@@ -387,10 +387,10 @@ color:black;
                     <a href="#absentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">出缺勤相關</a>
                      <ul class="collapse list-unstyled" id="absentInfo">
                         <li>
-                            <a id="absent-Btn" href="${contextRoot}/absentUpdate.page">AdviseAbsent(更改出缺勤)</a>
+                            <a id="absent-Btn" href="${contextRoot}/courseAllPageBackAjax.page">AdviseAbsent(更改出缺勤)</a>
                         </li>
                         <li>
-                            <a id="absent-Btn" href="${contextRoot}/absent.page">CreateAbsent(輸入出缺勤)</a>
+                            <a id="absent-Btn" href="${contextRoot}/courseAllPageBackAjax.page">CreateAbsent(輸入出缺勤)</a>
                         </li>
                     </ul>
                 </li>
