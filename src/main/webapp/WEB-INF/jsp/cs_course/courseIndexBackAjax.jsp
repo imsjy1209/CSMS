@@ -2489,9 +2489,9 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    '</thead>'+
 		    '<tbody>'+
 		      '<tr>'+
-		        '<td><input type="checkbox" checkes></td>'+
-		        '<td>22</td>'+
-		        '<td>謝冬冬</td>'+
+// 		        '<td><input type="checkbox" checkes></td>'+
+// 		        '<td>22</td>'+
+// 		        '<td>謝冬冬</td>'+
 		     '</tr>'+
 		    '</tbody>'+
 		  '</table>'+
