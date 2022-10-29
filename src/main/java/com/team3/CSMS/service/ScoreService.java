@@ -13,7 +13,9 @@ import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
 import com.team3.CSMS.dto.ScoreDto;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.ClassList;
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Score;
+import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -27,7 +29,7 @@ public class ScoreService {
 		List<Score> scoreList = scoreDao.findAll();
 		return scoreList;
 	}
-	// 【Parent頁面】找全部score
+	// 【校方頁面】找全部score
 	public List<ScoreDto2> findScoreByClassId(Integer classCodeId ,Integer frequency) {
 		List<Score> scoreList = scoreDao.getScoreByclasslistId(classCodeId, frequency);
 		ArrayList<ScoreDto2> scdtoList = new ArrayList<>();
@@ -38,6 +40,32 @@ public class ScoreService {
 		}
 		return scdtoList;
 	}
+	
+	// 【校方頁面】找及格score
+	public List<ScoreDto2> findPassScoreByclasslistId(Integer classCodeId ,Integer frequency) {
+		List<Score> scorePassList = scoreDao.getPassScoreByclasslistId(classCodeId, frequency);
+		ArrayList<ScoreDto2> scdtoList = new ArrayList<>();
+		for (Score score : scorePassList) {
+			ScoreDto2 scDto = new ScoreDto2(score);
+			scdtoList.add(scDto);
+
+		}
+		return scdtoList;
+	}
+
+	
+	// 【校方頁面】找不及格score
+		public List<ScoreDto2> findNotPassScoreByclasslistId(Integer classCodeId ,Integer frequency) {
+			List<Score> scoreNotPassList = scoreDao.getNotPassScoreByclasslistId(classCodeId, frequency);
+			ArrayList<ScoreDto2> scdtoList = new ArrayList<>();
+			for (Score score : scoreNotPassList) {
+				ScoreDto2 scDto = new ScoreDto2(score);
+				scdtoList.add(scDto);
+
+			}
+			return scdtoList;
+		}
+	
 
 	// 【家長頁面】選擇學生後，帶出該學生在該課堂的歷次考試成績
 	public List<ScoreDto2> getChildScoreListByStudentId(Integer studentId) {
@@ -50,6 +78,11 @@ public class ScoreService {
 		return scdtoList;
 	}
 	
+	//[MODEL]
+//	public List<Score> getscoreforParent(Student student,ClassList classList,Parent parent){
+//		return scoreDao.scoreforParent(student,classList,parent);
+//	}
+//	
 
 	// 新增
 	public void insertScore(Score score) {
