@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -71,5 +73,13 @@ public class ScoreParentController {
 	public String getAll() {
 		return "cs_score/scoreParent";
 	}
-
+	
+	// for ParentHompage
+//		@PostMapping(value = "/sendParentToHomepage")
+//		public String sendParentToHomepage(
+//				@RequestParam("studentId") Integer studentId,@SessionAttribute("users") Users user,Model m){
+//					List<Parent> pList = parentService.getChildScoreListByParentId(user.getId());
+//					m.addAttribute=("pList",pList);							
+//					return "/cs_student/studentHomepage";
+//		}
 }

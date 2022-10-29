@@ -1,46 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<title>Login</title>
-<style>
-  html,
- body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-  .maindiv{
-    border: 1px solid red;
-    width: 250px;
-    text-align: left;
-    position: relative ;
-    right: -1200px;
-    top: -200px;
-  }
-</style>
-</head>
-<body>
-<h1>請登入</h1>
-<div class="logodiv">
-  <img src="${contextRoot}/image/LoginLogo.png" alt="" style="border: 1px solid red;">
-</div>
-<form action="users/checklogin" method="post">
-  <div class="container maindiv" >
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <!DOCTYPE html>
+    <html>
 
-    <label for="pwd" style="border:1px solid red"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="pwd" required>
-    <p>${LoginError}</p>
-    <button type="submit">Login</button>
-    <button type="button" id="test"></button>
-  </div>
-</form>
-<script>
-</script>
-</body>
-</html>
+    <head>
+      <meta charset="UTF-8">
+      <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+      <title>Login</title>
+      <style>
+        body {
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          background: #6494ED;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          color: #2e446e;
+        }
+
+        .login {
+          background-color: #6494ED;
+          width: 29%;
+          height: 35%;
+          border-radius: 15px;
+          text-align: center;
+          color: #2e446e;
+        }
+
+        .login input {
+          display: block;
+          margin: 2% auto;
+          text-align: center;
+          background: none;
+          border-radius: 22px;
+          padding: 12px;
+          font-size: 15px;
+          outline: none;
+        }
+
+        .login input[type="text"],
+        .login input[type="password"] {
+          border: 2px solid #2e446e;
+          width: 220px;
+          
+        }
+
+        .login input[type="text"]:focus,
+        .login input[type="password"]:focus {
+          border: 2px solid #ff9933;
+          width: 280px;
+          transition: 0.5s;
+        }
+        .orangebtn{
+          background-color:  #ff9933;
+          color: #2e446e;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 22px;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="">
+        <img src="${contextRoot}/image/LoginLogo.png" alt=""> 
+      </div>
+      <div class="login">
+        <form action="users/checklogin" method="post">
+          <div class="container form-group maindiv">
+            <h1>Login</h1>
+            <label for="username"><b>Username</b></label>
+            <input type="text" class="form-control" placeholder="Enter Username" name="username" required>
+
+            <label for="pwd"><b>Password</b></label>
+            <input type="password" class="form-control" placeholder="Enter Password" name="pwd" required>
+            <p>${LoginError}</p>
+            <button type="submit" class="orangebtn">Login</button>
+          </div>
+        </form>
+      </div>
+      <script>
+      </script>
+    </body>
+
+    </html>

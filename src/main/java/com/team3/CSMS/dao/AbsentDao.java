@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Absent;
 // import com.team3.CSMS.model.ClassList;
+import com.team3.CSMS.model.Student;
 
 
 public interface AbsentDao extends JpaRepository<Absent, Integer> {
@@ -35,6 +36,11 @@ public interface AbsentDao extends JpaRepository<Absent, Integer> {
     @Query (value= "insert into absentOrNot (fk_classId_id,fk_student_id,arrivedOrNot) "+
             "values(:classId,:studentId,:arrivedValue) ", nativeQuery = true)
     void insertAbsentData(@Param("classId") Integer classId,@Param("studentId") Integer studentId ,@Param("arrivedValue")Integer arrivedValue);
+    
+
+    //HQL 透過學生找出缺勤
+    @Query(value="from Absent where student= :student")
+    List<Absent>selectAbsentByStudentId(@Param("student")Student student);
     
     // 可以空值得寫法
     // @Query(value= "SELECT 'Table 1' AS MSG, COLUMN1, COLUMN2 COLUMN3, COLUMN4, COLUMN5 FROM TABLE1 "+

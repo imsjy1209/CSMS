@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.AbsentDao;
 // import com.team3.CSMS.dto.AbsentDataDto;
 import com.team3.CSMS.model.Absent;
+import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -42,9 +43,17 @@ public class AbsentService {
     public void insertAbsentData(Integer classId,Integer studentId, Integer arrivedValue){
         aDao.insertAbsentData(classId, studentId, arrivedValue);
     }
+
     
     //SQL語法
     public List<Absent> findStuMohu(Integer classCodeId,String days,String studentName){
     	return aDao.selectAbsentByDaysAndClassCodeIdAndStuNameMohu(classCodeId,days,studentName);
     }
+
+    // 尋找個人出缺勤
+    public List<Absent> selectAbsentByStudent(Student student){
+       return aDao.selectAbsentByStudentId(student);
+    }
+    
+    
 }

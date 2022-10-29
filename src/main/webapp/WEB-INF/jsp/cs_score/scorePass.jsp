@@ -63,15 +63,7 @@
 			<br>
 			<div>
 				<button id='selectBtn' class="btn btn-light">搜尋</button>			     
-			     &nbsp 	     
-				<a href="${contextRoot}/scoreAdd" type="button"
-			class="btn btn-light" >新增</a>
-			  &nbsp 	     
-				<a  href="${contextRoot}/passscore" type="button"
-			class="btn btn-success" >及格</a>
-			 &nbsp 	     
-			<a href="${contextRoot}/notPassscore" type="button"
-			class="btn btn-danger" >不及格</a>
+			    
 			</div>
 
 		
@@ -81,8 +73,7 @@
 					<td>id</td>
 					<td>學生姓名</td>
 					<td>分數</td>
-					<td>編輯功能</td>
-					<td>刪除功能</td>
+
 				</tr>
 			</thead>
 			<tbody id="content-data">
@@ -135,7 +126,7 @@
 		let classCodeIdvalue = classSelected.value;
 		let anotherSelectvalue = anotherSelect.value;		//for studentList and classinfo
 		let xhr2 = new XMLHttpRequest();		// get the information from select value
-		xhr2.open("GET", "<c:url value='/findAllScore2.controller'/>"
+		xhr2.open("GET", "<c:url value='/findPassScore.controller'/>"
 				+ "?classCodeId=" + classCodeIdvalue + "&frequency="
 				+ anotherSelectvalue, true);
 		xhr2.send();
@@ -158,15 +149,7 @@
 				scolist_data += '<td>' + sidto[i].student + '</td>'
 				scolist_data += '<td>' + sidto[i].score + '</td>'
 				scolist_data += "<td style='display:none' class='scoreId'>"
-						+ sidto[i].scoreId + "</td>"		
-				scolist_data += "<td class='edit'><a href='${contextRoot}/scoreData/edit?id="
-						+ sidto[i].scoreId
-						+ "' type='button' class='btn btn-dark'>Edit</a></td>"
-				scolist_data += "<td class='delete'><a onclick="
-						+ "\"return confirm('確定刪除嗎?')\" type='button' href='${contextRoot}/scoreData/delete?id="
-						+ sidto[i].scoreId
-						+ "' class='btn btn-dark'>Delete</a></td>"
-
+						+ sidto[i].scoreId + "</td>"				
 				scolist_data += '<tr>'
 			}
 
@@ -174,10 +157,6 @@
 			$('#scoreTable').append(scolist_data)
 		}
 	}
-	
-	
-
-	
 	//=======================暫時不用=======================
 	$(".test1").on("click", function() {
 		let roomSize = $(this).prev().prev().children("input").val()
