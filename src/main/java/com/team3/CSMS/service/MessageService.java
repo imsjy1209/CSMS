@@ -48,4 +48,11 @@ public class MessageService {
 	public List<Messagez>getAllByParent(Parent parent){
 		return mDao.getAllByParent(parent);
 	}
+	
+	//已讀方法
+	public Messagez readornot(int id) {
+		Messagez messagez = findById(id);
+		mDao.readOrNot(id);
+		return messagez;
+	}
 }

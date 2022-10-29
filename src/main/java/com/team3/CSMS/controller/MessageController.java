@@ -101,5 +101,12 @@ public class MessageController {
 //		return "/cs_score/scoreEdit";
 //	}
 	
+	//已讀方法
+	@GetMapping("message/readornot")
+	public @ResponseBody Messagez readornot(@RequestParam("id")int id) {
+		Messagez messagez = mSer.readornot(id);
+		return messagez;
+	}
+	
 	
 }
