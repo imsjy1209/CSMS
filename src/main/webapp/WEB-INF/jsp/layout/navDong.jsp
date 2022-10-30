@@ -30,11 +30,11 @@
 /* 單一選單 */
 li{
 	height: 200%;
-	font-size: 18px; 
+	font-size: 15px; 
 }
 
 .nav-item {
-	margin-left: 50px;
+	margin-left: 25px;
 }
 
 /* hover加文字底線 */
@@ -148,10 +148,10 @@ li{
 	    <!-- 靠右 -->
 		<ul class="nav navbar-nav navbar-right ">
 		    <li class="nav-item active">
-	        	 <i class='bx bxs-user-circle' style="font-size:25px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
+	        	 <i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
 	      	</li>
 	      	<li class="nav-item active">
-	      		<i class='bx bx-log-out bx-rotate-180' style="font-size:25px;line-height:40px"></i><b>&nbsp;登出</b>
+	      		<i class='bx bx-log-out bx-rotate-180' style="font-size:15px;line-height:40px"></i><b>&nbsp;登出</b>
 	      	</li>
       	</ul>
 	</div>

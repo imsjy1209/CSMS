@@ -12,6 +12,9 @@
 <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 	rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
@@ -29,12 +32,13 @@ html, body {
 .footer {
 	height: 40px; /*設定footer本身高度*/
 	background-color: #cbe6f5;
-	font-size: 17px;
+	font-size: 15px;
 	text-align: center;
 	color: gray;
 }
 
 /* Footer Style (end) */
+
 .scoreIcon {
 	top: 500px;
 	left: 120px;
@@ -62,7 +66,7 @@ html, body {
 .announcementDiv {
 	border: 2px solid slateblue;
 	size: 100px;
-	width: 1000px;
+	width: 700px;
 	height: 300px;
 	top: 250px;
 	right: 150px;
@@ -76,7 +80,7 @@ button {
 }
 
 .wrapper {
-	width: 95%;
+	width: 100%;
 	margin: auto;
 }
 
@@ -89,13 +93,16 @@ button {
 	width: 70%;
 	border: 1px solid blue;
 	float: right;
+	margin-right: 50px;
 }
 
 .aside {
 	width: 10%;
 	border: 1px solid red;
 	float: left;
+	margin-left: 50px;
 }
+
 </style>
 
 </head>
@@ -105,9 +112,7 @@ button {
 	<!-- Student Navbar -->
 	<jsp:include page="../layout/navDong.jsp"></jsp:include>
 	<div class="wrapper">
-		<div>
-			<p>輪播區</p>
-		</div>
+		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
 				<div class="absCheckIcon hoverLight" id="absCheckIcon">
@@ -158,10 +163,8 @@ button {
 			</div>
 			<div class="article ">
 				<div class="announcementDiv">
-					<h4>左邊目前只有第三個按鈕有接modal</h4>
-
+					<h4>modal區</h4>
 				</div>
-
 
 				<!-- Button trigger modal -->
 				<button type="button" class="" data-toggle="modal"
@@ -356,25 +359,56 @@ button {
 
 
 	</div>
-	</div>
-	</div>
-
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	<script>
-		
-	</script>
-</body>
-
-</html>
-
 
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
+<script type="text/javascript">
+	/* 宣告變數 */
+	let slideNum = 0;
+	let slideCount = $(".slides li").length;
+	let lastIndex = slideCount - 1;
 	
+	/* 建立圖片、點點運作的方法 */
+	function show() {
+	    // 點點顏色
+	    $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+	
+	    // 圖片移動
+	    let slidemove = 0 - 400 * slideNum;
+	    $("ul.slides").css("left", slidemove);
+	}
+	
+	/* 點點、圖片 */
+	$(".dot li").mouseenter(function () {
+	    slideNum = $(this).index();
+	    show();
+	});
+	
+	/* 自動輪播(自動下一頁) */
+	// JS P.102：let Interval = setInterval(function,milliseconds)
+	let autoplay = setInterval(function () {
+	    slideNum++;
+	    if (slideNum > lastIndex) { slideNum = 0; }
+	    show();
+	}, 2000); // 把function放上下一頁的方法
+	
+	/* 輪播暫停 */
+	$(".wrapper").mouseover(function () {
+	    clearInterval(autoplay);
+	});
+	
+	/* 自動輪播重啟 */
+	$(".wrapper").mouseout(function () {
+	    let autoplay = setInterval(function () {
+	        slideNum++;
+	        if (slideNum > lastIndex) { slideNum = 0; }
+	        show();
+	    }, 2000);
+	}); // 第一次autoplay被mouseover清除，在mouseout時加回來
 </script>
+
 </body>
 
 </html>
