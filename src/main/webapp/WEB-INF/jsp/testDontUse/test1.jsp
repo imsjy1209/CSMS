@@ -54,8 +54,8 @@
 	}
 </style>
 </head>
-<body>
-    <jsp:include page="../layout/navDong.jsp"></jsp:include>
+<!-- <body> -->
+<%--     <jsp:include page="../layout/navDong.jsp"></jsp:include> --%>
 
 	<div class="absCheckIcon hoverLight" id ="absCheckIcon">
 		<!-- 出席 button 的 data-target 要改-->

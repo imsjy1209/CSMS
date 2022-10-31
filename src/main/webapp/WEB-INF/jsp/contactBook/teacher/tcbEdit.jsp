@@ -5,9 +5,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+<!-- NAVBAR -->
+<%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
+<jsp:include page="../../layout/nav_teacher.jsp"></jsp:include>
 	
 <!-- CONTENT -->
+<br><br>
+<div class="wrapper">
 <div class="container">	
 	<h4>【老師】聯絡簿編輯</h4>
 	<br>
@@ -29,7 +33,9 @@
 		</div>
 	</form>
 </div>
-
+</div> 
+<!-- footer -->
+<jsp:include page="../../footer/footer.jsp"></jsp:include>	
 
 <!-- CDN -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

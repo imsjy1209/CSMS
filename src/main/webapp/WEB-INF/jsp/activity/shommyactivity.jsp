@@ -10,7 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+<!-- NAVBAR -->
+<%-- <jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
+<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+	
+<!-- CONTENT -->
+<br><br>
+<div class="wrapper">
 	<div class="container" align="center"><br>
 	<h2>我的活動</h2><br>
 	${student.name}<br>
@@ -36,5 +42,8 @@
 			</div>
 		</c:forEach>
 	</div>
+</div>
+<!-- footer -->
+<jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
 </html>
