@@ -141,7 +141,7 @@
 					if (userProfile.parent!=null){
 						$("#changect").attr("type","button");
 						console.log(prevPwd);
-						console.log(userProfile.parent.tel);
+						console.log(userProfile.parent);
 
 						let oldCellPhone=userProfile.parent.tel;
 						$("#phone").val(oldCellPhone)

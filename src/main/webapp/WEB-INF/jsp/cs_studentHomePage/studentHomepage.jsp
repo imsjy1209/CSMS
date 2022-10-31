@@ -60,7 +60,9 @@ html, body {
 }
 
 .hoverLight:hover {
-	filter: drop-shadow(0px 0px 10px #000000);
+	/* box-shadow:0px 0px 10px #ff9933 inset; */
+	/* filter: drop-shadow(0px 0px 10px #ff9933); */
+	color: black;
 }
 
 .announcementDiv {
@@ -115,12 +117,13 @@ button {
 		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
-				<div class="absCheckIcon hoverLight" id="absCheckIcon">
+				<div class="absCheckIcon " id="absCheckIcon">
 					<!-- 出席 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#absentMID">
 						<img src="${contextRoot}/image/absCheck.png" title="出席" alt=""
-							style="border: 1px solid red;">
+							 class="hoverLight" style="color:white;">
+							 <i style="font-size: 80px;" class='bx bx-shield-minus hoverLight' ></i>
 					</button>
 				</div>
 
