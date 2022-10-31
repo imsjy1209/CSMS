@@ -10,7 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+	<!-- NAVBAR -->
+	<%-- <jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
+	<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+	<!-- CONTENT -->
+	<br><br>
+	<div class="wrapper">
 	<div class="container">
 		<div align="center">
 			<h1>活動頁面</h1>
@@ -44,6 +49,9 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	<!-- footer -->
+	<jsp:include page="../footer/footer.jsp"></jsp:include>	
 	<script>
 	btn01.onclick = function() {
 		let xhr = new XMLHttpRequest();

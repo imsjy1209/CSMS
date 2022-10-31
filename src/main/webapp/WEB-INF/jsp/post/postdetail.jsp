@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+<!-- NAVBAR -->
+<%-- 	<jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
+<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+<br><br>
+<div class="wrapper">
 	<div class="container">
 	<br><h1 align="center">公告</h1><br>
 		<div class="card">
@@ -24,5 +28,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+<!-- footer -->
+<jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
 </html>

@@ -5,9 +5,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+<!-- NAVBAR -->
+<%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
+<jsp:include page="../../layout/nav_student.jsp"></jsp:include>
 	
 <!-- CONTENT -->
+<br><br>
+<div class="wrapper">
 <div class="container">	
 	<h4>【學生】聯絡簿首頁</h4>
 	<br>
@@ -18,20 +29,6 @@
   		</select>
   	</div>
   	<br>
-  	<br>
-<!-- 	<div> -->
-<!-- 		<label for="exampleFormControlSelect1">建立聯絡簿：</label> -->
-<!-- 		<table id="add_cbList" class="table table-borderless" style="text-align:center"> -->
-<!-- 			<tr> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder=""/></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="createAt" name="createAt" placeholder="課程內容" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="hw" name="hw" placeholder="回家作業" /></td> -->
-<!-- 			  <td><input type="text" class="form-control" id="quiz" name="quiz" placeholder="考試通知" /></td> -->
-<!-- 			  <td><a href="#" type="button" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="false">新增</a></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
-
 	<br>
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">
@@ -49,9 +46,10 @@
 			</thead>
 		</table>
   	</div>
-  	
+</div>  	
 </div>
-	
+<!-- footer -->
+<jsp:include page="../../footer/footer.jsp"></jsp:include>	
 
 
 <!-- CDN -->
@@ -162,14 +160,6 @@ $("#classInfoList").on("change",function(){
 	  	  	$('#cbList').append(cb_content); 
   		}
   	}
-});
-
-//=======================版面動作=======================
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
 });
 
 </script>

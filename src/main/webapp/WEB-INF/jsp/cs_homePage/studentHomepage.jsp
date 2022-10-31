@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<title>Test</title>
+<title>Welcome</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- BOX ICONS -->
@@ -19,25 +19,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 
-/* Footer Style (start) */
-html, body {
-	height: 100%;
-	margin: 0;
-}
 
-.wrapper { /* 每一頁都要用wrapper包起來 */
-	min-height: calc(100% - 107px); /*減去navebar(77px)和footer(40)高度*/
-}
-
-.footer {
-	height: 40px; /*設定footer本身高度*/
-	background-color: #cbe6f5;
-	font-size: 15px;
-	text-align: center;
-	color: gray;
-}
-
-/* Footer Style (end) */
 
 .scoreIcon {
 	top: 500px;
@@ -110,7 +92,7 @@ button {
 <body>
 
 	<!-- Student Navbar -->
-	<jsp:include page="../layout/navDong.jsp"></jsp:include>
+	<jsp:include page="../layout/nav_student.jsp"></jsp:include>
 	<div class="wrapper">
 		<div class="carouselArea">輪播區</div>
 		<div class="content">
