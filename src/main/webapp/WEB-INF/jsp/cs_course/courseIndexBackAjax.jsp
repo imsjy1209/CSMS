@@ -405,7 +405,8 @@ $(function() {
 			$('.OrderListBtnGroup').remove();
 			$('.classListSelDiv').remove();
 			$('.ClassStudentListBtnGroup').remove();
-			$('.forDonDon').remove();
+			$('.absentContent').remove();
+			$('.accessMan').remove();
 			$('.main-title').text('課程商品-Course')
 	})
 		function showAllCourse(){
@@ -750,6 +751,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
+		$('.accessMan').remove();
 		$('.main-title').text('班級資訊-ClassList')
 		
 
@@ -1077,6 +1079,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
+		$('.accessMan').remove();
 		$('.main-title').text('上課紀錄-ClassRecord')
 		
 		var xhr = new XMLHttpRequest();
@@ -1140,6 +1143,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
+		$('.accessMan').remove();
 		$('.main-title').text('訂單總表-OrderList')
 		
 		
@@ -1515,6 +1519,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
+		$('.accessMan').remove();
 		$('.main-title').text('購買/排課狀態-OrderDetail')
 		
 		
@@ -1726,6 +1731,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.absentContent').remove();
+		$('.accessMan').remove();
 		$('.main-title').text('學員對應班級清單-ClassStudentList')
 		
 		
@@ -1915,6 +1921,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.accessMan').remove();
 		$('.absentContent').remove();
 		$('.main-title').text('教室清單-Room')
 		
@@ -2285,6 +2292,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.accessMan').remove();
 		$('#thead-title').html("");
 		$('#content-data').html("");
 		$('.main-title').text('輸入出缺勤-InsertAbsentData')
@@ -2445,6 +2453,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		$('.OrderListBtnGroup').remove();
 		$('.classListSelDiv').remove();
 		$('.ClassStudentListBtnGroup').remove();
+		$('.accessMan').remove();
 		$('#thead-title').html("");
 		$('#content-data').html("");
 		$('.main-title').text('更改出缺勤-Absent Update')
@@ -2690,7 +2699,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		//===非Ajax生成的元素====
 		var contentAccess = "";
 		contentAccess+=
-		'<div class="container" align="center">'+
+		'<div class="container accessMan" align="center">'+
 			'<nav>'+
 			'<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
 				  '<a class="nav-item nav-link active navSch" id="navSchool" data-toggle="tab" href="#nav-school" role="tab" aria-controls="nav-school" aria-selected="true">校方</a>'+

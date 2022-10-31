@@ -306,6 +306,19 @@ font-size: 0.5rem;
 	 background-color:red;
 }
 
+.bx-trash{
+cursor: pointer;
+font-size:36px;
+transition: 0.4s;
+}
+.bx-trash:hover{
+cursor: pointer;
+font-size:48px;
+}
+
+/* td{ */
+/* 	vertical-align:middle; */
+/* } */
 
 
 /*  testttt    */

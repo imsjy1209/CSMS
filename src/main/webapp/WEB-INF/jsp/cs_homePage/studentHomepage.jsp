@@ -94,7 +94,8 @@ button {
 	<!-- Student Navbar -->
 	<jsp:include page="../layout/nav_student.jsp"></jsp:include>
 	<div class="wrapper">
-		<div class="carouselArea">輪播區</div>
+		<div class="carouselArea">輪播區
+		</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
 				<div class="absCheckIcon hoverLight" id="absCheckIcon">
