@@ -32,7 +32,7 @@
 	<br>
   	<div>
   		<table id="cbList" class="table table-bordered" style="text-align:center">
-  			<thead  id="cbList-title">
+  			<thead id="cbList-title">
     			<tr>
 				     <th class="table-info" scope="col">編號</th>
 				     <th class="table-info" scope="col">建立日期</th>

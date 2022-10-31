@@ -374,39 +374,65 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">聯絡簿(前3筆紀錄)</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle">聯絡簿 (前3筆紀錄)</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							<table>
+							<table class="table table-bordered" style="text-align:center">
 								<thead>
 									<tr>
-										<th>建立日期</th>
-										<th>課程代號</th>
-										<th>科目名稱</th>
-										<th>課程內容</th>
-										<th>回家作業</th>
-										<th>考試通知</th>
+										<th class="table-info" scope="col">建立日期</th>
+										<th class="table-info" scope="col">課程代號</th>
+										<th class="table-info" scope="col">科目名稱</th>
+										<th class="table-info" scope="col">課程內容</th>
+										<th class="table-info" scope="col">回家作業</th>
+										<th class="table-info" scope="col">考試通知</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="top3cbList" items="${top3cbList}">
 										<c:choose>
-											<c:when test="${top3cbList == null}">查無結果</c:when>
+											<c:when test="${top3cbList == null}">
+												<tr>
+													<td colspan="6">查無結果</td>
+												</tr>
+											</c:when>
 											<c:otherwise>
 												<tr>
-													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${top3cbList.create_at}"/>1123</td>
+													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${top3cbList.create_at}"/></td>
 													<td>${top3cbList.classList.classCode}</td>
 													<td>${top3cbList.classList.course.courseSubject}</td>
-													<td>${top3cbList.courseContent}</td>
-													<td>${top3cbList.homework}</td>
-													<td>${top3cbList.quizNotice}</td>
+													<c:choose>
+														<c:when test="${top3cbList.courseContent == null}">
+															<td></td>
+														</c:when>
+														<c:otherwise>
+															<td>${top3cbList.courseContent}</td>
+														</c:otherwise>
+													</c:choose>
+													
+													<c:choose>
+														<c:when test="${top3cbList.homework == null}">
+															<td></td>
+														</c:when>
+														<c:otherwise>
+															<td>${top3cbList.homework}</td>
+														</c:otherwise>
+													</c:choose>
+													
+													<c:choose>
+														<c:when test="${top3cbList.quizNotice == null}">
+															<td></td>
+														</c:when>
+														<c:otherwise>
+															<td>${top3cbList.quizNotice}</td>
+														</c:otherwise>
+													</c:choose>
 												</tr>
 											</c:otherwise>			
 										</c:choose>
-
 									</c:forEach>
 								</tbody>
 							</table>
@@ -414,7 +440,7 @@ button {
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">See more</button>
+							<a type="button" class="btn btn-primary" href="${contextRoot}/ContactBook/St_Index">See more</a>
 						</div>
 					</div>
 				</div>
