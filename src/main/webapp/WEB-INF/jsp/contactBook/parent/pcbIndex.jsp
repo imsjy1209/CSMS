@@ -5,12 +5,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+<!-- BOX ICONS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
 <!-- NAVBAR -->
 <%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
 <jsp:include page="../../layout/nav_parent.jsp"></jsp:include>
-
-<!-- BOX ICONS -->
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	
 <!-- CONTENT -->
 <br><br>
@@ -237,14 +243,6 @@ function showContactBookDetail(selectedClassListId,selectedStudentId){
   		}
   	}	
 }
-
-//=======================版面動作=======================
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-});
 
 </script>
 

@@ -97,32 +97,14 @@ li{
   	<div class="navbar-nav-scroll" id="navbarNav" style="width:100%;">
   	   
 	    <ul class="navbar-nav bd-navbar-nav navbar-light flex-row navbar-left" style="width:70%;float:left;">
-	    
-	      <li class="nav-item dropdown font-weight-bold btn-2">
-	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-	          出缺勤相關
-	        </a>
-	        <div class="dropdown-menu">
-	        	<a class="dropdown-item lia" href="#">出缺勤紀錄查詢</a>
-	        </div>
-	      </li>
 	      
 	      <li class="nav-item dropdown font-weight-bold btn-2">
 	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 	        	課程相關
 	        </a>
 	        <div class="dropdown-menu">
-	          <a class="dropdown-item" href="#">報名課程查詢</a>
-	        </div>
-	      </li>
-	      
-	      <li class="nav-item dropdown font-weight-bold btn-2">
-	        <a class="nav-link active dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-	        	活動相關
-	        </a>
-	        <div class="dropdown-menu">
-	          <a class="dropdown-item lia" href="${contextRoot}/getAll">活動總覽</a>
-	          <a class="dropdown-item lia" href="${contextRoot}/getmyact">我的活動紀錄</a>
+	          	<a class="dropdown-item lia" href="${contextRoot}/frontParentscore">查看成績</a>
+	          	<a class="dropdown-item lia" href="${contextRoot}/ContactBook/P_Index">查看聯絡簿</a>
 	        </div>
 	      </li>
 	      
@@ -135,23 +117,23 @@ li{
 	        </div>
 	      </li>
 	      
-	      <li class="nav-item dropdown font-weight-bold btn-2">
-	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-	        	電子聯絡簿
-	        </a>
-	        <div class="dropdown-menu">
-	          <a class="dropdown-item lia" href="${contextRoot}/post/viewbyall">查看聯絡簿</a>
-	        </div>
-	      </li>
-	      
 	    </ul>
 	    <!-- 靠右 -->
 		<ul class="nav navbar-nav navbar-right ">
-		    <li class="nav-item active">
-	        	 <i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
+		    <li class="nav-item active btn-2 leftBtn">
+		    	<a class="leftBtn" href="#" style="color:white;text-decoration: none;">
+	        		<i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
+	        	</a>
 	      	</li>
-	      	<li class="nav-item active">
-	      		<i class='bx bx-log-out bx-rotate-180' style="font-size:15px;line-height:40px"></i><b>&nbsp;登出</b>
+	      	<li class="nav-item active btn-2 leftBtn">
+		    	<a class="leftBtn" href="#" style="color:white;text-decoration: none;">
+	        		<i class='bx bx-store' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;課程選購</b></span>
+	        	</a>
+	      	</li>
+	      	<li class="nav-item active btn-2 leftBtn">
+	      		<a class="leftBtn" href="${contextRoot}/signout" style="color:white;text-decoration:none;">
+	      			<i class='bx bx-log-out bx-rotate-180' style="font-size:15px;line-height:40px;"></i><b>&nbsp;登出</b>
+	      		</a>
 	      	</li>
       	</ul>
 	</div>

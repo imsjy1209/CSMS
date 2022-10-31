@@ -33,11 +33,18 @@
 </style>
 </head>
 <body>
+<!-- NAVBAR -->
+<%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
+<jsp:include page="../layout/nav_parent.jsp"></jsp:include>
+	
+<!-- CONTENT -->
+<br><br>
+<div class="wrapper">
 <!-- 	<div class="topbtn"> -->
 <!-- 	         <a type="button" -->
 <%-- 			class="btn btn-warning" href="${contextRoot}/homepage.controller">Go --%>
 <!-- 			To HomePage</a> -->
-	</div>
+<!-- 	</div> -->
 	   <div class="container">
 		<h3>All Score Data</h3>
 		<span id="hiddenUserId" hidden>15</span>
@@ -62,6 +69,10 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+
+<!-- footer -->
+<jsp:include page="../footer/footer.jsp"></jsp:include>	
 <!-- jsp作業區 -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
