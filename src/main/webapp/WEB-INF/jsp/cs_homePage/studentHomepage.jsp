@@ -103,45 +103,50 @@ button {
 					<!-- 出席 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#absentMID">
-						<img src="${contextRoot}/image/absCheck.png" title="出席" alt=""
-							 class="hoverLight" style="color:white;">
-							 <i style="font-size: 80px;" class='bx bx-shield-minus hoverLight' ></i>
+						<!-- <img src="${contextRoot}/image/absCheck.png" title="出席" alt=""
+							 class="hoverLight"> -->
+						<!-- <i style="font-size: 90px;" class='bx bx-checkbox-checked hoverLight' style='color:#6b6868'  ></i> -->
+						<i style="font-size: 90px;" class='bx bx-calendar-check hoverLight' style='color:#6b6868'></i>
 					</button>
 				</div>
 
-				<div class="lessonIcon hoverLight" id="lessonIcon">
+				<div class="lessonIcon " id="lessonIcon">
 					<!-- 課程 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#courseMID">
-						<img src="${contextRoot}/image/lesson.png" title="課程"
-							style="border: 1px solid red;">
+						<!-- <img src="${contextRoot}/image/lesson.png" title="課程"
+							style="border: 1px solid red;"> -->
+						<i style="font-size: 90px;" class='bx bx-book hoverLight' title="課程" style='color:#6b6868' ></i>
 					</button>
 				</div>
 
-				<div class="activeIcon hoverLight" id="activeIcon">
+				<div class="activeIcon " id="activeIcon">
 					<!-- 活動 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#activityMID">
-						<img src="${contextRoot}/image/active.png" title="活動" alt=""
-							style="border: 1px solid red;">
+						<!-- <img src="${contextRoot}/image/active.png" title="活動" alt=""
+							style="border: 1px solid red;"> -->
+						<i style="font-size: 90px;" class='bx bx-universal-access hoverLight' style='color:#6b6868'></i>
 					</button>
 				</div>
 
-				<div class="scoreIcon hoverLight" id="scoreIcon">
+				<div class="scoreIcon " id="scoreIcon">
 					<!-- 分數 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#scoreMID">
-						<img src="${contextRoot}/image/score.png" title="分數" alt=""
-							style="border: 1px solid red;">
+						<!-- <img src="${contextRoot}/image/score.png" title="分數" alt=""
+							style="border: 1px solid red;"> -->
+							<i style="font-size: 90px;" class='bx bx-bar-chart bx-rotate-90 hoverLight' style='color:#6b6868'></i>
 					</button>
 				</div>
 
-				<div class="scoreIcon hoverLight" id="contactBookIcon">
+				<div class="scoreIcon " id="contactBookIcon">
 					<!-- 分數 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#contactBookMID">
-						<img src="${contextRoot}/image/contactbook.png" title="聯絡簿" alt=""
-							style="border: 1px solid red;">
+						<!-- <img src="${contextRoot}/image/contactbook.png" title="聯絡簿" alt=""
+							style="border: 1px solid red;"> -->
+						<i style="font-size: 90px;" class='bx bx-book-reader hoverLight' style='color:#6b6868'></i>
 					</button>
 				</div>
 
