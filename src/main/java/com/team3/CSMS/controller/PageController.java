@@ -131,8 +131,13 @@ public class PageController {
 		return "/cs_studentHomePage/studentHomepage";	}
 	
 
+//	@GetMapping("/youAreFirst")
+//	public String firstLogin(){
+//		return "/login/firstLogin";
+//	}
+	
 	@GetMapping("/youAreFirst")
-	public String firstLogin(){
-		return "/login/firstLogin";
+	public String firstLogin2(){
+		return "/login/firstLoginTest";
 	}
 }
