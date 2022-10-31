@@ -75,7 +75,7 @@
 <br><br><br><br><br><br>
 
 <div class="container">
-<%-- <h3><i class='bx bxs-user' ></i><span >${student.name}</span><span class="stuId" style='display:none;'>${student.id}</span></h3> --%>
+<span class="stuId" style='display:none;'>${student.id}</span>
 <table class="table table-hover table-content">
   <thead>
     <tr>

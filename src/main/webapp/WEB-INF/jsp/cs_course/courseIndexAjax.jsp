@@ -164,8 +164,7 @@ padding-right:15px!important;
 	</section>
 	
 <footer>
-<!-- 		<div id="already-buy-course-area" class="already-buy-course-area"> -->
-<h3>已擁有的課程</h3>
+
 
 		<span id="stuSessionId" style="display:none">${student.id}</span>
 		
@@ -176,8 +175,11 @@ padding-right:15px!important;
 		</c:forEach>
 		</div>
 		
-<div class="shop-content-test" id="already-buy-course-area">
-		</div>
+		
+		
+	<h3>已擁有的課程</h3>		
+	<div class="shop-content-test" id="already-buy-course-area">
+	</div>
 </footer>			
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -818,25 +820,22 @@ $(document).on('click','.cart-remove',function(){
 //================End OF RemoveItems From Cart===============
 
 
-//結帳動作
+//============結帳動作======================
 $(document).on('click','.btn-buy',function(){
-//	buyButtonClicked();
-
-
     
     var father = $(this).siblings('.cart-content').children();
+    
     for(var i=0;i<father.length;i++){
-	var courseId = father.eq(i).find('.detail-box').find('span').text();
-	var studentId =$('#stuSessionId').text();
-	 console.log(courseId);
-	 console.log(studentId);
+		var courseId = father.eq(i).find('.detail-box').find('span').text();
+		var studentId =$('#stuSessionId').text();
+	 	console.log(courseId);
+	 	console.log(studentId);
 	 
-  	 var xhr = new XMLHttpRequest();
-	 xhr.open("GET", "<c:url value='/orderDetailCreateAjax.controller?courseId=" + courseId + "&studentId=" + studentId + "' />", true);
-	 xhr.send();
-	 
-	 var cartContent = document.getElementsByClassName('cart-content')[0]
-	 cartContent.removeChild(cartContent.firstChild);
+  		 var xhr = new XMLHttpRequest();
+	 	 xhr.open("GET", "<c:url value='/orderDetailCreateAjax.controller?courseId=" + courseId + "&studentId=" + studentId + "' />", true);
+		 xhr.send();
+	 	 var cartContent = document.getElementsByClassName('cart-content')[0]
+	 	 cartContent.removeChild(cartContent.firstChild);
 	
 	}
     

@@ -5,11 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+<!-- NAVBAR -->
+<%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
+<jsp:include page="../../layout/nav_teacher.jsp"></jsp:include>
+
  <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	
 <!-- CONTENT -->
+<br><br>
+<div class="wrapper">
 <div class="container">	
 	<h4>【老師】聯絡簿首頁</h4>
 	<br>
@@ -45,9 +50,10 @@
 <!-- 				      <a href="#" type="button" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="false">刪除</a> -->
 		</table>
   	</div>
-  	
+</div>  	
 </div>
-	
+<!-- footer -->
+<jsp:include page="../../footer/footer.jsp"></jsp:include>		
 
 
 <!-- CDN -->

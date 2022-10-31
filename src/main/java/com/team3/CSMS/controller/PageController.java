@@ -1,12 +1,8 @@
 package com.team3.CSMS.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.team3.CSMS.model.ClassList;
 
 @Controller
 public class PageController {
@@ -125,14 +121,36 @@ public class PageController {
 	public String Control() {
 		return "/register/controllUser";
 	}
-	// 測試用
-	@GetMapping("/student.Homepage")
-	public String testme(){
-		return "/cs_studentHomePage/studentHomepage";	}
 	
 
+//	@GetMapping("/youAreFirst")
+//	public String firstLogin(){
+//		return "/login/firstLogin";
+//	}
+//	// 測試用
+//	@GetMapping("/student.Homepage")
+//	public String testme(){
+//		return "/cs_studentHomePage/studentHomepage";	}
+	
 	@GetMapping("/youAreFirst")
-	public String firstLogin(){
-		return "/login/firstLogin";
+	public String firstLogin2(){
+		return "/login/firstLoginTest";
 	}
+	
+	// 回前台首頁
+	@GetMapping("/teacher.Homepage")
+	public String teacherGoHome(){
+		return "/cs_homePage/teacherHomepage";	
+	}
+	
+	@GetMapping("/student.Homepage")
+	public String studentGoHome(){
+		return "/cs_homePage/studentHomepage";	
+	}
+	
+	@GetMapping("/parent.Homepage")
+	public String parentGoHome(){
+		return "/cs_homePage/parentHomepage";	
+	}
+	
 }

@@ -224,7 +224,7 @@ public class UsersController {
             return "login/login";
 		}else if(users.getIsFirst() == 1) {
 			m.addAttribute("users",users);
-			return "login/firstLogin";
+			return "login/firstLoginTest";
 		}else {
 			m.addAttribute("users",users);
 		}
@@ -257,7 +257,7 @@ public class UsersController {
         	m.addAttribute("parent",parent);
             break;     
     	}
-    	return "cs_studentHomePage/studentHomepage";
+    	return "cs_homePage/studentHomepage";
     }
     
     @PostMapping(value = "users/updateFirstLogin")

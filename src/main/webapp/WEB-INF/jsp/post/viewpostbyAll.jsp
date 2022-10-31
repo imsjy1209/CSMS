@@ -6,10 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Welcome</title>
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+<!-- NAVBAR -->
+<%-- 	<jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
+<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+<br><br>
+<div class="wrapper">
 	<div class="container" align="">
 	<h1 align="center">查看公告</h1>
 		<div class="list-group">
@@ -19,5 +23,8 @@
 			</c:forEach>
 		</div>
 	</div>
+</div>
+<!-- footer -->
+<jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
 </html>

@@ -121,10 +121,13 @@ public class OrderListController {
 			
 			
 			// ============跳轉頁面待更新==============
-			obj.setReturnURL("http://localhost:8081/CSMS/courseAllOnPageAjax.page");
+			obj.setReturnURL("http://localhost:8081/CSMS/");
 			obj.setNeedExtraPaidInfo("N");
 			obj.setClientBackURL("http://localhost:8081/CSMS/courseAllOnPageAjax.page");
 			String form = all.aioCheckOut(obj, null);
+			
+			
+			
 			return form;
 	    }
 		

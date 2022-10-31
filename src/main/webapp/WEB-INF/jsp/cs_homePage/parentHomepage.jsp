@@ -60,9 +60,7 @@ html, body {
 }
 
 .hoverLight:hover {
-	/* box-shadow:0px 0px 10px #ff9933 inset; */
-	/* filter: drop-shadow(0px 0px 10px #ff9933); */
-	color: black;
+	filter: drop-shadow(0px 0px 10px #000000);
 }
 
 .announcementDiv {
@@ -112,18 +110,17 @@ button {
 <body>
 
 	<!-- Student Navbar -->
-	<jsp:include page="../layout/navDong.jsp"></jsp:include>
+	<jsp:include page="../layout/nav_parent.jsp"></jsp:include>
 	<div class="wrapper">
 		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
-				<div class="absCheckIcon " id="absCheckIcon">
+				<div class="absCheckIcon hoverLight" id="absCheckIcon">
 					<!-- 出席 button 的 data-target 要改-->
 					<button type="button" class="" data-toggle="modal"
 						data-target="#absentMID">
 						<img src="${contextRoot}/image/absCheck.png" title="出席" alt=""
-							 class="hoverLight" style="color:white;">
-							 <i style="font-size: 80px;" class='bx bx-shield-minus hoverLight' ></i>
+							style="border: 1px solid red;">
 					</button>
 				</div>
 

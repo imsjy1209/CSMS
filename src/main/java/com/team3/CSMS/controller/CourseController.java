@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.team3.CSMS.dto.SessionForCourseDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Course;
@@ -545,6 +550,33 @@ public class CourseController {
 		}
 		
 	}
+	
+	
+	//新增訂單明細
+		@GetMapping("/orderDetailCreateAjax.controller")
+		public @ResponseBody void orderDetailCreateAjax
+		(@RequestParam(name="courseId")Integer courseId,@RequestParam(name="studentId")Integer studentId,SessionStatus sessionStatus) {
+			
+//			System.out.println();
+//			System.out.println(courseId);
+//			System.out.println(studentId);
+			
+			Student oneStuden = studentService.findStudentById(studentId);
+			Optional<Course> aCourseOptional = courseService.findCourseById(courseId);
+			Course oneCourse = aCourseOptional.get();
+			
+			OrderDetail newOD = new OrderDetail();
+			newOD.setCourse(oneCourse);
+			newOD.setStudent(oneStuden);
+			newOD.setOrderList(null);
+			newOD.setArrangeClassList(0);
+			newOD.setConfirmOrder(0);
+			
+			orderDetailService.insertOrderDetail(newOD);
+			
+			sessionStatus.setComplete();
+			
+		}
 
 
 }

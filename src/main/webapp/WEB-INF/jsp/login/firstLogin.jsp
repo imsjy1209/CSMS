@@ -28,6 +28,7 @@
 					/* text-align: center; */
 					color: #2e446e;
 					border: 5px solid #E5892D;
+					transition: 0.5s;
 				}
 
 				.pwdReset input {
@@ -39,6 +40,7 @@
 					padding: 12px;
 					font-size: 15px;
 					outline: none;
+					transition: 0.5s;
 
 				}
 
@@ -60,13 +62,13 @@
 				.pwdReset input[type="password"]:focus {
 					border: 2px solid #ff9933;
 					width: 280px;
-					transition: 0.5s;
+/* 					transition: 0.5s; */
 				}
 
 				.pwdReset input[type="submit"]:hover {
 					background-color: green;
 					color: #ffffff;
-					transition: 0.5s;
+/* 					transition: 0.5s; */
 				}
 
 				.orangebtn {
@@ -99,9 +101,9 @@
 				</h1>
 			</div>
 			<form class="form" method="post" action="../users/updateFirstLogin">
+				
 				<div class="">
-					<label for="idPwd1" class="t1"> <b class="spanMargin">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b><br/>
-					</label> <input readonly type="text" id="idPwd1" name="old" value="${users.password}" placeholder=""
+					<label for="idPwd1" class="t1"> <b class="spanMargin">舊密碼：</b></label><input readonly type="text" id="idPwd1" name="old" value="${users.password}" placeholder=""
 					maxlength="30" size="20" autocomplete="off" aria-invalid="false"><br> 
 				</div>
 
@@ -110,7 +112,9 @@
 						<span id="h" class="spanMargin" >提示：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp2" class="spanOrange">&nbsp</span>
 					</label> <input type="text" id="idPwd2" name="newPassword" value="" placeholder="請輸入新密碼"
 						maxlength="30" size="20" autocomplete="off" aria-invalid="false"><br>
-
+				</div>
+				
+				
 				<div class="">
 					<label for="idPwd3" class="t3"> <b class="spanMargin">確認密碼：&nbsp&nbsp&nbsp&nbsp</b><br>
 						<span id="h" class="spanMargin" >提示：&nbsp&nbsp&nbsp&nbsp</span><span id="idsp3" class="spanOrange">&nbsp</span>
@@ -126,6 +130,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		
 		<script>
 			window.onload = function () {
 				enableBtn();
