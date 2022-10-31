@@ -74,12 +74,12 @@ public class ScoreParentController {
 		return "cs_score/scoreParent";
 	}
 	
-	// for ParentHompage
+    //for ParentHompage
 //		@PostMapping(value = "/sendParentToHomepage")
 //		public String sendParentToHomepage(
 //				@RequestParam("studentId") Integer studentId,@SessionAttribute("users") Users user,Model m){
 //					List<Parent> pList = parentService.getChildScoreListByParentId(user.getId());
 //					m.addAttribute=("pList",pList);							
-//					return "/cs_student/studentHomepage";
+//					return "/cs_homePage/parentHomepage";
 //		}
 }

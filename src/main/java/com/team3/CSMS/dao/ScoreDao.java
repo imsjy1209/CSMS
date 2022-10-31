@@ -54,12 +54,8 @@ public interface ScoreDao extends JpaRepository<Score, Integer> {
 	 List<Score> getChildScoreListByStudentId(@Param("studentId") Integer studentId);
 	
     //HQL: from Score
-//	 @Query(value="from Score s where s.student=:student and  s.classList=:classList and s.parent=:parent ")
-//	 List<Score> scoreforParent(
-//			 @Param("student") Student student,
-//			 @Param("classList") ClassList classList,
-//			 @Param("parent") Parent parent		 
-//			 );
+	 @Query(value="from Score where parent=:parent ")
+	 List<Score> scoreforParent(@Param("parent") Parent parent);
 
 	 //【Score】及格分數
 		@Query(value = "SELECT * from [Score] where fk_classlist_id = :classCodeId and frequency= :frequency and score >=60 ", nativeQuery = true)

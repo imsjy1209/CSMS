@@ -2,46 +2,96 @@
 	pageEncoding="UTF-8"
 	import="java.util.*,com.team3.CSMS.model.Activity"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.msgtable {
+					text-align: center;
+					/* border-collapse: collapse; */
+					/* border: null; */
+					width: 75%;
+				}
+
+				thead {
+					font-size: 20px;
+				}
+				.orangebtn{
+					/* background-color:  #ff9933; */
+					color: #ff9933;
+					border:1px solid #ff9933;
+					padding: 5px 32px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+					font-size: 16px;
+					border-radius: 22px;
+					margin-left: 600px;
+				}
+				.orangebtn:hover{
+					background-color: #ff9933;
+					color: white;
+					text-decoration: none;
+					display: inline-block;
+				}
+</style>
 </head>
 <body>
 	<jsp:include page="../../layout/navbar.jsp"></jsp:include>
 	<div class="container">
 		<div align="center">
-			<h1>活動頁面</h1>
-			<br> 搜尋活動 : <input type="text" id="name">
+			<h1> 訊息頁面</h1>
+			<br> 訊息查詢 : <input type="text" id="name">
 			<button id="btn01">查詢</button>
 			<button id="btn02">清除查詢</button>
 			<br>
 			<br>
-			<div id="dataArea">
-			<table border="1">
-				<tr style="background-color: #B5FFFF">
-					<th>家長名稱
-					<th>標題
-					<th>類型
-					<th>查看詳情
-					<th>是否已讀 <c:forEach var="message" items="${list}">
+			<div id="accordionExample" class="accordion">
+			<table class="msgtable  table-hover">
+				<tr style="border: null;background-color: #496cad;color: aliceblue;">
+					<th>家長名稱 </th>
+					<th>標題 </th>
+					<th>類型 </th>
+					<th>日期 </th>
+					<c:forEach var="message" items="${list}">
 							<tr>
 								<td>${message.parent.name}
-								<td>${message.titleOfMsg}
-								<td>${message.typeOfMsg}
-								<td align="center"><a
-									href="${contextRoot}/message/viewmessage?id=${message.id}"><i
-										class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i></a>
-									<c:choose>
+									<td><button class="btn btn-link" type="button" data-toggle="collapse"
+										data-target="#msg${message.id}" aria-expanded="true"
+										aria-controls="collapseOne">
+										${message.titleOfMsg}</td>
+									<td>${message.typeOfMsg}</td>
+									<td>${message.createTime}</td>
+									<tr>
+										<td colspan="4">
+											<div style="text-align:left;" id="msg${message.id}" class="card-body collapse "
+												aria-labelledby="headingOne" data-parent="#accordionExample">
+												<blockquote class="">
+													<p>${message.whatToSay}</p>
+													<footer class="blockquote-footer">${message.school.name}<cite
+															title="Source Title"></cite>
+													</footer>
+													<a href="${contextRoot}/message/viewmessage?id=${message.id}" class="orangebtn ">
+														回覆
+														<!-- <i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i> -->
+													</a>
+												</blockquote>
+											</div>
+										</td>
+									</tr>
+								</tr>
+									<!-- <c:choose>
 										<c:when test="${message.readOrNot == 0}">
 											<td align="center">X
 										</c:when>
 										<c:when test="${message.readOrNot ==1}">
 											<td align="center">O
 										</c:when>
-									</c:choose>
+									</c:choose> -->
 						</c:forEach>
 			</table>
 			</div>

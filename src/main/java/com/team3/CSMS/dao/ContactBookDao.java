@@ -50,9 +50,22 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "inner join [Teacher] as T on T.[teacher_id] = CL.[fk_teacher_id] "
 			+ "inner join [School] as S on S.[school_id] = CL.[fk_school_id] "
 			+ "where [fk_classlist_id] = :classListId and [phase] = 3 "
-			+ "order by CB.[create_at] desc, CB.[phase] asc, [cb_id] desc;", nativeQuery = true)
+			+ "order by CB.[create_at] desc, CB.[phase] asc, [cb_id] desc", nativeQuery = true)
 	List<ContactBook> getStudentContactBookListByClassListId(@Param("classListId") Integer classListId);
 	
+	// 學生首頁Modal：顯示前3三筆聯絡簿(日期、課程代號、科目、上課內容、回家作業、下週考試)
+	@Query(value = "select top(3)* from [ContactBook] as CB "
+			+ "inner join [ClassList] as CL on CB.[fk_classlist_id] = CL.[classlist_id] "
+			+ "inner join [Teacher] as T on T.[teacher_id] = CL.[fk_teacher_id] "
+			+ "inner join [School] as S on S.[school_id] = CL.[fk_school_id] "
+			+ "inner join [ClassStudentList] as CSL on CL.[classlist_id] = CSL.[fk_classlist_id] "
+			+ "where CB.[phase] = 3 and CSL.[fk_student_id] = :sessionStuId "
+			+ "order by CB.[create_at] desc", nativeQuery = true)
+	List<ContactBook> getTop3StudentContactBookList(@Param("sessionStuId") Integer sessionStuId);
+	//============================
+//	@Query(value = "select top(3)* from [ContactBook] "
+//			+ "where CB.[phase] = 3 and CSL.[fk_student_id] = :sessionStuId "
+//			+ "order by CB.[create_at] desc")
 	//------------------------- 家長 -------------------------
 	// 家長聯絡簿選單By classListId, studentId
 	@Query(value = "select * from [ContactBook] as CB "

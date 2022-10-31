@@ -66,7 +66,7 @@ html, body {
 .announcementDiv {
 	border: 2px solid slateblue;
 	size: 100px;
-	width: 700px;
+	width: 1000px;
 	height: 300px;
 	top: 250px;
 	right: 150px;
@@ -112,7 +112,6 @@ button {
 	<!-- Student Navbar -->
 	<jsp:include page="../layout/nav_parent.jsp"></jsp:include>
 	<div class="wrapper">
-		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
 				<div class="absCheckIcon hoverLight" id="absCheckIcon">
@@ -129,15 +128,6 @@ button {
 					<button type="button" class="" data-toggle="modal"
 						data-target="#courseMID">
 						<img src="${contextRoot}/image/lesson.png" title="課程"
-							style="border: 1px solid red;">
-					</button>
-				</div>
-
-				<div class="activeIcon hoverLight" id="activeIcon">
-					<!-- 活動 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#activityMID">
-						<img src="${contextRoot}/image/active.png" title="活動" alt=""
 							style="border: 1px solid red;">
 					</button>
 				</div>
@@ -163,7 +153,7 @@ button {
 			</div>
 			<div class="article ">
 				<div class="announcementDiv">
-					<h4>modal區</h4>
+					<h4>想想要放啥咪??(因為家長沒有活動功能，所以不能有輪播活動圖)</h4>
 				</div>
 
 				<!-- Button trigger modal -->
@@ -301,8 +291,8 @@ button {
 						<div class="modal-body">
 							<!-- 								<p>scoreMID test</p> -->
 
-							<c:forEach var="post" items="${scoreforStudent}">
-								<table>
+							<c:forEach var="post" items="${scoreforParent}">
+								<table class="table">
 									<tr>
 										<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
 										<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
