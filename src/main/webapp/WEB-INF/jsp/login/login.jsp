@@ -9,7 +9,6 @@
       <title>Login</title>
       <style>
         body {
-          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
           background: #6494ED;
           display: flex;
           align-items: center;
@@ -31,7 +30,7 @@
           display: block;
           margin: 2% auto;
           text-align: center;
-          background: none;
+          background: white;
           border-radius: 22px;
           padding: 12px;
           font-size: 15px;
@@ -40,16 +39,16 @@
 
         .login input[type="text"],
         .login input[type="password"] {
-          border: 2px solid #2e446e;
+          border: 3px solid #2e446e;
           width: 220px;
-          
+          transition: 0.5s;
         }
 
         .login input[type="text"]:focus,
         .login input[type="password"]:focus {
-          border: 2px solid #ff9933;
+          border: 3px solid #ff9933;
           width: 280px;
-          transition: 0.5s;
+          /* transition: 0.5s; */
         }
         .orangebtn{
           background-color:  #ff9933;

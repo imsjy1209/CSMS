@@ -112,53 +112,11 @@ button {
 	<!-- Student Navbar -->
 	<jsp:include page="../layout/nav_teacher.jsp"></jsp:include>
 	<div class="wrapper">
-		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
-				<div class="absCheckIcon hoverLight" id="absCheckIcon">
-					<!-- 出席 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#absentMID">
-						<img src="${contextRoot}/image/absCheck.png" title="出席" alt=""
-							style="border: 1px solid red;">
-					</button>
-				</div>
 
-				<div class="lessonIcon hoverLight" id="lessonIcon">
-					<!-- 課程 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#courseMID">
-						<img src="${contextRoot}/image/lesson.png" title="課程"
-							style="border: 1px solid red;">
-					</button>
-				</div>
 
-				<div class="activeIcon hoverLight" id="activeIcon">
-					<!-- 活動 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#activityMID">
-						<img src="${contextRoot}/image/active.png" title="活動" alt=""
-							style="border: 1px solid red;">
-					</button>
-				</div>
 
-				<div class="scoreIcon hoverLight" id="scoreIcon">
-					<!-- 分數 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#scoreMID">
-						<img src="${contextRoot}/image/score.png" title="分數" alt=""
-							style="border: 1px solid red;">
-					</button>
-				</div>
-
-				<div class="scoreIcon hoverLight" id="contactBookIcon">
-					<!-- 分數 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#contactBookMID">
-						<img src="${contextRoot}/image/contactbook.png" title="聯絡簿" alt=""
-							style="border: 1px solid red;">
-					</button>
-				</div>
 
 			</div>
 			<div class="article ">
