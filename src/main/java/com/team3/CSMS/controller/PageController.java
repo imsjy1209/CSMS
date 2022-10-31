@@ -122,14 +122,19 @@ public class PageController {
 		return "/register/controllUser";
 	}
 	
+
+//	@GetMapping("/youAreFirst")
+//	public String firstLogin(){
+//		return "/login/firstLogin";
+//	}
 //	// 測試用
 //	@GetMapping("/student.Homepage")
 //	public String testme(){
 //		return "/cs_studentHomePage/studentHomepage";	}
 	
 	@GetMapping("/youAreFirst")
-	public String firstLogin(){
-		return "/login/firstLogin";
+	public String firstLogin2(){
+		return "/login/firstLoginTest";
 	}
 	
 	// 回前台首頁
