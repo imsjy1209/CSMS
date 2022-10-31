@@ -1,22 +1,22 @@
 package com.team3.CSMS.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.team3.CSMS.dto.SessionForCourseDto;
 import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Course;
 import com.team3.CSMS.model.OrderDetail;
@@ -32,7 +32,7 @@ import com.team3.CSMS.service.SchoolService;
 import com.team3.CSMS.service.StudentService;
 import com.team3.CSMS.service.TeacherService;
 
-
+@SessionAttributes(names = {"shoppingCart"})
 @Controller
 public class CourseController {
 
@@ -65,6 +65,9 @@ public class CourseController {
 			courseService.deleteCourse(courseForDelete);
 			return "redirect:/courseAllPageBackAjax.page";
 		}
+		
+
+		
 		
 		//刪除Course資料-ajax
 		@GetMapping("/deleteCourseDataAjax.controller")
@@ -410,16 +413,17 @@ public class CourseController {
 		
 		List<Course> courseList = courseService.findCourseByOn();
 		
+		
 		Student oneStudent = studentService.findStudentById(stuIdForFindAlreadyBuy);
+		
+		//======抓出該學生已經購買過的商品============
 		List<OrderDetail> orderDetailList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStudent, 2);
+		
+		//=====將total商品list移除已購買過的商品=====
 		for(OrderDetail oneOrderDetail:orderDetailList) {
 			Course oneCourse = oneOrderDetail.getCourse();
 			courseList.removeIf(o->oneCourse==o);
 		}
-//		for(Course oneNewCourse:courseList) {
-//			System.out.println(oneNewCourse.getCourseSubject());
-//		}
-		
 		
 		return courseList;
 	}
@@ -439,67 +443,108 @@ public class CourseController {
 	}
 	
 	//商品總total頁面--以類型(日常/衝刺)篩選(for前台)--Ajax
-	@GetMapping("/findAllCourseByCategoryAjax.page")
-	public @ResponseBody List<Course> findCourseByCategory(@RequestParam(name="category")String category,Model model) {
-		List<Course> courseList = courseService.findCourseByCategory(category);
-		return courseList;
-	}
+//	@GetMapping("/findAllCourseByCategoryAjax.page")
+//	public @ResponseBody List<Course> findCourseByCategory(@RequestParam(name="category")String category,Model model,@RequestParam(name="stuIdForFindAlreadyBuy")Integer stuIdForFindAlreadyBuy) {
+//		
+//		List<Course> courseList = courseService.findCourseByCategory(category);
+//		
+//		Student oneStu = studentService.findStudentById(stuIdForFindAlreadyBuy);
+//		List<OrderDetail> ordList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStu, 2);
+//		for(OrderDetail oneOrd:ordList) {
+//			Course aCourse = oneOrd.getCourse();
+//			courseList.removeIf(o->aCourse==o);
+//		}
+//		return courseList;
+//	}
 	
 	//商品總total頁面--以多選關鍵字搜尋(for前台)--Ajax
 	@GetMapping("/findAllCourseByKeyWordAjax.controller")
 	public @ResponseBody List<Course> findAllCourseByKeyWordAjax
-	(@RequestParam(name="cs")String cs,@RequestParam(name="cg")String cg,@RequestParam(name="cc")String cc) {
+	(@RequestParam(name="cs")String cs,@RequestParam(name="cg")String cg,@RequestParam(name="cc")String cc,@RequestParam(name="stuIdForFindAlreadyBuy")Integer stuIdForFindAlreadyBuy) {
 		String newCS = "%"+cs+"%";
 		String newCG = "%"+cg+"%";
 		String newCC = "%"+cc+"%";
 		
 		List<Course> courseList = courseService.findCourseByKeyWord(newCS,newCG,newCC);
+		
+		Student oneStu = studentService.findStudentById(stuIdForFindAlreadyBuy);
+		List<OrderDetail> ordList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStu, 2);
+		for(OrderDetail oneOrd:ordList) {
+			Course aCourse = oneOrd.getCourse();
+			courseList.removeIf(o->aCourse==o);
+		}
+		
 		return courseList;
 	}
 	
 	//商品總total頁面--以單一關鍵字搜尋(for前台)--Ajax
 	@GetMapping("/findAllCourseByMoHuAjax.controller")
-	public @ResponseBody List<Course> findAllCourseByMoHuAjax(@RequestParam(name="mohu")String mohu) {
+	public @ResponseBody List<Course> findAllCourseByMoHuAjax(@RequestParam(name="mohu")String mohu,@RequestParam(name="stuIdForFindAlreadyBuy")Integer stuIdForFindAlreadyBuy) {
 		
 		List<Course> mohuList1 = courseService.findByCourseOnOffIsAndCourseSemesterContainingOrCourseOnOffIsAndCourseCategoryContainingOrCourseOnOffIsAndCourseSubjectContainingOrCourseOnOffIsAndCourseGradeContaining(1,mohu,1,mohu,1,mohu,1,mohu);
+		
+		Student oneStu = studentService.findStudentById(stuIdForFindAlreadyBuy);
+		List<OrderDetail> ordList = orderDetailService.findByStudentIsAndConfirmOrderIs(oneStu, 2);
+		for(OrderDetail oneOrd:ordList) {
+			Course aCourse = oneOrd.getCourse();
+			mohuList1.removeIf(o->aCourse==o);
+		}
+		
 		
 		return mohuList1;
 	}
 	
+	//===find Course By Id====
+	@GetMapping("/findCourseByIdAjax.controller")
+	public @ResponseBody Course findCourseByIdAjax(@RequestParam(name="courseIdFromSession")Integer courseIdFromSession) {
+		Optional<Course> aCourse = courseService.findCourseById(courseIdFromSession);
+		Course oneCourseForSession = aCourse.get();
+		return oneCourseForSession;
+	}
 	
-	//======被Neil廢棄的程式碼=============================================
-//	//商品總total頁面--以多選關鍵字搜尋(for前台)--Ajax
-//	@GetMapping("/findAllCourseByCheckedBoxAjax.controller")
-//	public @ResponseBody List<Course> findAllCourseByCheckedBoxAjax
-//	(@RequestParam(name="csCH")String csCH,@RequestParam(name="csEN")String csEN,@RequestParam(name="csMA")String csMA,@RequestParam(name="cgEle")String cgEle,@RequestParam(name="cgJun")String cgJun,@RequestParam(name="cgSen")String cgSen,@RequestParam(name="ccNor")String ccNor,@RequestParam(name="ccRush")String ccRush) {
-//		List<Course> courseList = courseService.findCourseByKeyWord(csCH, csEN, csMA, cgEle, cgJun, cgSen, ccNor, ccRush);
-//		for(Course oneCourse:courseList) {
-//			String courseSubject = oneCourse.getCourseSubject();
-//			System.out.println(courseSubject);
-//		}
-//		return courseList;
-//	}
+	//====購物車暫存Session==============
+	List<SessionForCourseDto> sessionList = new ArrayList<SessionForCourseDto>();
 	
+	@ResponseBody
+	@PostMapping("/shoppingCartSession.controller")
+	public void shoppingCartSession
+	(@RequestParam(name="course_id")String course_id,@RequestParam(name="stuIdForSession")String stuIdForSession,Model m) {
+		SessionForCourseDto oneSessionForCourse = new SessionForCourseDto();
+		
+		oneSessionForCourse.setCourse_id(Integer.valueOf(course_id));
+		oneSessionForCourse.setStuIdForSession(Integer.valueOf(stuIdForSession));
+		
+		sessionList.add(oneSessionForCourse);
+		
+		for(SessionForCourseDto oneSession :sessionList) {
+			System.out.println(oneSession.getCourse_id());
+		}
+		
+		m.addAttribute("shoppingCart",sessionList);
+	}
 	
-	
-//	//商品總total頁面(for前台)
-//	@GetMapping("/AllOnCourse.page")
-//	public String findAllOnCourse(Model model) {
-//		List<Course> courseList = courseService.findCourseByOn();
-//		model.addAttribute("courseList",courseList);
-//		return "cramschool/courseIndex";
-//	}
-	
-//	//商品總total頁面--圖片(for前台)
-//	@GetMapping("AllOnCoursePic/{id}")
-//	public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id){
-//		Course Course1 = courseService.getCoursePicById(id);
-//		byte[] photoFile = Course1.getCoursePic();
-//		
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.IMAGE_JPEG);
-//		// 資料, header, HttpStatus
-//		return new ResponseEntity<byte[]>(photoFile, headers, HttpStatus.OK);
-//	}
+	//=====移除Session裡面的Course===========
+	@ResponseBody
+	@PostMapping("/removeShoppingCartSession.controller")
+	public void shoppingCartSessionForRemove(@RequestParam(name="course_id")String course_id,@RequestParam(name="stuIdForSession")String stuIdForSession,Model m) {
+		System.out.println("=======================");
+		System.out.println(course_id);
+		System.out.println(stuIdForSession);
+		System.out.println("=======================");
+		
+		List<SessionForCourseDto> sessionList = (List<SessionForCourseDto>) m.getAttribute("shoppingCart");
+		System.out.println(sessionList);
+		
+		for(SessionForCourseDto oneSessionForRemove :sessionList) {
+			if(oneSessionForRemove.getCourse_id().equals(Integer.valueOf(course_id))) {
+				System.out.println("idEach="+oneSessionForRemove.getCourse_id());
+				System.out.println("idForR="+Integer.valueOf(course_id));
+				sessionList.remove(oneSessionForRemove);
+			}
+			
+		}
+		
+	}
+
 
 }

@@ -3,12 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+<!--Link to Css-->
+<link rel="stylesheet" href="${contextRoot}/css/style.css">
+
+
+
+	<!--box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
 <link rel="stylesheet"
@@ -17,24 +27,56 @@
 	crossorigin="anonymous">
 	
 <style>
+
+ .table-content{ 
+ position:relative; 
+ text-align:center;
+ } 
+
 .total-div{
-	float:right;
-/* 	background-color:yellow; */
-	font-size: large;
+	display:flex;
+	justify-content: space-between;
 	
+	background:white;
+	
+    position: absolute; 
+    bottom: 20px;
+    width: 1115px;
+/*     width: 100%; */
+/*     height: 6rem;  */
+  
 }
 
 
+.leftGroup{
+}
+
+.rightGroup{
+}
+
 
 </style>	
+
 <title>Insert title here</title>
 </head>
-<body>
 
+
+<body>
+<header>
+<div class="nav container">
+			<a href="${pageContext.request.contextPath}/CSMSHomePage" class="logo">CramSchool</a>
+			<h3><i class='bx bxs-user' >${student.name}</i></h3>
+			<div><i style='font-size:48px;' class='bx bx-dollar-circle bx-spin' ></i></div>
+			
+		</div>
+		
+			
+</header>
+<br><br><br><br><br><br>
 
 <div class="container">
-<h3><i class='bx bxs-user' >${student.name}</i></h3>
-<table class="table table-hover">
+<%-- <h3><i class='bx bxs-user' ></i><span >${student.name}</span><span class="stuId" style='display:none;'>${student.id}</span></h3> --%>
+<table class="table table-hover table-content">
   <thead>
     <tr>
       <th scope="col">確認購買</th>
@@ -56,7 +98,7 @@
     <th>${item.id}</th>
    	<td style='color:red;'><span class='courseInfoId' style='display:none ;'>${item.course.id}</span>未結帳</td>
    	<td>${item.student.name}</td>
-   	<td>${item.course.courseSubject}${item.course.courseGrade}${item.course.courseClass}年級</td>
+   	<td>[${item.course.courseSubject}]-${item.course.courseGrade}${item.course.courseClass}年級</td>
    	<td class='course-price'>${item.course.coursePrice}</td>
    	<td>${item.course.startDate}</td>
    	<td>${item.course.endDate}</td>
@@ -67,22 +109,35 @@
 </table>
 
 
+	<div class="total-div">
+	
+	<div class="leftGroup">
+	
+		<table class="table">
+				<tr>
+		<td><button id="selectAll" class="btn btn-danger">全選</button></td>
+		<td><button id="cancelAll" class="btn btn-warning">取消全選</button></td>
+			</tr>
+			</table>
+	</div>
+	
+	<div class="rightGroup">	
+<!-- 		<p class="ppp">Total:</p> -->
+<!-- 		<p class="total-money ppp">0</p> -->
+<!-- 		<button id="goToPay" class="btn btn-primary">去買單</button> -->
+<!-- 		<button id="backToPrevPage" class="btn btn-primary">回上一頁</button> -->
 
-<div class="total-div">
-
-<button id="selectAll" class="btn btn-danger">全選</button>
-<button id="cancelAll" class="btn btn-warning">取消全選</button>
-<button id="goToPay" class="btn btn-primary">結帳gogo</button>
-<button id="backToPrevPage" class="btn btn-primary">回上一頁</button>
-<div>
-<table>
-<tr>
-<td>Total:</td><td class="total-money">0</td>
-</tr>
-</table>
-</div>
-
-</div>
+			<table class="table">
+				<tr>
+				<td style="vertical-align:middle;">Total:</td>
+				<td class="total-money" style="vertical-align:middle;">0</td>
+				<td><button id="goToPay" class="btn btn-primary">去買單</button></td>
+				<td><button id="backToPrevPage" class="btn btn-primary">回上一頁</button></td>
+				</tr>
+			</table>
+	</div>
+	
+	</div>
 </div>
 
 
@@ -116,7 +171,7 @@ $('#goToPay').click(function(){
 		
 //現階段先把StudentId寫死，付費方式也先寫死	
 //處理再次確定要購買的課程(Revise confirmOrder from 0 to 2)
-	var studentId=2;
+	var studentId= $('.stuId').text();
 	var payment="credit_card"
 	
 	var ODIdList = [];
@@ -182,6 +237,10 @@ var ODIdListNoPurchase = [];
 	})
 	
 	}
+	
+	window.location.href='${contextRoot}/changeToEcpayPage.controller?amount='+amount;
+	
+	
 })
 
 

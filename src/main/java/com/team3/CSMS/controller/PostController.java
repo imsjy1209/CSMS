@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team3.CSMS.model.Post;
 import com.team3.CSMS.service.PostService;
@@ -58,17 +59,16 @@ public class PostController {
 		return "redirect:/showAllPost.controller";
 	}
 	
-	//====公告上下架============
-	@GetMapping("/postChangeToOn/{id}")
-	public String postChangeToOn(@PathVariable int id) {
+	//====公告上下架-Ajax============
+	@ResponseBody
+	@GetMapping("/postChangeToOn")
+	public void postChangeToOn(@RequestParam int id) {
 		pser.already(id);
-		return "redirect:/showAllPost.controller";
 	}
-
-	@GetMapping("/postChangeToOff/{id}")
-	public String postChangeToOff(@PathVariable int id) {
+	@ResponseBody
+	@GetMapping("/postChangeToOff")
+	public void postChangeToOff(@RequestParam int id) {
 		pser.removed(id);
-		return "redirect:/showAllPost.controller";
 	}
 	
 	//

@@ -16,6 +16,11 @@ public class PageController {
 		return "cs_course/courseIndex";
 	}
 	
+	@GetMapping("/ecpayOk.page")
+	public String ecpayOk() {
+		return "cs_orderList/orderListIndex";
+	}
+	
 	@GetMapping("/sideBarCheck")
 	public String testPage() {
 		return "framePage/sideBar";

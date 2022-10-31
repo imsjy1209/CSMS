@@ -4,6 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<!-- 【Sweet Alert】 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js" integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -12,8 +16,16 @@
 
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
+<style>
+.notWork{
+background-color:white;
+color:black;
+
+}
+</style>
+
 	<div class="container">
-	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-message-square-edit' ></i>編輯活動</h3>
+	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-message-square-edit' ></i>編輯公告</h3>
 			<form action="${contextRoot}/updatePostFin" method="post">
 			<p style="display: none"><input name="id" value="${post.id}"/></p>
 			
@@ -47,13 +59,25 @@
 		   <c:choose>
 					<c:when test="${post.isDelete == 1}">
 					<br/>
-					<a href="${contextRoot}/postChangeToOn/${id}" class='btn btn-primary'>上架<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></a>
+					<span class='idForUpdate' style='display:none;'>${id}</span>
+					<i class='btn btn-primary onOrOff notWork'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></i>
+					<i class='btn btn-danger onOrOff'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></i>
+					
+<%-- 					<a href="${contextRoot}/postChangeToOn/${id}" class='btn btn-primary onOrOff notWork'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></a> --%>
+<%-- 					<a href="${contextRoot}/postChangeToOff/${id}" class='btn btn-danger onOrOff'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></a> --%>
+					
 <%-- 					<li class="list-group-item"><div align="left" style="float: left;">上架活動:</div><a href="${contextRoot}/post/already/${id}"><i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></a></li> --%>
 					</c:when>
 					
 					<c:when test="${post.isDelete == 0}">
 					<br/>
-					<a href="${contextRoot}/postChangeToOff/${id}" class='btn btn-danger'>下架<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></a>
+					<span class='idForUpdate' style='display:none;'>${id}</span>
+					<i class='btn btn-primary onOrOff'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></i>
+					<i class='btn btn-danger onOrOff notWork'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></i>
+					
+<%-- 					<a href="${contextRoot}/postChangeToOn/${id}" class='btn btn-primary onOrOff'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></a> --%>
+<%-- 					<a href="${contextRoot}/postChangeToOff/${id}" class='btn btn-danger onOrOff notWork'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></a> --%>
+
 <%-- 					<li class="list-group-item"><div align="left" style="float: left;">下架活動:</div><a href="${contextRoot}/post/removed/${id}"><i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></a></li> --%>
 					</c:when>
 				</c:choose>
@@ -81,7 +105,75 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+
+$('.onOrOff').click(function(){
+	if($(this).attr('class')=='btn btn-danger onOrOff notWork'){
+	$(this).removeClass('notWork')
+	$(this).prev().addClass('notWork')
+	var id = $(this).siblings('span').text();
+	console.log(id)
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/postChangeToOff?id=" +id+ "' />", true);
+	xhr.send();
+	
+	//===更改成功alert======
+	const Toast = Swal.mixin({
+  	toast: true,
+  	position: 'top-end',
+  	showConfirmButton: false,
+  	timer: 1000,
+  	timerProgressBar: true,
+  	didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+ 	 }
+	})
+
+	Toast.fire({
+	  icon: 'success',
+ 	 title: '已下架'
+	})
+	//===End of 更改成功alert======
+
+	
+	}
+	else{
+		$(this).removeClass('notWork')	
+		$(this).next().addClass('notWork')	
+		var id = $(this).siblings('span').text();
+	console.log(id)
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/postChangeToOn?id=" +id+ "' />", true);
+	xhr.send();
+	
+	//===更改成功alert======
+	const Toast = Swal.mixin({
+  	toast: true,
+  	position: 'top-end',
+  	showConfirmButton: false,
+  	timer: 1000,
+  	timerProgressBar: true,
+  	didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+ 	 }
+	})
+
+	Toast.fire({
+	  icon: 'success',
+ 	 title: '已上架'
+	})
+	//===End of 更改成功alert======
+
+	}
+	
+})	
+
+
 //=======================版面動作=======================
+	
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');

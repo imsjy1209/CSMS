@@ -16,6 +16,7 @@
 
 <!--Link to Css-->
 <link rel="stylesheet" href="${contextRoot}/css/style.css">
+
 <!--box icons-->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 	rel='stylesheet'>
@@ -72,7 +73,7 @@ padding-right:15px!important;
 	
 		<div class="nav container">
 			<a href="${pageContext.request.contextPath}/CSMSHomePage" class="logo">CramSchool</a>
-			<i class='bx bxs-user' >${student.name}</i>
+			<h3><i class='bx bxs-user' >${student.name}</i></h3>
 			<div><i class='bx bx-cart' style='font-size:48px;' id="cart-icon"></i><span class="badge badge-primary badge-pill">0</span></div>
 			
 			<!--Cart-->
@@ -81,7 +82,6 @@ padding-right:15px!important;
 				<!--Content-->
 
 				<div class="cart-content"></div>
-
 
 				<!--Total-->
 				<div class="total">
@@ -96,6 +96,7 @@ padding-right:15px!important;
 			</div>
 		</div>
 	</header>
+	
 	<section class="shop container">
 		<h2 class="section-title">Course Products</h2>
 		<div class="shop-category-select">
@@ -165,28 +166,19 @@ padding-right:15px!important;
 <footer>
 <!-- 		<div id="already-buy-course-area" class="already-buy-course-area"> -->
 <h3>已擁有的課程</h3>
-<span id="stuSessionId" style="display:none">${student.id}</span>
+
+		<span id="stuSessionId" style="display:none">${student.id}</span>
+		
+		<div style="display:none;">
+		 <c:forEach var="item" items="${shoppingCart}">
+		    <span class="stuIdFromSession">${item.stuIdForSession}</span>
+			<span class="courseIdSession">${item.course_id}</span>
+		</c:forEach>
+		</div>
+		
 <div class="shop-content-test" id="already-buy-course-area">
 		</div>
 </footer>			
-	
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
-<!--  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
-<!--   crossorigin="anonymous"></script> -->
-  
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
-<!--  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
-<!--   crossorigin="anonymous"></script> -->
-  
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
-<!--  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
-<!--   crossorigin="anonymous"></script> -->
-	
-
-<!--####################################################################### -->				
-			<!--Link TO JS-->
-<!-- 	<script src="js/main.js"></script> -->
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -199,6 +191,8 @@ padding-right:15px!important;
 //========查詢全部的按鈕=====================
 $(".searchAllBtn").click(function(){
 	var keyword = $(this).text()
+	var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
+	
 	var xhr = new XMLHttpRequest();
 	
 	if(keyword=="查詢全部"){
@@ -208,7 +202,7 @@ $(".searchAllBtn").click(function(){
 		cs="";
 		cg="";
 		cc="";
-	xhr.open("GET", "<c:url value='/AllOnCourseAjax.page' />", true);
+	xhr.open("POST", "<c:url value='/AllOnCourseExceptAlreadyBuyAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
 	}
 	xhr.send();
 	xhr.onreadystatechange = function() {
@@ -247,7 +241,6 @@ $(".searchAllBtn").click(function(){
 			//確認購物車中有那些商品，讓當前商品頁面的購買按鈕亮燈
 				$('.cart-content').children('.cart-box').each(function(){
 					var cartId = $(this).children('.detail-box').find('span').text();
-// 					console.log(cartId)
 					$('.shop-content').children('.product-box').each(function(){
 						var shopId = $(this).children('.course-id').text();
 						if(cartId==shopId){
@@ -276,7 +269,6 @@ $(".searchAllBtn").click(function(){
 			
 			
 			var ctt = $('.courseTeachTime');
-// 			console.log(ctt.eq(0).val());
 			var cttlength = ctt.length;
 			
 			//第幾個courseTeachTime
@@ -300,8 +292,10 @@ $(".searchAllBtn").click(function(){
 //==========MohuBtn===================================
 	$('#mohuBtn').click(function(){
 		var mohu = $(this).prev().val()
+		var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
+		
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/findAllCourseByMoHuAjax.controller?mohu=" + mohu + "' />", true);
+		xhr.open("GET", "<c:url value='/findAllCourseByMoHuAjax.controller?mohu=" + mohu + "&stuIdForFindAlreadyBuy=" +stuIdForFindAlreadyBuy + "' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
@@ -391,6 +385,7 @@ $(".searchAllBtn").click(function(){
 
 //===========條件式多選，分主科/學級/類型=======================
 	
+	var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
 	var cg = "";
 	var cs = "";
 	var cc = "";
@@ -419,7 +414,7 @@ $(".searchAllBtn").click(function(){
 			cc="";
 		}
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/findAllCourseByKeyWordAjax.controller?cg=" + cg +"&cs=" + cs +"&cc=" + cc + "' />", true);
+		xhr.open("GET", "<c:url value='/findAllCourseByKeyWordAjax.controller?cg=" + cg +"&cs=" + cs +"&cc=" + cc + "&stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
@@ -509,14 +504,39 @@ $(".searchAllBtn").click(function(){
 
 $(function(){
 	var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
-// 	var stuIdForFindAlreadyBuy =2;
-	var xhr = new XMLHttpRequest();
 	
-	if(stuIdForFindAlreadyBuy!=null){
+	//====確認Session資料並添加到購物車中===========
+// 	$('.stuIdFromSession').each(function(){
+// 		if($(this).text()==stuIdForFindAlreadyBuy){
+			
+// 		}
+// 	})	
+	
+	$('.courseIdSession').each(function(){
+		var courseIdFromSession = $(this).text()
+		var contentForSessionShoppingCart="";
+		var xhrShoppingCart = new XMLHttpRequest();	
+		xhrShoppingCart.open("GET", "<c:url value='/findCourseByIdAjax.controller?courseIdFromSession=" + courseIdFromSession + "' />", true);
+		xhrShoppingCart.send();	
+		xhrShoppingCart.onreadystatechange = function() {
+			if (xhrShoppingCart.readyState == 4 && xhrShoppingCart.status == 200) {	
+						
+			var courseDataForShoppingCart = JSON.parse(xhrShoppingCart.responseText);
+			console.log(courseDataForShoppingCart)
+			contentForSessionShoppingCart += "<div class='cart-box'><img src=data:image/jpeg;base64," + courseDataForShoppingCart.coursePic + " class='cart-img'>" +
+			"<div class='detail-box'><span hidden='hidden'>" + courseDataForShoppingCart.id + "</span><div class='cart-product-title'>" + courseDataForShoppingCart.courseGrade +courseDataForShoppingCart.courseClass +"年級"+courseDataForShoppingCart.courseSubject+ courseDataForShoppingCart.courseCategory + "</div>" +
+			"<div class='cart-price'>$" + courseDataForShoppingCart.coursePrice + "</div>" +
+			"</div><i class='bx bxs-trash-alt cart-remove'></i></div>";
+			$(".cart-content").append(contentForSessionShoppingCart);
+					}//====End Of 4 & 200======		
+				}//===End Of ReadyStateChange=====
+	})
+	
+	var xhr = new XMLHttpRequest();
+	if(stuIdForFindAlreadyBuy!=""){
 	xhr.open("POST", "<c:url value='/AllOnCourseExceptAlreadyBuyAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
-	}
-	else
-	xhr.open("GET", "<c:url value='/findAllCourseByKeyWordAjax.controller?cg=" + cg +"&cs=" + cs +"&cc=" + cc + "' />", true);
+	
+	
 	xhr.send();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -555,7 +575,6 @@ $(function(){
 			//確認購物車中有那些商品，讓當前商品頁面的購買按鈕亮燈
 					$('.cart-content').children('.cart-box').each(function(){
 					var cartId = $(this).children('.detail-box').find('span').text();
-					console.log(cartId)
 					$('.shop-content').children('.product-box').each(function(){
 						var shopId = $(this).children('.course-id').text();
 						if(cartId==shopId){
@@ -581,9 +600,22 @@ $(function(){
 				})
 			})
 			
+			//======依照目前購物車中數量更新數字===========
+			var cartCount = $('.cart-box').length;
+			$('.badge-pill').text(cartCount);
+			
+			//=====依照目前購物車中數量更新總價格===========
+			var cartTotalP = 0;
+			$('.cart-price').each(function(){
+				var eachCartPrice = $(this).text().substr(1);
+				cartTotalP += Number(eachCartPrice);
+			})	
+			var totalPNow = $('.total-price').text().substr(1);
+			var newTotal = Number(totalPNow)+cartTotalP;
+			$('.total-price').text("$"+newTotal)
+			
 			//=========禮拜幾上課的燈==========
 			var ctt = $('.courseTeachTime');
-//   			console.log(ctt.eq(0).val());
 			var cttlength = ctt.length;
 			//第幾個courseTeachTime
 			for(var j=0; j < cttlength; j++){
@@ -600,13 +632,24 @@ $(function(){
 		}//End of print data
 	}
 	//End Of CourseDataLoading
-	functionGoGo();
+	functionGoGo();//===Bulid already buy info=====
+	
+	
+	}
+	
+	else if(stuIdForFindAlreadyBuy==""){
+		var contentForNotice="";
+		contentForNotice += "<h1>請先登入</h1>";
+		$('.shop-category-select').html(contentForNotice);
+		console.log('login notice')
+		return;
+	}
+
 })
 
 function functionGoGo(){
 		//start testttttttttttttttttt
 		var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
-		console.log(stuIdForFindAlreadyBuy)
 		var xhrTest = new XMLHttpRequest();
 		xhrTest.open("GET", "<c:url value='/findByStudentIsAndConfirmOrderIsAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
 		xhrTest.send();
@@ -636,10 +679,7 @@ function functionGoGo(){
 				}
 				var infoTest = document.getElementById("already-buy-course-area");
 				infoTest.innerHTML = contentTest;
-				console.log("loading finished")
-				
 				var ctt = $('.courseTeachTime');
-//   			console.log(ctt.eq(0).val());
 				var cttlength = ctt.length;
 				//第幾個courseTeachTime
 				for(var j=0; j < cttlength; j++){
@@ -656,7 +696,6 @@ function functionGoGo(){
 				
 			}
 			else{
-				console.log('gggggggggggg')
 			}
 		}//end of testtttttttttttttttt
 	}
@@ -726,6 +765,17 @@ $(".shop-content").on('click','.add-cart',function(){
 
 //===============Remove Items From Cart===============
 $(document).on('click','.cart-remove',function(){
+	
+	//======移除Session裡面的Course============
+		console.log('remove Session gogo')
+	var courseIdForRemoveFromSession = $(this).prev().find('span').text();	
+	var stuIdForSession = $('#stuSessionId').text();
+	
+	var xhrShoppingCartForRemove = new XMLHttpRequest();	
+	xhrShoppingCartForRemove.open("POST", "<c:url value='/removeShoppingCartSession.controller?course_id=" + courseIdForRemoveFromSession + "&stuIdForSession=" + stuIdForSession +"' />", true);
+	xhrShoppingCartForRemove.send();		
+	
+		
 	console.log("gogogogogogogo")
 	var courseIdForRemove = $(this).siblings(".detail-box").find('span').text()
 	$(this).closest(".cart-box").remove();
@@ -772,7 +822,7 @@ $(document).on('click','.cart-remove',function(){
 $(document).on('click','.btn-buy',function(){
 //	buyButtonClicked();
 
-    alert('轉移到結帳頁面')
+
     
     var father = $(this).siblings('.cart-content').children();
     for(var i=0;i<father.length;i++){
@@ -788,10 +838,35 @@ $(document).on('click','.btn-buy',function(){
 	 var cartContent = document.getElementsByClassName('cart-content')[0]
 	 cartContent.removeChild(cartContent.firstChild);
 	
-}
-    updatetotal();
-  	document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+	}
+    
+    xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		    //===跳轉中alert======
+			const Toast = Swal.mixin({
+		  	toast: true,
+		  	position: 'top-end',
+		  	showConfirmButton: false,
+		  	timer: 3000,
+		  	timerProgressBar: true,
+		  	didOpen: (toast) => {
+		    toast.addEventListener('mouseenter', Swal.stopTimer)
+		    toast.addEventListener('mouseleave', Swal.resumeTimer)
+		 	 }
+			})
 
+			Toast.fire({
+			  icon: 'success',
+		 	 title: '跳轉到結帳頁面中...'
+			})
+//===End of 跳轉中alert======
+			
+			 updatetotal();
+			 document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+		}
+    }
+    
+   
 })
 
 
@@ -799,22 +874,20 @@ function addProductToCart(title,course_id, price, productImg) {
 
 	for (var i = 0; i < $(".cart-product-title").length; i++) {
 	    if ($(".cart-product-title")[i].innerText == title) {
-// 	        alert('購物車中已有此商品');
 
-//====購物車已有此商品的警示==========
+		//====購物車已有此商品的警示==========
 		Swal.fire({
   		icon: 'warning',
  		title: 'Oops...',
   		text: '購物車中已有此商品!',
-//   		footer: '<a href="">Why do I have this issue?</a>'
 		})
-//====End of購物車已有此商品的警示==========
+		//====End of購物車已有此商品的警示==========
 
 	        return;
 	    }
 	}
-// 	alert('已成功新增了一項課程到購物車')
 	
+	console.log('ggggggggggggggggggg')
 	//===新增成功alert======
 	const Toast = Swal.mixin({
   	toast: true,
@@ -841,6 +914,9 @@ function addProductToCart(title,course_id, price, productImg) {
 	cartTotal = Number(cartCount)+1
 	$('.badge-pill').text(cartTotal);
 	
+	var stuIdForSession = $('#stuSessionId').text();
+	console.log('stuIdForSession=' + stuIdForSession)
+	
 	var cartBoxContent ="<div class='cart-box'><img src=" + productImg + " class='cart-img'>" +
 "<div class='detail-box'><span hidden='hidden'>" + course_id + "</span><div class='cart-product-title'>" + title + "</div>" +
     "<div class='cart-price'>" + price + "</div>" +
@@ -849,6 +925,11 @@ function addProductToCart(title,course_id, price, productImg) {
 $(".cart-content").append(cartBoxContent);
 
 
+//====新增商品資料到購物車Session中======
+var xhrSession = new XMLHttpRequest();
+xhrSession.open("POST", "<c:url value='/shoppingCartSession.controller?course_id=" + course_id + "&stuIdForSession=" + stuIdForSession + "' />", true);
+xhrSession.send();
+console.log("session save")
 
 
 //================End OF RemoveItems From Cart===============

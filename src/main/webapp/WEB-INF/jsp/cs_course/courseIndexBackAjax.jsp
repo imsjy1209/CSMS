@@ -2447,7 +2447,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		$('.ClassStudentListBtnGroup').remove();
 		$('#thead-title').html("");
 		$('#content-data').html("");
-		$('.main-title').text('更改出缺勤-AbsentUpdate')
+		$('.main-title').text('更改出缺勤-Absent Update')
 		
 		//=========生成非Ajax元素===============
 		var contentAbsent = "";
@@ -2464,16 +2464,18 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 			'</form>'+
 		'</div>'+
 
-			'<div>'+
-		  		'<p id="classInfo">'+
-		  		'</p>'+
-			'</div>'+
+// 			'<div>'+
+// 		  		'<p id="classInfo">'+
+// 		  		'</p>'+
+// 			'</div>'+
 			
-		'<form class="form-inline" action="">'+
+// 		'<form class="form-inline" action="">'+
+          '<div class="form-inline" >'+
 		  '<i style="font-size:36px;" class="bx bx-search-alt bx-flashing" ></i>'+
-		   '<input class="form-control mr-sm-2" type="search" value="" placeholder="Search" aria-label="Search">'+
-		   '<button id="mohuBtn" class="btn btn-outline-success my-2 my-sm-0">Search</button>'+
-		 '</form></br>'+
+		   '<input class="form-control mr-sm-3" type="search" value="" placeholder="Search" aria-label="Search">'+
+		   '<button id="mohuBtnForAbsent" class="btn btn-outline-success my-2 my-sm-0">Search</button>'+
+		  '</div></br>'+
+// 		 '</form></br>'+
 		 
 		'<form:form>'+
 		'<table class="table table-hover" id="studentList">'+
@@ -2487,9 +2489,9 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    '</thead>'+
 		    '<tbody>'+
 		      '<tr>'+
-		        '<td><input type="checkbox" checkes></td>'+
-		        '<td>22</td>'+
-		        '<td>謝冬冬</td>'+
+// 		        '<td><input type="checkbox" checkes></td>'+
+// 		        '<td>22</td>'+
+// 		        '<td>謝冬冬</td>'+
 		     '</tr>'+
 		    '</tbody>'+
 		  '</table>'+
@@ -2547,6 +2549,9 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    // insert class info and Absent list
 		    function displayAbsentListAndInfo (responseText){
 		    let dataSource =JSON.parse(responseText);
+		    console.log("============")
+		    console.log(dataSource)
+		    console.log("============")
 		    let abListLength=dataSource.abList.length;
 		    let teacher=dataSource.cliDto[0].teacherName;
 		    let clsRoom=dataSource.cliDto[0].classroom;
@@ -2603,6 +2608,69 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		  }//end of funtion displayStudentListAndInfox
 		  
 		  }	
+		  
+		  $(document).on('click','#mohuBtnForAbsent',function(){
+			  var classCodeId = $(this).parent().prev().find('select').val()
+			  var days = $(this).parent().prev().find('#days').val()
+			  var studentName =	$(this).prev().val()
+			  
+			  console.log('clicked')
+				
+				let xhrNeil = new XMLHttpRequest();
+			  	xhrNeil.open("GET","<c:url value='/getAbsentDataAjax.controller?classCodeId=" + classCodeId + "&days=" + days + "&studentName=" + studentName +"'/>",true); 
+			  	xhrNeil.send();
+			  	
+			  	xhrNeil.onreadystatechange = function() {
+			    if(xhrNeil.readyState == 4 && xhrNeil.status == 200){
+			        let dataSource =JSON.parse(xhrNeil.responseText);
+			        console.log(dataSource);
+			        let abListLength=dataSource.abList.length;
+				    let teacher=dataSource.cliDto[0].teacherName;
+				    let clsRoom=dataSource.cliDto[0].classroom;
+				    let subject=dataSource.cliDto[0].subject;
+				    let school=dataSource.cliDto[0].schoolType;
+				    let grade=dataSource.cliDto[0].grade;
+				    // insert class info
+				    $('#classInfo').remove();
+				    let  classInfo=$("#classInfo");
+				    classInfo.html(" 教室: "+clsRoom+" 課程內容: "+school+'&nbsp&nbsp&nbsp&nbsp'+grade+'&nbsp&nbsp&nbsp&nbsp'+subject+'&nbsp'+" 老師: "+teacher)
+				    // insert students list
+				    $('#studentList tbody tr td').remove();
+				    //判斷職相等
+				      stulist_data="<tbody>";
+				    for (i=0;i<abListLength; i++){
+				        stulist_data+="<tr>"
+				        // console.log(dataSource.abList[i].id);
+				        let absid=dataSource.abList[i].id;
+				        stulist_data+="<td>" +dataSource.abList[i].student.classStudentLists[0].studentNo +"</td>"
+				        stulist_data+="<td style='display:none' class='absid  '>"+absid +"</td>"
+				        stulist_data+="<td>" +dataSource.abList[i].student.name+"</td>"
+				        // console.log(dataSource.abList[i].arrviedOrNot)
+				        let InorOut=dataSource.abList[i].arrviedOrNot
+				        let absesntText;
+				        if (InorOut==0){
+				          absesntText="缺席";
+				        } else if(InorOut==1){
+				          absesntText="出席";
+				        } else if (InorOut==2){
+				          absesntText="請假";
+				        }
+				        stulist_data+="<td><select class='abs' id='abs' name='abs'><option value='"+InorOut+"' selected='selected' hidden>"+absesntText+"</option>"
+				        stulist_data+="<option value='0' >缺席</option>"
+				        stulist_data+="<option value='1' >出席</option>"
+				        stulist_data+="<option value='2' >請假</option>"
+				        stulist_data+="</select></td></tr>"
+				    }
+
+				    stulist_data +='</tobody>';
+				    $('#studentList').append(stulist_data)
+			        
+			      }
+			  	}
+			    
+		  })
+		  
+		  
 	    
 	  }) 
 	  

@@ -44,8 +44,16 @@ public class AbsentService {
         aDao.insertAbsentData(classId, studentId, arrivedValue);
     }
 
+    
+    //SQL語法
+    public List<Absent> findStuMohu(Integer classCodeId,String days,String studentName){
+    	return aDao.selectAbsentByDaysAndClassCodeIdAndStuNameMohu(classCodeId,days,studentName);
+    }
+
     // 尋找個人出缺勤
     public List<Absent> selectAbsentByStudent(Student student){
        return aDao.selectAbsentByStudentId(student);
     }
+    
+    
 }

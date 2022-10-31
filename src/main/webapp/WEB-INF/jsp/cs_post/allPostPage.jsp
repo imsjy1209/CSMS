@@ -8,29 +8,28 @@
 
 	<div class="container">
 	<h3 class='main-title'><i style='font-size:36px;'class='bx bxs-calendar-event' ></i>公告管理</h3>
-	
-	
+
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style='color: black;'>
+      <div class="modal-body">
         ...
       </div>
       <div class="modal-footer">
-<!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div>
-	
+</div>	
 	
 			<table class="table table-striped mt-5">
 				<tr>
@@ -42,7 +41,8 @@
 					<th>更新內容
 					 <c:forEach var="post" items="${list}">
 							<tr class="accordion-toggle">
-								<td><button type="button" class="showModalEye btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class='bx bx bxs-show'></i></button>
+							
+								<td><button type="button" class="showModalEye btn btn-primary" data-toggle="modal" data-placement="top" data-target="#exampleModalCenter"><i class='bx bx bxs-show'>Show</i></button>
 								<td class='topicTd'>${post.topic}
 								<td class='articleTd' style='display:none;'>${post.article}</td>
 								<td class='updateTimeTd' style='display:none;'>${post.update_at}</td>
@@ -57,10 +57,10 @@
 									</c:choose>
 								<c:choose>
 										<c:when test="${post.isDelete == 0}">
-											<td>是
+											<td><button type="button" class="btn btn-primary">上架中</button></td>
 										</c:when>
 										<c:when test="${post.isDelete ==1}">
-											<td>否
+											<td><button type="button" class="btn btn-danger">下架中</button></td>
 										</c:when>
 									</c:choose>
 								<td align="center"><a
