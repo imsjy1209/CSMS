@@ -30,6 +30,7 @@ import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.AbsentService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
+import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.UserService;
 
@@ -47,6 +48,9 @@ public class UsersController {
     private OrderDetailService orderDetailService;
     @Autowired
     private ScoreStudentService scoreStudentService;
+    
+    @Autowired
+    private ScoreService scoreService;
     
     @Autowired
     private AbsentService absentService;
@@ -251,13 +255,16 @@ public class UsersController {
             m.addAttribute("aOrderDetailList",aOrderDetailList);
             m.addAttribute("personalAbsent", personalAbsent);
             m.addAttribute("scoreforStudent",scoreforStudent);
-            break;
+            return "cs_homePage/studentHomepage";
         case 5:
         	Parent parent = users.getParent();
-        	m.addAttribute("parent",parent);
-            break;     
+        	m.addAttribute("parent",parent);       	         
+			List<Score> scoreforParent = scoreService.getscoreforParent(parent);
+			m.addAttribute("scoreforParent",scoreforParent);
+            
+            return "cs_homePage/parentHomepage";
     	}
-    	return "cs_homePage/studentHomepage";
+    	return "cs_homePage/parentHomepage";
     }
     
     @PostMapping(value = "users/updateFirstLogin")
