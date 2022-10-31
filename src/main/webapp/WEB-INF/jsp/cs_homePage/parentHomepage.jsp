@@ -291,8 +291,8 @@ button {
 						<div class="modal-body">
 							<!-- 								<p>scoreMID test</p> -->
 
-							<c:forEach var="post" items="${scoreforStudent}">
-								<table>
+							<c:forEach var="post" items="${scoreforParent}">
+								<table class="table">
 									<tr>
 										<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
 										<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp

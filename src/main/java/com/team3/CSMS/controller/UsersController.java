@@ -32,6 +32,7 @@ import com.team3.CSMS.service.AbsentService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
+import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.UserService;
 
@@ -51,11 +52,16 @@ public class UsersController {
     @Autowired
     private ScoreStudentService scoreStudentService;
     
-    @Autowired
-    ContactBookService contactBookService;
     
     @Autowired
+    private ScoreService scoreService;
+    
+    @Autowired
+    ContactBookService contactBookService;
+
+    @Autowired
     private AbsentService absentService;
+    
     // 透過ID找到個資
     @GetMapping(value = "/userProfile.json",
                 produces = {"application/json;charset=UTF-8"})
@@ -259,13 +265,16 @@ public class UsersController {
             m.addAttribute("personalAbsent", personalAbsent);
             m.addAttribute("scoreforStudent",scoreforStudent);
             m.addAttribute("top3cbList",top3cbList);
-            break;
+            return "cs_homePage/studentHomepage";
         case 5:
         	Parent parent = users.getParent();
-        	m.addAttribute("parent",parent);
-            break;     
+        	m.addAttribute("parent",parent);       	         
+			List<Score> scoreforParent = scoreService.getscoreforParent(parent);
+			m.addAttribute("scoreforParent",scoreforParent);
+            
+            return "cs_homePage/parentHomepage";
     	}
-    	return "cs_homePage/studentHomepage";
+    	return "cs_homePage/parentHomepage";
     }
     
     @PostMapping(value = "users/updateFirstLogin")

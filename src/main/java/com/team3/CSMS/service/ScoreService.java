@@ -1,5 +1,4 @@
 package com.team3.CSMS.service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,10 +78,11 @@ public class ScoreService {
 	}
 	
 	//[MODEL]
-//	public List<Score> getscoreforParent(Student student,ClassList classList,Parent parent){
-//		return scoreDao.scoreforParent(student,classList,parent);
-//	}
-//	
+	public List<Score> getscoreforParent(Parent parent){
+		return scoreDao.scoreforParent(parent);
+	}
+
+	
 
 	// 新增
 	public void insertScore(Score score) {
