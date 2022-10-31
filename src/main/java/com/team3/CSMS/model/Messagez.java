@@ -48,7 +48,7 @@ public class Messagez {
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Column(name = "timeOfMsg", columnDefinition = "datetime", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	private Date create_at; // insert data default getDate()
+	private Date createTime; // insert data default getDate()
     
     //SQL nvarchar(max)
     @Column(name="whatToSay")
@@ -63,8 +63,8 @@ public class Messagez {
 
     @PrePersist
 	public void onCreate() {
-    	if (create_at == null) {
-			create_at = new Date();
+    	if (createTime == null) {
+			createTime = new Date();
 		}
 		
 	}
@@ -158,7 +158,12 @@ public class Messagez {
         this.readOrNot = readOrNot;
     }
 
-    
-    
+    public Date getCreateTime(){
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
 }
