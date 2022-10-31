@@ -150,35 +150,34 @@ button {
 					<div id="carouselExampleIndicators" class="carousel slide"
 						data-ride="carousel">
 						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0"
-								class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 						</ol>
 						<div class="carousel-inner">
-							<div class="carousel-item active">
+							<div class="carousel-item active" data-interval="3000" data-pause="hover">
 								<img src="${contextRoot}/image/activityPhoto/01.PNG" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
     								<h5>泳渡日月潭</h5>
 									<p>讚讚讚讚讚</p>
 								</div>
 							</div>
-							<div class="carousel-item">
+							<div class="carousel-item" data-interval="3000" data-pause="hover">
 								<img src="${contextRoot}/image/activityPhoto/02.PNG" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
     								<h5>大家一起來散步</h5>
 									<p>喔耶喔耶喔耶</p>
 								</div>
 							</div>
-							<div class="carousel-item">
+							<div class="carousel-item" data-interval="3000" data-pause="hover">
 								<img src="${contextRoot}/image/activityPhoto/03.PNG" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
     								<h5>益智模型</h5>
 									<p>啦啦啦啦啦啦啦~~</p>
 								</div>
 							</div>
-							<div class="carousel-item">
+							<div class="carousel-item" data-interval="3000">
 								<img src="${contextRoot}/image/activityPhoto/04.PNG" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
     								<h5>參觀博物館</h5>
