@@ -49,28 +49,7 @@ public class OrderDetailController {
 		orderDetailService.deleteOrderDetailById(id);
 	}
 	
-	//新增訂單明細
-	@GetMapping("/orderDetailCreateAjax.controller")
-	public @ResponseBody void orderDetailCreateAjax
-	(@RequestParam(name="courseId")Integer courseId,@RequestParam(name="studentId")Integer studentId) {
-		
-		System.out.println();
-		System.out.println(courseId);
-		System.out.println(studentId);
-		
-		Student oneStuden = studentService.findStudentById(studentId);
-		Optional<Course> aCourseOptional = courseService.findCourseById(courseId);
-		Course oneCourse = aCourseOptional.get();
-		
-		OrderDetail newOD = new OrderDetail();
-		newOD.setCourse(oneCourse);
-		newOD.setStudent(oneStuden);
-		newOD.setOrderList(null);
-		newOD.setArrangeClassList(0);
-		newOD.setConfirmOrder(0);
-		
-		orderDetailService.insertOrderDetail(newOD);
-	}
+	
 	
 	//依據學生id找尚未結帳(OrderList值為null)的訂單明細
 	@GetMapping("/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller")
@@ -86,7 +65,7 @@ public class OrderDetailController {
 	@PostMapping("/updateOrderListAndOrderDetailData.controller")
 	public void updateOrderListAndOrderDetailData
 	(@RequestBody List<OrderDetailDto> orderDetailDtoList,@RequestParam(name="amount")Integer amount,@RequestParam(name="payment")String payment,@RequestParam(name="studentId")Integer studentId){
-		
+		System.out.println("studentId=" + studentId);
 		Student oneStudent = studentService.findStudentById(studentId);
 		Date date = new Date();
 		
