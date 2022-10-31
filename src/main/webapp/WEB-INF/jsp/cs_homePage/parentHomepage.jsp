@@ -112,7 +112,6 @@ button {
 	<!-- Student Navbar -->
 	<jsp:include page="../layout/nav_parent.jsp"></jsp:include>
 	<div class="wrapper">
-		<div class="carouselArea">輪播區</div>
 		<div class="content">
 			<div class="aside" style="border: 5px solid red;">
 				<div class="absCheckIcon hoverLight" id="absCheckIcon">
@@ -154,7 +153,7 @@ button {
 			</div>
 			<div class="article ">
 				<div class="announcementDiv">
-					<h4>modal區</h4>
+					<h4>想想要放啥咪??(因為家長沒有活動功能，所以不能有輪播活動圖)</h4>
 				</div>
 
 				<!-- Button trigger modal -->

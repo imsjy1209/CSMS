@@ -43,6 +43,13 @@ public class ContactBookController {
 	
 	@Autowired
 	private ContactBookSignService cbsService;
+	
+	@GetMapping(value = "/lalala.json", produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<ContactBook> test(Integer sessionStuId) {
+		List<ContactBook> cbList = cbService.getTop3StudentContactBookList(sessionStuId);
+		return cbList;
+	}
+	
 
 	//------------------------- 老師 -------------------------  進度：已完成 (有加入session測試)
 	/* 進入聯絡簿系統 */
