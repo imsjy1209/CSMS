@@ -217,7 +217,7 @@ button {
 						role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+								<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-check-square'></i>出缺勤</b></h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
@@ -274,7 +274,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b>出缺勤</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-book'></i>&nbsp;課程</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -304,7 +304,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b>活動</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-universal-access'></i>&nbsp;活動</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -332,7 +332,7 @@ button {
 					<div class="modal-content">
 						<div class="modal-header">
 
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b>成績</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-poll'></i>&nbsp;成績</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 
@@ -388,7 +388,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b>聯絡簿 (前3筆紀錄)</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-book-reader'></i>&nbsp;聯絡簿 (前3筆紀錄)</b></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
