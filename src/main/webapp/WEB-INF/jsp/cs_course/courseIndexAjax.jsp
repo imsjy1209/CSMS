@@ -72,7 +72,7 @@ padding-right:15px!important;
 	
 	
 		<div class="nav container">
-			<a href="${pageContext.request.contextPath}/CSMSHomePage" class="logo">CramSchool</a>
+			<a href="${pageContext.request.contextPath}/student.Homepage" class="logo">CramSchool</a>
 			<h3><i class='bx bxs-user' >${student.name}</i></h3>
 			<div><i class='bx bx-cart' style='font-size:48px;' id="cart-icon"></i><span class="badge badge-primary badge-pill">0</span></div>
 			

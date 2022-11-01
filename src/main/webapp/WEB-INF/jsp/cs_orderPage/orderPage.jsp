@@ -36,15 +36,15 @@
 .total-div{
 	display:flex;
 	justify-content: space-between;
-	
 	background:white;
-	
     position: absolute; 
     bottom: 20px;
     width: 1115px;
-/*     width: 100%; */
-/*     height: 6rem;  */
-  
+}
+
+.test{
+text-decoration:line-through;
+
 }
 
 
@@ -64,7 +64,7 @@
 <body>
 <header>
 <div class="nav container">
-			<a href="${pageContext.request.contextPath}/CSMSHomePage" class="logo">CramSchool</a>
+			<a href="${pageContext.request.contextPath}/student.Homepage" class="logo">CramSchool</a>
 			<h3><i class='bx bxs-user' >${student.name}</i></h3>
 			<div><i style='font-size:48px;' class='bx bx-dollar-circle bx-spin' ></i></div>
 			
@@ -87,21 +87,23 @@
       <th scope="col">商品價錢</th>
       <th scope="col">開課日期</th>
       <th scope="col">結業日期</th>
+      <th scope="col">移除</th>
     </tr>
   </thead>
   <tbody>
 
     
    <c:forEach var="item" items="${orderDetailList}">
-   <tr>
-    <th><input class='check-buy-box' type='checkbox'/></th>
-    <th>${item.id}</th>
-   	<td style='color:red;'><span class='courseInfoId' style='display:none ;'>${item.course.id}</span>未結帳</td>
-   	<td>${item.student.name}</td>
-   	<td>[${item.course.courseSubject}]-${item.course.courseGrade}${item.course.courseClass}年級</td>
-   	<td class='course-price'>${item.course.coursePrice}</td>
-   	<td>${item.course.startDate}</td>
-   	<td>${item.course.endDate}</td>
+   <tr class='remove'>
+    <th class='checkBoxTh' style='vertical-align:middle'><input class='check-buy-box' type='checkbox'/></th>
+    <th class='orderIdTh' style='vertical-align:middle'><span class=''>${item.id}</span></th>
+   	<td style='color:red;vertical-align:middle'><span class=''><span class='courseInfoId' style='display:none ;'>${item.course.id}</span>未結帳</span></td>
+   	<td style='vertical-align:middle'><span class=''>${item.student.name}</span></td>
+   	<td style='vertical-align:middle'><span class=''>[${item.course.courseSubject}]-${item.course.courseGrade}${item.course.courseClass}年級</span></td>
+   	<td style='vertical-align:middle' class='course-price'><span class=''>${item.course.coursePrice}</span></td>
+   	<td style='vertical-align:middle'><span class=''>${item.course.startDate}</span></td>
+   	<td style='vertical-align:middle'><span class=''>${item.course.endDate}</span></td>
+   	<td style='vertical-align:middle'><i class='bx bx-trash bx-tada' style='color:#cb1616;'></i></td>
    	</tr>
    </c:forEach>
 
@@ -132,7 +134,7 @@
 				<td style="vertical-align:middle;">Total:</td>
 				<td class="total-money" style="vertical-align:middle;">0</td>
 				<td><button id="goToPay" class="btn btn-primary">去買單</button></td>
-				<td><button id="backToPrevPage" class="btn btn-primary">回上一頁</button></td>
+				<td><a href="${pageContext.request.contextPath}/courseAllOnPageAjax.page" id="backToPrevPage" class="btn btn-primary">回上一頁</a></td>
 				</tr>
 			</table>
 	</div>
@@ -169,14 +171,13 @@ $('#goToPay').click(function(){
 	}
 	else{
 		
-//現階段先把StudentId寫死，付費方式也先寫死	
-//處理再次確定要購買的課程(Revise confirmOrder from 0 to 2)
+//===========處理再次確定要購買的課程(Revise confirmOrder from 0 to 2)============
 	var studentId= $('.stuId').text();
 	var payment="credit_card"
 	
 	var ODIdList = [];
 	$('input:checked').each(function(){
-		var oDId= $(this).parent().next().text();
+		var oDId= $(this).parent().next().children().text();
 		var courseInfoId = $(this).parent().next().next().find('.courseInfoId').text();
 		var eachODId = {"orderDetailId":oDId,"studentInfoId":studentId,"courseInfoId":courseInfoId};
 		ODIdList.push(eachODId);
@@ -184,11 +185,11 @@ $('#goToPay').click(function(){
 	var payment ="credit_card";
 	var ODIdListJsonString = JSON.stringify(ODIdList);
 	console.log(ODIdListJsonString);
-//處理再次確定後不購買的課程(Revise confirmOrder from 0 to 1)
+//============處理再次確定後不購買的課程(Revise confirmOrder from 0 to 1)=====================
 
 var ODIdListNoPurchase = [];
 	$('input:not(:checked)').each(function(){
-		var oDIdNoPurchase= $(this).parent().next().text();
+		var oDIdNoPurchase= $(this).parent().next().children().text();
 		var courseInfoIdNoPurchase = $(this).parent().next().next().find('.courseInfoId').text();
 		var eachODIdNoPurchase = {"orderDetailId":oDIdNoPurchase,"studentInfoId":studentId,"courseInfoId":courseInfoIdNoPurchase};
 		ODIdListNoPurchase.push(eachODIdNoPurchase);
@@ -244,21 +245,30 @@ var ODIdListNoPurchase = [];
 })
 
 
-//再次選擇要購買的項目
-$('.check-buy-box').change(function(){
+//==========再次選擇要購買的項目===============
+$(document).on('click','input:checkbox',function(){
+// 	if($(this).prop('checked')==true){
+// 		console.log('ggggggggggg')
+// 		 $(this).prop('checked', false);
+// 	}
+// 	else{
+// 		$(this).prop('checked', true);
+// 	}
 	let total=0;
 	$(':checked').each(function(){
 	total += Number($(this).parent().siblings('.course-price').text())				
 	})
 	$('.total-money').text(total)
-	
 })
 
-//一次全選
-$('#selectAll').click(function(){
+
+//===========一次全選===========
 	
+$(document).on('click','#selectAll',function(){
 	$('input:checkbox').each(function() {
-	    $(this).attr('checked', true);
+	    $(this).prop('checked', true);
+	    let bgColor = 'lightblue';
+		$(this).closest('tr').css('background', bgColor)
 	})
 	let total=0;
 	$(':checked').each(function(){
@@ -268,12 +278,15 @@ $('#selectAll').click(function(){
 	
 })
 
-//取消全選
-$('#cancelAll').click(function(){
+//=========取消全選=========
+$(document).on('click','#cancelAll',function(){
 	
-	$('input:checkbox').each(function () {  
-	    $(this).attr('checked',false);
+	$('input:checkbox').each(function (){  
+	    $(this).prop('checked',false);
+	    let bgColor = 'none';
+		$(this).closest('tr').css('background', bgColor)
 	});
+	
 	let total=0;
 	$(':checked').each(function(){
 	total += Number($(this).parent().siblings('.course-price').text())				
@@ -283,18 +296,51 @@ $('#cancelAll').click(function(){
 })
 
 
-//checkbox被選擇後變色
-$('input[type="checkbox"]').click(function() {
-// 				$(this).parent().parent('tr').attr("style",'none');
-// 				console.log($(this).parent().parent('tr'))
-				let bgColor = 'none';
-				if ($(this).prop('checked')) {
-					bgColor = 'lightblue';
-				}
-				$(this).closest('tr').css('background', bgColor)
-			})
+//=======checkbox被選擇後變色===========
+	$(document).on('click','input[type="checkbox"]',function(){
+		let bgColor = 'none';
+		if ($(this).prop('checked')) {
+			bgColor = 'lightblue';
+		}
+		$(this).closest('tr').css('background', bgColor)
+	})
 
+			
+//=====點擊移除商品按鈕========	
+	$(document).on('click','.bx-trash',function(){
+		
+		var orderIdForUpdateOnOrOff = $(this).parent().siblings('.orderIdTh').children().text();
+		console.log(orderIdForUpdateOnOrOff)
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/updateOrderDetailDataOnlyOne.controller?orderId=" + orderIdForUpdateOnOrOff  + "' />", true);
+		xhr.send();
+		
+		var wairForRemove = $(this).parent().parent().find('span')
+		wairForRemove.each(function(){
+		$(this).addClass('test')	
+		})
+		$(this).parent().siblings('.checkBoxTh').html("<span>已移除</span>")
+		$(this).parent().html("<button class='recover btn btn-warning'>還原</button>")
+	})
 
+//=====點擊還原商品按鈕========
+$(document).on('click','.recover',function(){
+	var orderIdForUpdateOnOrOff = $(this).parent().siblings('.orderIdTh').children().text();
+	console.log(orderIdForUpdateOnOrOff)
+	
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/updateOrderDetailDataOnlyOne2.controller?orderId=" + orderIdForUpdateOnOrOff  + "' />", true);
+		xhr.send();
+	
+	var wairForRecover = $(this).parent().parent().find('span')
+	wairForRecover.each(function(){
+		$(this).removeClass('test')
+	})
+	$(this).parent().siblings('.checkBoxTh').html("<input class='check-buy-box' type='checkbox'/>")
+	$(this).parent().html("<i class='bx bx-trash bx-tada' style='color:#cb1616;'></i>")
+	
+})
 </script>
 
 </html>

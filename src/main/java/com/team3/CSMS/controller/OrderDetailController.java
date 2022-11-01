@@ -59,6 +59,24 @@ public class OrderDetailController {
 		return "cs_orderPage/orderPage";
 	}
 	
+	//=======更新OrderDetail資料-不購買Ajax(Revise confirmOrder from 0 to 1)============
+	@ResponseBody
+	@GetMapping("/updateOrderDetailDataOnlyOne.controller")
+	public void updateOrderDetailDataOnlyOne(@RequestParam (name="orderId")Integer orderId){
+		OrderDetail oneOrderDetail = orderDetailService.findOrderDetailById(orderId);
+		oneOrderDetail.setConfirmOrder(1);
+		orderDetailService.insertOrderDetail(oneOrderDetail);
+	}
+	
+	//=======更新OrderDetail資料-待確認Ajax(Revise confirmOrder from 1 to 0)============
+	@ResponseBody
+	@GetMapping("/updateOrderDetailDataOnlyOne2.controller")
+	public void updateOrderDetailDataOnlyOne2(@RequestParam (name="orderId")Integer orderId){
+		OrderDetail oneOrderDetail = orderDetailService.findOrderDetailById(orderId);
+		oneOrderDetail.setConfirmOrder(0);
+		orderDetailService.insertOrderDetail(oneOrderDetail);
+	}
+	
 	
 	//批量更新orderDetail資料(Revise confirmOrder from 0 to 2)And OrderList資料
 	@ResponseBody

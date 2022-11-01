@@ -100,6 +100,12 @@ public class ContactBookService {
 		return dtoList;
 	}
 	
+	// 學生首頁Modal：顯示前3三筆聯絡簿(日期、課程代號、科目、上課內容、回家作業、下週考試)
+	public List<ContactBook> getTop3StudentContactBookList(Integer sessionStuId) {
+		List<ContactBook> cbList = cbDao.getTop3StudentContactBookList(sessionStuId);
+		return cbList;
+	}
+	
 	//------------------------- 家長 -------------------------
 	// 家長聯絡簿選單By classListId
 	public List<ContactBookListParentVerDto> getParentContactBookListByClassListId(Integer classListId, Integer studentId) {

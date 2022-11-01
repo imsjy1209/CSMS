@@ -186,8 +186,8 @@
 									data-target="#absentMID"><i style="font-size: 90px;"
 										class='bx bx-calendar-check hoverLight'> </i></li></button>
 							<li style="--i:0.2s;"><button class="lessonIcon btnli" data-toggle="modal"
-									data-target="#courseMID"><i style="font-size: 90px;"
-										class='bx bx-book hoverLight' title="課程"></i></li></button>
+									data-target="#courseMID"><i style="font-size: 90px;" class='bx bx-book hoverLight'
+										title="課程"></i></li></button>
 							<li style="--i:0.3s;"><button class="activeIcon btnli" data-toggle="modal"
 									data-target="#activityMID"><i style="font-size: 90px;"
 										class='bx bx-universal-access hoverLight'></i></li></button>
@@ -267,187 +267,264 @@
 							<button type="button" class="" data-toggle="modal"
 								data-target="#exampleModalCenter"></button>
 
+						</div>
+						<!-- end of modal -->
 
-							<!-- Modal for Absent -->
-							<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
-								aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<p>${student.name}</p>
-											<table calss="table">
-												<thead>
+						<!-- Modal for Absent -->
+						<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalCenterTitle"><b><i
+													class='bx bx-check-square'></i>出缺勤</b></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>${student.name}</p>
+										<table>
+											<thead>
+												<tr>
+													<th>日期</th>
+													<th>課程</th>
+													<th>出席狀況</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="personalAbsent" items="${personalAbsent}">
 													<tr>
-														<th>日期</th>
-														<th>課程</th>
-														<th>出席狀況</th>
+														<td>
+															<fmt:formatDate pattern="yyyy-MM-dd"
+																value="${personalAbsent.dayz}" />
+														</td>
+														<td>${personalAbsent.classList.course.courseSubject}</td>
+														<td>
+															<c:choose>
+																<c:when test="${personalAbsent.arrviedOrNot == 0}">缺席
+																</c:when>
+																<c:when test="${personalAbsent.arrviedOrNot == 1}">出席
+																</c:when>
+																<c:when test="${personalAbsent.arrviedOrNot == 2}">請假
+																</c:when>
+															</c:choose>
+														</td>
 													</tr>
-												</thead>
-												<tbody>
-													<c:forEach var="personalAbsent" items="${personalAbsent}">
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Save
+											changes</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- end of modal -->
+
+
+					</div>
+					<!-- end of modal -->
+
+
+					<!-- Modal for Course -->
+					<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle"><b><i
+												class='bx bx-book'></i>&nbsp;課程</b></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>courseMID test</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+
+						</div>
+						<!-- end of modal -->
+
+					</div>
+					<!-- end of modal -->
+
+					<!-- Modal for Activity -->
+					<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle"><b><i
+												class='bx bx-universal-access'></i>&nbsp;活動</b></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>activityMID test</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end of modal -->
+
+					<!-- Modal for Score -->
+					<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+
+									<h5 class="modal-title" id="exampleModalCenterTitle"><b><i
+												class='bx bx-poll'></i>&nbsp;成績 (最新3筆紀錄)</b></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<table class="table table-bordered" style="text-align:center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">學生名字</th>
+												<th class="table-info" scope="col">課程代號</th>
+												<th class="table-info" scope="col">科目名稱</th>
+												<th class="table-info" scope="col">次數</th>
+												<th class="table-info" scope="col">分數</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="post" items="${scoreforStudent}">
+												<tr>
+													<td>${post.student.name}</td>
+													<td>${post.classlist.classCode}</td>
+													<td>${post.classlist.course.courseSubject}</td>
+													<td>${post.frequency}</td>
+													<td>${post.score}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+									<a type="button" class="btn btn-primary" href="${contextRoot}/frontscore">看更多</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end of modal -->
+
+					<!-- Modal for ContactBook -->
+					<div class="modal fade" id="contactBookMID" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle"><b><i
+												class='bx bx-book-reader'></i>&nbsp;聯絡簿 (最新3筆紀錄)</b></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<table class="table table-bordered" style="text-align:center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">建立日期</th>
+												<th class="table-info" scope="col">課程代號</th>
+												<th class="table-info" scope="col">科目名稱</th>
+												<th class="table-info" scope="col">課程內容</th>
+												<th class="table-info" scope="col">回家作業</th>
+												<th class="table-info" scope="col">考試通知</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="top3cbList" items="${top3cbList}">
+												<c:choose>
+													<c:when test="${top3cbList == null}">
+														<tr>
+															<td colspan="6">查無結果</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
 														<tr>
 															<td>
 																<fmt:formatDate pattern="yyyy-MM-dd"
-																	value="${personalAbsent.dayz}" />
+																	value="${top3cbList.create_at}" />
 															</td>
-															<td>${personalAbsent.classList.course.courseSubject}</td>
-															<td>
-																<c:choose>
-																	<c:when test="${personalAbsent.arrviedOrNot == 0}">
-																		缺席</c:when>
-																	<c:when test="${personalAbsent.arrviedOrNot == 1}">
-																		出席</c:when>
-																	<c:when test="${personalAbsent.arrviedOrNot == 2}">
-																		請假</c:when>
-																</c:choose>
-															</td>
+															<td>${top3cbList.classList.classCode}</td>
+															<td>${top3cbList.classList.course.courseSubject}</td>
+															<c:choose>
+																<c:when test="${top3cbList.courseContent == null}">
+																	<td></td>
+																</c:when>
+																<c:otherwise>
+																	<td>${top3cbList.courseContent}</td>
+																</c:otherwise>
+															</c:choose>
+
+															<c:choose>
+																<c:when test="${top3cbList.homework == null}">
+																	<td></td>
+																</c:when>
+																<c:otherwise>
+																	<td>${top3cbList.homework}</td>
+																</c:otherwise>
+															</c:choose>
+
+															<c:choose>
+																<c:when test="${top3cbList.quizNotice == null}">
+																	<td></td>
+																</c:when>
+																<c:otherwise>
+																	<td>${top3cbList.quizNotice}</td>
+																</c:otherwise>
+															</c:choose>
 														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-
-
-										</div>
-									</div>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</tbody>
+									</table>
 								</div>
-
-							</div>
-							<!-- end of modal -->
-
-
-						</div>
-						<!-- end of modal -->
-
-
-						<!-- Modal for Course -->
-						<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<p>courseMID test</p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-									</div>
-								</div>
-
-							</div>
-							<!-- end of modal -->
-
-						</div>
-						<!-- end of modal -->
-
-						<!-- Modal for Activity -->
-						<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<p>activityMID test</p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-									</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+									<a type="button" class="btn btn-primary"
+										href="${contextRoot}/ContactBook/St_Index">看更多</a>
 								</div>
 							</div>
 						</div>
-						<!-- end of modal -->
 
-						<!-- Modal for Score -->
-						<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-
-										<h5 class="modal-title" id="exampleModalCenterTitle">成績</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<!-- 								<p>scoreMID test</p> -->
-
-										<c:forEach var="post" items="${scoreforStudent}">
-											<table>
-												<tr>
-													<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
-													<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
-													<td>第${post.frequency}次考試</td>&nbsp&nbsp&nbsp&nbsp
-													<td>${post.score}分</td>
-												</tr>
-											</table>
-										</c:forEach>
-
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end of modal -->
-
-						<!-- Modal for ContactBook -->
-						<div class="modal fade" id="contactBookMID" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<p>contactBookMID test</p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end of modal -->
 					</div>
 					<!-- end of modal -->
+
+
+				</div>
+				<!-- end of modal -->
+
+
 				</div>
 
 				<!-- footer -->

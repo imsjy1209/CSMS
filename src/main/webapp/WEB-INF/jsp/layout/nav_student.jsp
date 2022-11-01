@@ -138,7 +138,7 @@ li {
 	        	</a>
 	      	</li>
 	      	<li class="nav-item active btn-2 leftBtn">
-		    	<a class="leftBtn" href="#" style="color:white;text-decoration: none;">
+		    	<a class="leftBtn" href="${contextRoot}/courseAllOnPageAjax.page" style="color:white;text-decoration: none;">
 	        		<i class='bx bx-store' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;課程選購</b></span>
 	        	</a>
 	      	</li>
