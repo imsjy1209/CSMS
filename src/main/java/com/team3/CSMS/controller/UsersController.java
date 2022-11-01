@@ -271,7 +271,8 @@ public class UsersController {
         case 5:
         	Parent parent = users.getParent();
         	m.addAttribute("parent",parent);       	         
-			List<Score> scoreforParent = scoreService.getscoreforParent(parent);
+			//List<Score> scoreforParent = scoreService.getscoreforParent(parent); // 改搜最新3筆
+			List<Score> scoreforParent = scoreService.top3ScoreforParent(parent.getId());
 			m.addAttribute("scoreforParent",scoreforParent);
             
             return "cs_homePage/parentHomepage";

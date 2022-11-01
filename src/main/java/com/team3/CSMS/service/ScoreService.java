@@ -3,18 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ScoreDao;
-import com.team3.CSMS.dto.ClassInfoForStudentScorePageDto;
-import com.team3.CSMS.dto.ScoreDto;
 import com.team3.CSMS.dto.ScoreDto2;
-import com.team3.CSMS.model.ClassList;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Score;
-import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -77,11 +71,15 @@ public class ScoreService {
 		return scdtoList;
 	}
 	
-	//[MODEL]
+	
 	public List<Score> getscoreforParent(Parent parent){
 		return scoreDao.scoreforParent(parent);
 	}
-
+	
+	//[MODEL]
+	public List<Score> top3ScoreforParent(Integer sessionParentId) {
+		return scoreDao.top3ScoreforParent(sessionParentId);
+	}
 	
 
 	// 新增

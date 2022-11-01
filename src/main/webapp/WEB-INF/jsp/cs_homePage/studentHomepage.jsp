@@ -367,8 +367,8 @@ button {
 
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<a type="button" class="btn btn-primary" href="${contextRoot}/frontscore">See more</a>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+							<a type="button" class="btn btn-primary" href="${contextRoot}/frontscore">看更多</a>
 						</div>
 					</div>
 				</div>
@@ -447,8 +447,8 @@ button {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<a type="button" class="btn btn-primary" href="${contextRoot}/ContactBook/St_Index">See more</a>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+							<a type="button" class="btn btn-primary" href="${contextRoot}/ContactBook/St_Index">看更多</a>
 						</div>
 					</div>
 				</div>
