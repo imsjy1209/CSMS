@@ -117,6 +117,15 @@ li{
 	        </div>
 	      </li>
 	      
+	      <li class="nav-item dropdown font-weight-bold btn-2">
+	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+	        	訊息相關
+	        </a>
+	        <div class="dropdown-menu">
+	          <a class="dropdown-item lia" href="${contextRoot}/message/getallByParent">查看訊息</a>
+	        </div>
+	      </li>
+	      
 	    </ul>
 	    <!-- 靠右 -->
 		<ul class="nav navbar-nav navbar-right ">
