@@ -332,7 +332,7 @@ button {
 					<div class="modal-content">
 						<div class="modal-header">
 
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-poll'></i>&nbsp;成績</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-poll'></i>&nbsp;成績 (最新3筆紀錄)</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 
@@ -341,9 +341,6 @@ button {
 							</button>
 						</div>
 						<div class="modal-body">
-							<!-- 								<p>scoreMID test</p> -->
-
-							
 								<table class="table table-bordered" style="text-align:center">
 									<thead>
 										<tr>
@@ -370,10 +367,8 @@ button {
 
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<a type="button" class="btn btn-primary" href="${contextRoot}/frontscore">See more</a>
 						</div>
 					</div>
 				</div>
@@ -388,7 +383,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-book-reader'></i>&nbsp;聯絡簿 (前3筆紀錄)</b></h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b><i class='bx bx-book-reader'></i>&nbsp;聯絡簿 (最新3筆紀錄)</b></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -452,8 +447,7 @@ button {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<a type="button" class="btn btn-primary" href="${contextRoot}/ContactBook/St_Index">See more</a>
 						</div>
 					</div>

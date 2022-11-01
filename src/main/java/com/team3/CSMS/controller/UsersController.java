@@ -261,7 +261,7 @@ public class UsersController {
             m.addAttribute("student",student);
             List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
             List<Absent> personalAbsent=absentService.selectAbsentByStudent(student);
-            List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student);
+            List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
             List<ContactBook> top3cbList = contactBookService.getTop3StudentContactBookList(student.getId());
             m.addAttribute("aOrderDetailList",aOrderDetailList);
             m.addAttribute("personalAbsent", personalAbsent);

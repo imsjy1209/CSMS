@@ -62,10 +62,7 @@ public interface ContactBookDao extends JpaRepository<ContactBook, Integer> {
 			+ "where CB.[phase] = 3 and CSL.[fk_student_id] = :sessionStuId "
 			+ "order by CB.[create_at] desc", nativeQuery = true)
 	List<ContactBook> getTop3StudentContactBookList(@Param("sessionStuId") Integer sessionStuId);
-	//============================
-//	@Query(value = "select top(3)* from [ContactBook] "
-//			+ "where CB.[phase] = 3 and CSL.[fk_student_id] = :sessionStuId "
-//			+ "order by CB.[create_at] desc")
+
 	//------------------------- 家長 -------------------------
 	// 家長聯絡簿選單By classListId, studentId
 	@Query(value = "select * from [ContactBook] as CB "
