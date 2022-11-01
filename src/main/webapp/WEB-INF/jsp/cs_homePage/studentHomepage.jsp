@@ -170,8 +170,9 @@
 				<div class="content">
 					<div class="aside">	
 					<!-- Modal選單區 -->	
-					<div class="menuToggle"></div>
-					
+					<div class="menuToggle">
+						<i class='bx bx-list-ul' style="font-size: 90px; color:black" ></i>
+					</div>
 					<div class="menu">
 						<ul>
 							<li style="--i:0.1s;">
