@@ -59,19 +59,11 @@
 </div>
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>	
+
 <script>
 // 問題：依使用者呈現navbar
 // console.log($(".hidGroupsId").text());
 // var usersGroupId = $(".hidGroupsId").text();
-// if (usersGroupId == 2){
-// 	$(".navGroups").html('<jsp:include page="../layout/nav_teacher.jsp" />');
-// } else if (usersGroupId == 3){
-// 	$(".navGroups").html('<jsp:include page="../layout/nav_parent.jsp" />');
-// } else if (usersGroupId == 4){
-// 	$(".navGroups").html('<jsp:include page="../layout/nav_student.jsp" />');
-// } else {
-// 	console.log("使用者角色代號：" + usersGroupId);
-// }
 
 </script>
 </body>
