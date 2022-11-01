@@ -163,10 +163,8 @@
 			<body>
 			<!-- Student Navbar -->
 			<jsp:include page="../layout/nav_student.jsp"></jsp:include>
-			<br>
-			<br>
+			<br><br>
 			<div class="wrapper">
-				
 				<div class="content">
 					<div class="aside">	
 					<!-- Modal選單區 -->	
@@ -276,27 +274,34 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalCenterTitle">
-											<b><i class='bx bx-check-square'></i>出缺勤</b>
+											<b><i class='bx bx-check-square'></i>出缺勤紀錄</b>
 										</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-body">
-										<p>${student.name}</p>
-										<table class="table">
+										<table class="table table-bordered" style="text-align:center">
 											<thead>
 												<tr>
-													<th>日期</th>
-													<th>課程</th>
-													<th>出席狀況</th>
+													<th class="table-info" scope="col">學生姓名</th>
+													<th class="table-info" scope="col">日期</th>
+													<th class="table-info" scope="col">課程代號</th>
+													<th class="table-info" scope="col">科目名稱</th>
+													<th class="table-info" scope="col">出席狀況</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach var="personalAbsent" items="${personalAbsent}">
 													<tr>
 														<td>
+															${personalAbsent.student.name}
+														</td>
+														<td>
 															<fmt:formatDate pattern="yyyy-MM-dd" value="${personalAbsent.dayz}" />
+														</td>
+														<td>
+															${personalAbsent.classList.classCode}
 														</td>
 														<td>${personalAbsent.classList.course.courseSubject}</td>
 														<td>
