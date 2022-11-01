@@ -3,7 +3,6 @@
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 			<!DOCTYPE html>
 			<html>
-
 			<head>
 				<meta charset="UTF-8">
 				<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -17,6 +16,10 @@
 				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 				<style>
+					*{
+						margin: 0px;
+						padding: 0px;
+					}
 					.announcementDiv {
 						border: 2px solid slateblue;
 						size: 100px;
@@ -25,14 +28,12 @@
 						top: 250px;
 						right: 150px;
 					}
-
 					/* button {
 							border: none;
 							background: none;
 							outline: none;
 							color: #666666;
 					} */
-
 					.wrapper {
 						width: 100%;
 						margin: auto;
@@ -64,28 +65,22 @@
 
 					.menuToggle {
 						position: relative;
-						width: 70px;
+						/* width: 70px;
 						height: 70px;
-						background-color: #699cfa;
+						background-color: #699cfa; */
 						border-radius: 70px;
 						cursor: pointer;
 						display: flex;
 						justify-content: center;
 						align-items: center;
 					}
-
 					.menuToggle::before {
-						content: '+';
+						content: '';
 						position: absolute;
-						font-size: 3em;
 						font-weight: 200;
 						color: #ff9933;
 						transition: 1.5s;
 						text-align: center;
-					}
-
-					.menuToggle.active::before {
-						transform: rotate(225deg);
 					}
 
 					.menu {
@@ -112,7 +107,7 @@
 						content: '';
 						position: absolute;
 						background: red;
-						left: calc(50%-8px);
+						left: calc(25%-8px);
 						bottom: 4px;
 						transform: rotate(45deg);
 						border-radius: 2px;
@@ -128,7 +123,7 @@
 						position: relative;
 						/* display: flex; */
 						justify-content: center;
-						/* align-items: center; */
+						align-items: center;
 						height: 80px;
 						gap: 40px;
 						padding: left 0;
@@ -140,7 +135,6 @@
 						opacity: 0;
 						visibility: hidden;
 						transform: translateX(5px);
-						/* icon 出現的角度*/
 						transition: 0.25s;
 						transition-delay: calc(0s+var(--i));
 						background-color: none;
@@ -150,18 +144,14 @@
 						opacity: 1;
 						visibility: visible;
 						transform: translateY(10px);
-						/* icon 出現的角度*/
 						transition-delay: calc(0.75s+var(--i));
-						margin: 0cm;
-
+						height: 100%;
 					}
 
 					.menu ul li button {
-						/* display: block; */
-						font-size: 2em;
+						font-size: 2px;
 						text-decoration: none;
 						background-color: none;
-						/* color:#555; */
 					}
 
 					.menu ul li:hover button {
@@ -170,35 +160,13 @@
 				</style>
 
 			</head>
-
 			<body>
-
 				<!-- Student Navbar -->
 				<jsp:include page="../layout/nav_student.jsp"></jsp:include>
 				<br>
 				<br>
 				<div class="wrapper">
-					<div class="menuToggle">
-					</div>
-					<div class="menu">
-						<ul>
-							<li style="--i:0.1s;"><button class="absCheckIcon btnli" data-toggle="modal"
-									data-target="#absentMID"><i style="font-size: 90px;"
-										class='bx bx-calendar-check hoverLight'> </i></li></button>
-							<li style="--i:0.2s;"><button class="lessonIcon btnli" data-toggle="modal"
-									data-target="#courseMID"><i style="font-size: 90px;" class='bx bx-book hoverLight'
-										title="課程"></i></li></button>
-							<li style="--i:0.3s;"><button class="activeIcon btnli" data-toggle="modal"
-									data-target="#activityMID"><i style="font-size: 90px;"
-										class='bx bx-universal-access hoverLight'></i></li></button>
-							<li style="--i:0.4s;"><button class="scoreIcon btnli" data-toggle="modal"
-									data-target="#scoreMID"><i style="font-size: 90px;"
-										class='bx bx-bar-chart bx-rotate-90 hoverLight'></i></li></button>
-							<li style="--i:0.5s;"><button class="contactBookIcon btnli" data-toggle="modal"
-									data-target="#contactBookMID"><i style="font-size: 90px;"
-										class='bx bx-book-reader hoverLight'></i></li></button>
-						</ul>
-					</div>
+					
 					<div class="content">
 						<div class="article ">
 							<div class="announcementDiv">
@@ -262,14 +230,36 @@
 									</a>
 								</div>
 							</div>
-
 							<!-- Button trigger modal -->
-							<button type="button" class="" data-toggle="modal"
-								data-target="#exampleModalCenter"></button>
 
 						</div>
 						<!-- end of modal -->
 
+						<!--  這段開始原本在輪播上面 -->
+						<div class="menuToggle">
+							<i class='bx bx-list-ul' style="font-size: 90px; color:black" ></i>
+						</div>
+						<div class="menu">
+							<ul>
+							<li style="--i:0.1s;"><button class="absCheckIcon btnli" data-toggle="modal"
+									data-target="#absentMID"><i style="font-size: 90px;"
+										class='bx bx-calendar-check hoverLight'> </i></button></li>
+							<li style="--i:0.2s;"><button class="lessonIcon btnli" data-toggle="modal"
+									data-target="#courseMID"><i style="font-size: 90px;" class='bx bx-book hoverLight'
+										title="課程"></i></button></li>
+							<li style="--i:0.3s;"><button class="activeIcon btnli" data-toggle="modal"
+									data-target="#activityMID"><i style="font-size: 90px;"
+										class='bx bx-universal-access hoverLight'></i></button></li>
+							<li style="--i:0.4s;"><button class="scoreIcon btnli" data-toggle="modal"
+									data-target="#scoreMID"><i style="font-size: 90px;"
+										class='bx bx-bar-chart bx-rotate-90 hoverLight'></i></li></button>
+							<li style="--i:0.5s;"><button class="contactBookIcon btnli" data-toggle="modal"
+									data-target="#contactBookMID"><i style="font-size: 90px;"
+										class='bx bx-book-reader hoverLight'></i></button></li>
+							</ul>
+						</div>
+						<!-- 這段之前原本在輪播上面 -->
+						
 						<!-- Modal for Absent -->
 						<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
 							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -284,7 +274,7 @@
 									</div>
 									<div class="modal-body">
 										<p>${student.name}</p>
-										<table>
+										<table class="table">
 											<thead>
 												<tr>
 													<th>日期</th>
@@ -318,21 +308,13 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<!-- end of modal -->
-
-
 					</div>
 					<!-- end of modal -->
-
-
 					<!-- Modal for Course -->
 					<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -424,7 +406,6 @@
 											</c:forEach>
 										</tbody>
 									</table>
-
 
 								</div>
 								<div class="modal-footer">
