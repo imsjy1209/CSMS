@@ -225,6 +225,10 @@
 				<div class="article ">
 					<div class="announcementDiv">
 						公告區
+						
+						
+						
+						
 					</div> <!-- end of class=announcementDiv -->
 					<!-- Modal內容區 -->
 					<!-- Modal for Absent -->
