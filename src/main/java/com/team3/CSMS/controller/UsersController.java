@@ -250,10 +250,12 @@ public class UsersController {
             School school = users.getSchool();
             m.addAttribute("school",school);
             break;
+            
         case 3:
             Teacher teacher = users.getTeacher();
             m.addAttribute("teacher",teacher);
-            break;
+            return "cs_homePage/teacherHomepage";
+            
         case 4:
             Student student = users.getStudent();
             m.addAttribute("student",student);

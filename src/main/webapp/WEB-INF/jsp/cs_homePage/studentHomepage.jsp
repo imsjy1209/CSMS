@@ -274,7 +274,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b>出缺勤</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -304,7 +304,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b>活動</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -332,7 +332,7 @@ button {
 					<div class="modal-content">
 						<div class="modal-header">
 
-							<h5 class="modal-title" id="exampleModalCenterTitle">成績</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b>成績</b></h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 
@@ -343,16 +343,30 @@ button {
 						<div class="modal-body">
 							<!-- 								<p>scoreMID test</p> -->
 
-							<c:forEach var="post" items="${scoreforStudent}">
-								<table class="table">
-									<tr>
-										<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
-										<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
-										<td>第${post.frequency}次考試</td>&nbsp&nbsp&nbsp&nbsp
-										<td>${post.score}分</td>
-									</tr>
+							
+								<table class="table table-bordered" style="text-align:center">
+									<thead>
+										<tr>
+											<th class="table-info" scope="col">學生名字</th>
+											<th class="table-info" scope="col">課程代號</th>
+											<th class="table-info" scope="col">科目名稱</th>
+											<th class="table-info" scope="col">次數</th>
+											<th class="table-info" scope="col">分數</th>
+										</tr>
+									</thead>
+									<tbody>
+									<c:forEach var="post" items="${scoreforStudent}">
+										<tr>
+											<td>${post.student.name}</td>
+											<td>${post.classlist.classCode}</td>
+											<td>${post.classlist.course.courseSubject}</td>
+											<td>${post.frequency}</td>
+											<td>${post.score}</td>
+										</tr>
+									</c:forEach>
+									</tbody>
 								</table>
-							</c:forEach>
+							
 
 						</div>
 						<div class="modal-footer">
@@ -374,7 +388,7 @@ button {
 					role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">聯絡簿 (前3筆紀錄)</h5>
+							<h5 class="modal-title" id="exampleModalCenterTitle"><b>聯絡簿 (前3筆紀錄)</b></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
