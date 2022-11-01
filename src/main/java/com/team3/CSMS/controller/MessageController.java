@@ -53,14 +53,7 @@ public class MessageController {
 			@RequestParam("topic") String topic,
 			@RequestParam("article") String article,
 			@RequestParam("type") String type) {
-				System.out.println("=====================================");
-				System.out.println("=====================================");
-				System.out.println("=====================================");
-				System.out.println(name);
 		School school = sSer.getTeacherByName(name);
-		System.out.println(school.getId());
-		System.out.println("=====================================");
-		System.out.println("=====================================");
 		Messagez messagez = new Messagez(parent,school,0,type,topic,article);
 		mSer.insert(messagez);
 		return"redirect:/message/getallByParent";
