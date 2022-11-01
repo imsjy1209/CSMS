@@ -66,7 +66,7 @@ html, body {
 .announcementDiv {
 	border: 2px solid slateblue;
 	size: 100px;
-	width: 700px;
+	width: 1000px;
 	height: 300px;
 	top: 250px;
 	right: 150px;
@@ -129,15 +129,6 @@ button {
 					<button type="button" class="" data-toggle="modal"
 						data-target="#courseMID">
 						<img src="${contextRoot}/image/lesson.png" title="課程"
-							style="border: 1px solid red;">
-					</button>
-				</div>
-
-				<div class="activeIcon hoverLight" id="activeIcon">
-					<!-- 活動 button 的 data-target 要改-->
-					<button type="button" class="" data-toggle="modal"
-						data-target="#activityMID">
-						<img src="${contextRoot}/image/active.png" title="活動" alt=""
 							style="border: 1px solid red;">
 					</button>
 				</div>
