@@ -117,8 +117,10 @@ window.onload = function() {
 				'<div class="col-12">'+
 				'</br>'+
 					'<button type="submit" class="btn btn-primary">註冊</button>'+
+					
 				'</div>'+
-			'</form>';
+				'</form>'+
+				'<button type="submit" class="btn btn-dark oneKey">OneKey</button>';
 			
 			}if (type == "4") {
 				
@@ -227,7 +229,18 @@ window.onload = function() {
             $('#sidebar').toggleClass('active');
         });
     });
-
+    
+	  $(document).on('click','.oneKey',function(){
+				console.log('gogogogogoggo')
+	    		console.log($('input'))
+	    		$('input').eq(0).val('BA099')
+	    		$('input').eq(1).val('abc12345')
+	    		$('input').eq(2).val('MAX')
+	    		$('input').eq(3).val('實習教師')
+	    		$('input').eq(4).val('2022-11-06')
+	    		$('input').eq(5).val('2023-11-06')
+	    		$('input').eq(6).val('大學英文')
+	  })
 
 </script>
 

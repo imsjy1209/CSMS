@@ -553,8 +553,6 @@ $(function() {
 				
 				})
 				
-				
-				
 				//=========上下架的變更=========
 				$(".con").click(function(){
 				var onOrOffVal = $(this).parent().siblings('.onOrOff-td').children().val();
@@ -1276,12 +1274,16 @@ $(document).on('click','.updateCourseAjax',function(e){
 			
 			
 			//刪除orderList
-			$('.ol-del-btn').click(function(){
+			
+// 			$('.ol-del-btn').click(function(){
+			$(documnt).on('click','.ol-del-btn',function(){
 				if(window.confirm('確定刪除嗎?')){
 					var orderListId = $(this).parent().siblings('.ol-id').text();
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "<c:url value='/deleteOrderListByIdAjax.controller?orderListId="+orderListId+"' />", true);
 					xhr.send();
+					
+					$(this).parent().parent().next().remove();
 					$(this).parent().parent().remove();
 					
 					//===更改成功alert======
@@ -1309,14 +1311,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 					}
 			})
 			
-			$('input[type="checkbox"]').click(function() {
-				console.log('checkbox', $(this));
-				let bgColor = 'none';
-				if ($(this).prop('checked')) {
-					bgColor = 'lightblue';
-				}
-				$(this).closest('tr').css('background', bgColor)
-			})
 		}
 	}
 	
@@ -1460,13 +1454,16 @@ $(document).on('click','.updateCourseAjax',function(e){
 				
 				
 				//刪除orderList
-				$('.ol-del-btn').click(function(){
+// 				$('.ol-del-btn').click(function(){
+				$(document).on('click','.ol-del-btn',function(){
 					if(window.confirm('確定刪除嗎?')){
 						var orderListId = $(this).parent().siblings('.ol-id').text();
 						var xhr = new XMLHttpRequest();
 						xhr.open("GET", "<c:url value='/deleteOrderListByIdAjax.controller?orderListId="+orderListId+"' />", true);
 						xhr.send();
-						$(this).parent().remove();
+						
+						$(this).parent().parent().next().remove();
+						$(this).parent().parent().remove();
 						
 						//===更改成功alert======
 						const Toast = Swal.mixin({
@@ -1492,14 +1489,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 						}
 				})
 				
-				$('input[type="checkbox"]').click(function() {
-					console.log('checkbox', $(this));
-					let bgColor = 'none';
-					if ($(this).prop('checked')) {
-						bgColor = 'lightblue';
-					}
-					$(this).closest('tr').css('background', bgColor)
-				})
 			}
 		}
 		
@@ -1523,6 +1512,18 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.main-title').text('購買/排課狀態-OrderDetail')
 		
 		
+		//======Create Btn Option====================	
+		var contentBtnOptForOD="";		
+		contentBtnOptForOD += 
+					  '<div class="OrderListBtnGroup btn-group" role="group" aria-label="Basic example">' +
+		 				 '<button type="button" class="ODDescOrAsc btn btn-outline-info">明細ID降冪</button>' +
+		 				 '<button type="button" class="ODDescOrAsc btn btn-outline-info">明細ID升冪</button>' +
+		 				
+					  '</div>';
+		$('#forBtnOption').html(contentBtnOptForOD);
+		//======End Of Create Btn Option====================
+		
+		
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllOrderDetail.controller' />", true);
 	xhr.send();
@@ -1533,6 +1534,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			content0 += 
 			"<tr>" +
 			"<th></th>"+
+			"<th>明細編號#</th>"+
 			"<th>所屬學校</th>"+
 			"<th>學生名稱</th>"+
 			"<th>性別</th>"+
@@ -1551,7 +1553,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			for(var i=0; i < orderDetailList.length; i++){
 				content += 
 				"<td></td>" +	
-				"<td class='oDId-id' style='display:none;'>" + orderDetailList[i].id + "</td>" +
+				"<td class='oDId-id'>" + orderDetailList[i].id + "</td>" +
 				"<td class='student-id' style='display:none;'>" + orderDetailList[i].student.id + "</td>" +
 				"<td>" + orderDetailList[i].student.schoolName + "</td>" +
 				"<td>" + orderDetailList[i].student.name + "</td>" +
@@ -1597,8 +1599,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 			})
 			
 	//針對已購買課程的OrderDetail，透過CourseId找到對應的ClassListId並新增到ClassStudentList中
-	$('.oDon').click(function(){
-		
+	// 	$('.oDon').click(function(){
+	$(document).on('click','.oDon',function(){
 		if($(this).next().next().text()==0){
 		$(this).addClass('active');
 		$(this).next().removeClass('active');
@@ -1636,8 +1638,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 		}
 				
 	})
-	
-	$('.oDoff').click(function(){
+	// 	$('.oDoff').click(function(){
+	$(document).on('click','.oDoff',function(){
 		if($(this).next().text()==1){
 			$(this).addClass('active');
 			$(this).prev().removeClass('active');
@@ -1674,10 +1676,11 @@ $(document).on('click','.updateCourseAjax',function(e){
 			console.log('nothing happened')
 			}
 		
-	})
+	})//====End of移除排班=====
 			
-			//刪除按鈕的功能
-			$('.oD-delete-td').click(function(){
+			//=======刪除按鈕的功能===========
+// 			$('.oD-delete-td').click(function(){
+			$(document).on('click','.oD-delete-td',function(){
 			var oDidDel = $(this).siblings('.oDId-id').text();
 			console.log(oDidDel);
 			if(window.confirm('確定刪除嗎?')){
@@ -1709,20 +1712,83 @@ $(document).on('click','.updateCourseAjax',function(e){
 		 	else{
 		 		console.log("nothing happened")
 		 	}
-			})
 			
+			})//========End Of 刪除按鈕的功能=========
+				
+				
 			
-			$('input[type="checkbox"]').click(function() {
-				console.log('checkbox', $(this));
-				let bgColor = 'none';
-				if ($(this).prop('checked')) {
-					bgColor = 'lightblue';
-				}
-				$(this).closest('tr').css('background', bgColor)
-			})
+		}//======End of Od Main Info Create=======
+	}//======End of Od Main Info Create=======
+	
+		
+	$(document).on('click','.ODDescOrAsc',function(){
+		if($(this).text()=='明細ID降冪'){
+// 			var xhr = new XMLHttpRequest();
+// 			xhr.open("GET", "<c:url value='/findAllByOrderByIdDesc.controller' />", true);
+			console.log("upupup")
 		}
-	}
-	})		
+		else if($(this).text()=='明細ID升冪'){
+// 			var xhr = new XMLHttpRequest();
+// 			xhr.open("GET", "<c:url value='/findAllByOrderByIdAsc.controller' />", true);
+			console.log("down")
+		}
+		
+// 		xhr.send();
+// 		xhr.onreadystatechange = function() {
+// 			if (xhr.readyState == 4 && xhr.status == 200) {
+				
+// 				var content0 = "";
+// 				content0 += 
+// 				"<tr>" +
+// 				"<th></th>"+
+// 				"<th>明細編號#</th>"+
+// 				"<th>所屬學校</th>"+
+// 				"<th>學生名稱</th>"+
+// 				"<th>性別</th>"+
+// 				"<th>方案資訊</th>"+
+// 				"<th>價錢</th>"+
+// 				"<th>購買狀態</th>"+
+// 				"<th>排課狀態</th>"+
+// 				"<th>Function</th>"+
+// 				"</tr>";
+				
+// 				var content = "";
+// 				var orderDetailList = JSON.parse(xhr.responseText);
+				
+// 				console.log(orderDetailList);
+				
+// 				for(var i=0; i < orderDetailList.length; i++){
+// 					content += 
+// 					"<td></td>" +	
+// 					"<td class='oDId-id'>" + orderDetailList[i].id + "</td>" +
+// 					"<td class='student-id' style='display:none;'>" + orderDetailList[i].student.id + "</td>" +
+// 					"<td>" + orderDetailList[i].student.schoolName + "</td>" +
+// 					"<td>" + orderDetailList[i].student.name + "</td>" +
+// 					"<td>" + orderDetailList[i].student.gender + "</td>" +
+// 					"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
+// 					"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
+// 					"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
+// 					"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
+// 					"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
+// 	    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+// 	           		"</tr>";
+// 				}
+// 				var info0 = document.getElementById("thead-title");
+// 				info0.innerHTML = content0;
+				
+// 				var info = document.getElementById("content-data");
+// 				info.innerHTML = content;
+// 			}
+// 		} //=======End of After Btn Click Create Data=======
+		
+		
+			
+	})//=====End of Btn Click=======
+		
+		
+	
+	
+	})//======End of OD Show============		
 	
 //========================ClassStudentList==================
 	

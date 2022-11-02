@@ -55,7 +55,7 @@ public class LoginController {
 			@RequestParam("name") String name,
 			@RequestParam("title") String title,
 			@RequestParam("hiredate") String hiredate,
-			@RequestParam("resigndate") String resigndate) throws ParseException {
+			@RequestParam(value="resigndate",required = false) String resigndate) throws ParseException {
 		java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = formatter.parse(hiredate);
 		Date date1 = formatter.parse(resigndate);

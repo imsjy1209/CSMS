@@ -29,7 +29,7 @@ color:black;
 			<form action="${contextRoot}/updatePostFin" method="post">
 			<p style="display: none"><input name="id" value="${post.id}"/></p>
 			
-<div class="form-group row">
+	<div class="form-group row">
 
 			<div class="col-sm-3">
 				<div class="form-group">

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<jsp:include page="../layout/navbar.jsp"></jsp:include>
+	<jsp:include page="../layout/nav_student.jsp"></jsp:include>
 	<div class="container">
 		<div align="center" style="width: 50%; height: 200px; margin: 0 auto;">
 
@@ -21,13 +21,13 @@
 				alt="...">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item"><div align="left"
-						style="float: left;">活動名稱:</div>${act.name}</li>
+						style="float: left;">活動名稱:</div><br>${act.name}</li>
 				<li class="list-group-item"><div align="left"
-						style="float: left;">活動地點:</div>${act.place}</li>
+						style="float: left;">活動地點:</div><br>${act.place}</li>
 				<li class="list-group-item"><div align="left"
-						style="float: left;">活動日期:</div>${act.date}</li>
+						style="float: left;">活動日期:</div><br>${act.date}</li>
 				<li class="list-group-item"><div align="left"
-						style="float: left;">詳細內容:</div>${act.content}</li>
+						style="float: left;">詳細內容:</div><br>${act.content}</li>
 				<li class="list-group-item">
 				<a href="${contextRoot}/quit/${act.id}" class="card-link">取消報名</a></li>
 			</ul>

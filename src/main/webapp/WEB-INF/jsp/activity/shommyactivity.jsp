@@ -19,7 +19,7 @@
 <div class="wrapper">
 	<div class="container" align="center"><br>
 	<h2>我的活動</h2><br>
-	${student.name}<br>
+	<br><span>${joinMsg}</span>
 		<c:forEach var="activity" items="${activities}">
 			<div class="card mb-3" style="max-width: 540px;">
 				<div class="row no-gutters">

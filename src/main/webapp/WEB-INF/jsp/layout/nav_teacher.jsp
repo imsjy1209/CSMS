@@ -107,16 +107,15 @@ li{
 	          	<a class="dropdown-item lia" href="${contextRoot}/ContactBook/T_Index">查看/新增聯絡簿</a>
 	        </div>
 	      </li>
-	      	      
-	      <li class="nav-item dropdown font-weight-bold btn-2">
+  
+	      <!-- <li class="nav-item dropdown font-weight-bold btn-2">
 	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 	        	訊息相關
 	        </a>
 	        <div class="dropdown-menu">
 	          <a class="dropdown-item lia" href="${contextRoot}/message/getallByParent">查看訊息</a>
 	        </div>
-	      </li>
-	      
+	      </li> -->
 	      <li class="nav-item dropdown font-weight-bold btn-2">
 	        <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 	        	公告相關

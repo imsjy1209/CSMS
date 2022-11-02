@@ -1,6 +1,7 @@
 package com.team3.CSMS.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.team3.CSMS.dto.UserSchoolDto;
 import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.dto.UserStudentDto;
 import com.team3.CSMS.model.Absent;
+import com.team3.CSMS.model.Activity;
 import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
@@ -36,9 +38,10 @@ import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.PostService;
 import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
+import com.team3.CSMS.service.StudentService;
 import com.team3.CSMS.service.UserService;
 
-@SessionAttributes(names = { "users", "school", "teacher", "student", "parent" })
+@SessionAttributes(names = {"users","school","teacher","student","parent","shoppingCart"})
 @Controller
 public class UsersController {
 
@@ -65,6 +68,9 @@ public class UsersController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private StudentService studentService;
 
 	// 透過ID找到個資
 	@GetMapping(value = "/userProfile.json", produces = { "application/json;charset=UTF-8" })
@@ -222,9 +228,6 @@ public class UsersController {
 	public String checkLogin(@RequestParam(name = "username") String username, @RequestParam(name = "pwd") String pwd,
 			SessionStatus status, Model m) {
 		Users users = userService.checkLogin(username, pwd);
-		// if(users.getIsFirst() == 1){
-		// return "users/firstlogin";
-		// }
 		if (users == null) {
 			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
 			return "login/login";
@@ -240,20 +243,19 @@ public class UsersController {
 		Groups groups = users.getGroups();
 		Integer id = groups.getId();
 		switch (id) {
-//        case 1:
-//        	users.getadmin();
-//            break;
+        case 1:
+        	return "cs_course/courseIndexBackAjax"; // Admin-後台
 		case 2:
 			School school = users.getSchool();
 			m.addAttribute("school", school);
-			break;
-			
+			return "cs_course/courseIndexBackAjax"; // 校方(導師)-後台
+		
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);
 			List<Post> pListAll = postService.viewAllByAll();
 			m.addAttribute("pListAll", pListAll);
-			return "cs_homePage/teacherHomepage";	
+			return "cs_homePage/teacherHomepage"; // 老師-前台
 			
 		case 4:
 			Student student = users.getStudent();
@@ -262,11 +264,13 @@ public class UsersController {
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
 			List<ContactBook> top3cbList = contactBookService.getTop3StudentContactBookList(student.getId());
+			Set<Activity> activities = studentService.getMyAct(student.getId());
 			m.addAttribute("aOrderDetailList", aOrderDetailList);
 			m.addAttribute("personalAbsent", personalAbsent);
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
-			return "cs_homePage/studentHomepage";	
+			m.addAttribute("activities", activities);
+			return "cs_homePage/studentHomepage"; // 學生-前台	 
 			
         case 5:
         	Parent parent = users.getParent();
@@ -276,9 +280,9 @@ public class UsersController {
 			List<Post> pListforAll = postService.viewAllByAll();
 			m.addAttribute("scoreforParent",scoreforParent);
 			m.addAttribute("pListforAll", pListforAll);
-            return "cs_homePage/parentHomepage";
+            return "cs_homePage/parentHomepage"; // // 家長-前台
     	}
-    	return "cs_homePage/parentHomepage";
+    	return "cs_homePage/parentHomepage"; // 此處無效但必填
     }
     
 	@GetMapping("users/gotohomepage")
@@ -298,10 +302,12 @@ public class UsersController {
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
 			List<ContactBook> top3cbList = contactBookService.getTop3StudentContactBookList(student.getId());
+			Set<Activity> activities = studentService.getMyAct(student.getId());
 			m.addAttribute("aOrderDetailList", aOrderDetailList);
 			m.addAttribute("personalAbsent", personalAbsent);
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
+			m.addAttribute("activities", activities);
 			return "cs_homePage/studentHomepage";
 		case 5:
 			Parent parent = users.getParent();

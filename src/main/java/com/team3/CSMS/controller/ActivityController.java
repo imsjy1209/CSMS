@@ -274,16 +274,18 @@ public class ActivityController {
 	}
 
 	@GetMapping("/join/{act_id}")
-	public String joinact(@PathVariable int act_id, @SessionAttribute("student") Student student) {
+	public String joinact(@PathVariable int act_id, @SessionAttribute("student") Student student,Model m) {
 		System.out.println(act_id + "" + student);
 		aService.join(act_id, student);
-		return "activity/checkjoin";
+		m.addAttribute("joinMsg","報名成功!");
+		return "redirect:/getmyact";
 	}
 
 	@GetMapping("/quit/{act_id}")
-	public String quitact(@PathVariable int act_id, @SessionAttribute("student") Student student) {
+	public String quitact(@PathVariable int act_id, @SessionAttribute("student") Student student,Model m) {
 		aService.quit(act_id, student.getId());
-		return "activity/checkquit";
+		m.addAttribute("joinMsg","取消成功!");
+		return "redirect:/getmyact";
 	}
 
 	@GetMapping("/createstu")

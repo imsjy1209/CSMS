@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -505,25 +506,26 @@ public class CourseController {
 		return oneCourseForSession;
 	}
 	
-	//====購物車暫存Session==============
-	List<SessionForCourseDto> sessionList = new ArrayList<SessionForCourseDto>();
 	
 	@ResponseBody
 	@PostMapping("/shoppingCartSession.controller")
 	public void shoppingCartSession
 	(@RequestParam(name="course_id")String course_id,@RequestParam(name="stuIdForSession")String stuIdForSession,Model m) {
-		SessionForCourseDto oneSessionForCourse = new SessionForCourseDto();
 		
+		SessionForCourseDto oneSessionForCourse = new SessionForCourseDto();
 		oneSessionForCourse.setCourse_id(Integer.valueOf(course_id));
 		oneSessionForCourse.setStuIdForSession(Integer.valueOf(stuIdForSession));
 		
-		sessionList.add(oneSessionForCourse);
+		List<SessionForCourseDto> sessionList = (List<SessionForCourseDto>) m.getAttribute("shoppingCart");
 		
-		for(SessionForCourseDto oneSession :sessionList) {
-			System.out.println(oneSession.getCourse_id());
+		if(sessionList==null) {
+			sessionList= new ArrayList<SessionForCourseDto>();
+	
 		}
 		
+		sessionList.add(oneSessionForCourse);
 		m.addAttribute("shoppingCart",sessionList);
+		
 	}
 	
 	//=====移除Session裡面的Course===========
@@ -555,9 +557,8 @@ public class CourseController {
 		public @ResponseBody void orderDetailCreateAjax
 		(@RequestParam(name="courseId")Integer courseId,@RequestParam(name="studentId")Integer studentId,SessionStatus sessionStatus) {
 			
-//			System.out.println();
-//			System.out.println(courseId);
-//			System.out.println(studentId);
+			System.out.println(courseId);
+			System.out.println(studentId);
 			
 			Student oneStuden = studentService.findStudentById(studentId);
 			Optional<Course> aCourseOptional = courseService.findCourseById(courseId);
@@ -573,6 +574,14 @@ public class CourseController {
 			orderDetailService.insertOrderDetail(newOD);
 			
 			sessionStatus.setComplete();
+			
+//			for(SessionForCourseDto oneSessionForRemove :sessionList) {
+//				sessionList.remove(oneSessionForRemove);
+//			}
+			
+			
+			
+		
 			
 		}
 

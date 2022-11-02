@@ -45,14 +45,14 @@
 
 					.article {
 						width: 70%;
-						border: 1px solid blue;
+						/* border: 1px solid blue; */
 						float: right;
 						margin-right: 50px;
 					}
 
 					.aside { 
  						width: 10%; 
- 						border: 1px solid red; 
+ 						/* border: 1px solid red;  */
  						float: left; 
  						margin-left: 50px; 
  					} 
@@ -117,35 +117,32 @@
  						transition-delay: 0.5s; 
  						bottom: -6px 
 					} 
+ 					.menu ul { 
+ 						position: relative;
+ 						justify-content: center; 
+ 						align-items: center; 
+ 						height: 80px; 
+ 						gap: 40px; 
 
-/*  					.menu ul {  */
-/*  						position: relative; */
-/* 						display: flex;  */
-/*  						justify-content: center;  */
-/*  						align-items: center;  */
-/*  						height: 80px;  */
-/*  						gap: 40px;  */
-/*  						padding: left 0;  */
-/*  					}  */
+ 					} 
+					.menu ul li {
+						list-style: none;
+						cursor: pointer;
+						opacity: 0;
+						visibility: hidden;
+						transform: translateX(5px);
+						transition: 0.25s;
+						transition-delay: calc(0s+var(--i));
+						background-color: none;
+					}
 
-/* 					.menu ul li { */
-/* 						list-style: none; */
-/* 						cursor: pointer; */
-/* 						opacity: 0; */
-/* 						visibility: hidden; */
-/* 						transform: translateX(5px); */
-/* 						transition: 0.25s; */
-/* 						transition-delay: calc(0s+var(--i)); */
-/* 						background-color: none; */
-/* 					} */
-
-/* 					.menuToggle.active~.menu ul li { */
-/* 						opacity: 1; */
-/* 						visibility: visible; */
-/* 						transform: translateY(10px); */
-/* 						transition-delay: calc(0.75s+var(--i)); */
-/* 						height: 100%; */
-/* 					} */
+					.menuToggle.active~.menu ul li {
+						opacity: 1;
+						visibility: visible;
+						transform: translateY(10px);
+						transition-delay: calc(0.75s+var(--i));
+						height: 110%;
+					}
 
 					.menu ul li button { 
  						font-size: 2px; 
@@ -163,7 +160,6 @@
 </head>
 
 <body>
-
 	<!-- Teacher Navbar -->
 	<jsp:include page="../layout/nav_teacher.jsp"></jsp:include>
 			<br><br>
@@ -186,7 +182,7 @@
 									<i style="font-size: 90px;" class='bx bx-book hoverLight' title="課程"></i>
 								</button>
 							</li>
-							<li style="--i:0.5s;">
+							<li style="--i:0.3s;">
 								<button class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
 									<i style="font-size: 90px;" class='bx bx-book-reader hoverLight'></i>
 								</button>
@@ -336,8 +332,13 @@
 <jsp:include page="../footer/footer.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script type="text/javascript">
+<script>
 
+//=====================homepage功能按鍵=======================
+	let menuToggle = document.querySelector('.menuToggle');
+			menuToggle.onclick = function () {
+				menuToggle.classList.toggle('active');
+			}
 </script>
 
 </body>

@@ -834,38 +834,47 @@ $(document).on('click','.btn-buy',function(){
   		 var xhr = new XMLHttpRequest();
 	 	 xhr.open("GET", "<c:url value='/orderDetailCreateAjax.controller?courseId=" + courseId + "&studentId=" + studentId + "' />", true);
 		 xhr.send();
-	 	 var cartContent = document.getElementsByClassName('cart-content')[0]
-	 	 cartContent.removeChild(cartContent.firstChild);
+
+	 	 
+	     xhr.onreadystatechange = function() {
+	 		if (xhr.readyState == 4 && xhr.status == 200) {
+	 		 	 var cartContent = document.getElementsByClassName('cart-content')[0]
+	 		 	 cartContent.removeChild(cartContent.firstChild);
+	 			
+	 		    //===跳轉中alert======
+	 			const Toast = Swal.mixin({
+	 		  	toast: true,
+	 		  	position: 'top-end',
+	 		  	showConfirmButton: false,
+	 		  	timer: 3000,
+	 		  	timerProgressBar: true,
+	 		  	didOpen: (toast) => {
+	 		    toast.addEventListener('mouseenter', Swal.stopTimer)
+	 		    toast.addEventListener('mouseleave', Swal.resumeTimer)
+	 		 	 }
+	 			})
+
+	 			Toast.fire({
+	 			  icon: 'success',
+	 		 	 title: '跳轉到結帳頁面中...'
+	 			})
+	 //===End of 跳轉中alert======
+	 			
+	 			 
+	 		}
+	     }
 	
 	}
     
-    xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-		    //===跳轉中alert======
-			const Toast = Swal.mixin({
-		  	toast: true,
-		  	position: 'top-end',
-		  	showConfirmButton: false,
-		  	timer: 3000,
-		  	timerProgressBar: true,
-		  	didOpen: (toast) => {
-		    toast.addEventListener('mouseenter', Swal.stopTimer)
-		    toast.addEventListener('mouseleave', Swal.resumeTimer)
-		 	 }
-			})
 
-			Toast.fire({
-			  icon: 'success',
-		 	 title: '跳轉到結帳頁面中...'
-			})
-//===End of 跳轉中alert======
-			
-			 updatetotal();
-			 document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
-		}
+    xhr.onreadystatechange = function() {
+ 		if (xhr.readyState == 4 && xhr.status == 200) {
+    updatetotal();
+	 document.location.href = "${contextRoot}/findOrderDetailListByIdAndOrderListValueIsNullAjax.controller?id="+ studentId;
+ 		}
     }
-    
-   
+	 
+	 
 })
 
 
