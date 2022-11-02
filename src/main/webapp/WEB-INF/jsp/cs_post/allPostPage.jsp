@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*,com.team3.CSMS.model.Activity"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <%-- <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include> --%>
@@ -25,7 +26,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="width:200%">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -46,25 +47,28 @@
 			<table class="table table-striped mt-5">
 				<tr>
 					<th>
-					<th>標題
-					<th>最後更新時間
-					<th>公告對象
-					<th>是否上架
-					<th>更新內容
+					<th>標題</th>
+					<th>最後更新時間</th>
+					<th>公告對象</th>
+					<th>是否上架</th>
+					<th>更新內容</th>
 					 <c:forEach var="post" items="${list}">
-							<tr class="accordion-toggle">
-							
-								<td><button type="button" class="showModalEye btn btn-primary" data-toggle="modal" data-placement="top" data-target="#exampleModalCenter"><i class='bx bx bxs-show'>Show</i></button>
-								<td class='topicTd'>${post.topic}
+							<tr class="accordion-toggle">	
+								<td>
+									<button type="button" class="showModalEye btn btn-primary" data-toggle="modal" data-placement="top" data-target="#exampleModalCenter">
+										<i class='bx bx bxs-show'>Show</i>
+									</button>
+								</td>
+								<td class='topicTd'>${post.topic}</td>
 								<td class='articleTd' style='display:none;'>${post.article}</td>
-								<td class='updateTimeTd' style='display:none;'>${post.update_at}</td>
-								<td>${post.update_at}
+								<td class='updateTimeTd' style='display:none;'></td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
 								<c:choose>
 										<c:when test="${post.userType == 1}">
-											<td>校方
+											<td>校方</td>
 										</c:when>
 										<c:when test="${post.userType ==2}">
-											<td>所有人
+											<td>所有人</td>
 										</c:when>
 									</c:choose>
 								<c:choose>
@@ -93,7 +97,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-
+console.log($(".UpdateTimeTd").text())
 $('.showModalEye').click(function(){
 	var articleHtml = $(this).parent().siblings('.articleTd').html();
 // 	console.log(articleHtml)
