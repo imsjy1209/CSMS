@@ -23,6 +23,7 @@ import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
 import com.team3.CSMS.model.Parent;
+import com.team3.CSMS.model.Post;
 import com.team3.CSMS.model.School;
 import com.team3.CSMS.model.Score;
 import com.team3.CSMS.model.Student;
@@ -32,6 +33,7 @@ import com.team3.CSMS.service.AbsentService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
+import com.team3.CSMS.service.PostService;
 import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.UserService;
@@ -60,6 +62,9 @@ public class UsersController {
 
 	@Autowired
 	private AbsentService absentService;
+	
+	@Autowired
+	private PostService postService;
 
 	// 透過ID找到個資
 	@GetMapping(value = "/userProfile.json", produces = { "application/json;charset=UTF-8" })
@@ -266,7 +271,9 @@ public class UsersController {
         	m.addAttribute("parent",parent);       	         
 			//List<Score> scoreforParent = scoreService.getscoreforParent(parent); // 改搜最新3筆
 			List<Score> scoreforParent = scoreService.top3ScoreforParent(parent.getId());
+			List<Post> pListforAll = postService.viewAllByAll();
 			m.addAttribute("scoreforParent",scoreforParent);
+			m.addAttribute("pListforAll", pListforAll);
             return "cs_homePage/parentHomepage";
     	}
     	return "cs_homePage/parentHomepage";
@@ -293,7 +300,9 @@ public class UsersController {
 		case 5:
 			Parent parent = users.getParent();
 			List<Score> scoreforParent = scoreService.getscoreforParent(parent);
-			m.addAttribute("scoreforParent", scoreforParent);
+			List<Post> pListforAll = postService.viewAllByAll();
+			m.addAttribute("scoreforParent",scoreforParent);
+			m.addAttribute("pListforAll", pListforAll);
 			return "cs_homePage/parentHomepage";
 		}
 		return "cs_homePage/teacherHomepage";

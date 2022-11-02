@@ -30,8 +30,8 @@
 		<br>
 		<span class="hidGroupsId" hidden>${users.groups.id}</span>
 		<div class="container">
-			<table id="cbList" class="table table-bordered" style="text-align:center">
-	  			<thead id="cbList-title">
+			<table id="pList" class="table table-bordered" style="text-align:center">
+	  			<thead id="pList-title">
 	    			<tr>
 	    				<th class="table-info" scope="col">功能</th>
 					    <th class="table-info" scope="col">編號</th>

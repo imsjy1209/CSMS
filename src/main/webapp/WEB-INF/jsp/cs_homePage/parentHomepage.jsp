@@ -224,11 +224,31 @@
 
 				<div class="article ">
 					<div class="announcementDiv">
-						公告區
-						
-						
-						
-						
+						<!-- 公告區 -->
+						<table id="pList" class="table table-bordered" style="text-align:center">
+				  			<thead id="pList-title">
+				    			<tr>
+				    				<th class="table-info" scope="col">功能</th>
+								    <th class="table-info" scope="col">編號</th>
+								    <th class="table-info" scope="col">標題</th>
+								    <th class="table-info" scope="col">最後更新時間</th>
+							    </tr>
+							</thead>
+							<tbody>
+							<c:forEach var="post" items="${pListforAll}">
+								<tr>
+									<td>
+										<a href="${contextRoot}/post/detail/${post.id}" type="button" class="btn btn-outline-success btn-sm">
+											<i class="bx bx bxs-show"></i>&nbsp;查看
+										</a>
+									</td>
+									<td>${post.id}</td>
+								    <td>${post.topic}</td>
+								    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
 					</div> <!-- end of class=announcementDiv -->
 					<!-- Modal內容區 -->
 					<!-- Modal for Absent -->
@@ -410,6 +430,7 @@
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
+//console.log($(".btn-outline-success"));
 // ========================== 家長聯絡簿Ajax ==========================
 /* 視窗載入事件：帶入【家長】課程選單 */
 window.onload = function() { 
