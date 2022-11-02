@@ -39,7 +39,7 @@
 	</div>	
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">詳細內容:</label>
-					<textarea class="form-control" name="contentDetail"></textarea>
+					<textarea class="form-control" name="contentDetail"><h1>JDIJSAOFASADDS</h1></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>

@@ -41,7 +41,7 @@ import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.StudentService;
 import com.team3.CSMS.service.UserService;
 
-@SessionAttributes(names = { "users", "school", "teacher", "student", "parent" })
+@SessionAttributes(names = {"users","school","teacher","student","parent","shoppingCart"})
 @Controller
 public class UsersController {
 
@@ -249,7 +249,7 @@ public class UsersController {
 			School school = users.getSchool();
 			m.addAttribute("school", school);
 			return "cs_course/courseIndexBackAjax"; // 校方(導師)-後台
-			
+		
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);
