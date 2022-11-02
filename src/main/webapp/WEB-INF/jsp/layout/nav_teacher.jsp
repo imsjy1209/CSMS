@@ -103,7 +103,7 @@ li{
 	        	課程相關
 	        </a>
 	        <div class="dropdown-menu">
-	          	<a class="dropdown-item lia" href="${contextRoot}/frontParentscore">查看班級</a>
+	          	<a class="dropdown-item lia" href="#">查看班級</a>
 	          	<a class="dropdown-item lia" href="${contextRoot}/ContactBook/T_Index">查看/新增聯絡簿</a>
 	        </div>
 	      </li>
