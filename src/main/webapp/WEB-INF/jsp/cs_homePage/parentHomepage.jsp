@@ -19,31 +19,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 
-
-/* .scoreIcon { */
-/* 	top: 500px; */
-/* 	left: 120px; */
-/* } */
-
-/* .lessonIcon { */
-/* 	top: 375px; */
-/* 	left: 120px; */
-/* } */
-
-/* .absCheckIcon { */
-/* 	top: 250px; */
-/* 	left: 120px; */
-/* } */
-
-/* .activeIcon { */
-/* 	top: 625px; */
-/* 	left: 120px; */
-/* } */
-
-/* .hoverLight:hover { */
-/* 	filter: drop-shadow(0px 0px 10px #000000); */
-/* } */
-
 					*{
 						margin: 0px;
 						padding: 0px;

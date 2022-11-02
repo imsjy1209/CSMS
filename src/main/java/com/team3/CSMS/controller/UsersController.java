@@ -251,6 +251,8 @@ public class UsersController {
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);
+			List<Post> pListAll = postService.viewAllByAll();
+			m.addAttribute("pListAll", pListAll);
 			return "cs_homePage/teacherHomepage";	
 			
 		case 4:
@@ -285,6 +287,10 @@ public class UsersController {
 		Integer id = groups.getId();
 		switch (id) {
 		case 3:
+			Teacher teacher = users.getTeacher();
+			m.addAttribute("teacher", teacher);
+			List<Post> pListAll = postService.viewAllByAll();
+			m.addAttribute("pListAll", pListAll);
 			return "cs_homePage/teacherHomepage";
 		case 4:
 			Student student = users.getStudent();
