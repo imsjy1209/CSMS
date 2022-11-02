@@ -493,17 +493,17 @@ color:black;
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
+                                 <a href="${contextRoot}/signout"><i class='bx bx-log-out bx-rotate-180' style="font-size:15px;line-height:40px;"></i><b>&nbsp;登出</b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
+<!--                             <li class="nav-item"> -->
+<!--                                 <a class="nav-link" href="#">Page</a> -->
+<!--                             </li> -->
+<!--                             <li class="nav-item"> -->
+<!--                                 <a class="nav-link" href="#">Page</a> -->
+<!--                             </li> -->
+<!--                             <li class="nav-item"> -->
+<!--                                 <a class="nav-link" href="#">Page</a> -->
+<!--                             </li> -->
                         </ul>
                     </div>
                 </div>

@@ -109,6 +109,12 @@ public class PageController {
 	public String pwdUpdatePage(){
 		return "cs_updateProfile/updatePWD";
 	}
+	
+	// 更改School密碼用----Neil
+	@GetMapping("/passw0rdUpdateForQueen.page")
+	public String passw0rdUpdateForQueen(){
+		return "cs_updateProfile/updatePwdForSchool";
+	}
 
 	// 更改成員權限
 	@GetMapping("/userControl.page")
