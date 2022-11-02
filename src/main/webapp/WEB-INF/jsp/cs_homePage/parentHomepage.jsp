@@ -52,7 +52,7 @@
 
 					.aside { 
  						width: 10%; 
- 						border: 1px solid red; 
+/*  						border: 1px solid red;  */
  						float: left; 
  						margin-left: 50px; 
  					} 
@@ -118,34 +118,34 @@
  						bottom: -6px 
 					} 
 
-/*  					.menu ul {  */
-/*  						position: relative; */
+ 					.menu ul { 
+ 						position: relative;
 /* 						display: flex;  */
-/*  						justify-content: center;  */
-/*  						align-items: center;  */
-/*  						height: 80px;  */
-/*  						gap: 40px;  */
-/*  						padding: left 0;  */
-/*  					}  */
+ 						justify-content: center; 
+ 						align-items: center; 
+ 						height: 80px; 
+ 						gap: 40px; 
+ 						padding: left 0; 
+ 					} 
 
-/* 					.menu ul li { */
-/* 						list-style: none; */
-/* 						cursor: pointer; */
-/* 						opacity: 0; */
-/* 						visibility: hidden; */
-/* 						transform: translateX(5px); */
-/* 						transition: 0.25s; */
-/* 						transition-delay: calc(0s+var(--i)); */
-/* 						background-color: none; */
-/* 					} */
+					.menu ul li {
+						list-style: none;
+						cursor: pointer;
+						opacity: 0;
+						visibility: hidden;
+						transform: translateX(5px);
+						transition: 0.25s;
+						transition-delay: calc(0s+var(--i));
+						background-color: none;
+					}
 
-/* 					.menuToggle.active~.menu ul li { */
-/* 						opacity: 1; */
-/* 						visibility: visible; */
-/* 						transform: translateY(10px); */
-/* 						transition-delay: calc(0.75s+var(--i)); */
-/* 						height: 100%; */
-/* 					} */
+					.menuToggle.active~.menu ul li {
+						opacity: 1;
+						visibility: visible;
+						transform: translateY(10px);
+						transition-delay: calc(0.75s+var(--i));
+						height: 100%;
+					}
 
 					.menu ul li button { 
  						font-size: 2px; 
@@ -394,138 +394,11 @@
 								</div>
 							</div>	
 						</div>
-<<<<<<< HEAD
-						<div class="modal-body">
-							<p>courseMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-
-				</div>
-				<!-- end of modal -->
-
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for Activity -->
-			<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>activityMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for Score -->
-			<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-
-							<h5 class="modal-title" id="exampleModalCenterTitle">成績</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-
-
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<!-- 								<p>scoreMID test</p> -->
-
-<%-- 							<c:forEach var="post" items="${scoreforParent}"> --%>
-								<table class="table table-bordered" style="text-align:center">
-									<thead>
-										<tr>
-											<th class="table-info" scope="col">學生名字</th>
-											<th class="table-info" scope="col">課程代號</th>
-											<th class="table-info" scope="col">科目名稱</th>
-											<th class="table-info" scope="col">次數</th>
-											<th class="table-info" scope="col">分數</th>
-										</tr>
-									</thead>
-										<tbody>
-										<c:forEach var="post" items="${scoreforParent}"> 
-									<tr>
-										<td>${post.student.name}</td>
-										<td>${post.classlist.classCode}</td>
-										<td>${post.classlist.course.courseSubject}</td>
-										<td>${post.frequency}</td>
-										<td>${post.score}</td>
-									</tr>
-								
-							</c:forEach>
-							</tbody>
-							</table>
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for ContactBook -->
-			<div class="modal fade" id="contactBookMID" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>contactBookMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					
-
 					</div>		
 					<!-- end of modal -->	
 				</div> <!-- end of class=article -->
 			</div> <!-- end of class=content -->
 		</div> <!-- end of class=wrapper -->
-
 
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>
@@ -698,7 +571,11 @@ function showContactBookDetail(selectedClassListId,selectedStudentId){
   		}
   	}	
 }
-
+//=====================homepage功能按鍵=======================
+let menuToggle = document.querySelector('.menuToggle');
+			menuToggle.onclick = function () {
+				menuToggle.classList.toggle('active');
+			}
 </script>
 
 </body>

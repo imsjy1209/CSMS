@@ -56,22 +56,35 @@
 					<option value="1">第1次</option>
 					<option value="2">第2次</option>
 					<option value="3">第3次</option>
+					<option value="4">第4次</option>
+			                </select>
+			</label>
+			<!-- 及格不及格選單 -->
+				<label> <select class="form-control" id="tool_type2"
+				name="tool_type" style="cursor: pointer;"
+				class="selectpicker ml-1 mb-2" data-width="150px">
+					<option value="0">請選擇</option>
+					<option value="1">及格</option>
+					<option value="2">不及格</option>
+					<option value="3">全部</option>
+				
 			                </select>
 			</label>
 			<br>
 			
 			<br>
 			<div>
-				<button id='selectBtn' class="btn btn-light">搜尋</button>			     
+				<button id='selectBtn' class="btn btn-info">搜尋</button>			     
 			     &nbsp 	     
-				<a href="${contextRoot}/scoreAdd" type="button"
-			class="btn btn-light" >新增</a>
-			  &nbsp 	     
+		  		<a href="${contextRoot}/scoreAdd" type="button"
+			class="btn btn-primary" >新增</a>
+			  &nbsp 	
+			  	<!--     
 				<a  href="${contextRoot}/passscore" type="button"
 			class="btn btn-success" >及格</a>
 			 &nbsp 	     
 			<a href="${contextRoot}/notPassscore" type="button"
-			class="btn btn-danger" >不及格</a>
+			class="btn btn-danger" >不及格</a>  -->
 			</div>
 
 		
@@ -126,29 +139,66 @@
 			}
 		}
 	}
-
+//------
 	let ciassListSelect = $("#selectBtn");
 	ciassListSelect.click(sendClassCodeId);
+	
 	function sendClassCodeId() {
+		
 		let classSelected = document.getElementById("classCode");
-		let anotherSelect = document.getElementById("tool_type");		//get the select value
+		let anotherSelect = document.getElementById("tool_type");
+		let threeSelect = document.getElementById("tool_type2");//get the select value
+		let value = $("#tool_type2").prop("value");//option value
+		console.log(value);
 		let classCodeIdvalue = classSelected.value;
-		let anotherSelectvalue = anotherSelect.value;		//for studentList and classinfo
-		let xhr2 = new XMLHttpRequest();		// get the information from select value
-		xhr2.open("GET", "<c:url value='/findAllScore2.controller'/>"
-				+ "?classCodeId=" + classCodeIdvalue + "&frequency="
-				+ anotherSelectvalue, true);
-		xhr2.send();
-		xhr2.onreadystatechange = function() {
-			if (xhr2.readyState == 4 && xhr2.status == 200) {
-				displayScoreListAndInfo(xhr2.responseText);//當選擇改變時找出對應資訊和學生清單
+		let anotherSelectvalue = anotherSelect.value;
+		let threeSelectvalue = threeSelect.value;//for studentList and classinfo
+		if(value==1){
+			let xhr3 = new XMLHttpRequest();
+			
+			xhr3.open("GET", "<c:url value='/findPassScore.controller'/>"
+					+ "?classCodeId=" + classCodeIdvalue + "&frequency="
+					+ anotherSelectvalue, true);
+			xhr3.send();
+			xhr3.onreadystatechange = function() {
+			 if(xhr3.readyState == 4 && xhr3.status == 200) {
+					displayScoreListAndInfo(xhr3.responseText);//當選擇改變時找出對應資訊和學生清單
+				}
+			} 
+		}
+		
+		else if (value==2){		
+			let xhr4 = new XMLHttpRequest();
+			
+			xhr4.open("GET", "<c:url value='/findNotPassScore.controller'/>"
+					+ "?classCodeId=" + classCodeIdvalue + "&frequency="
+					+ anotherSelectvalue, true);
+			xhr4.send();
+			xhr4.onreadystatechange = function() {
+			if(xhr4.readyState == 4 && xhr4.status == 200) {
+					displayScoreListAndInfo(xhr4.responseText);//當選擇改變時找出對應資訊和學生清單
+				}
+			
 			}
 		}
+		else if (value==3){			
+			let xhr2 = new XMLHttpRequest();		// get the information from select value
+			xhr2.open("GET", "<c:url value='/findAllScore2.controller'/>"
+					+ "?classCodeId=" + classCodeIdvalue + "&frequency="
+					+ anotherSelectvalue, true);
+			xhr2.send();
+			xhr2.onreadystatechange = function() {
+			if (xhr2.readyState == 4 && xhr2.status == 200) {
+					displayScoreListAndInfo(xhr2.responseText);//當選擇改變時找出對應資訊和學生清單
+				}
+			}
+		}
+	}
 		function displayScoreListAndInfo(responseText) {
 			let dataSource = JSON.parse(responseText);
 			let sidto = dataSource.sidto;
-			console.log(sidto[1]);
-			console.log(sidto[1].score);
+			//console.log(sidto[1]);
+			//console.log(sidto[1].score);
 			let scoreLength = sidto.length;
 			$('#scoreTable tbody tr td').remove();
 			scolist_data = '<tbody>';
@@ -173,22 +223,10 @@
 			scolist_data += '</tobody>';
 			$('#scoreTable').append(scolist_data)
 		}
-	}
-	
 	
 
 	
-	//=======================暫時不用=======================
-	$(".test1").on("click", function() {
-		let roomSize = $(this).prev().prev().children("input").val()
-		let roomName = $(this).prev().prev().prev().children("input").val()
-		let id = $(this).prev().prev().prev().prev().text();
-		console.log(id);
-		console.log(roomName);
-		console.log(roomSize);
-		//document.location.href = "${contextRoot}/updateRoomData.controller/"
-		//+ id + "/" + roomName + "/" + roomSize;
-	});
+	
 </script>
 </body>
 </html>

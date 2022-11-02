@@ -39,9 +39,9 @@
 			<label for="inputScore" class="form-label"></label>
 			<input type="text" name="score" class="form-control"  placeholder="請輸入次數" id="inputfrequency" size="5" value="${score1.score}">
 		</div>   
-		<button id='selectBtn' class="btn btn-light">搜尋</button>
+		<button id='selectBtn' class="btn btn-primary">搜尋</button>
 		&nbsp
-		<button id='send' class="btn btn-light">send</button>
+		<button id='send' class="btn btn-success">send</button>
 	</div>
 
 	<div style="width:50%">
