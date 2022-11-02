@@ -222,9 +222,6 @@ public class UsersController {
 	public String checkLogin(@RequestParam(name = "username") String username, @RequestParam(name = "pwd") String pwd,
 			SessionStatus status, Model m) {
 		Users users = userService.checkLogin(username, pwd);
-		// if(users.getIsFirst() == 1){
-		// return "users/firstlogin";
-		// }
 		if (users == null) {
 			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
 			return "login/login";
@@ -240,20 +237,19 @@ public class UsersController {
 		Groups groups = users.getGroups();
 		Integer id = groups.getId();
 		switch (id) {
-//        case 1:
-//        	users.getadmin();
-//            break;
+        case 1:
+        	return "cs_course/courseIndexBackAjax"; // Admin-後台
 		case 2:
 			School school = users.getSchool();
 			m.addAttribute("school", school);
-			break;
+			return "cs_course/courseIndexBackAjax"; // 校方(導師)-後台
 			
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);
 			List<Post> pListAll = postService.viewAllByAll();
 			m.addAttribute("pListAll", pListAll);
-			return "cs_homePage/teacherHomepage";	
+			return "cs_homePage/teacherHomepage"; // 老師-前台
 			
 		case 4:
 			Student student = users.getStudent();
@@ -266,7 +262,7 @@ public class UsersController {
 			m.addAttribute("personalAbsent", personalAbsent);
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
-			return "cs_homePage/studentHomepage";	
+			return "cs_homePage/studentHomepage"; // 學生-前台	 
 			
         case 5:
         	Parent parent = users.getParent();
@@ -276,9 +272,9 @@ public class UsersController {
 			List<Post> pListforAll = postService.viewAllByAll();
 			m.addAttribute("scoreforParent",scoreforParent);
 			m.addAttribute("pListforAll", pListforAll);
-            return "cs_homePage/parentHomepage";
+            return "cs_homePage/parentHomepage"; // // 家長-前台
     	}
-    	return "cs_homePage/parentHomepage";
+    	return "cs_homePage/parentHomepage"; // 此處無效但必填
     }
     
 	@GetMapping("users/gotohomepage")

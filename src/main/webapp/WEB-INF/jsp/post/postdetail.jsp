@@ -40,7 +40,24 @@
 <br><br>
 <div class="wrapper">
 	<div class="container">
-	<br><h1 align="center">公告</h1><br>
+	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告</h3>
+		<br>
+		<br>
+		<div class="container">
+			<table id="pList" class="table table-bordered" style="text-align:center">
+	  			<thead id="pList-title">
+	    			<tr>
+	    				<th class="table-info" scope="col">功能</th>
+					    <th class="table-info" scope="col">編號</th>
+					    <th class="table-info" scope="col">標題</th>
+					    <th class="table-info" scope="col">最後更新時間</th>
+				    </tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
 		<div class="card">
 			<div class="card-header">
 				<h4>${post.topic}<br></h4>
