@@ -82,7 +82,7 @@
         <img src="${contextRoot}/image/LoginLogo.png" alt=""> 
       </div>
       <div class="login">
-        <form action="users/checklogin" method="post">
+        <form action="${contextRoot}/users/checklogin" method="post">
           <div class="container form-group maindiv">
             <h1>Login</h1>
             <label for="username"><b>Username</b></label>
@@ -90,7 +90,7 @@
 
             <label for="pwd"><b>Password</b></label>
             <input type="password" class="form-control pwd" placeholder="Enter Password" name="pwd" required>
-            <p style="color:#E00000">${LoginError}</p>
+            <p id="errMsg" style="color:#E00000">${LoginError}</p>
             <button type="submit" class="orangebtn">Login</button>
           </div>
         </form>
@@ -144,7 +144,6 @@
     	  
     	  
       })
-      
       
       
       </script>
