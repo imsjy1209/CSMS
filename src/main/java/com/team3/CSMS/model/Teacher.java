@@ -54,7 +54,7 @@ public class Teacher {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@Column(name = "resigndate", columnDefinition = "date")
+	@Column(name = "resigndate", columnDefinition = "date", nullable = true)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date resigndate;
 

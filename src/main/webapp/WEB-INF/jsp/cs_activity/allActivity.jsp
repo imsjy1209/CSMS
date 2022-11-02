@@ -12,7 +12,31 @@
 <script src='fullcalendar/locales-all.js'></script>
 <script src='fullcalendar/moment.js'></script>
 <!-- =================for char.js======================= -->
+<style type="text/css">
+table {
+	border-collapse: collapse;
+	width: 770px;
+	/*自動斷行*/
+	word-wrap: break-word;
+	table-layout: fixed;
+}
 
+.box {
+	width: 650px;
+	height: 650px border:1px solid gray;
+	box-shadow: 5px 10px 7px gray;
+	padding: 20px;
+}
+
+.hidden {
+	display: none
+}
+
+.fc .fc-toolbar-title {
+	color: brown;
+	font-size: 1.75em;
+}
+</style>
 
 	
 	<div class="container">

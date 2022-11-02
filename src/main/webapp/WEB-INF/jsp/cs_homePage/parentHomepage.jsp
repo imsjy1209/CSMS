@@ -44,7 +44,7 @@
 
 					.article {
 						width: 70%;
-						border: 1px solid blue;
+						/* border: 1px solid blue; */
 						float: right;
 						margin-right: 50px;
 					}
@@ -142,7 +142,7 @@
 						visibility: visible;
 						transform: translateY(10px);
 						transition-delay: calc(0.75s+var(--i));
-						height: 100%;
+						height: 110%;
 					}
 
 					.menu ul li button { 

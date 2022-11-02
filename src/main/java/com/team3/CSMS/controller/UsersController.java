@@ -1,6 +1,7 @@
 package com.team3.CSMS.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.team3.CSMS.dto.UserSchoolDto;
 import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.dto.UserStudentDto;
 import com.team3.CSMS.model.Absent;
+import com.team3.CSMS.model.Activity;
 import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
@@ -36,9 +38,10 @@ import com.team3.CSMS.service.ParentService;
 import com.team3.CSMS.service.PostService;
 import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
+import com.team3.CSMS.service.StudentService;
 import com.team3.CSMS.service.UserService;
 
-@SessionAttributes(names = { "users", "school", "teacher", "student", "parent" })
+@SessionAttributes(names = {"users","school","teacher","student","parent","shoppingCart"})
 @Controller
 public class UsersController {
 
@@ -65,6 +68,9 @@ public class UsersController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private StudentService studentService;
 
 	// 透過ID找到個資
 	@GetMapping(value = "/userProfile.json", produces = { "application/json;charset=UTF-8" })
@@ -243,7 +249,7 @@ public class UsersController {
 			School school = users.getSchool();
 			m.addAttribute("school", school);
 			return "cs_course/courseIndexBackAjax"; // 校方(導師)-後台
-			
+		
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);
@@ -258,10 +264,12 @@ public class UsersController {
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
 			List<ContactBook> top3cbList = contactBookService.getTop3StudentContactBookList(student.getId());
+			Set<Activity> activities = studentService.getMyAct(student.getId());
 			m.addAttribute("aOrderDetailList", aOrderDetailList);
 			m.addAttribute("personalAbsent", personalAbsent);
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
+			m.addAttribute("activities", activities);
 			return "cs_homePage/studentHomepage"; // 學生-前台	 
 			
         case 5:
@@ -294,10 +302,12 @@ public class UsersController {
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
 			List<ContactBook> top3cbList = contactBookService.getTop3StudentContactBookList(student.getId());
+			Set<Activity> activities = studentService.getMyAct(student.getId());
 			m.addAttribute("aOrderDetailList", aOrderDetailList);
 			m.addAttribute("personalAbsent", personalAbsent);
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
+			m.addAttribute("activities", activities);
 			return "cs_homePage/studentHomepage";
 		case 5:
 			Parent parent = users.getParent();

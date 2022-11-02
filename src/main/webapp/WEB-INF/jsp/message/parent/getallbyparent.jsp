@@ -19,7 +19,6 @@
 					thead {
 						font-size: 20px;
 					}
-
 					.orangebtn {
 						/* background-color:  #ff9933; */
 						color: #ff9933;
@@ -43,7 +42,7 @@
 			</head>
 
 			<body>
-				<jsp:include page="../../layout/navbar.jsp"></jsp:include>
+				<jsp:include page="../../layout/nav_parent.jsp"></jsp:include>
 				<div class="container">
 					<div align="center">
 						<h1>訊息</h1>
@@ -85,10 +84,7 @@
 													回覆
 													<i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i>
 												</a> -->
-													<button type="button" class="orangebtn" data-toggle="modal"
-														data-target="#replymsg">
-														回覆
-													</button>
+													<button type="button" class="orangebtn" data-toggle="modal" data-target="#replymsg">回覆</button>
 												</blockquote>
 											</div>
 										</td>
@@ -108,17 +104,12 @@
 									<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 									  <div class="modal-content modal-xl">
 										<div class="modal-header">
-										  <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+										  <h5 class="modal-title" id="exampleModalCenterTitle">回復 :</h5>
 										  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										  </button>
 										</div>
 										<div class="modal-body" id="ckArea">
-										  
-										</div>
-										<div class="modal-footer">
-										  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										  <button type="button" class="btn btn-primary">Save changes</button>
 										</div>
 									  </div>
 									</div>
@@ -128,7 +119,6 @@
 					</div>
 				</div>
 			</body>
-
 			<script>
 			$('.orangebtn').click(function () {
 				let msgtitle=$(this).parent().parent().parent().parent().prev().children().find('.tt').text();
@@ -139,14 +129,14 @@
 					'<input type="text" name="topic" value="'+msgtitle+'">'+
 					'<input type="text" name="type" value="家長回復"> '+
 					'<input type="text" name="school" value="'+schoolname+'"> '+
-					'</div><br><h4>回復 :</h4><br> '+
+					'</div><br><h4></h4><br>'+
 					'<textarea class="form-control" name="article"></textarea> '+
-					'<input type="submit" value="回復"></form>'
+					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>'
 				$('#ckArea').html(str);
 				// console.log(123);
 				CKEDITOR.replace('article');
 				CKEDITOR.config.width = 800;
-				CKEDITOR.config.height = 300;	
+				CKEDITOR.config.height = 300;
 			})
 			
 			</script>

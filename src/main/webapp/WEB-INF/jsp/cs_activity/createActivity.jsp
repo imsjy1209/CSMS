@@ -39,9 +39,10 @@
 	</div>	
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">詳細內容:</label>
-					<textarea class="form-control" name="contentDetail"></textarea>
+					<textarea id="text123" class="form-control" name="contentDetail"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="button" class="btn btn-dark oneKey">OneKey</button>
 			</form>
 		
     </div>
@@ -76,6 +77,15 @@ CKEDITOR.config.height = 300;
           $('#sidebar').toggleClass('active');
       });
   });
+  
+  $(document).on('click','.oneKey',function(){
+	  console.log($('input'))
+	  $('input').eq(0).val('文藝之旅')
+		$('input').eq(1).val('松菸')
+		$('input').eq(2).val('2022-11-06')
+	  
+  })
+  
 
   
   
