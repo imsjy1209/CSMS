@@ -429,18 +429,21 @@ color:black;
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
+                         
+                             <li class="nav-item">
+                              <a href="${contextRoot}/passw0rdUpdateForQueen.page"> <i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料&nbsp;&nbsp;&nbsp;</b></span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                            
+                             <li class="nav-item active">
+                                 <a href="${contextRoot}/signout"><i class='bx bx-log-out bx-rotate-180' style="font-size:15px;line-height:40px;"></i><b>&nbsp;登出&nbsp;</b></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
+                            
+<!--                             <li class="nav-item"> -->
+<!--                                 <a class="nav-link" href="#">Page</a> -->
+<!--                             </li> -->
+<!--                             <li class="nav-item"> -->
+<!--                                 <a class="nav-link" href="#">Page</a> -->
+<!--                             </li> -->
                         </ul>
                     </div>
                 </div>
