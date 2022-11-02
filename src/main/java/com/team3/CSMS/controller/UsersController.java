@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team3.CSMS.dto.UserParentDto;
 import com.team3.CSMS.dto.UserSchoolDto;
@@ -226,14 +227,18 @@ public class UsersController {
 
 	@PostMapping("users/checklogin")
 	public String checkLogin(@RequestParam(name = "username") String username, @RequestParam(name = "pwd") String pwd,
-			SessionStatus status, Model m) {
+			SessionStatus status, Model m, RedirectAttributes rm) {
 		Users users = userService.checkLogin(username, pwd);
 		if (users == null) {
-			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
-			return "login/login";
+			//m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
+			//return "login/login";
+			rm.addFlashAttribute("LoginError","帳號密碼錯誤，請重新輸入"); // 滿足redirect+攜帶modal
+			return "redirect:/login";
 		} else if (users.getAccRight() == 0) {
-			m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
-			return "login/login";
+			//m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
+			//return "login/login";
+			rm.addFlashAttribute("LoginError","帳號無登入權限，請聯絡工作人員"); // 滿足redirect+攜帶modal
+			return "redirect:/login";
 		} else if (users.getIsFirst() == 1) {
 			m.addAttribute("users", users);
 			return "login/firstLoginTest";
