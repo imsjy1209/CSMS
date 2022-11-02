@@ -247,7 +247,7 @@ public class UsersController {
 			School school = users.getSchool();
 			m.addAttribute("school", school);
 			break;
-			
+			//FIXME: 要改跳轉的頁面
 		case 3:
 			Teacher teacher = users.getTeacher();
 			m.addAttribute("teacher", teacher);

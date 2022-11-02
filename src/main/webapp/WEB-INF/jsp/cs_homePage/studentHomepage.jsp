@@ -20,6 +20,7 @@
 						margin: 0px;
 						padding: 0px;
 					}
+					
 					.announcementDiv {
 						border: 2px solid slateblue;
 						size: 100px;
@@ -46,7 +47,7 @@
 
 					.article {
 						width: 70%;
-						border: 1px solid blue;
+						/* border: 1px solid blue; */
 						float: right;
 						margin-right: 50px;
 					}
@@ -60,15 +61,15 @@
 
 					.btnli {
 						border: none;
-						background-color: white;
+						background-color:transparent;
 					}
 
 					.menuToggle {
 						position: relative;
-						/* width: 70px;
-						height: 70px;
-						background-color: #699cfa; */
-						border-radius: 70px;
+						/* width: 80px;
+						height: 80px;
+						background-color: #6494ed;
+						border-radius: 80px; */
 						cursor: pointer;
 						display: flex;
 						justify-content: center;
@@ -100,7 +101,7 @@
 						z-index: 1;
 						transform: translateX(50px);
 						transition-delay: 0s, 0.5s, 0.5s;
-
+						background-color: azure;
 					}
 
 					.menu::before {
@@ -144,7 +145,7 @@
 						visibility: visible;
 						transform: translateY(10px);
 						transition-delay: calc(0.75s+var(--i));
-						height: 100%;
+						height: 110%;
 					}
 
 					.menu ul li button {
@@ -168,7 +169,7 @@
 					<div class="aside">	
 					<!-- Modal選單區 -->	
 					<div class="menuToggle">
-						<i class='bx bx-list-ul' style="font-size: 90px; color:black" ></i>
+						<i class='bx bx-list-ul' style="font-size: 90px; color:#2e446e" ></i>
 					</div>
 					<div class="menu">
 						<ul>
