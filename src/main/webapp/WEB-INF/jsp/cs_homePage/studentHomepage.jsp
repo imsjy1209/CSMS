@@ -53,7 +53,7 @@
 
 					.aside { 
  						width: 10%; 
- 						border: 1px solid red; 
+ 						/* border: 1px solid red;  */
  						float: left; 
  						margin-left: 50px; 
  					} 
@@ -121,7 +121,6 @@
 
 					.menu ul {
 						position: relative;
-						/* display: flex; */
 						justify-content: center;
 						align-items: center;
 						height: 80px;
