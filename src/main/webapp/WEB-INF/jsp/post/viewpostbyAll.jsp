@@ -17,10 +17,25 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 <body>
-<!-- NAVBAR -->
+<!-- 舊NAVBAR -->
 <%-- <jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
 <!-- 依group_id呈現navBar -->
-<div class="navGroups"><jsp:include page="../layout/nav_student.jsp" /></div>
+<div class="navGroups">
+	<c:choose>
+		<c:when test="${users.groups.id == 3}">
+			<!-- TEACHER NAVBAR -->
+			<jsp:include page="../layout/nav_teacher.jsp" />
+		</c:when>
+		<c:when test="${users.groups.id == 4}">
+			<!-- STUDENT NAVBAR -->
+			<jsp:include page="../layout/nav_student.jsp" />	
+		</c:when>
+		<c:when test="${users.groups.id == 5}">
+			<!-- PARENT NAVBAR -->
+			<jsp:include page="../layout/nav_parent.jsp" />	
+		</c:when>
+	</c:choose>
+</div>
 
 <br><br>
 <div class="wrapper">
@@ -61,9 +76,7 @@
 <jsp:include page="../footer/footer.jsp"></jsp:include>	
 
 <script>
-// 問題：依使用者呈現navbar
 // console.log($(".hidGroupsId").text());
-// var usersGroupId = $(".hidGroupsId").text();
 
 </script>
 </body>

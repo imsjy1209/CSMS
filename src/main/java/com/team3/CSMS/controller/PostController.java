@@ -147,7 +147,7 @@ public class PostController {
 
 	// 【所有人】公告查詢
 	@GetMapping("post/viewbyall")
-	public String viewbyall(@SessionAttribute("users") Users users,Model m) {
+	public String viewbyall(Model m) {
 		List<Post> list = pser.viewAllByAll();
 		m.addAttribute("list", list);
 		return "post/viewpostbyAll";
