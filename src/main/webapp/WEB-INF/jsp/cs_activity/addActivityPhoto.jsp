@@ -19,10 +19,10 @@
 		<br>
 		
 		<div class="col-md-6">
-			Picture Preview <img id="preview_imgInp" src="#" />
+			Picture Preview <img width="0px" id="preview_imgInp" src="#" alt="請放入照片" />
 		</div>
 		
-		<input type="submit" value="送出">
+		<br><input type="submit" value="送出">
 	</form>
 		
     </div>
@@ -39,6 +39,7 @@
 
 $("#imgInp").change(function() {
 	readURL(this);
+	$('#preview_imgInp').attr('width','500px')
 });
 
 function readURL(input) {
