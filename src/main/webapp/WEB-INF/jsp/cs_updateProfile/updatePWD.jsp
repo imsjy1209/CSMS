@@ -2,8 +2,8 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 			<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-			<jsp:include page="../framePage/sideBar.jsp"></jsp:include>		
-			<span id="usid" display:none>${userId}</span>
+			<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+			<span class="userProfiledId" style='display:none'>${users.id}</span>
 			<div id="profilePwd" style="flex-direction: column;">
 				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;">
 					<div class="card-body">
@@ -140,10 +140,11 @@
 					updateProfileFunction();
 				}
 				function updateProfileFunction() {
+					let userId=$('.userProfiledId').text();
 					//FIXME: 要改成透過session
 					// let userId=15;// 學生
 					// let userId=4; // 校務
-					let userId=8;// 老師
+					// let userId=8;// 老師
 					// let userId = 45;//家長有電話 emai
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "<c:url value='/userProfile.json?userId=" + userId + " '/>", true);
@@ -151,7 +152,7 @@
 					xhr.onreadystatechange = function () {
 						if (xhr.readyState == 4 && xhr.status == 200) {
 							var userProfile = JSON.parse(xhr.responseText);
-							console.log(userProfile);
+							// console.log(userProfile);
 							
 							var prevPwd = userProfile.password;
 							// 家長 按鈕觸發

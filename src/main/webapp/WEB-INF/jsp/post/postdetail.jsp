@@ -1,34 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Welcome</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- BOX ICONS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+	integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 <body>
-<!-- NAVBAR -->
-<%-- 	<jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
-<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+<!-- 舊NAVBAR -->
+<%-- <jsp:include page="../layout/navbar.jsp"></jsp:include> --%>
+<!-- 依group_id呈現navBar -->
+<div class="navGroups">
+	<c:choose>
+		<c:when test="${users.groups.id == 3}">
+			<!-- TEACHER NAVBAR -->
+			<jsp:include page="../layout/nav_teacher.jsp" />
+		</c:when>
+		<c:when test="${users.groups.id == 4}">
+			<!-- STUDENT NAVBAR -->
+			<jsp:include page="../layout/nav_student.jsp" />	
+		</c:when>
+		<c:when test="${users.groups.id == 5}">
+			<!-- PARENT NAVBAR -->
+			<jsp:include page="../layout/nav_parent.jsp" />	
+		</c:when>
+	</c:choose>
+</div>
+
 <br><br>
 <div class="wrapper">
 	<div class="container">
-	<br><h1 align="center">公告</h1><br>
-		<div class="card">
-			<div class="card-header">
-				<h4>${post.topic}<br></h4>
-			</div>
-			<div class="card-body">
-				<blockquote class="blockquote mb-0">
-					<p>${post.article}</p>
-					<footer class="blockquote-footer">${post.update_at}<cite
-							title="Source Title"></cite>
-					</footer>
-				</blockquote>
+	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告 (第${post.id}號文)</h3>
+		<br>
+		<div class="container">
+			<table id="pList" class="table table-bordered">
+	    		<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">標題</th>
+					<td>${post.topic}</td>
+				</tr>
+
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">內文</th>
+					<td>${post.article}</td>
+				</tr>
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">發布時間</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+				</tr>
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">修改時間</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+				</tr>
+			</table>
+			<div id="btnArea" style="text-align:center">
+				<a href="${contextRoot}/post/viewbyall" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">返回</a>
 			</div>
 		</div>
 	</div>
-</div>
+</div>	
+<br>
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
