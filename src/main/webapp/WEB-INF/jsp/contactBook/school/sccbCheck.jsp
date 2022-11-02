@@ -9,9 +9,10 @@
  <!--box icons-->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+<!-- SCHOOL -->
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿查詢</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿查詢</h4>
 	<br>
 	
 	<div id="classInfo-area">

@@ -19,7 +19,6 @@
 					thead {
 						font-size: 20px;
 					}
-
 					.orangebtn {
 						/* background-color:  #ff9933; */
 						color: #ff9933;
@@ -43,7 +42,7 @@
 			</head>
 
 			<body>
-				<jsp:include page="../../layout/navbar.jsp"></jsp:include>
+				<jsp:include page="../../layout/nav_parent.jsp"></jsp:include>
 				<div class="container">
 					<div align="center">
 						<h1>訊息</h1>
@@ -85,8 +84,7 @@
 													回覆
 													<i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i>
 												</a> -->
-													<button type="button" class="orangebtn" data-toggle="modal"
-														data-target="#replymsg">回覆</button>
+													<button type="button" class="orangebtn" data-toggle="modal" data-target="#replymsg">回覆</button>
 												</blockquote>
 											</div>
 										</td>

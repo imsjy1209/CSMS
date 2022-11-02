@@ -9,11 +9,12 @@
 <%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
 <jsp:include page="../../layout/nav_teacher.jsp"></jsp:include>
 	
+<!-- TEACHER -->
 <!-- CONTENT -->
 <br><br>
 <div class="wrapper">
 <div class="container">	
-	<h4>【老師】聯絡簿編輯</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿編輯</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -67,34 +68,24 @@
 var clsListId =  ${classListId};
 // console.log(clsListId);
 
-$("#sidebar").find("a").on("click",function(event){
-	alert("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
-	//SweetAlert本來有但後來故障了@@
-// 		Swal.fire({
-// 		 title: '案件尚未送出',
-// 		 text: '如確認欲離開，請點「回上一頁」按鈕',
-// 		 icon: 'warning',
-// 		 showCancelButton: true,
-// 		 confirmButtonColor: '#3085d6,
-// 		 confirmButtonText: '確認'
-// 		})();
-	
+/* 防止案件未送出就離開 */
+$(document).on("click","#navbar", function(){
+	forbiddenToLeave();
 });
 
-
-$("#content>nav").find("a").on("click",function(){
-	alert("案件尚未送出，如確認欲離開，請點「回上一頁」按鈕");
-	//SweetAlert本來有但後來故障了@@
-	// 	Swal.fire({
-		//  title: '案件尚未送出',
-		//  text: '如確認欲離開，請點「回上一頁」按鈕',
-		//  icon: 'warning',
-		//  showCancelButton: true,
-		//  confirmButtonColor: '#3085d6,
-		//  confirmButtonText: '確認'
-	// 	})();
-})
-
+function forbiddenToLeave(){
+	//SweetAlert
+	Swal.fire({
+		title: '案件尚未送出',
+		text: '如確認欲離開，請點「回上一頁」按鈕',
+		icon: 'warning',
+		showConfirmButton: false,
+		showCancelButton: true,
+		cancelButtonColor: '#3085d6',
+		cancelButtonText: '確認'
+	});
+	event.preventDefault();
+}
 
 /* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
