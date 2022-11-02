@@ -52,18 +52,20 @@
 			<br>
 			<div id="accordionExample" class="accordion">
 			<table class="msgtable  table-hover">
+				<thead>
 				<tr style="border: null;background-color: #496cad;color: aliceblue;">
 					<th>家長名稱 </th>
 					<th>標題 </th>
 					<th>類型 </th>
 					<th>日期 </th>
+				</tr>
+				</thead>
 					<c:forEach var="message" items="${list}">
 							<tr>
-								<td>${message.parent.name}
-									<td><button class="btn btn-link" type="button" data-toggle="collapse"
+								<td class="ptName">${message.parent.name}</td>
+									<td><button class="btn btn-link tt" type="button" data-toggle="collapse"
 										data-target="#msg${message.id}" aria-expanded="true"
-										aria-controls="collapseOne">
-										${message.titleOfMsg}</td>
+										aria-controls="collapseOne">${message.titleOfMsg}</td>
 									<td>${message.typeOfMsg}</td>
 									<td>${message.createTime}</td>
 									<tr>
@@ -75,10 +77,11 @@
 													<footer class="blockquote-footer">${message.school.name}<cite
 															title="Source Title"></cite>
 													</footer>
-													<a href="${contextRoot}/message/viewmessage?id=${message.id}" class="orangebtn ">
+													<button type="button" class="orangebtn" data-toggle="modal" data-target="#replymsg">回覆</button>
+													<!-- <a href="${contextRoot}/message/viewmessage?id=${message.id}" class="orangebtn ">
 														回覆
-														<!-- <i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i> -->
-													</a>
+														<i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i>
+													</a> -->
 												</blockquote>
 											</div>
 										</td>
@@ -93,9 +96,43 @@
 										</c:when>
 									</c:choose> -->
 						</c:forEach>
-			</table>
+						<div class="modal fade" id="replymsg" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+							  <div class="modal-content modal-xl">
+								<div class="modal-header">
+								  <h5 class="modal-title" id="exampleModalCenterTitle">回復 :</h5>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body" id="ckArea">
+								</div>
+							  </div>
+							</div>
+						  </div>
+				</table>
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	$('.orangebtn').click(function () {
+				let msgtitle=$(this).parent().parent().parent().parent().prev().children().find('.tt').text();
+				let parentName=$(this).parent().parent().parent().parent().prev().find('.ptName').text();
+				// console.log(schoolname);
+				str='<form action="${pageContext.request.contextPath}/message/addMessageBySchool" method="post"> '+
+					'<div style="">'+
+					'<input type="text" name="topic" value="'+msgtitle+'">'+
+					'<input type="text" name="type" value="導師回復"> '+
+					'<input type="text" name="parentid" value="'+parentName+'"> '+
+					'</div><br><h4></h4><br>'+
+					'<textarea class="form-control" name="article"></textarea> '+
+					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>'
+				$('#ckArea').html(str);
+				// console.log(123);
+				CKEDITOR.replace('article');
+				CKEDITOR.config.width = 800;
+				CKEDITOR.config.height = 300;
+			})
+</script>
 </html>

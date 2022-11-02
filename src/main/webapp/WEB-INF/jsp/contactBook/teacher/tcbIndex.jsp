@@ -11,12 +11,13 @@
 
  <!-- BOX ICONS -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	
+
+<!-- TEACHER -->	
 <!-- CONTENT -->
 <br><br>
 <div class="wrapper">
 <div class="container">	
-	<h4>【老師】聯絡簿首頁</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿首頁</h4>
 	<br>
 	<div class="form-group">
   		<label for="exampleFormControlSelect1">選擇課程：</label>

@@ -15,12 +15,13 @@
 <!-- NAVBAR -->
 <%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
 <jsp:include page="../../layout/nav_student.jsp"></jsp:include>
-	
+
+<!-- STUDENT -->	
 <!-- CONTENT -->
 <br><br>
 <div class="wrapper">
 <div class="container">	
-	<h4>【學生】聯絡簿首頁</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿首頁</h4>
 	<br>
 	<div class="form-group">
   		<label for="exampleFormControlSelect1">選擇課程：</label>

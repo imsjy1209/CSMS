@@ -50,20 +50,20 @@
 	    				<th class="table-info" scope="col">功能</th>
 					    <th class="table-info" scope="col">文號</th>
 					    <th class="table-info" scope="col">標題</th>
-					    <th class="table-info" scope="col">最後更新時間</th>
+					    <th class="table-info" scope="col">發布時間</th>
+					    <th class="table-info" scope="col">修改時間</th>
 				    </tr>
 				</thead>
 				<tbody>
 				<c:forEach var="post" items="${list}">
 					<tr>
 						<td>
-							<a href="${contextRoot}/post/detail/${post.id}" type="button" class="btn btn-outline-success btn-sm">
-								<i class="bx bx bxs-show"></i>&nbsp;查看
-							</a>
+							<a href="${contextRoot}/post/detail/${post.id}" type="button" class="btn btn-outline-success">查看</a>
 						</td>
-						<td>${post.id}</td>
-					    <td>${post.topic}</td>
-					    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+						<td style="vertical-align: middle;">${post.id}</td>
+					    <td style="vertical-align: middle;">${post.topic}</td>
+					    <td style="vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.create_at}" /></td>
+					    <td style="vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
 					</tr>
 				</c:forEach>
 				</tbody>

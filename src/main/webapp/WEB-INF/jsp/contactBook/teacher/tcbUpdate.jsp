@@ -9,11 +9,12 @@
 <%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
 <jsp:include page="../../layout/nav_teacher.jsp"></jsp:include>
 	
+<!-- TEACHER -->	
 <!-- CONTENT -->
 <br><br>
 <div class="wrapper">
 <div class="container">	
-	<h4>【老師】聯絡簿修改</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿修改</h4>
 	<br>
 	
 	<div id="classInfo-area">
@@ -76,6 +77,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
+        
 <!-- SCRIPT -->
 <script type="text/javascript">
 //=======================作業區=======================
@@ -121,7 +125,21 @@ window.onload = function(){
     }
 }
 
+/* 畫面載入告知已成功送出案件 */
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000
+})
 
+$(function() {
+	Toast.fire({
+	    icon: 'success',
+	    title: '案件已成功送出'
+	})
+ });
+ 
 //=======================版面動作=======================
 
 $(document).ready(function () {

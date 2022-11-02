@@ -14,7 +14,7 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<!-- NAVBAR -->
+<!-- PARENT NAVBAR -->
 <%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
 <jsp:include page="../../layout/nav_parent.jsp"></jsp:include>
 	
@@ -22,7 +22,7 @@
 <br><br>
 <div class="wrapper">
 <div class="container">	
-	<h4>【家長】聯絡簿首頁</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿</h4>
 	<br>
 	<div class="form-group">
   		<label for="exampleFormControlSelect1">選擇課程：</label>
@@ -76,7 +76,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
-
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
 
 <!-- SCRIPT -->
 <script type="text/javascript">
@@ -162,6 +164,19 @@ $(document).on('click', '.bx-tada', function(){
 	
 	// (2) 移除icon
 	$(this).remove();
+	
+	// (3) 告知簽名成功
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'top-end',
+	    showConfirmButton: false,
+	    timer: 2000
+	})
+
+	Toast.fire({
+		icon: 'success',
+		title: '簽名成功'
+	})
 		
 })
 

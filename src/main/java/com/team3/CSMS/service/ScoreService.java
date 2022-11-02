@@ -37,26 +37,26 @@ public class ScoreService {
 	// 【校方頁面】找及格score
 	public List<ScoreDto2> findPassScoreByclasslistId(Integer classCodeId ,Integer frequency) {
 		List<Score> scorePassList = scoreDao.getPassScoreByclasslistId(classCodeId, frequency);
-		ArrayList<ScoreDto2> scdtoList = new ArrayList<>();
+		ArrayList<ScoreDto2> scdpasstoList = new ArrayList<>();
 		for (Score score : scorePassList) {
-			ScoreDto2 scDto = new ScoreDto2(score);
-			scdtoList.add(scDto);
+			ScoreDto2 scpassDto = new ScoreDto2(score);
+			scdpasstoList.add(scpassDto);
 
 		}
-		return scdtoList;
+		return scdpasstoList;
 	}
 
 	
 	// 【校方頁面】找不及格score
 		public List<ScoreDto2> findNotPassScoreByclasslistId(Integer classCodeId ,Integer frequency) {
 			List<Score> scoreNotPassList = scoreDao.getNotPassScoreByclasslistId(classCodeId, frequency);
-			ArrayList<ScoreDto2> scdtoList = new ArrayList<>();
+			ArrayList<ScoreDto2> scdnotpasstoList = new ArrayList<>();
 			for (Score score : scoreNotPassList) {
-				ScoreDto2 scDto = new ScoreDto2(score);
-				scdtoList.add(scDto);
+				ScoreDto2 scnotpassDto = new ScoreDto2(score);
+				scdnotpasstoList.add(scnotpassDto);
 
 			}
-			return scdtoList;
+			return scdnotpasstoList;
 		}
 	
 

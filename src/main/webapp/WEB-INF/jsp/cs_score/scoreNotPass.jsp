@@ -56,13 +56,14 @@
 					<option value="1">第1次</option>
 					<option value="2">第2次</option>
 					<option value="3">第3次</option>
+					<option value="4">第4次</option>
 			                </select>
 			</label>
 			<br>
 			
 			<br>
 			<div>
-				<button id='selectBtn' class="btn btn-light">搜尋</button>			     
+				<button id='selectBtn' class="btn btn-info">搜尋</button>			     
 			    
 			</div>
 
