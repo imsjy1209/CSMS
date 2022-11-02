@@ -5,13 +5,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
+
+<%-- <jsp:include page="../../framePage/sideBar.jsp"></jsp:include> --%>
+
+
+<c:choose>
+  <c:when test="${users.groups.id == 2}">
+   <!-- SCHOOL NAVBAR -->
+<jsp:include page="../../framePage/sideBarForNotAjaxForQueen.jsp"></jsp:include>
+  </c:when>
+  
+  <c:when test="${users.groups.id == 1}">
+   <!-- ALL NAVBAR -->
+<jsp:include page="../../framePage/sideBarForNotAjax.jsp"></jsp:include>
+  </c:when>
+ </c:choose>
+
+
+
+
+
+
  <!--box icons-->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	
+
+<!-- SCHOOL -->
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【校方】聯絡簿編輯</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿編輯</h4>
 	<br>
 	
 	<div id="classInfo-area">

@@ -2,23 +2,21 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 			<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-			<!-- 依group_id呈現navBar -->
-			<div class="navGroups">
-				<c:choose>
-				<c:when test="${users.groups.id == 3}">
-				<!-- TEACHER NAVBAR -->
-				<jsp:include page="../layout/nav_teacher.jsp" />
-				</c:when>
-				<c:when test="${users.groups.id == 4}">
-				<!-- STUDENT NAVBAR -->
-				<jsp:include page="../layout/nav_student.jsp" /> 
-				</c:when>
-				<c:when test="${users.groups.id == 5}">
-				<!-- PARENT NAVBAR -->
-				<jsp:include page="../layout/nav_parent.jsp" /> 
-				</c:when>
-				</c:choose>
-			</div>
+			
+<%-- 			<jsp:include page="../framePage/sideBar.jsp"></jsp:include> --%>
+			
+<c:choose>
+  <c:when test="${users.groups.id == 2}">
+   <!-- SCHOOL NAVBAR -->
+<jsp:include page="../framePage/sideBarForNotAjaxForQueen.jsp"></jsp:include>
+  </c:when>
+  
+  <c:when test="${users.groups.id == 1}">
+   <!-- ALL NAVBAR -->
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
+  </c:when>
+ </c:choose>
+			
 			<span class="userProfiledId" style='display:none'>${users.id}</span>
 			<div id="profilePwd" style="flex-direction: column;">
 				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;">
@@ -59,7 +57,7 @@
 										<input type="text" id="idPwd1" name="password1" value=""
 											placeholder="請輸入現在使用的密碼" maxlength="30" size="20" autocomplete="off"
 											aria-invalid="false"><br> <span
-											id="h" style="color:white">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp1"
+											id="h">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp1"
 											class="">&nbsp</span>
 									</div>
 									<div class="d2">
@@ -67,14 +65,14 @@
 										</label> <input type="text" id="idPwd2" name="password2" value=""
 											placeholder="請輸入新密碼" maxlength="30" size="20" autocomplete="off"
 											aria-invalid="false"><br> <span
-											id="h" style="color:white">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp2"
+											id="h">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp2"
 											class="">&nbsp</span>
 									</div>
 									<div class="d3">
-										<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp</b>
+										<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp&nbsp</b>
 										</label> <input type="text" id="idPwd3" name="password3" value=""
 											placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off"
-											aria-invalid="false"><br> <span id="h" style="color:white">確認密碼：&nbsp&nbsp&nbsp</span><span
+											aria-invalid="false"><br> <span id="h">確認密碼：&nbsp&nbsp&nbsp&nbsp</span><span
 											id="idsp3" class="">&nbsp</span>
 									</div>
 							</div>
@@ -176,8 +174,8 @@
 								//================把按鈕打開=============
 								$("#changect").attr("type", "button");
 								//=========把卡片塞進去並新增資料=========
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+userProfile.parent.name+'"></li>'+
-												'<li class="list-group-item" id="">身分：<input type="text" readonly style="border: none;" value="'+userProfile.groups.groupsName+'"></li>';
+								let profileStr ='<li class="list-group-item" id="">姓名: <input type="text" readonly style="border: none;" value="'+userProfile.parent.name+'"></li>'+
+												'<li class="list-group-item" id="">身分: <input type="text" readonly style="border: none;" value="'+userProfile.groups.groupsName+'"></li>';
 								$('#porfileLi').html(profileStr);
 								let kidsList ='<div class="card-body"><h5 class="card-title" >學員清單</h5></div>'+
 											  '<table class="table table-hover"><thead><tr><th scope="col">姓名</th><th scope="col">性別</th><th scope="col">學校</th></tr><thead><tbody>'
@@ -261,10 +259,10 @@
 								let emergencyContact=userProfile.student.parent.name;
 								let emergencyPhone=userProfile.student.parent.tel;
 								let stuProfileRelationship=	userProfile.student.relationship
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別: <input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
-												'<li class="list-group-item" id="">學校：<input type="text" readonly style="border: none;" value="'+stuProfileSchoolName+' '+stuProfileGrade+'年級'+'"></li>'+
-												'<li class="list-group-item" id="">緊急聯絡人：<input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係: <input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
-												'<li class="list-group-item" id="">緊急連絡電話：<input type="text" readonly style="border: none;" value="'+emergencyPhone+'"></li>';
+								let profileStr ='<li class="list-group-item" id="">姓名: <input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別: <input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
+												'<li class="list-group-item" id="">學校: <input type="text" readonly style="border: none;" value="'+stuProfileSchoolName+' '+stuProfileGrade+'年級'+'"></li>'+
+												'<li class="list-group-item" id="">緊急聯絡人: <input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係: <input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
+												'<li class="list-group-item" id="">緊急連絡電話: <input type="text" readonly style="border: none;" value="'+emergencyPhone+'"></li>';
 								$('#porfileLi').html(profileStr);
 							}
 							//=======老師身分=========
@@ -273,10 +271,10 @@
 								let teacherProfileIdentity=userProfile.groups.groupsName;
 								let teacherProfileStatus=userProfile.teacher.status;
 								let teacherProfileExpertise=userProfile.teacher.expertise;
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+teacherProfileName+'"></li>'+
-												'<li class="list-group-item" id="">身分：<input type="text" readonly style="border: none;" value="'+teacherProfileIdentity+'"></li>'+
-												'<li class="list-group-item" id="">狀態：<input type="text" readonly style="border: none;" value="'+teacherProfileStatus+'"></li>'+
-												'<li class="list-group-item" id="">教學項目：<input type="text" readonly style="border: none;" value="'+teacherProfileExpertise+'"></li>';
+								let profileStr ='<li class="list-group-item" id="">姓名: <input type="text" readonly style="border: none;" value="'+teacherProfileName+'"></li>'+
+												'<li class="list-group-item" id="">身分: <input type="text" readonly style="border: none;" value="'+teacherProfileIdentity+'"></li>'+
+												'<li class="list-group-item" id="">狀態: <input type="text" readonly style="border: none;" value="'+teacherProfileStatus+'"></li>'+
+												'<li class="list-group-item" id="">教學項目: <input type="text" readonly style="border: none;" value="'+teacherProfileExpertise+'"></li>';
 								$('#porfileLi').html(profileStr);
 								
 							}
@@ -286,10 +284,10 @@
 								let schoolProfileGroupsName=userProfile.groups.groupsName;
 								let schoolProfileStatus=userProfile.school.status;
 								let schoolProfileTitle=userProfile.school.title
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+schoolProfileName+'"></li>'+
-												'<li class="list-group-item" id="">身分：<input type="text" readonly style="border: none;" value="'+schoolProfileGroupsName+'"></li>'+
-												'<li class="list-group-item" id="">狀態：<input type="text" readonly style="border: none;" value="'+schoolProfileStatus+'"></li>'+
-												'<li class="list-group-item" id="">職稱：<input type="text" readonly style="border: none;" value="'+schoolProfileTitle+'"></li>';
+								let profileStr ='<li class="list-group-item" id="">姓名: <input type="text" readonly style="border: none;" value="'+schoolProfileName+'"></li>'+
+												'<li class="list-group-item" id="">身分: <input type="text" readonly style="border: none;" value="'+schoolProfileGroupsName+'"></li>'+
+												'<li class="list-group-item" id="">狀態: <input type="text" readonly style="border: none;" value="'+schoolProfileStatus+'"></li>'+
+												'<li class="list-group-item" id="">職稱: <input type="text" readonly style="border: none;" value="'+schoolProfileTitle+'"></li>';
 								$('#porfileLi').html(profileStr);
 							}
 							// 開始改密碼

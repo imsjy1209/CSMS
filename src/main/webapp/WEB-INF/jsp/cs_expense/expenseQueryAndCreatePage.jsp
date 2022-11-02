@@ -94,7 +94,7 @@ function displayData01(data) {
 		htmlSeg += "行銷費用: <input name='markting' value="+obj.markting+"><br><br>";
 		htmlSeg += "人事費用: <input name='personnel' value="+obj.personnel+"><br><br>";
 		htmlSeg += "其他費用: <input name='other' value="+ obj.other+"><br><br>";
-		htmlSeg += "<input type='submit' value='上傳'>"
+		htmlSeg += "<input type='submit' value='上傳'><button type='button' class='btn btn-dark oneKey'>OneKey</button>";
 		htmlSeg += "</form>"
 	} else {
 		htmlSeg += "已存在，可更新資料<br><br>"
@@ -121,6 +121,15 @@ function displayData01(data) {
         });
     });
 
+	$(document).on('click','.oneKey',function(){
+		$('input').eq(2).val('555')
+		$('input').eq(3).val('5555')
+		$('input').eq(4).val('45454')
+		$('input').eq(5).val('3425435')
+		$('input').eq(6).val('22222')
+		
+		
+	})
 
 </script>
 

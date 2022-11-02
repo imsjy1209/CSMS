@@ -14,7 +14,20 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 
+<%-- <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include> --%>
+
+
+<c:choose>
+  <c:when test="${users.groups.id == 2}">
+   <!-- SCHOOL NAVBAR -->
+<jsp:include page="../framePage/sideBarForNotAjaxForQueen.jsp"></jsp:include>
+  </c:when>
+  
+  <c:when test="${users.groups.id == 1}">
+   <!-- ALL NAVBAR -->
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
+  </c:when>
+ </c:choose>
 
 <style>
 .notWork{

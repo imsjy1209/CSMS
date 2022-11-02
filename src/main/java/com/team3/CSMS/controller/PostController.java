@@ -71,8 +71,20 @@ public class PostController {
 		pser.removed(id);
 	}
 	
-	//
-
+	@PostMapping("/postCreate")
+	public String postCreate(@RequestParam("topic") String topic, @RequestParam("userType") int userType,
+			@RequestParam("article") String article) {
+		Post post = new Post(userType, topic, article);
+		pser.insert(post);
+		System.out.println("==============================");
+		System.out.println("==============================");
+		System.out.println("==============================");
+		System.out.println("==============================");
+		System.out.println("==============================");
+		return "redirect:/createPost.controller";
+	}
+	
+	
 	
 	//========End Of PostController-Neil 1024========================================
 
@@ -149,5 +161,12 @@ public class PostController {
 		List<Post> list = pser.viewAllByAll();
 		m.addAttribute("list", list);
 		return "post/viewpostbyAll";
+	}
+	
+	
+	//===for 建立公告的頁面========
+	@GetMapping("/createPost.controller")
+	public String createPost(Model m) {
+		return "cs_post/createPostPage";
 	}
 }

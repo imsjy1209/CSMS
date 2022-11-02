@@ -40,6 +40,7 @@ public class ScoreController {
 		return "/cs_score/score";
 	}
 	
+
 	// 顯示校方頁面----及格
 	@GetMapping("/passscore")
 	public String showScoreIndexAjax2() {

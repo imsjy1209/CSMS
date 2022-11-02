@@ -45,27 +45,29 @@
 		<div class="container">
 			<table id="pList" class="table table-bordered">
 	    		<tr>
-					<th class="table-info" scope="col" style="width:15%;text-align:center;">標題</th>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;vertical-align: middle;">標題</th>
 					<td>${post.topic}</td>
 				</tr>
 
 				<tr>
-					<th class="table-info" scope="col" style="width:15%;text-align:center;">內文</th>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;vertical-align: middle;">內文</th>
 					<td>${post.article}</td>
 				</tr>
 				<tr>
-					<th class="table-info" scope="col" style="width:15%;text-align:center;">發布時間</th>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;vertical-align: middle;">發布時間</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.create_at}" /></td>
 				</tr>
 				<tr>
-					<th class="table-info" scope="col" style="width:15%;text-align:center;">修改時間</th>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;vertical-align: middle;">修改時間</th>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
 				</tr>
 			</table>
+			<br>
 			<div id="btnArea" style="text-align:center">
 				<a href="${contextRoot}/post/viewbyall" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">返回</a>
 			</div>
 		</div>
+		<br>
 	</div>
 </div>	
 <br>

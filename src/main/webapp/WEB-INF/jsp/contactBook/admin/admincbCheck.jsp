@@ -6,10 +6,11 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../framePage/sideBar.jsp"></jsp:include>
-	
+
+<!-- ADMIN -->	
 <!-- CONTENT -->
 <div class="container">	
-	<h4>【Admin】聯絡簿查詢</h4>
+	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿查詢</h4>
 	<br>
 	
 	<div id="classInfo-area">
