@@ -42,14 +42,13 @@
 	<div class="container" align="">
 	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告</h3>
 		<br>
-		<br>
 		<span class="hidGroupsId" hidden>${users.groups.id}</span>
 		<div class="container">
 			<table id="pList" class="table table-bordered" style="text-align:center">
 	  			<thead id="pList-title">
 	    			<tr>
 	    				<th class="table-info" scope="col">功能</th>
-					    <th class="table-info" scope="col">編號</th>
+					    <th class="table-info" scope="col">文號</th>
 					    <th class="table-info" scope="col">標題</th>
 					    <th class="table-info" scope="col">最後更新時間</th>
 				    </tr>
