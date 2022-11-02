@@ -40,39 +40,35 @@
 <br><br>
 <div class="wrapper">
 	<div class="container">
-	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告</h3>
-		<br>
+	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告 (第${post.id}號文)</h3>
 		<br>
 		<div class="container">
-			<table id="pList" class="table table-bordered" style="text-align:center">
-	  			<thead id="pList-title">
-	    			<tr>
-	    				<th class="table-info" scope="col">功能</th>
-					    <th class="table-info" scope="col">編號</th>
-					    <th class="table-info" scope="col">標題</th>
-					    <th class="table-info" scope="col">最後更新時間</th>
-				    </tr>
-				</thead>
-				<tbody>
-				</tbody>
+			<table id="pList" class="table table-bordered">
+	    		<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">標題</th>
+					<td>${post.topic}</td>
+				</tr>
+
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">內文</th>
+					<td>${post.article}</td>
+				</tr>
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">發布時間</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+				</tr>
+				<tr>
+					<th class="table-info" scope="col" style="width:15%;text-align:center;">修改時間</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+				</tr>
 			</table>
-		</div>
-	</div>
-		<div class="card">
-			<div class="card-header">
-				<h4>${post.topic}<br></h4>
-			</div>
-			<div class="card-body">
-				<blockquote class="blockquote mb-0">
-					<p>${post.article}</p>
-					<footer class="blockquote-footer">${post.update_at}<cite
-							title="Source Title"></cite>
-					</footer>
-				</blockquote>
+			<div id="btnArea" style="text-align:center">
+				<a href="${contextRoot}/post/viewbyall" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">返回</a>
 			</div>
 		</div>
 	</div>
-</div>
+</div>	
+<br>
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
