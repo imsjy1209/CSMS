@@ -36,7 +36,7 @@ import com.team3.CSMS.service.ScoreService;
 import com.team3.CSMS.service.ScoreStudentService;
 import com.team3.CSMS.service.UserService;
 
-@SessionAttributes(names = {"users","school","teacher","student","parent"})
+@SessionAttributes(names = {"users","school","teacher","student","parent","shoppingCart"})
 @Controller
 public class UsersController {
 	
