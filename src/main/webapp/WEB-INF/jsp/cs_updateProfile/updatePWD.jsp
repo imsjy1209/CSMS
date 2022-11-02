@@ -2,7 +2,23 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 			<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-			<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+			<!-- 依group_id呈現navBar -->
+			<div class="navGroups">
+				<c:choose>
+				<c:when test="${users.groups.id == 3}">
+				<!-- TEACHER NAVBAR -->
+				<jsp:include page="../layout/nav_teacher.jsp" />
+				</c:when>
+				<c:when test="${users.groups.id == 4}">
+				<!-- STUDENT NAVBAR -->
+				<jsp:include page="../layout/nav_student.jsp" /> 
+				</c:when>
+				<c:when test="${users.groups.id == 5}">
+				<!-- PARENT NAVBAR -->
+				<jsp:include page="../layout/nav_parent.jsp" /> 
+				</c:when>
+				</c:choose>
+			</div>
 			<span class="userProfiledId" style='display:none'>${users.id}</span>
 			<div id="profilePwd" style="flex-direction: column;">
 				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;">
