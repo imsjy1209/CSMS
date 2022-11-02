@@ -160,38 +160,38 @@ button {
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active" data-interval="3000" data-pause="hover">
-								<img src="${contextRoot}/image/activityPhoto/01.PNG" class="d-block w-100" alt="...">
+								<img src="${contextRoot}/image/activityPhoto/01.jpg" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<div style="background-color:rgb(255,153,51,0.7)">
-	    								<h5>泳渡日月潭</h5>
-										<p>讚讚讚讚讚</p>
+	    								<!-- <h5>泳渡日月潭</h5>
+										<p>讚讚讚讚讚</p> -->
 									</div>
 								</div>
 							</div>
 							<div class="carousel-item" data-interval="3000" data-pause="hover">
-								<img src="${contextRoot}/image/activityPhoto/02.PNG" class="d-block w-100" alt="...">
+								<img src="${contextRoot}/image/activityPhoto/02.jpg" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<div style="background-color:rgb(255,153,51,0.7)">
-	    								<h5>大家一起來散步</h5>
-										<p>喔耶喔耶喔耶</p>
+	    								<!-- <h5>大家一起來散步</h5>
+										<p>喔耶喔耶喔耶</p> -->
 									</div>
 								</div>
 							</div>
 							<div class="carousel-item" data-interval="3000" data-pause="hover">
-								<img src="${contextRoot}/image/activityPhoto/03.PNG" class="d-block w-100" alt="...">
+								<img src="${contextRoot}/image/activityPhoto/03.jpg" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<div style="background-color:rgb(255,153,51,0.7)">
-	    								<h5>益智模型</h5>
-										<p>啦啦啦啦啦啦啦~~</p>
+	    								<!-- <h5>益智模型</h5>
+										<p>啦啦啦啦啦啦啦~~</p> -->
 									</div>
 								</div>
 							</div>
 							<div class="carousel-item" data-interval="3000">
-								<img src="${contextRoot}/image/activityPhoto/04.PNG" class="d-block w-100" alt="...">
+								<img src="${contextRoot}/image/activityPhoto/04.jpg" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<div style="background-color:rgb(255,153,51,0.7)">
-	    								<h5>參觀博物館</h5>
-										<p>有位偷看鏡頭~~齁~~</p>
+	    								<!-- <h5>參觀博物館</h5>
+										<p>有位偷看鏡頭~~齁~~</p> -->
 									</div>
 								</div>
 							</div>
