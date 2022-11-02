@@ -89,7 +89,7 @@
             <input type="text" class="form-control userName" placeholder="Enter Username" name="username" required>
 
             <label for="pwd"><b>Password</b></label>
-            <input type="password" class="form-control" placeholder="Enter Password" name="pwd" required>
+            <input type="password" class="form-control pwd" placeholder="Enter Password" name="pwd" required>
             <p style="color:#E00000">${LoginError}</p>
             <button type="submit" class="orangebtn">Login</button>
           </div>
@@ -115,29 +115,29 @@
       
       $(document).on('click','.oneKey',function(){
     	if($(this).text()=='School'){
-//     		console.log('schooooooooool')
+    		console.log('schooooooooool')
     		userName.val('AA002')
     		pwd.val('abc12345')
     		
     	}
     	else if($(this).text()=='Teacher'){
-//     		console.log('Teacheeeeeeeeeer')
+    		console.log('Teacheeeeeeeeeer')
     		userName.val('BA001')
     		pwd.val('abc12345')
     	}
     	
       	else if($(this).text()=='Student'){
-//     		console.log('Studennnnnnnnnt')
+    		console.log('Studennnnnnnnnt')
     		userName.val('CA001')
     		pwd.val('abc12345')
     	}
        	else if($(this).text()=='Parent'){
-//     		console.log('Parennnnnnnnnnnt')
+    		console.log('Parennnnnnnnnnnt')
     		userName.val('DA001')
     		pwd.val('abc12345')
     	}
        	else if($(this).text()=='Admin'){
-//     		console.log('Parennnnnnnnnnnt')
+    		console.log('Parennnnnnnnnnnt')
     		userName.val('admin')
     		pwd.val('abc12345')
     	}
