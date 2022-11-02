@@ -117,7 +117,6 @@
  						transition-delay: 0.5s; 
  						bottom: -6px 
 					} 
-
  					.menu ul { 
  						position: relative;
  						justify-content: center; 
@@ -126,7 +125,6 @@
  						gap: 40px; 
 
  					} 
-
 					.menu ul li {
 						list-style: none;
 						cursor: pointer;
