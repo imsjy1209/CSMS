@@ -2679,6 +2679,23 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    xhr3.open("GET","<c:url value='/updateStudentOrNotByID'/>"+"?absid="+absentid+"&absOrNot="+absOrNot,true); 
 		    xhr3.send();
 
+			const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 2000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+
 		    })
 		  }//end of funtion displayStudentListAndInfox
 		  
@@ -3015,6 +3032,22 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 	      // get the information from select value
 	      xhr3.open("GET","<c:url value='/updateUsersPermisson'/>"+"?userId="+userId+"&permission="+permission,true); 
 	      xhr3.send();
+		  const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1500,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})	
 		})  
 			
 		})

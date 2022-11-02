@@ -143,6 +143,7 @@ public class PostController {
 		return "post/viewpostbySchool";
 	}
 
+	// 【所有人】公告查詢
 	@GetMapping("post/viewbyall")
 	public String viewbyall(Model m) {
 		List<Post> list = pser.viewAllByAll();

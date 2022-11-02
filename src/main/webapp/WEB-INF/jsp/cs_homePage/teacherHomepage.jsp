@@ -19,352 +19,326 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 
-/* Footer Style (start) */
-html, body {
-	height: 100%;
-	margin: 0;
-}
+					*{
+						margin: 0px;
+						padding: 0px;
+					}
+					.announcementDiv {
+						border: 2px solid slateblue;
+						size: 100px;
+						width: 800px;
+						height: 550px;
+						top: 250px;
+						right: 150px;
+					}
 
-.wrapper { /* 每一頁都要用wrapper包起來 */
-	min-height: calc(100% - 107px); /*減去navebar(77px)和footer(40)高度*/
-}
+					.wrapper {
+						width: 100%;
+						margin: auto;
+					}
 
-.footer {
-	height: 40px; /*設定footer本身高度*/
-	background-color: #cbe6f5;
-	font-size: 15px;
-	text-align: center;
-	color: gray;
-}
 
-/* Footer Style (end) */
+ 					.content { 
+ 						width: 100%; 
+						overflow: auto; 
+					} 
 
-.scoreIcon {
-	top: 500px;
-	left: 120px;
-}
+					.article {
+						width: 70%;
+						/* border: 1px solid blue; */
+						float: right;
+						margin-right: 50px;
+					}
 
-.lessonIcon {
-	top: 375px;
-	left: 120px;
-}
+					.aside { 
+ 						width: 10%; 
+ 						/* border: 1px solid red;  */
+ 						float: left; 
+ 						margin-left: 50px; 
+ 					} 
+ 					.btnli {
+						border: none;
+						background-color: white;
+					}
+					
+					.menuToggle {
+						position: relative;
+						/* width: 70px;
+						height: 70px;
+						background-color: #699cfa; */
+						border-radius: 70px;
+						cursor: pointer;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}					
+					
+					.menuToggle::before {
+						content: '';
+						position: absolute;
+						font-weight: 200;
+						color: #ff9933;
+						transition: 1.5s;
+						text-align: center;
+					}
+					
+ 					.menu { 
+ 						position: absolute; 
+ 						width: 30px; 
+ 						height: 30px; 
+ 						border-radius: 70px; 
+						z-index: 1; 
+ 						transition: transform 0.5s, width 0.5s, height 0.5s; 
+						transition-delay: 1s, 0.5s, 0.5s; 
+ 						transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+					} 
+					
+					.menuToggle.active~.menu { 
+ 						/*width: 90px; 
+ 						height: 450px; 
+ 						z-index: 1; */
+ 						transform: translateX(50px); 
+ 						transition-delay: 0s, 0.5s, 0.5s; 
 
-.absCheckIcon {
-	top: 250px;
-	left: 120px;
-}
+ 					} 
 
-.activeIcon {
-	top: 625px;
-	left: 120px;
-}
+ 					.menu::before { 
+						content: ''; 
+						position: absolute; 
+						background: red; 
+						left: calc(25%-8px);
+						bottom: 4px;
+						transform: rotate(45deg);
+						border-radius: 2px;
+						transition: 0.5s;
+					}
 
-.hoverLight:hover {
-	filter: drop-shadow(0px 0px 10px #000000);
-}
+ 					.menuToggle.active~.menu::before { 
+ 						transition-delay: 0.5s; 
+ 						bottom: -6px 
+					} 
+ 					.menu ul { 
+ 						position: relative;
+ 						justify-content: center; 
+ 						align-items: center; 
+ 						height: 80px; 
+ 						gap: 40px; 
 
-.announcementDiv {
-	border: 2px solid slateblue;
-	size: 100px;
-	width: 700px;
-	height: 300px;
-	top: 250px;
-	right: 150px;
-}
+ 					} 
+					.menu ul li {
+						list-style: none;
+						cursor: pointer;
+						opacity: 0;
+						visibility: hidden;
+						transform: translateX(5px);
+						transition: 0.25s;
+						transition-delay: calc(0s+var(--i));
+						background-color: none;
+					}
 
-button {
-	border: none;
-	background: none;
-	outline: none;
-	color: #666666;
-}
+					.menuToggle.active~.menu ul li {
+						opacity: 1;
+						visibility: visible;
+						transform: translateY(10px);
+						transition-delay: calc(0.75s+var(--i));
+						height: 110%;
+					}
 
-.wrapper {
-	width: 100%;
-	margin: auto;
-}
+					.menu ul li button { 
+ 						font-size: 2px; 
+						text-decoration: none; 
+						background-color: none; 
+					} 
 
-.content {
-	width: 100%;
-	overflow: auto;
-}
-
-.article {
-	width: 70%;
-	border: 1px solid blue;
-	float: right;
-	margin-right: 50px;
-}
-
-.aside {
-	width: 10%;
-	border: 1px solid red;
-	float: left;
-	margin-left: 50px;
-}
-
-</style>
+ 					.menu ul li:hover button { 
+ 						color: #ff9933; 
+ 					} 
+					
+					
+		</style>
 
 </head>
 
 <body>
-
-	<!-- Student Navbar -->
+	<!-- Teacher Navbar -->
 	<jsp:include page="../layout/nav_teacher.jsp"></jsp:include>
-	<div class="wrapper">
-		<div class="content">
-			<div class="aside" style="border: 5px solid red;">
-
-
-
-
-			</div>
-			<div class="article ">
-				<div class="announcementDiv">
-					<h4>modal區</h4>
-				</div>
-
-				<!-- Button trigger modal -->
-				<button type="button" class="" data-toggle="modal"
-					data-target="#exampleModalCenter"></button>
-
-
-				<!-- Modal for Absent -->
-				<div class="modal fade" id="absentMID" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-lg"
-						role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
+			<br><br>
+			<div class="wrapper">
+				<div class="content">
+					<div class="aside">	
+					<!-- Modal選單區 -->	
+					<div class="menuToggle">
+						<i class='bx bx-list-ul' style="font-size: 90px; color:black" ></i>
+					</div>
+					<div class="menu">
+						<ul>
+							<li style="--i:0.1s;">
+								<button class="absCheckIcon btnli" data-toggle="modal" data-target="#absentMID">
+									<i style="font-size: 90px;" class='bx bx-calendar-check hoverLight'> </i>
 								</button>
-							</div>
-							<div class="modal-body">
-								<p>${student.name}</p>
-								<table>
-									<thead>
-										<tr><th>日期</th><th>課程</th><th>出席狀況</th></tr>
-									</thead>
-									<tbody>
-										<c:forEach var="personalAbsent" items="${personalAbsent}">
-											<tr>
-												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${personalAbsent.dayz}"/></td>
-												<td> ${personalAbsent.classList.course.courseSubject} </td>
-												<td>
-													<c:choose>
-														<c:when test="${personalAbsent.arrviedOrNot == 0}">缺席</c:when>
-														<c:when test="${personalAbsent.arrviedOrNot == 1}">出席</c:when>
-														<c:when test="${personalAbsent.arrviedOrNot == 2}">請假</c:when>
-													</c:choose>
-												</td>
-											</tr>
-										</c:forEach>
-								</tbody>
-								</table>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save
-									changes</button>
-
-							</div>
-						</div>
+							</li>
+							<li style="--i:0.2s;">
+								<button class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
+									<i style="font-size: 90px;" class='bx bx-book hoverLight' title="課程"></i>
+								</button>
+							</li>
+							<li style="--i:0.3s;">
+								<button class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+									<i style="font-size: 90px;" class='bx bx-book-reader hoverLight'></i>
+								</button>
+							</li>
+						</ul>
 					</div>
+				</div><!-- end of class=aside -->
 
-				</div>
-				<!-- end of modal -->
-
-
-			</div>
-			<!-- end of modal -->
-
-
-			<!-- Modal for Course -->
-			<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>courseMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-
-				</div>
-				<!-- end of modal -->
-
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for Activity -->
-			<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>activityMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for Score -->
-			<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-
-							<h5 class="modal-title" id="exampleModalCenterTitle">成績</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-
-
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<!-- 								<p>scoreMID test</p> -->
-
-							<c:forEach var="post" items="${scoreforStudent}">
-								<table>
-									<tr>
-										<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
-										<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
-										<td>第${post.frequency}次考試</td>&nbsp&nbsp&nbsp&nbsp
-										<td>${post.score}分</td>
-									</tr>
-								</table>
+				<div class="article ">
+					<div class="announcementDiv">
+						<!-- 公告區 -->
+						<table id="pList" class="table table-bordered" style="text-align:center">
+				  			<thead id="pList-title">
+				    			<tr>
+				    				<th class="table-info" scope="col">功能</th>
+								    <th class="table-info" scope="col">編號</th>
+								    <th class="table-info" scope="col">標題</th>
+								    <th class="table-info" scope="col">最後更新時間</th>
+							    </tr>
+							</thead>
+							<tbody>
+							<c:forEach var="post" items="${pListAll}">
+								<tr>
+									<td>
+										<a href="${contextRoot}/post/detail/${post.id}" type="button" class="btn btn-outline-success btn-sm">
+											<i class="bx bx bxs-show"></i>&nbsp;查看
+										</a>
+									</td>
+									<td>${post.id}</td>
+								    <td>${post.topic}</td>
+								    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.update_at}" /></td>
+								</tr>
 							</c:forEach>
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
+							</tbody>
+						</table>
+					</div> <!-- end of class=announcementDiv -->
+					<!-- Modal內容區 -->
+					<!-- Modal for Absent -->
+					<div class="modal fade" id="absentMID" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">
+										<b><i class='bx bx-check-square'></i>出缺勤紀錄</b>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<table class="table table-bordered" style="text-align:center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">學生姓名</th>
+												<th class="table-info" scope="col">日期</th>
+												<th class="table-info" scope="col">課程代號</th>
+												<th class="table-info" scope="col">科目名稱</th>
+												<th class="table-info" scope="col">出席狀況</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="personalAbsent" items="${personalAbsent}">
+												<tr>
+													<td>
+														${personalAbsent.student.name}
+													</td>
+													<td>
+														<fmt:formatDate pattern="yyyy-MM-dd" value="${personalAbsent.dayz}" />
+													</td>
+													<td>
+														${personalAbsent.classList.classCode}
+													</td>
+													<td>${personalAbsent.classList.course.courseSubject}</td>
+													<td>
+														<c:choose>
+															<c:when test="${personalAbsent.arrviedOrNot == 0}">缺席
+															</c:when>
+															<c:when test="${personalAbsent.arrviedOrNot == 1}">出席
+															</c:when>
+															<c:when test="${personalAbsent.arrviedOrNot == 2}">請假
+															</c:when>
+														</c:choose>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<!-- end of modal -->
-
-			<!-- Modal for ContactBook -->
-			<div class="modal fade" id="contactBookMID" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg"
-					role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle">標題</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+					<!-- end of modal for absent -->
+					<!-- Modal for ContactBook -->
+					<div class="modal fade" id="contactBookMID" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">
+										<b><i class='bx bx-book-reader'></i>&nbsp;聯絡簿 (最新3筆紀錄)</b>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+	  									<label for="exampleFormControlSelect1">選擇課程：</label>
+	  									<select class="form-control" id="classInfoList" name="classInfoList">
+	    									<option value="-1" selected="selected" hidden>請選擇</option>
+	  									</select>
+	  								</div>
+									<br>
+									<div id="sthHidden"><!-- 放studentId --></div>
+						  			<div>
+							  			<table id="cbList" class="table table-bordered" style="text-align:center;font-size:12px;">
+							  				<thead  id="cbList-title">
+							    				<tr>
+											    	<th class="table-info" scope="col" hidden>編號</th>
+											     	<th class="table-info" scope="col">建立日期</th>
+											     	<th class="table-info" scope="col">學生姓名</th>
+											    	<th class="table-info" scope="col">課程內容</th>
+											    	<th class="table-info" scope="col">回家作業</th>
+											     	<th class="table-info" scope="col">考試通知</th>
+											     	<th class="table-info" scope="col">狀態</th>
+											     	<th class="table-info" scope="col">簽章</th>
+										    	</tr>
+											</thead>
+										</table>
+						  			</div>
+					  			</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+									<a type="button" class="btn btn-primary" href="${contextRoot}/ContactBook/P_Index">看更多</a>
+								</div>
+							</div>	
 						</div>
-						<div class="modal-body">
-							<p>contactBookMID test</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- end of modal -->
-
-
-		</div>
-		<!-- end of modal -->
-
-
-	</div>
+					</div>		
+					<!-- end of modal -->	
+				</div> <!-- end of class=article -->
+			</div> <!-- end of class=content -->
+		</div> <!-- end of class=wrapper -->
 
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script type="text/javascript">
-	/* 宣告變數 */
-	let slideNum = 0;
-	let slideCount = $(".slides li").length;
-	let lastIndex = slideCount - 1;
-	
-	/* 建立圖片、點點運作的方法 */
-	function show() {
-	    // 點點顏色
-	    $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
-	
-	    // 圖片移動
-	    let slidemove = 0 - 400 * slideNum;
-	    $("ul.slides").css("left", slidemove);
-	}
-	
-	/* 點點、圖片 */
-	$(".dot li").mouseenter(function () {
-	    slideNum = $(this).index();
-	    show();
-	});
-	
-	/* 自動輪播(自動下一頁) */
-	// JS P.102：let Interval = setInterval(function,milliseconds)
-	let autoplay = setInterval(function () {
-	    slideNum++;
-	    if (slideNum > lastIndex) { slideNum = 0; }
-	    show();
-	}, 2000); // 把function放上下一頁的方法
-	
-	/* 輪播暫停 */
-	$(".wrapper").mouseover(function () {
-	    clearInterval(autoplay);
-	});
-	
-	/* 自動輪播重啟 */
-	$(".wrapper").mouseout(function () {
-	    let autoplay = setInterval(function () {
-	        slideNum++;
-	        if (slideNum > lastIndex) { slideNum = 0; }
-	        show();
-	    }, 2000);
-	}); // 第一次autoplay被mouseover清除，在mouseout時加回來
+<script>
+
+//=====================homepage功能按鍵=======================
+	let menuToggle = document.querySelector('.menuToggle');
+			menuToggle.onclick = function () {
+				menuToggle.classList.toggle('active');
+			}
 </script>
 
 </body>

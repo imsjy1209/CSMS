@@ -2,15 +2,12 @@ package com.team3.CSMS.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ScoreStudentDao;
 import com.team3.CSMS.dto.ScoreDto2;
 import com.team3.CSMS.model.Score;
-import com.team3.CSMS.model.Student;
 
 @Service
 @Transactional
@@ -37,8 +34,8 @@ public class ScoreStudentService {
 	}
 	
 	//
-	public List<Score> getScoreforStudent(Student student){
-		return scoreStudentDao.scoreforStudent(student);
+	public List<Score> getScoreforStudent(Integer sessionStuId){
+		return scoreStudentDao.scoreforStudent(sessionStuId);
 	}
 
 }

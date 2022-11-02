@@ -2,14 +2,12 @@ package com.team3.CSMS.dao;
 
 import java.util.List;
 
-import javax.servlet.jsp.jstl.sql.Result;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Score;
-import com.team3.CSMS.model.Student;
+
 
 public interface ScoreStudentDao extends JpaRepository<Score, Integer> {
 
@@ -21,8 +19,8 @@ public interface ScoreStudentDao extends JpaRepository<Score, Integer> {
 	//HQL: from Score
 	//SQL: select * from score 
 	//bean裡面對應的Student 變數名稱 private Student student;
-	@Query(value="from Score where student= :student")
-	List<Score> scoreforStudent(@Param("student") Student student);
+	@Query(value="select top(3)* from Score where fk_student_id = :sessionStuId order by id desc", nativeQuery = true)
+	List<Score> scoreforStudent(@Param("sessionStuId") Integer sessionStuId);
 
 
 

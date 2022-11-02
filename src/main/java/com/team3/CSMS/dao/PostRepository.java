@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	@Query(value = "from Post where isDelete = 0")
 	public List<Post> viewAllBySchool();
 
-	@Query(value = "from Post where isDelete = 0 and userType = 2")
+	@Query(value = "from Post where isDelete = 0 and userType = 2 order by update_at desc")
 	public List<Post> viewAllByAll();
 
 }

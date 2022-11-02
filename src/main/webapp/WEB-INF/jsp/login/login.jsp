@@ -89,8 +89,8 @@
             <input type="text" class="form-control userName" placeholder="Enter Username" name="username" required>
 
             <label for="pwd"><b>Password</b></label>
-            <input type="text" class="form-control pwd" placeholder="Enter Password" name="pwd" required>
-            <p>${LoginError}</p>
+            <input type="password" class="form-control" placeholder="Enter Password" name="pwd" required>
+            <p style="color:#E00000">${LoginError}</p>
             <button type="submit" class="orangebtn">Login</button>
           </div>
         </form>

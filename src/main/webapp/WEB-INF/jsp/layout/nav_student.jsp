@@ -10,6 +10,7 @@
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
+
 <style>
 
 /* navbar header */
@@ -91,7 +92,7 @@ li {
 <nav id="navbar" class="navbar sticky-top navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
 	<!-- Logo -->
 	<div id="navbar-brand">
-	  	<a class="navbar-brand" href="${contextRoot}/student.Homepage" >
+	  	<a class="navbar-brand" href="${contextRoot}/users/gotohomepage" >
 	  		<img src="${contextRoot}/image/navbarLogo.png" alt="" class="csmslogo" title="回首頁" />
 	  	</a>
   	</div>
