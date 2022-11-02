@@ -291,16 +291,30 @@ button {
 						<div class="modal-body">
 							<!-- 								<p>scoreMID test</p> -->
 
-							<c:forEach var="post" items="${scoreforParent}">
-								<table class="table">
+<%-- 							<c:forEach var="post" items="${scoreforParent}"> --%>
+								<table class="table table-bordered" style="text-align:center">
+									<thead>
+										<tr>
+											<th class="table-info" scope="col">學生名字</th>
+											<th class="table-info" scope="col">課程代號</th>
+											<th class="table-info" scope="col">科目名稱</th>
+											<th class="table-info" scope="col">次數</th>
+											<th class="table-info" scope="col">分數</th>
+										</tr>
+									</thead>
+										<tbody>
+										<c:forEach var="post" items="${scoreforParent}"> 
 									<tr>
-										<td>名字:${post.student.name}</td> &nbsp&nbsp&nbsp&nbsp
-										<td>科目:${post.classlist.classCode}</td>&nbsp&nbsp&nbsp&nbsp
-										<td>第${post.frequency}次考試</td>&nbsp&nbsp&nbsp&nbsp
-										<td>${post.score}分</td>
+										<td>${post.student.name}</td>
+										<td>${post.classlist.classCode}</td>
+										<td>${post.classlist.course.courseSubject}</td>
+										<td>${post.frequency}</td>
+										<td>${post.score}</td>
 									</tr>
-								</table>
+								
 							</c:forEach>
+							</tbody>
+							</table>
 
 						</div>
 						<div class="modal-footer">
