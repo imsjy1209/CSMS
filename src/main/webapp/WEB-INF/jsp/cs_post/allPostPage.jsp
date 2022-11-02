@@ -4,7 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<%-- <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include> --%>
+
+<c:choose>
+  <c:when test="${users.groups.id == 2}">
+   <!-- SCHOOL NAVBAR -->
+<jsp:include page="../framePage/sideBarForNotAjaxForQueen.jsp"></jsp:include>
+  </c:when>
+  
+  <c:when test="${users.groups.id == 1}">
+   <!-- ALL NAVBAR -->
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
+  </c:when>
+ </c:choose>
 
 	<div class="container">
 	<h3 class='main-title'><i style='font-size:36px;'class='bx bxs-calendar-event' ></i>公告管理</h3>

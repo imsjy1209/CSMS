@@ -327,42 +327,7 @@ color:black;
                     <a href="#">About</a>
                 </li>
                 
-                <li>
-                    <a href="#registerInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">註冊相關</a>
-                     <ul class="collapse list-unstyled" id="registerInfo">
-                        <li>
-                            <a id="register-Btn" href="${contextRoot}/createRegister.page">Register(新增註冊)</a>
-                        </li>
-                    </ul>
-                </li>
                 
-                <li>
-                    <a href="#accessInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a>
-                     <ul class="collapse list-unstyled" id="accessInfo">
-                        <li>
-                            <a id="right-Btn" href="${contextRoot}/courseAllPageBackAjax.page">AccessManager(更改權限)</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                         <li>
-                            <a id="courseCreate-Btn" href="${contextRoot}/courseAllPageBackAjax.page">CourseCreate(建立商品)</a>
-                        </li>
-                        
-                        <li>
-                            <a id="course-Btn" href="${contextRoot}/courseAllPageBackAjax.page">Course(商品)</a>
-                        </li>
-                        <li>
-                            <a id="orderList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">OrderList(訂單)</a>
-                        </li>
-                         <li>
-                            <a id="orderDetail-Btn"  href="${contextRoot}/courseAllPageBackAjax.page">購買/排課狀態(訂單明細)</a>
-                        </li>
-                    </ul>
-                </li>
                 
                 
                 <li>
@@ -399,9 +364,6 @@ color:black;
                     <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">聯絡簿相關</a>
                      <ul class="collapse list-unstyled" id="contactBookInfo">
                         <li>
-                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
-                        </li>
-                        <li>
                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
                         </li>
                     </ul>
@@ -411,36 +373,11 @@ color:black;
                 <li>
                     <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
                      <ul class="collapse list-unstyled" id="postInfo">
-                         <li>
+                        <li>
                             <a id="PostList-Btn" href="${contextRoot}/createPost.controller">建立公告</a>
-                        </li> 
+                        </li>
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/showAllPost.controller">PostList(所有公告)</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#expenseInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">財務相關</a>
-                     <ul class="collapse list-unstyled" id="expenseInfo">
-                        <li>
-                            <a id="expense-Btn" href="${contextRoot}/expenseHome.page">FinancialChart(財務圖表)</a>
-                        </li>
-                        <li>
-                            <a id="expense-Btn" href="${contextRoot}/expenseQueryAndCreate.page">CostRecord(損益記錄)</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                
-                <li>
-                    <a href="#activityInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">活動相關</a>
-                     <ul class="collapse list-unstyled" id="activityInfo">
-                        <li>
-                            <a id="activity-Btn" href="${contextRoot}/createActivity.controller">CreateActivity(建立活動)</a>
-                        </li>
-                        <li>
-                            <a id="activity-Btn" href="${contextRoot}/findAllActivity.controller">ShowAllActivity(所有活動)</a>
                         </li>
                     </ul>
                 </li>

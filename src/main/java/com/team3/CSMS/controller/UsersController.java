@@ -248,7 +248,7 @@ public class UsersController {
 		case 2:
 			School school = users.getSchool();
 			m.addAttribute("school", school);
-			return "cs_course/courseIndexBackAjax"; // 校方(導師)-後台
+			return "redirect:/ContactBook/Sc_Index"; // 校方(導師)-後台
 		
 		case 3:
 			Teacher teacher = users.getTeacher();

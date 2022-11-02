@@ -489,6 +489,9 @@ cursor: pointer;
                     <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
                      <ul class="collapse list-unstyled" id="postInfo">
                         <li>
+                            <a id="PostList-Btn" href="${contextRoot}/createPost.controller">建立公告</a>
+                        </li> 
+                        <li>
                             <a id="PostList-Btn" href="${contextRoot}/showAllPost.controller">PostList(所有公告)</a>
                         </li>
                     </ul>
