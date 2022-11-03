@@ -274,6 +274,15 @@ public class UsersController {
 			return "cs_homePage/teacherHomepage";
 		case 4:
 			Student student = users.getStudent();
+			
+			//======Course Info which already have===========
+			List<OrderDetail> oneOrderList = orderDetailService.findByStudentIsAndConfirmOrderIs(student, 2);
+			//======End of Course Info which already have====
+			
+			//======Class Info===============================
+			List<ClassStudentList> oneCSL = classStudentListService.findByStudentIs(student);
+			//======End of Class Info========================
+			
 			List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
@@ -284,6 +293,10 @@ public class UsersController {
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
 			m.addAttribute("activities", activities);
+			
+			m.addAttribute("oneOrderDetailList", oneOrderList);
+			m.addAttribute("oneCSL", oneCSL);
+			
 			return "cs_homePage/studentHomepage";
 		case 5:
 			Parent parent = users.getParent();
