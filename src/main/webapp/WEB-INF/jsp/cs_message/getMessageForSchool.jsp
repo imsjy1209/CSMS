@@ -131,9 +131,9 @@
 	$('.orangebtn').click(function () {
 				let msgtitle=$(this).parent().parent().parent().parent().prev().children().find('.tt').text();
 				let parentName=$(this).parent().parent().parent().parent().prev().find('.ptName').text();
-				console.log(parentName);
+				// console.log(parentName);
 				str='<form action="${pageContext.request.contextPath}/message/addMessageBySchool" method="post"> '+
-					'<div style="">'+
+					'<div style="display:none">'+
 					'<input type="text" name="titleOfMsg" value="'+msgtitle+'">'+
 					'<input type="text" name="typeOfMsg" value="導師回復"> '+
 					'<input type="text" name="parentid" value="'+parentName+'"> '+
@@ -146,5 +146,13 @@
 				CKEDITOR.config.width = 800;
 				CKEDITOR.config.height = 300;
 			})
+
+//=======================版面動作=======================
+$(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });				
+
 </script>
 </html>

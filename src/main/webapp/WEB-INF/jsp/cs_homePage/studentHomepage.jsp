@@ -32,15 +32,18 @@
 					.announcementDiv {
 						justify-content: center;
 						width: 100%;
-						
 						/* border: 2px solid slateblue;	 */
 					}
-					
+					.menu{
+						margin: auto;
+						
+					}
 					.aside {
 						/* border: 1px solid red;  */
 						margin-left: 50px;
 						margin-top: 5px;
 						position: relative;
+						justify-content: center;
 					}
 					.btnli {
 						border: none;
@@ -50,9 +53,9 @@
 					.menu ul{
 						position: relative;
 						display: flex;
-						gap: 50px;
+						gap: 60px;
 						justify-content: center;
-						margin-top: 20px;
+						margin-top: 60px;
 					}
 					
 					.menu ul li{
@@ -75,9 +78,9 @@
 						content: '';
 						position:absolute;
 						inset: 30px;
-						box-shadow: 0 0 0 10px var(--clr),
-						0 0 0 15px var(--bg),
-						0 0 0 22px var(--clr);
+						box-shadow: 0 0 0 15px var(--clr),
+						0 0 0 20px var(--bg),
+						0 0 0 27px var(--clr);
 						transition: 0.5s;
 					}
 					.menu ul li:hover:before{
@@ -101,18 +104,15 @@
 					}
 					
 					.menu ul li:hover a{
-						font-size: 3em;
+						font-size: 70px;
 						filter: drop-shadow(0 0 20px var(--clr))
 								drop-shadow(0 0 40px var(--clr))
 								drop-shadow(0 0 60px var(--clr));			
 					}
 				</style>
-
 			</head>
 
 			<body>
-				<!-- Student Navbar -->
-				
 				<!-- Modal選單區 -->
 				<div class="wrapper">
 							<div class="announcementDiv"><!-- 輪播區 -->
@@ -122,19 +122,23 @@
 									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 									</ol>
 									<div class="carousel-inner">
 									<div class="carousel-item active">
-										<img src="${contextRoot}/image/activityPhoto/01.jpg" class="d-block w-100" alt="...">
+										<img src="${contextRoot}/image/activityPhoto/01.png" class="d-block w-100" alt="...">
 									</div>
 									<div class="carousel-item">
-										<img src="${contextRoot}/image/activityPhoto/02.jpg" class="d-block w-100" alt="...">
+										<img src="${contextRoot}/image/activityPhoto/02.png" class="d-block w-100" alt="...">
 									</div>
 									<div class="carousel-item">
-										<img src="${contextRoot}/image/activityPhoto/03.jpg" class="d-block w-100" alt="...">
+										<img src="${contextRoot}/image/activityPhoto/03.png" class="d-block w-100" alt="...">
 									</div>
 									<div class="carousel-item">
-										<img src="${contextRoot}/image/activityPhoto/04.jpg" class="d-block w-100" alt="...">
+										<img src="${contextRoot}/image/activityPhoto/04.png" class="d-block w-100" alt="...">
+									</div>
+									<div class="carousel-item">
+										<img src="${contextRoot}/image/activityPhoto/05.png" class="d-block w-100" alt="...">
 									</div>
 									</div>
 									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -148,7 +152,7 @@
 								</div>
 							</div><!-- end of class=announcementDiv -->
 							<div class="aside"><!--  按鈕icon-->
-								<div class="menu">
+								<div class="menu" >
 									<ul>
 										<li style="-i: 0.1s;--clr:#1877f2;">
 											<a class="absCheckIcon btnli" data-toggle="modal" data-target="#absentMID">
@@ -245,8 +249,7 @@
 						</div>
 					</div>
 					<!-- end of modal for absent -->
-					
-					
+	
 					<!-- Modal for Course -->
 					<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -261,7 +264,6 @@
 									</button>
 								</div>
 								<div class="modal-body">
-								
 									<table class="table table-bordered" style="text-align: center">
 										<thead>
 											<tr>
@@ -363,10 +365,7 @@
 						</div>
 					</div>
 					<!-- end of modal for ClassInfo-->
-					
-					
-					
-					
+	
 					<!-- Modal for Activity -->
 					<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -395,8 +394,8 @@
 														<p class="card-text">
 															${activity.place}<br>${activity.date}</p>
 														<p class="card-text">
-															<small class="text-muted"><a
-																	href="${contextRoot}/getmyact/getact?id=${activity.id}"
+															<small class="text-muted">
+																<a href="${contextRoot}/getmyact/getact?id=${activity.id}"
 																	class="card-link">查看詳情</a></small>
 														</p>
 													</div>
@@ -413,7 +412,6 @@
 						</div>
 					</div>
 					<!-- end of modal for activity-->
-
 					<!-- Modal for Score -->
 					<div class="modal fade" id="scoreMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -512,7 +510,6 @@
 																	<td>${top3cbList.courseContent}</td>
 																</c:otherwise>
 															</c:choose>
-
 															<c:choose>
 																<c:when test="${top3cbList.homework == null}">
 																	<td></td>
@@ -521,7 +518,6 @@
 																	<td>${top3cbList.homework}</td>
 																</c:otherwise>
 															</c:choose>
-
 															<c:choose>
 																<c:when test="${top3cbList.quizNotice == null}">
 																	<td></td>

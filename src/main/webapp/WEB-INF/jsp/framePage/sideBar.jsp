@@ -231,7 +231,7 @@ cursor: pointer;
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-/*             background: #7386D5; */
+            background: #7386D5;
             background: cornflowerblue;
             color: #fff;
             transition: all 0.3s;
