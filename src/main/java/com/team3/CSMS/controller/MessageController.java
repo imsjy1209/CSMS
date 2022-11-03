@@ -76,6 +76,16 @@ public class MessageController {
 		return "message/school//getallbyschool";
 	}
 	
+	//=========Neil 1103================================
+	@GetMapping("/messageForSchool.controller")
+	public String messageForSchool(@SessionAttribute("school")School school,Model m) {		
+		List<Messagez> list = mSer.findBySchoolIsOrderByCreateTimeDesc(school);
+		
+		m.addAttribute("list",list);
+		return "cs_message/getMessageForSchool";
+	}
+	//=========End of Neil 1103================================
+	
 	@GetMapping("message/getallByParent")
 	public String getallByParent(@SessionAttribute("parent")Parent parent,Model m) {		
 		List<Messagez> list = mSer.getAllByParent(parent);

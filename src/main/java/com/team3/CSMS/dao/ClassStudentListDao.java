@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.ClassStudentList;
-import com.team3.CSMS.model.OrderList;
+import com.team3.CSMS.model.Student;
 
 public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Integer> {
     @Query(value= "SELECT * from [ClassStudentList] as [csl] "+
@@ -26,5 +26,7 @@ public interface ClassStudentListDao extends JpaRepository<ClassStudentList, Int
 	
 	List<ClassStudentList> findAllByOrderByIdDesc();
 	List<ClassStudentList> findAllByOrderByIdAsc();
+	
+	List<ClassStudentList> findByStudentIs(Student student);
 	
 }

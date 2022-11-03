@@ -22,7 +22,8 @@ public interface OrderDetailDao extends JpaRepository<OrderDetail,Integer> {
 	
 	List<OrderDetail> findByStudentIs(Student student);
 	
-	List<OrderDetail> findByOrderByIdDesc();
-	List<OrderDetail> findByOrderByIdAsc();
+	
+//	List<OrderDetail> findByOrderByIdDesc();
+//	List<OrderDetail> findByOrderByIdAsc();
 	
 }
