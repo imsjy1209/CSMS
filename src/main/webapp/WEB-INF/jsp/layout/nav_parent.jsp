@@ -10,17 +10,17 @@
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
+
 <style>
 
 /* navbar header */
 #navbar {
 	background-color: #496CAD;
-	
 }
 
 /* Logo */
 #navbar-brand {
-	width:70px;
+	width: 70px;
 }
 
 .csmslogo {
@@ -28,7 +28,7 @@
 }
 
 /* 單一選單 */
-li{
+li {
 	height: 200%;
 	font-size: 15px; 
 }
@@ -41,47 +41,50 @@ li{
 /* li:hover {
 	border-bottom: 2px solid yellow;
 } */
-
 .navbar-right {
-	float:right;
-	width:20%;
+	float: right;
+	width: 20%;
 }
 
-
-.navbar-right>li{
-	color:white;
+.navbar-right>li {
+	color: white;
 	/* vertical-align：middle; 這個好像會跳錯誤 */
 }		    	    
 
 .btn-2 {
-	 letter-spacing: 0;
+	letter-spacing: 0;
 }
- .btn-2:hover, .btn-2:active {
-	 letter-spacing: 0px;
+
+.btn-2:hover, .btn-2:active {
+	letter-spacing: 0px;
 }
- .btn-2:after, .btn-2:before {
-	 backface-visibility: hidden;
-	 border: 1px solid rgba(255, 255, 255, 0);
-	 bottom: 0px;
-	 content: " ";
-	 display: block;
-	 margin: 0 auto;
-	 position: relative;
-	 transition: all 280ms ease-in-out;
-	 width: 0;
+
+.btn-2:after, .btn-2:before {
+	backface-visibility: hidden;
+	border: 1px solid rgba(255, 255, 255, 0);
+	bottom: 0px;
+	content: " ";
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	transition: all 280ms ease-in-out;
+	width: 0;
 }
- .btn-2:hover:after, .btn-2:hover:before {
-	 backface-visibility: hidden;
-	 border-color: #ff9933;
-	 transition: width 350ms ease-in-out;
-	 width: 70%;
+
+.btn-2:hover:after, .btn-2:hover:before {
+	backface-visibility: hidden;
+	border-color: #ff9933;
+	transition: width 350ms ease-in-out;
+	width: 70%;
 }
- .btn-2:hover:before {
-	 bottom: auto;
-	 top: 0;
-	 width: 70%;
+
+.btn-2:hover:before {
+	bottom: auto;
+	top: 0;
+	width: 70%;
 }
- 
+
+
 </style>
 </head>
 <body>
@@ -123,6 +126,7 @@ li{
 	        </a>
 	        <div class="dropdown-menu">
 	          <a class="dropdown-item lia" href="${contextRoot}/message/getallByParent">查看訊息</a>
+			  <a class="dropdown-item lia" href="${contextRoot}/message">傳送訊息</a>
 	        </div>
 	      </li>
 	      
@@ -130,7 +134,7 @@ li{
 	    <!-- 靠右 -->
 		<ul class="nav navbar-nav navbar-right ">
 		    <li class="nav-item active btn-2 leftBtn">
-		    	<a class="leftBtn" href="#" style="color:white;text-decoration: none;">
+		    	<a class="leftBtn" href="${contextRoot}/passw0rdUpdate.page" style="color:white;text-decoration: none;">
 	        		<i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
 	        	</a>
 	      	</li>
@@ -148,6 +152,9 @@ li{
 
 <script type="text/javascript" src="${contextRoot}/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="${contextRoot}/js/bootstrap.bundle.js"></script>
-
+<script type="text/javascript" src="${contextRoot}/js/popper.min.js"></script>
+<script>
+	$('.dropdown-toggle').dropdown();
+</script>
 </body>
 </html>

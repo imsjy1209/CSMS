@@ -129,7 +129,7 @@ li{
 	    <!-- 靠右 -->
 		<ul class="nav navbar-nav navbar-right ">
 		    <li class="nav-item active btn-2 leftBtn">
-		    	<a class="leftBtn" href="#" style="color:white;text-decoration: none;">
+		    	<a class="leftBtn" href="${contextRoot}/passw0rdUpdate.page" style="color:white;text-decoration: none;">
 	        		<i class='bx bxs-user-circle' style="font-size:15px;line-height:40px"></i><span><b>&nbsp;會員資料</b></span>
 	        	</a>
 	      	</li>
@@ -147,6 +147,9 @@ li{
 
 <script type="text/javascript" src="${contextRoot}/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="${contextRoot}/js/bootstrap.bundle.js"></script>
-
+<script type="text/javascript" src="${contextRoot}/js/popper.min.js"></script>
+<script>
+	$('.dropdown-toggle').dropdown();
+</script>
 </body>
 </html>

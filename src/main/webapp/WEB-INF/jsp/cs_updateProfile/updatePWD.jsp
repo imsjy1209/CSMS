@@ -1,157 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-			<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-			<!-- 依group_id呈現navBar -->
-			<div class="navGroups">
-				<c:choose>
-				<c:when test="${users.groups.id == 3}">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+	<title>Welcome</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<!-- BOX ICONS -->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+		integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+	<!-- NAVBAR -->
+	<!-- 依group_id呈現navBar -->
+	<div class="navGroups">
+		<c:choose>
+			<c:when test="${users.groups.id == 3}">
 				<!-- TEACHER NAVBAR -->
 				<jsp:include page="../layout/nav_teacher.jsp" />
-				</c:when>
-				<c:when test="${users.groups.id == 4}">
+			</c:when>
+			<c:when test="${users.groups.id == 4}">
 				<!-- STUDENT NAVBAR -->
 				<jsp:include page="../layout/nav_student.jsp" /> 
-				</c:when>
-				<c:when test="${users.groups.id == 5}">
+			</c:when>
+			<c:when test="${users.groups.id == 5}">
 				<!-- PARENT NAVBAR -->
 				<jsp:include page="../layout/nav_parent.jsp" /> 
-				</c:when>
-				</c:choose>
-			</div>
+			</c:when>
+		</c:choose>
+	</div>
+	<!-- CONTENT -->
+	<br><br>
+	<div class="wrapper">
+		<div class="container">
+			<h3><i style="font-size:36px;" class="bx bxs-id-card"></i>&nbsp;會員資料</h3>
+		</div>
+		<br><br>
+		<div class="container" style="display:flex;justify-content:center;flex-wrap: wrap;">
+			<br>
+			<!-- users_id -->
 			<span class="userProfiledId" style='display:none'>${users.id}</span>
-			<div id="profilePwd" style="flex-direction: column;">
-				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;">
-					<div class="card-body">
-					  <h5 class="card-title">Personal Profile</h5>
+			<!-- users_id -->
+			<div id="profilePwd" style="flex-direction:column;width:80%">
+				<!-- 個人資料 -->
+				<div class="card" style="width:70%;flex-direction:column;margin:auto;justify-content:center;">
+					<!-- 項目名稱 -->
+					<div class="card-body" style="background-color:#FCFCFC">
+						<h5 class="card-title"><b><i class='bx bx-face'></i>&nbsp;個人資料</b></h5>
 					</div>
 					<ul class="list-group list-group-flush " id="porfileLi">
 					</ul>
-					<div class="" style="display: flex;">
+					<!-- Modal功能鈕 -->
+					<div class="BtnArea" style="display:flex;">
 						<!-- 改密碼 -->
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 5px;">
-							Change password
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 5px;">
+							Change Password
 						</button>
+						&nbsp;&nbsp;
 						<!-- 改電話 -->
-						<input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2" value="change contact" id="changect" style="margin: 5px;">
+						<input type="hidden" class="btn btn-info" data-toggle="modal" data-target="#exampleModa2" value="Change Contact" id="changect" style="margin: 5px;">
 					</div>
 				</div>
-				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;" id="kidsList">
+				<br>
+				<!-- 小孩資料 -->
+				<div class="card" style="width:70%;flex-direction:column; margin:auto;" id="kidsList">
+					<!-- refer to script -->
 				</div>
-			</div>
-
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalCenterTitle">▰ 密碼修改</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form class="form" method="post" action="/Project/TeaherPwd">
-									<div class="d1">
-										<label for="idPwd1" class="t1"> <b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-										</label>
-										<input type="text" id="idPwd1" name="password1" value=""
-											placeholder="請輸入現在使用的密碼" maxlength="30" size="20" autocomplete="off"
-											aria-invalid="false"><br> <span
-											id="h" style="color:white">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp1"
-											class="">&nbsp</span>
-									</div>
-									<div class="d2">
-										<label for="idPwd2" class="t2"> <b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-										</label> <input type="text" id="idPwd2" name="password2" value=""
-											placeholder="請輸入新密碼" maxlength="30" size="20" autocomplete="off"
-											aria-invalid="false"><br> <span
-											id="h" style="color:white">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="idsp2"
-											class="">&nbsp</span>
-									</div>
-									<div class="d3">
-										<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp</b>
-										</label> <input type="text" id="idPwd3" name="password3" value=""
-											placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off"
-											aria-invalid="false"><br> <span id="h" style="color:white">確認密碼：&nbsp&nbsp&nbsp</span><span
-											id="idsp3" class="">&nbsp</span>
-									</div>
-							</div>
-							<div class="d4 modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-								<button type="button" class="btn btn-primary btnn" id="btn" disabled>變更密碼</button>
-							</div>
-							</form>
+			</div><!-- end of id="profilePwd" -->
+		
+			<!-- Modal -->
+			<!-- 改密碼Modal -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalCenterTitle">▰ 密碼修改</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-					</div>
-				</div>
-				<!-- Button trigger modal -->
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModa2" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<!-- <div class="modal-dialog" role="document"> -->
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">更改電話</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div>
-									<label for="phonepwd" class="t1"> <b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-									</label>
-									<input type="text" id="phonePwd" name="phonePwd" value="" placeholder="請輸入現在使用的密碼"
-										maxlength="30" size="20" autocomplete="off" aria-invalid="false"><br> <span
-										id="h">密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="phonePwdSpan"
-										class="">&nbsp</span>
-								</div>
-								<div>
-									<label for="phone" class="t1"><b>電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
-									</label>
-									<input type="text" id="phone" name="phone" value="" placeholder="請輸入電話號碼"
-										maxlength="10" size="20">
-									<br> <span id="h">電話：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><span id="phoneSpan"
-										class="">&nbsp</span>
-								</div>
-							</div>
-							<div class="modal-footer ">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								
-								<input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2" value="change contact" id="sendPhone">
-								<!-- <button type="button" class="btn btn-primary" id="savePhone">Save changes</button> -->
-							</div>
+						<div class="modal-body">
+							<div class="d1">
+								<label for="idPwd1" class="t1">
+									<b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+								</label>
+								<input type="text" id="idPwd1" name="password1" value=""
+									placeholder="請輸入現在使用的密碼" maxlength="30" size="20" autocomplete="off"
+									aria-invalid="false">
+								<br>
+								<span id="h" style="color:white">舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+								<span id="idsp1" class="">&nbsp</span>
+							</div><!-- end of d1 -->
+							<div class="d2">
+								<label for="idPwd2" class="t2"> 
+									<b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+								</label>
+								<input type="text" id="idPwd2" name="password2" value=""
+									placeholder="請輸入新密碼" maxlength="30" size="20" autocomplete="off"
+									aria-invalid="false">
+								<br>
+								<span id="h" style="color:white">新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+								<span id="idsp2" class="">&nbsp</span>
+							</div><!-- end of d2 -->
+							<div class="d3">
+								<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp</b>
+								</label>
+								<input type="text" id="idPwd3" name="password3" value=""
+									placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off"
+									aria-invalid="false">
+								<br>
+								<span id="h" style="color:white">確認密碼：&nbsp&nbsp&nbsp</span>
+								<span id="idsp3" class="">&nbsp</span>
+							</div><!-- end of d3 -->
 						</div>
-					</div>
-				</div>
-			</div><!-- end of profile Div -->
+						<div class="d4 modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+							<button type="button" class="btn btn-primary btnn" id="btn" disabled>變更密碼</button>
+						</div>
+					</div><!-- end of modal-content -->
+				</div><!-- end of role="document" -->
+			</div><!-- end of modal -->
 			
-			<!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
-			<!--       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
-			<!--       crossorigin="anonymous"></script> -->
+			<!-- 改電話Modal -->
+			<div class="modal fade" id="exampleModa2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">更改電話</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div>
+								<label for="phonepwd" class="t1"> <b>新電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+								</label>
+								<input type="text" id="phonePwd" name="phonePwd" value="" placeholder="請輸入現在使用的密碼"
+									maxlength="30" size="20" autocomplete="off" aria-invalid="false">
+								<br>
+								<span id="h" style="color:white">新電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+								<span id="phonePwdSpan" class="">&nbsp</span>
+							</div>
+							<div>
+								<label for="phone" class="t1"><b>舊電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
+								</label>
+								<input type="text" id="phone" name="phone" value="" placeholder="請輸入電話號碼" maxlength="10" size="20">
+								<br>
+								<span id="h" style="color:white">舊電話號碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+								<span id="phoneSpan" class="">&nbsp</span>
+							</div>
+						</div>
+					<div class="modal-footer ">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+						<input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2" value="change contact" id="sendPhone">
+					</div>
+				</div><!-- end of modal-content -->
+			</div><!-- end of role="document" -->
+		</div><!-- end of modal -->
+	</div><!-- end of container Div -->	
+</div><!-- end of wrapper Div -->
 
-			<!--     <script -->
-			<!--       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
-			<!--       integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
-			<!--       crossorigin="anonymous"></script> -->
+<br>
+<!-- footer -->
+<jsp:include page="../footer/footer.jsp"></jsp:include>
 
-			<!--     <script -->
-			<!--       src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
-			<!--       integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
-			<!--       crossorigin="anonymous"></script> -->
+<!-- CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+		
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+		
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+		
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+    integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
 
-			<!--     <script src="https://code.jquery.com/jquery-3.6.0.min.js" -->
-			<!--       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" -->
-			<!--       crossorigin="anonymous"></script>   -->
-			<!-- <script src="/Project/Teacher/scripts/TeacherInfo.js"></script> -->
-
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-			<script>
+<!-- SCRIPT -->
+<script type="text/javascript">
 				window.onload = function () {
 					updateProfileFunction();
 				}
@@ -179,7 +222,7 @@
 								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+userProfile.parent.name+'"></li>'+
 												'<li class="list-group-item" id="">身分：<input type="text" readonly style="border: none;" value="'+userProfile.groups.groupsName+'"></li>';
 								$('#porfileLi').html(profileStr);
-								let kidsList ='<div class="card-body"><h5 class="card-title" >學員清單</h5></div>'+
+								let kidsList ='<div class="card-body" style="background-color:#FCFCFC"><h5 class="card-title"><b><i class="bx bxs-face"></i>&nbsp;學員清單</b></h5></div>'+
 											  '<table class="table table-hover"><thead><tr><th scope="col">姓名</th><th scope="col">性別</th><th scope="col">學校</th></tr><thead><tbody>'
 								let kids=userProfile.parent.student.length
 								for(let i=0;i<kids;i++){
@@ -261,9 +304,9 @@
 								let emergencyContact=userProfile.student.parent.name;
 								let emergencyPhone=userProfile.student.parent.tel;
 								let stuProfileRelationship=	userProfile.student.relationship
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別: <input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
+								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別：<input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
 												'<li class="list-group-item" id="">學校：<input type="text" readonly style="border: none;" value="'+stuProfileSchoolName+' '+stuProfileGrade+'年級'+'"></li>'+
-												'<li class="list-group-item" id="">緊急聯絡人：<input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係: <input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
+												'<li class="list-group-item" id="">緊急聯絡人：<input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係：<input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
 												'<li class="list-group-item" id="">緊急連絡電話：<input type="text" readonly style="border: none;" value="'+emergencyPhone+'"></li>';
 								$('#porfileLi').html(profileStr);
 							}
@@ -335,7 +378,7 @@
 								}
 								// 檢查欄位是否空白未填
 								if (pwd1Length < 1) {
-									msg1.append = "❌ 請輸入密碼";
+									msg1.innerHTML = "❌ 請輸入密碼";
 									msg1.style.color = "red";
 									$(this).attr("aria-invalid", "false");
 									// console.log(this);
@@ -518,6 +561,24 @@
 
 
 //     		})
+
+			/* 消除個人資料中input focus的框框 */
+			$(document).on("click", function(){
+				$("#profilePwd").find("input[type='text']").on("focus",function(){
+					$(this).css({
+						"outline": "none",
+						"border-color":"white",
+						"box-shadow":"white"
+					})	
+				})
+			});
+
+			//		#profilePwd>input[type="text"]:focus {
+			//			outline: none;
+			//			border-color:white;
+			//			box-shadow:white;
+			//		}
+
 			</script>
 			</body>
 
