@@ -160,7 +160,7 @@
 											</a>
 										</li>
 										<li style="-i: 0.3s;--clr:#f69930;">
-											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#classMID">
 												<i class='bx bx-barcode'></i>
 											</a>
 										</li>
