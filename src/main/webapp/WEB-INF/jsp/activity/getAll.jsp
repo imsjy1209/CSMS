@@ -16,19 +16,23 @@
 	<!-- CONTENT -->
 	<br><br>
 	<div class="wrapper">
-	<div class="container" align="center">
-<!-- 		<div align="center"> -->
-			<h3><i class='bx bx-universal-access'></i>&nbsp;活動總覽</h3>
-			
-			<br> 搜尋活動：<input type="text" id="name">
-			<button id="btn01">查詢</button>
-			<button id="btn02">清除查詢</button>
+		<div class="container" align="center">
+			<h3><i class='bx bxs-universal-access'></i>&nbsp;活動總覽</h3>
 			<br>
-			<br>
-			<div id="dataArea">
+			<div class="input-group" style="width:80%">
+  				<input type="text" id="name" class="form-control" placeholder="請輸入您欲查詢的活動名稱" 
+  					   aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+  				<div class="input-group-append" id="button-addon4">
+    				<button id="btn01" class="btn btn-outline-info" type="button">查詢</button>
+   					<button id="btn02" class="btn btn-outline-secondary" type="button">清除查詢</button>
+  				</div>
+			</div>
+		</div>
+		<br><br>	
+		<div class="container" style="display:flex;justify-content:center;flex-wrap: wrap;">
+			<div id="dataArea" style="flex-direction:column;width:87%">
 				<c:forEach var="activity" items="${list}">
-					<div class="card"
-						style="width: 18rem; float: left; padding: 15px 20px; margin: 5px 10px 15px 20px">
+					<div class="card" style="width: 18rem; float: left; padding: 15px 20px; margin: 5px 10px 15px 20px">
 						<img src="${contextRoot}/downloadImage/${activity.id}"
 							class="card-img-top"
 							style="object-fit: cover; width: 246px; height: 163px" alt="...">
@@ -49,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-	</div>
+	<br>
 	<!-- footer -->
 	<jsp:include page="../footer/footer.jsp"></jsp:include>	
 	<script>

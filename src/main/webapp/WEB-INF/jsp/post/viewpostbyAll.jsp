@@ -39,7 +39,7 @@
 
 <br><br>
 <div class="wrapper">
-	<div class="container" align="">
+	<div class="container">
 	<h3><i style="font-size:36px;" class="bx bxs-calendar-event"></i>&nbsp;公告</h3>
 		<br>
 		<span class="hidGroupsId" hidden>${users.groups.id}</span>
