@@ -69,6 +69,8 @@ public class MessageController {
 		mSer.insert(messagez);
 		return"redirect:/message/getallBySchool";
 	}
+	
+	
 	@GetMapping("message/getallBySchool")
 	public String getallBySchool(@SessionAttribute("school")School school,Model m) {		
 		List<Messagez> list = mSer.getAllBySchool(school);
@@ -79,7 +81,7 @@ public class MessageController {
 	//=========Neil 1103================================
 	@GetMapping("/messageForSchool.controller")
 	public String messageForSchool(@SessionAttribute("school")School school,Model m) {		
-		List<Messagez> list = mSer.findBySchoolIsOrderByCreateTimeDesc(school);
+		List<Messagez> list = mSer.findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(school);
 		
 		m.addAttribute("list",list);
 		return "cs_message/getMessageForSchool";

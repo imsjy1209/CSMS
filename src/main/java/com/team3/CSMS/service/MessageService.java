@@ -36,8 +36,8 @@ public class MessageService {
 	}
 	
 	//===find 
-	public List<Messagez> findBySchoolIsOrderByCreateTimeDesc(School school){
-		return mDao.findBySchoolIsOrderByCreateTimeDesc(school);
+	public List<Messagez> findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(School school){
+		return mDao.findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(school,0);
 	}
 	
 	public void insert(Messagez p) {
