@@ -155,12 +155,12 @@
 											</a>
 										</li>
 										<li style="-i: 0.2s;--clr:#ff0000;">
-											<a class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
+											<a class="lessonIcon btnli" data-toggle="modal" data-target="#classMID">
 												<i class='bx bx-book hoverLight' title="課程"></i>
 											</a>
 										</li>
 										<li style="-i: 0.3s;--clr:#f69930;">
-											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#courseMID">
 												<i class='bx bx-barcode'></i>
 											</a>
 										</li>
@@ -329,6 +329,7 @@
 												<th class="table-info" scope="col">學生姓名</th>
 												<th class="table-info" scope="col">科目</th>
 												<th class="table-info" scope="col">班級代碼</th>
+												<th class="table-info" scope="col">座號</th>
 												<th class="table-info" scope="col">班導</th>
 												<th class="table-info" scope="col">教師</th>
 												<th class="table-info" scope="col">教室</th>
@@ -341,6 +342,7 @@
 													<td>${aCSL.student.name}</td>
 													<td>${aCSL.classList.course.courseSubject}</td>
 													<td>${aCSL.classList.classCode}</td>
+													<td>${aCSL.studentNo}</td>
 													<td>${aCSL.classList.school.name}</td>
 													<td>${aCSL.classList.teacher.name}</td>
 													<td>${aCSL.classList.room.roomName}</td>
