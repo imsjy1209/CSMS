@@ -138,10 +138,12 @@ public class PageController {
 //	public String firstLogin(){
 //		return "/login/firstLogin";
 //	}
+
 //	// 測試用
-//	@GetMapping("/student.Homepage")
-//	public String testme(){
-//		return "/cs_studentHomePage/studentHomepage";	}
+	@GetMapping("/dongdong")
+	public String testme(){
+		return "/testDontUse/test";	
+	}
 	
 	@GetMapping("/youAreFirst")
 	public String firstLogin2(){

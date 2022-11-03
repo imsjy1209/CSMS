@@ -81,7 +81,8 @@ public class PostController {
 		System.out.println("==============================");
 		System.out.println("==============================");
 		System.out.println("==============================");
-		return "redirect:/createPost.controller";
+		// return "redirect:/createPost.controller";
+		return "redirect:/showAllPost.controller";
 	}
 	
 	

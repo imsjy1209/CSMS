@@ -21,111 +21,89 @@
 						margin: 0px;
 						padding: 0px;
 					}
-
+					:root{
+						--bg:#222;
+						/* --bg:white; */
+					}
+					.wrapper{
+						background-color: var(--bg);
+					}
 					.announcementDiv {
 						justify-content: center;
 						width: 100%;
 						/* border: 2px solid slateblue;	 */
 					}
+					
 					.aside {
 						/* border: 1px solid red;  */
 						margin-left: 50px;
 						margin-top: 5px;
 						position: relative;
+						
 					}
-
 					.btnli {
 						border: none;
 						background-color: transparent;
 					}
-
-					.menuToggle {
-						width: 10%;
-						border-radius: 70px;
-						cursor: pointer;
-						display: flex;
-						align-items: center;
-						
-					}
-
-					.menuToggle::before {
-						content: '';
-						position: absolute;
-						font-weight: 200;
-						color: #ff9933;
-						transition: 1.5s;
-						text-align: center;
-					}
-
-					.menu {
-						position: absolute;
-						width: 30px;
-						height: 30px;
-						border-radius: 70px;
-						z-index: 1;
-						transition: transform 0.5s, width 0.5s, height 0.5s;
-						transition-delay: 1s, 0.5s, 0.5s;
-						transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-						top: 0px;
-					}
-
-					.menuToggle.active~.menu {
-						z-index: 1;
-						/* transform: translateX(50px);	 */
-						transition-delay: 0s, 0.5s, 0.5s;
-					}
-
-					.menu::before {
-						content: '';
-						/* position: absolute; */
-						background: red;
-						left: calc(25% -8px);
-						bottom: 4px;
-						transform: rotate(45deg);
-						border-radius: 2px;
-						transition: 0.5s;
-					}
-
-					.menuToggle.active~.menu::before {
-						transition-delay: 0.5s;
-						/* bottom: -6px */
-					}
-
-					.menu ul {
-						display: flex;
+					/* start with icon css */
+					.menu ul{
 						position: relative;
+						display: flex;
+						gap: 50px;
+						justify-content: center;
+						margin-top: 20px;
+					}
+					
+					.menu ul li{
+						position: relative;
+						list-style: none;
+						width: 80px;
+						height: 80px;
+						display: flex;
 						justify-content: center;
 						align-items: center;
-						gap: 40px;
-						padding: left 0;
-					}
-
-					.menu ul li {
-						list-style: none;
 						cursor: pointer;
-						opacity: 0;
-						visibility: hidden;
-						transition: 0.25s;
-						transition-delay: calc(0s + var(- -i));
-						background-color: none;
+						transition: 0.5s;
+						top: 50%;
+					}
+					.menu ul li:hover{
+						z-index: 10000;
+						transform: scale(0.75);
+					}	
+					.menu ul li::before{
+						content: '';
+						position:absolute;
+						inset: 30px;
+						box-shadow: 0 0 0 10px var(--clr),
+						0 0 0 15px var(--bg),
+						0 0 0 22px var(--clr);
+						transition: 0.5s;
+					}
+					.menu ul li:hover:before{
+						inset: 0px;
 					}
 
-					.menuToggle.active~.menu ul li {
-						opacity: 1;
-						visibility: visible;
-						transform: translateX(700px);
-						transition-delay: calc(0.75s + var(- -i));
-						height: 100%;
+					.menu ul li::after{
+						content: '';
+						position:absolute;
+						inset: 0;
+						background: var(--bg);
+						transform: rotate(45deg);
 					}
-
-					.menu ul li button {
-						font-size: 2px;
-						text-decoration: none;
-						background-color: none;
+					.menu ul li a {
+						position: relative;
+						text-decoration: none ;
+						color: var(--clr);
+						z-index: 10;
+						font-size: 2em;
+						transition: 0.5s;
 					}
-
-					.menu ul li:hover button {
-						color: #ff9933;
+					
+					.menu ul li:hover a{
+						font-size: 3em;
+						filter: drop-shadow(0 0 20px var(--clr))
+								drop-shadow(0 0 40px var(--clr))
+								drop-shadow(0 0 60px var(--clr));			
 					}
 				</style>
 
@@ -169,42 +147,37 @@
 								</div>
 							</div><!-- end of class=announcementDiv -->
 							<div class="aside"><!--  按鈕icon-->
-								<p class="menuToggle">
-									<i class='bx bx-list-ul' style="font-size: 90px; color: black"></i>
-								</p>
 								<div class="menu">
 									<ul>
-										<li style="-i: 0.1s;">
-											<button class="absCheckIcon btnli" data-toggle="modal" data-target="#absentMID">
-												<i style="font-size: 90px;" class='bx bx-calendar-check hoverLight'> </i>
-											</button>
+										<li style="-i: 0.1s;--clr:#1877f2;">
+											<a class="absCheckIcon btnli" data-toggle="modal" data-target="#absentMID">
+												<i class='bx bx-calendar-check hoverLight'> </i>
+											</a>
 										</li>
-										<li style="-i: 0.2s;">
-											<button class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
-												<i style="font-size: 90px;" class='bx bx-book hoverLight' title="購買紀錄"></i>
-											</button>
+										<li style="-i: 0.2s;--clr:#ff0000;">
+											<a class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
+												<i class='bx bx-book hoverLight' title="課程"></i>
+											</a>
 										</li>
-										<li style="-i: 0.3s;">
-											<button class="lessonIcon btnli" data-toggle="modal" data-target="#classMID">
-												<i style="font-size: 90px;" class='bx bx-book hoverLight' title="班級資訊"></i>
-											</button>
+										<li style="-i: 0.3s;--clr:#f69930;">
+											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+												<i class='bx bx-barcode'></i>
+											</a>
 										</li>
-										<li style="-i: 0.4s;">
-											<button class="activeIcon btnli" data-toggle="modal" data-target="#activityMID">
-												<i style="font-size: 90px;" class='bx bx-universal-access hoverLight'></i>
-											</button>
+										<li style="-i: 0.4s;--clr:#1da1f2;">
+											<a class="activeIcon btnli" data-toggle="modal" data-target="#activityMID">
+												<i class='bx bx-universal-access hoverLight'></i>
+											</a>
 										</li>
-										<li style="-i: 0.5s;">
-											<button class="scoreIcon btnli" data-toggle="modal" data-target="#scoreMID">
-												<i style="font-size: 90px;"
-													class='bx bx-bar-chart bx-rotate-90 hoverLight'></i>
-											</button>
+										<li style="-i: 0.5s;--clr:#25d366;">
+											<a class="scoreIcon btnli" data-toggle="modal" data-target="#scoreMID">
+												<i class='bx bx-bar-chart hoverLight'></i>
+											</a>
 										</li>
-										<li style="-i: 0.5s;">
-											<button class="contactBookIcon btnli" data-toggle="modal"
-												data-target="#contactBookMID">
-												<i style="font-size: 90px;" class='bx bx-book-reader hoverLight'></i>
-											</button>
+										<li style="-i: 0.6s;--clr:#c32aa3;">
+											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+												<i class='bx bx-book-reader hoverLight'></i>
+											</a>
 										</li>
 									</ul>
 								</div>

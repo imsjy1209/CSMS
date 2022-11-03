@@ -126,6 +126,7 @@ li {
 	        </a>
 	        <div class="dropdown-menu">
 	          <a class="dropdown-item lia" href="${contextRoot}/message/getallByParent">查看訊息</a>
+			  <a class="dropdown-item lia" href="${contextRoot}/message">傳送訊息</a>
 	        </div>
 	      </li>
 	      
