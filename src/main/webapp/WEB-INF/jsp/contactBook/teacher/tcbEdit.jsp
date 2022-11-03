@@ -81,7 +81,7 @@ function forbiddenToLeave(){
 		icon: 'warning',
 		showConfirmButton: false,
 		showCancelButton: true,
-		cancelButtonColor: '#3085d6',
+		cancelButtonColor: '#DC3545',
 		cancelButtonText: '確認'
 	});
 	event.preventDefault();

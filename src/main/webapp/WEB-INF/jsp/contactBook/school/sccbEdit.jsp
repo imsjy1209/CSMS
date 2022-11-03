@@ -191,7 +191,7 @@ window.onload = function(){
     		$('#cbListBtnArea').append(CancelBenObj);
     		
     		// (5)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/Sc_GoPrevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		prevPageBtnObj = '<a type="button" class="btn btn-primary" onclick="alertBeforeLeave()" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
     		$('#cbListBtnArea').append(prevPageBtnObj);
      	}
     }
@@ -203,13 +203,37 @@ function cancelConfirm() {
 		text: '取消後本件即無法繼續編輯',
 		icon: 'warning',
 		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
+		confirmButtonColor: '#DC3545',
+		cancelButtonColor: '#007BFF',
 		confirmButtonText: '確認',
 		cancelButtonText: '取消'
 	}).then((result) => {
 		if (result.isConfirmed) {
-			window.location.href = "/CSMS/ContactBook/Sc_Cancel?cbId="+pvCbId;
+			
+			Swal.fire({
+				title:'取消成功',
+				icon:'success',
+				showConfirmButton: false,
+				showCancelButton: false
+			})
+						
+			setTimeout(function() {
+				window.location.href = "/CSMS/ContactBook/Sc_Cancel?cbId="+pvCbId;
+			 }, 1500);	
+	   }
+	})
+}
+
+function alertBeforeLeave() {
+	Swal.fire({
+		title: '友善提醒',
+		text: '本件尚未送出，返回後可於聯絡簿首頁進行補發',
+		icon: 'warning',
+		confirmButtonColor: '#DC3545',
+		confirmButtonText: '確認',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			window.location.href = "/CSMS/ContactBook/Sc_GoPrevPage";
 	   }
 	})
 }
