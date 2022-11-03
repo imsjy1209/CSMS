@@ -166,6 +166,7 @@
 							</a>
 						</div>
 					</div><!-- end of class=announcementDiv -->
+					<br>
 					<div class="aside">	
 						<!-- Modal選單區 -->	
 						<div class="menuToggle">
@@ -368,6 +369,7 @@
 					</div>		
 					<!-- end of modal -->	
 				</div> <!-- end of class=article -->
+<br>
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>
 

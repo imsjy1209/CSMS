@@ -75,7 +75,7 @@
       
       
       <div class="login">
-        <form class="form" method="post" action="../users/updateFirstLogin">
+        <form class="form" method="post" action="${contextRoot}/users/updateFirstLogin">
           <div class="container form-group maindiv">
             <h1>Change P@ssw0rd</h1>
             
