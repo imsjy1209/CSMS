@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../framePage/sideBar.jsp"></jsp:include>
+<jsp:include page="../layout/nav_parent.jsp"></jsp:include>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
 <form action="message/addMessageByParent" method="post">
 
@@ -11,7 +11,6 @@
 			<select id="school" name="school"></select>
 			<p>標題<br><input type="text" name="topic"></p>
 			<p>類型<br><input type="text" name="type"></p>
-
 
 	內容:<br><textarea class="form-control" name="article"></textarea>
 	<input type="submit" value="送出">
