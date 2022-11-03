@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="java.util.*,com.team3.CSMS.model.Activity"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
@@ -39,38 +39,47 @@ table {
 </style>
 
 	
-	<div class="container">
-	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-sun' ></i>活動管理</h3>
+<div class="container">
+	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-universal-access' ></i>活動管理</h3>
 	
-		<div class="container" align="center">
-			<span id="button"><i class='bx bxs-calendar' onclick='myFunction1()' style="font-size: 30px">Show on Calendar</i></span>
-			<div id="a"></div>
-
-			<table class="table table-striped mt-5">
-				<tr style="background-color: #B5FFFF">
-					<th>名稱
-					<th>地點
-					<th>日期
-					<th>更新內容
-					<th>是否上架 <c:forEach var="activity" items="${list}">
-							<tr>
-								<td>${activity.name}
-								<td>${activity.place}
-								<td>${activity.date}
-								<td><a
-									href="${contextRoot}/updateActivityPage/${activity.id}"><i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i></a>
-									<c:choose>
-										<c:when test="${activity.removed == 1}">
-											<td>X
-										</c:when>
-										<c:when test="${activity.removed ==0}">
-											<td >O
-										</c:when>
-									</c:choose>
-						</c:forEach>
-			</table>
+	<div class="container" align="center">
+		<span id="button">
+			<i class='bx bx-calendar-plus' onclick='myFunction1()' style="font-size: 20px;color:#e0777d">顯示行事曆</i>
+		</span>
+		
+		<div id="a">
 		</div>
-		</div>
+		<br>
+		<table class="table table-borded" style="text-align:center">
+			<tr>
+				<th class="table-info" scope="col">活動名稱</th>
+				<th class="table-info" scope="col">地點</th>
+				<th class="table-info" scope="col">日期</th>
+				<th class="table-info" scope="col">更新內容</th>
+				<th class="table-info" scope="col">是否上架</th>
+			</tr>
+			<c:forEach var="activity" items="${list}">
+			<tr>
+				<td>${activity.name}</td>
+				<td>${activity.place}</td>
+				<td>${activity.date}</td>
+				<td>
+					<a href="${contextRoot}/updateActivityPage/${activity.id}">
+						<i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i>
+					</a>
+				</td>
+				<c:choose>
+					<c:when test="${activity.removed == 1}">
+						<td><button type="button" class="btn btn-danger">下架中</button></td>
+					</c:when>
+					<c:when test="${activity.removed == 0}">
+						<td><button type="button" class="btn btn-primary">上架中</button></td>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</table>
+	</div>
+</div>
 	
 <!-- ================for Side Bar==================	 -->
 	</div>
@@ -85,10 +94,10 @@ table {
 function myFunction() {
 	$('#calendar').attr('style','display:none;');
 // 	document.getElementById('calendar').className = "hidden";
-	document.querySelector("#button").innerHTML = "<i class='bx bxs-calendar' onclick='myFunction1()' style='font-size: 30px'>Show on Calendar</i>";
+	document.querySelector("#button").innerHTML = "<i class='bx bx-calendar-plus' onclick='myFunction1()' style='font-size: 20px;color:#e0777d'>顯示行事曆</i>";
 }
 function myFunction1() {
-	document.querySelector("#button").innerHTML = "<i class='bx bxs-calendar' onclick='myFunction()' style='font-size: 30px'>Close Calendar</i>";
+	document.querySelector("#button").innerHTML = "<i class='bx bxs-calendar-minus' onclick='myFunction()' style='font-size: 20px;color:#e0777d'>隱藏行事曆</i>";
 	document.querySelector("#a").innerHTML = '<div id="calendar" class="box">';
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {

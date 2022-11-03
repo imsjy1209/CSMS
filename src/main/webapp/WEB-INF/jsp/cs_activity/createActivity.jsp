@@ -19,7 +19,7 @@
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
 	<div class="container">
-		<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-building-house'></i>建立活動</h3>
+		<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-universal-access'></i>建立活動</h3>
 		
 		<form action="${pageContext.request.contextPath}/createActivityWithCkeditor.controller" method="post">
 			<div class="form-group row">

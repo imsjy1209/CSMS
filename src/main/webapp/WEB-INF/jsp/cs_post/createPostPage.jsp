@@ -79,13 +79,13 @@ CKEDITOR.config.height = 300;
 $('.showModalEye').click(function(){
 	var articleHtml = $(this).parent().siblings('.articleTd').html();
 // 	console.log(articleHtml)
-	$('.modal-body').html(articleHtml)
+	$('.modal-body').html(articleHtml);
 	
 	var updateTimeText = $(this).parent().siblings('.updateTimeTd').text();
-	$('.modal-footer').html(updateTimeText)
+	$('.modal-footer').html(updateTimeText);
 	
 	var topicText = $(this).parent().siblings('.topicTd').text();
-	$('.modal-title').html(topicText)
+	$('.modal-title').html(topicText);
 	
 })
 
