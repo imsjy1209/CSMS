@@ -36,7 +36,6 @@
 					}
 					.menu{
 						margin: auto;
-						
 					}
 					.aside {
 						/* border: 1px solid red;  */
@@ -113,7 +112,6 @@
 			</head>
 
 			<body>
-				<!-- Modal選單區 -->
 				<div class="wrapper">
 							<div class="announcementDiv"><!-- 輪播區 -->
 								<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
