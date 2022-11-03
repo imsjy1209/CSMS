@@ -401,9 +401,9 @@ color:black;
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
                         </li>
-                        <li>
-                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
-                        </li>
+<!--                         <li> -->
+<%--                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a> --%>
+<!--                         </li> -->
                     </ul>
                 </li>
                 
