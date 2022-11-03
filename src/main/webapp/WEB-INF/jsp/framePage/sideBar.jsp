@@ -231,8 +231,8 @@ cursor: pointer;
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #7386D5;
-            background: cornflowerblue;
+            background: #5984d4;
+            /* background: cornflowerblue; */
             color: #fff;
             transition: all 0.3s;
         }
@@ -245,14 +245,14 @@ cursor: pointer;
 /* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
             padding: 20px;
-/*             background: #6d7fcc; */
-            background: cornflowerblue;
+            background: #5984d4;
+            /* background: cornflowerblue; */
             text-align: center;
         }
 
         #sidebar ul.components {
             padding: 20px 0;
-            border-bottom: 1px solid #47748b;
+            /* border-bottom: 1px solid #47748b; */
         }
 
         #sidebar ul p {
@@ -267,15 +267,15 @@ cursor: pointer;
         }
 
         #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
+            color: #2e446e;
+            background: #F6AE2D;
         }
 
         #sidebar ul li.active>a,
         a[aria-expanded="true"] {
             color: #fff;
-/*             background: #6d7fcc; */
-            background: cornflowerblue;
+            background: #5984d4;
+            /* background: cornflowerblue; */
         }
 
         a[data-toggle="collapse"] {
@@ -294,8 +294,8 @@ cursor: pointer;
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
-/*             background: #6d7fcc; */
-             background: slategray;
+            background: #2e446e;
+             /* background: slategray; */
         }
 
         ul.CTAs {
@@ -317,8 +317,8 @@ cursor: pointer;
 
         a.article,
         a.article:hover {
-            background: #6d7fcc !important;
-            color: #fff !important;
+            background: #fff !important;
+            color: #2e446e !important;
         }
         .csmslogo{
             width: 60%;
@@ -384,9 +384,8 @@ cursor: pointer;
                 <li>
                     <a href="#">About</a>
                 </li>
-                
                <li>
-                    <a href="#registerInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">註冊相關</a>
+                    <a href="#registerInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bxs-user-account' style='color:#ffffff'> 註冊相關</i></a>
                      <ul class="collapse list-unstyled" id="registerInfo">
                         <li>
                             <a id="register-Btn" href="${contextRoot}/createRegister.page">Register(新增註冊)</a>
@@ -404,7 +403,7 @@ cursor: pointer;
 <!--                 </li> -->
 
                <li>
-                    <a href="#test2Info" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">權限相關</a>
+                    <a href="#test2Info" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-shield-minus' style='color:#ffffff' > 權限相關</i></a>
                      <ul class="collapse list-unstyled" id="test2Info">
                         <li>
                             <a id="test2-Btn" href="#">AccManage(權限管理)</a>
@@ -412,7 +411,7 @@ cursor: pointer;
                     </ul>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">商品與訂單</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bxl-shopify' style='color:#ffffff' > 商品與訂單</i></a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a id="courseCreate-Btn" href="#">CourseCreate(建立商品)</a>
@@ -431,7 +430,7 @@ cursor: pointer;
                 
                 
                 <li>
-                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">課程資訊相關</a>
+                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bxs-school' style='color:#ffffff' > 課程資訊相關</i></a>
                      <ul class="collapse list-unstyled" id="studentInfo">
                         <li>
                             <a id="classList-Btn" href="#">ClassList(班級)</a>
@@ -451,7 +450,7 @@ cursor: pointer;
 
                 
                 <li>
-                    <a href="#testInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">出缺勤相關</a>
+                    <a href="#testInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-calendar' style='color:#ffffff' > 出缺勤相關</i></a>
                      <ul class="collapse list-unstyled" id="testInfo">
                         <li>
                             <a id="absentUpdate-Btn" href="#">AdviseAbsent(更改出缺勤)</a>
@@ -474,7 +473,7 @@ cursor: pointer;
 <!--                     </ul> -->
 <!--                 </li> -->
                  <li>
-                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">聯絡簿相關</a>
+                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-book-content' style='color:#ffffff' > 聯絡簿相關</i></a>
                      <ul class="collapse list-unstyled" id="contactBookInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
@@ -486,7 +485,7 @@ cursor: pointer;
                 </li>
                 
                 <li>
-                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
+                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-notepad' style='color:#ffffff' > 公告相關</i></a>
                      <ul class="collapse list-unstyled" id="postInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/createPost.controller">建立公告</a>
@@ -499,7 +498,7 @@ cursor: pointer;
                 
                 
                  <li>
-                    <a href="#expenseInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">財務相關</a>
+                    <a href="#expenseInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-money-withdraw' style='color:#ffffff' > 財務相關</i></a>
                      <ul class="collapse list-unstyled" id="expenseInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/expenseHome.page">FinancialChart(財務圖表)</a>
@@ -511,7 +510,7 @@ cursor: pointer;
                 </li>
                 
                 <li>
-                    <a href="#activityInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">活動相關</a>
+                    <a href="#activityInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bxs-tree-alt' style='color:#ffffff' > 活動相關</i></a>
                      <ul class="collapse list-unstyled" id="activityInfo">
                         <li>
                             <a id="activity-Btn" href="${contextRoot}/createActivity.controller">CreateActivity(建立活動)</a>
@@ -523,7 +522,7 @@ cursor: pointer;
                 </li>
                 
                 <li>
-                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-math' style='color:#ffffff' > 成績相關</i></a>
                      <ul class="collapse list-unstyled" id="scoreInfo">
                         <li>
                             <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
@@ -532,12 +531,10 @@ cursor: pointer;
                             <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
                         </li>
                     </ul>
-                </li>
-                
-                
-                <li>
+                </li>          
+                <!-- <li>
                     <a href="#">Contact</a>
-                </li>
+                </li> -->
             </ul>
 
 <!--             <ul class="list-unstyled CTAs"> -->
@@ -556,9 +553,9 @@ cursor: pointer;
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color:#5984d4 ;">
+                        <i class='bx bx-code'></i>
+                        
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

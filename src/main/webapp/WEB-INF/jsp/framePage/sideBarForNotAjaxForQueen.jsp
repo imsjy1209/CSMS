@@ -180,7 +180,7 @@ color:black;
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #7386D5;
+            background: #5984d4;
             color: #fff;
             transition: all 0.3s;
         }
@@ -192,13 +192,13 @@ color:black;
 /* ===========左上角Mark的區域============= */
         #sidebar .sidebar-header {
             padding: 20px;
-            background: #6d7fcc;
+            background: #5984d4;
             text-align: center;
         }
 
         #sidebar ul.components {
             padding: 20px 0;
-            border-bottom: 1px solid #47748b;
+            /* border-bottom: 1px solid #47748b; */
         }
 
         #sidebar ul p {
@@ -213,14 +213,14 @@ color:black;
         }
 
         #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
+            color: #2e446e;
+            background: #F6AE2D;
         }
 
         #sidebar ul li.active>a,
         a[aria-expanded="true"] {
             color: #fff;
-            background: #6d7fcc;
+            background: #5984d4;
         }
 
         a[data-toggle="collapse"] {
@@ -239,7 +239,7 @@ color:black;
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
-            background: #6d7fcc;
+            background: #2e446e;
         }
 
         ul.CTAs {
@@ -261,8 +261,8 @@ color:black;
 
         a.article,
         a.article:hover {
-            background: #6d7fcc !important;
-            color: #fff !important;
+            background: #fff !important;
+            color: #2e446e !important;
         }
         .csmslogo{
             width: 60%;
@@ -323,15 +323,11 @@ color:black;
 <!--                         </li> -->
 <!--                     </ul> -->
 <!--                 </li> -->
-                <li>
+                <!-- <li>
                     <a href="#">About</a>
-                </li>
-                
-                
-                
-                
+                </li> -->
                 <li>
-                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">課程資訊相關</a>
+                    <a href="#studentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bxs-school' style='color:#ffffff' > 課程資訊相關</i></a>
                      <ul class="collapse list-unstyled" id="studentInfo">
                         <li>
                             <a id="classList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">ClassList(班級)</a>
@@ -349,7 +345,7 @@ color:black;
                 </li>
                 
                 <li>
-                    <a href="#absentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">出缺勤相關</a>
+                    <a href="#absentInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-calendar' style='color:#ffffff' > 出缺勤相關</i></a>
                      <ul class="collapse list-unstyled" id="absentInfo">
                         <li>
                             <a id="absent-Btn" href="${contextRoot}/courseAllPageBackAjax.page">AdviseAbsent(更改出缺勤)</a>
@@ -361,7 +357,7 @@ color:black;
                 </li>
                 
                 <li>
-                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">聯絡簿相關</a>
+                    <a href="#contactBookInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-book-content' style='color:#ffffff' > 聯絡簿相關</i></a>
                      <ul class="collapse list-unstyled" id="contactBookInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
@@ -371,7 +367,7 @@ color:black;
                 
                 
                 <li>
-                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">公告相關</a>
+                    <a href="#postInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-notepad' style='color:#ffffff' > 公告相關</i></a>
                      <ul class="collapse list-unstyled" id="postInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/createPost.controller">建立公告</a>
@@ -383,7 +379,7 @@ color:black;
                 </li>
                 
                 <li>
-                    <a href="#messageInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">訊息相關</a>
+                    <a href="#messageInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-chat' style='color:#ffffff'> 訊息相關</i></a>
                      <ul class="collapse list-unstyled" id="messageInfo">
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/messageForSchool.controller">個人訊息</a>
@@ -393,7 +389,7 @@ color:black;
                 
                 
                 <li>
-                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>
+                    <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-math' style='color:#ffffff' > 成績相關</i></a>
                      <ul class="collapse list-unstyled" id="scoreInfo">
                         <li>
                             <a id="activity-Btn" href="${contextRoot}/scoreAdd">CreateScore(輸入成績)</a>
@@ -402,11 +398,10 @@ color:black;
                             <a id="activity-Btn" href="${contextRoot}/score">ShowAllScore(查看成績)</a>
                         </li>
                     </ul>
-                </li>
-                
-                <li>
+                </li>   
+                <!-- <li>
                     <a href="#">Contact</a>
-                </li>
+                </li> -->
             </ul>
 
 <!--             <ul class="list-unstyled CTAs"> -->
@@ -426,9 +421,8 @@ color:black;
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color:#5984d4 ;">
+                        <i class='bx bx-code'></i>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

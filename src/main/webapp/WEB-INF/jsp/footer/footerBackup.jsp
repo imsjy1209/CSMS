@@ -18,10 +18,10 @@ html, body {
 
 .footer {
 	height: 40px; /*設定footer本身高度*/
-	background-color: #496cad;
+	background-color: #cbe6f5;
 	font-size: 15px;
 	text-align: center;
-	color: #ff9933;
+	color: gray;
 }
 
 /* Footer Style (end) */
@@ -31,7 +31,7 @@ html, body {
 
 
 	<footer class="footer mt-auto py-2" >
-		<div class="container" style="color:#ff9933">
+		<div class="container" style="color:#214461">
 			Copyright &copy 2022 CSMS Corporation. All rights reserved.
 		</div>
 	</footer>
