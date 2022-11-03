@@ -2528,6 +2528,24 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 	                    console.log("ngngngng")
 	                  }
 	  	        })
+			const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 2000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已更改成功'
+				})
+
+		    
 	      })    
 	})//====End Of Absent Insert=======
 	
@@ -2690,9 +2708,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    $('#studentList').append(stulist_data)
 
 		    // absent select change event
-		    
-		    
-		    
+			$(document).on('change','.abs',function(){
 		    // get student id
 		    $(document).on('change','.abs',function(){
 		    let absentid=$(this).parent().siblings('.absid ').text();

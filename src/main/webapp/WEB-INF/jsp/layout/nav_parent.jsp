@@ -152,7 +152,6 @@ li {
 
 <script type="text/javascript" src="${contextRoot}/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="${contextRoot}/js/bootstrap.bundle.js"></script>
-<script type="text/javascript" src="${contextRoot}/js/popper.min.js"></script>
 <script>
 	$('.dropdown-toggle').dropdown();
 </script>

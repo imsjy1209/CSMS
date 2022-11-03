@@ -90,17 +90,15 @@
 
             <label for="pwd"><b>Password</b></label>
             <input type="password" class="form-control pwd" placeholder="Enter Password" name="pwd" required>
-            <p id="errMsg" style="color:#E00000">${LoginError}</p>
+            <p id="errMsg" style="color:#dc3545;font-weight:bold;font-size: 17px;">${LoginError}</p>
             <button type="submit" class="orangebtn">Login</button>
           </div>
         </form>
-        
         <button type="submit" class="btn btn-dark oneKey">School</button>
         <button type="submit" class="btn btn-dark oneKey">Teacher</button>
         <button type="submit" class="btn btn-dark oneKey">Student</button>
         <button type="submit" class="btn btn-dark oneKey">Parent</button>
-        <button type="submit" class="btn btn-dark oneKey">Admin</button>
-        
+        <button type="submit" class="btn btn-dark oneKey">Admin</button> 
       </div>
       
       
@@ -111,7 +109,6 @@
       <script>
       var userName = $('.userName')
       var pwd = $('.pwd')
-      
       
       $(document).on('click','.oneKey',function(){
     	if($(this).text()=='School'){
@@ -144,8 +141,7 @@
     	  
     	  
       })
-      
-      
+        
       </script>
     </body>
 

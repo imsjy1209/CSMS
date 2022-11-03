@@ -40,10 +40,10 @@
 	<!-- CONTENT -->
 	<br><br>
 	<div class="wrapper">
-		<div class="container">
+		<div class="container" align="center">
 			<h3><i style="font-size:36px;" class="bx bxs-id-card"></i>&nbsp;會員資料</h3>
 		</div>
-		<br><br>
+		<br>
 		<div class="container" style="display:flex;justify-content:center;flex-wrap: wrap;">
 			<br>
 			<!-- users_id -->

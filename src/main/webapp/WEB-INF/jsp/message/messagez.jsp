@@ -5,19 +5,32 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../layout/nav_parent.jsp"></jsp:include>
 <script type="text/javascript" src="${contextRoot}/ckeditor/ckeditor.js"></script>
-<form action="message/addMessageByParent" method="post">
-
-			<h5>發送對象</h5>
-			<select id="school" name="school"></select>
-			<p>標題<br><input type="text" name="topic"></p>
-			<p>類型<br><input type="text" name="type"></p>
-
-	內容:<br><textarea class="form-control" name="article"></textarea>
-	<input type="submit" value="送出">
-
-
-
-</form>
+<style>
+	.msgCard{
+		margin-left: 100px;
+		position:absolute;
+		justify-content: center;
+	}
+	.msg{
+		margin-top: 50px;
+	}
+</style>
+<div class="container msg">
+<div class="card" style="width: 900px;">
+	<div class="card-header">
+		Messages
+	</div>
+	<form action="message/addMessageByParent" method="post">
+		<ul class="list-group list-group-flush">
+		<li class="list-group-item">發送對象 : <select id="school" name="school"></select></li>
+		<li class="list-group-item"><p>標題<br><input type="text" name="topic"></p></li>
+		<li class="list-group-item"><p>類型<br><input type="text" name="type"></p></li>
+		<li class="list-group-item" >內容:<br><textarea style="margin-left: 50px;" class="form-control" name="article"></textarea>
+			<input type="submit" value="送出"></li>
+		</ul>
+	</form>
+  </div>
+</div>
 </body>
 <script type="text/javascript">
 	window.onload = function() {
@@ -41,6 +54,7 @@
 		CKEDITOR.replace('article');
 		CKEDITOR.config.width = 800;
 		CKEDITOR.config.height = 300;
+		
 	</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
