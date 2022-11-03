@@ -25,6 +25,17 @@ public class OrderDetailService {
 		return orderDetailList;
 	}
 	
+	//============找所有訂單明細OrderDetail-Desc=============
+	public List<OrderDetail> findByOrderByIdDesc() {
+		List<OrderDetail> orderDetailList = orderDetailDao.findByOrderByIdDesc();
+		return orderDetailList;
+	}
+	//============找所有訂單明細OrderDetail-Asc=============
+	public List<OrderDetail> findByOrderByIdAsc() {
+		List<OrderDetail> orderDetailList = orderDetailDao.findByOrderByIdAsc();
+		return orderDetailList;
+	}
+	
 	//新增訂單明細
 	public void insertOrderDetail(OrderDetail orderDetail) {
 		orderDetailDao.save(orderDetail);

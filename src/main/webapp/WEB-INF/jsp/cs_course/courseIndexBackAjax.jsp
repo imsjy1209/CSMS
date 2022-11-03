@@ -1704,63 +1704,95 @@ $(document).on('click','.updateCourseAjax',function(e){
 		
 	$(document).on('click','.ODDescOrAsc',function(){
 		if($(this).text()=='明細ID降冪'){
-// 			var xhr = new XMLHttpRequest();
-// 			xhr.open("GET", "<c:url value='/findAllByOrderByIdDesc.controller' />", true);
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "<c:url value='/findAllOrderDetailDesc.controller' />", true);
 			console.log("upupup")
 		}
 		else if($(this).text()=='明細ID升冪'){
-// 			var xhr = new XMLHttpRequest();
-// 			xhr.open("GET", "<c:url value='/findAllByOrderByIdAsc.controller' />", true);
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "<c:url value='/findAllOrderDetailAsc.controller' />", true);
 			console.log("down")
 		}
 		
-// 		xhr.send();
-// 		xhr.onreadystatechange = function() {
-// 			if (xhr.readyState == 4 && xhr.status == 200) {
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
 				
-// 				var content0 = "";
-// 				content0 += 
-// 				"<tr>" +
-// 				"<th></th>"+
-// 				"<th>明細編號#</th>"+
-// 				"<th>所屬學校</th>"+
-// 				"<th>學生名稱</th>"+
-// 				"<th>性別</th>"+
-// 				"<th>方案資訊</th>"+
-// 				"<th>價錢</th>"+
-// 				"<th>購買狀態</th>"+
-// 				"<th>排課狀態</th>"+
-// 				"<th>Function</th>"+
-// 				"</tr>";
+				var content0 = "";
+				content0 += 
+				"<tr>" +
+				"<th></th>"+
+				"<th>明細編號#</th>"+
+				"<th>所屬學校</th>"+
+				"<th>學生名稱</th>"+
+				"<th>性別</th>"+
+				"<th>方案資訊</th>"+
+				"<th>價錢</th>"+
+				"<th>購買狀態</th>"+
+				"<th>排課狀態</th>"+
+				"<th>Function</th>"+
+				"</tr>";
 				
-// 				var content = "";
-// 				var orderDetailList = JSON.parse(xhr.responseText);
+				var content = "";
+				var orderDetailList = JSON.parse(xhr.responseText);
 				
-// 				console.log(orderDetailList);
+				console.log(orderDetailList);
 				
-// 				for(var i=0; i < orderDetailList.length; i++){
-// 					content += 
-// 					"<td></td>" +	
-// 					"<td class='oDId-id'>" + orderDetailList[i].id + "</td>" +
-// 					"<td class='student-id' style='display:none;'>" + orderDetailList[i].student.id + "</td>" +
-// 					"<td>" + orderDetailList[i].student.schoolName + "</td>" +
-// 					"<td>" + orderDetailList[i].student.name + "</td>" +
-// 					"<td>" + orderDetailList[i].student.gender + "</td>" +
-// 					"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
-// 					"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
-// 					"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
-// 					"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
-// 					"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
-// 	    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
-// 	           		"</tr>";
-// 				}
-// 				var info0 = document.getElementById("thead-title");
-// 				info0.innerHTML = content0;
+				for(var i=0; i < orderDetailList.length; i++){
+					content += 
+					"<td></td>" +	
+					"<td class='oDId-id'>" + orderDetailList[i].id + "</td>" +
+					"<td class='student-id' style='display:none;'>" + orderDetailList[i].student.id + "</td>" +
+					"<td>" + orderDetailList[i].student.schoolName + "</td>" +
+					"<td>" + orderDetailList[i].student.name + "</td>" +
+					"<td>" + orderDetailList[i].student.gender + "</td>" +
+					"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
+					"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
+					"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
+					"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
+					"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
+	    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+	           		"</tr>";
+				}
+				var info0 = document.getElementById("thead-title");
+				info0.innerHTML = content0;
 				
-// 				var info = document.getElementById("content-data");
-// 				info.innerHTML = content;
-// 			}
-// 		} //=======End of After Btn Click Create Data=======
+				var info = document.getElementById("content-data");
+				info.innerHTML = content;
+				
+				var info0 = document.getElementById("thead-title");
+				info0.innerHTML = content0;
+				
+				var info = document.getElementById("content-data");
+				info.innerHTML = content;
+				
+				//將是否已排課轉換成按鈕
+				$('.arrange-info').each(function(){
+					var arrangeInfo = $(this).text();
+					if(arrangeInfo==1){
+						$(this).prev().prev().addClass('active')
+					}else{
+						$(this).prev().addClass('active')
+					}
+					
+				})
+				
+				//將購買狀態轉換成按鈕
+				$('.order-info').each(function(){
+					var orderInfo = $(this).text();
+					console.log(orderInfo)
+					if(orderInfo==0){
+						$(this).prev().prev().prev().addClass('active')
+					}
+					else if(orderInfo==1){
+						$(this).prev().prev().addClass('active')
+					}
+					else{
+						$(this).prev().addClass('active')
+					}
+				})
+			}
+		} //=======End of After Btn Click Create Data=======
 		
 		
 			

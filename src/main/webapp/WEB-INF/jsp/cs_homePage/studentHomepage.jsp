@@ -161,7 +161,7 @@
 											</a>
 										</li>
 										<li style="-i: 0.3s;--clr:#f69930;">
-											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
+											<a class="contactBookIcon btnli" data-toggle="modal" data-target="#classMID">
 												<i class='bx bx-barcode'></i>
 											</a>
 										</li>
@@ -245,6 +245,8 @@
 						</div>
 					</div>
 					<!-- end of modal for absent -->
+					
+					
 					<!-- Modal for Course -->
 					<div class="modal fade" id="courseMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -252,14 +254,51 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalCenterTitle">
-										<b><i class='bx bx-book'></i>&nbsp;課程</b>
+										<b><i class='bx bx-book'></i>&nbsp;購買紀錄</b>
 									</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
 								<div class="modal-body">
-									<p>courseMID test</p>
+								
+									<table class="table table-bordered" style="text-align: center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">學生姓名</th>
+												<th class="table-info" scope="col">商品資訊</th>
+												<th class="table-info" scope="col">商品價格</th>
+												<th class="table-info" scope="col">付款方式</th>
+												<th class="table-info" scope="col">付款時間</th>
+<!-- 												<th class="table-info" scope="col">購買狀態</th> -->
+												<th class="table-info" scope="col">排課狀態</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="aOrderDetail" items="${oneOrderDetailList}">
+												<tr>
+													<td>${aOrderDetail.student.name}</td>
+													<td>${aOrderDetail.course.courseCategory}-${aOrderDetail.course.courseSubject}-${aOrderDetail.course.courseGrade}${aOrderDetail.course.courseClass}年級</td>
+													<td>${aOrderDetail.course.coursePrice}</td>
+													<td>${aOrderDetail.orderList.payment}</td>
+													<td>${aOrderDetail.orderList.orderDate}</td>
+<!-- 													<td>已購買</td> -->
+													<td>
+														<c:choose>
+															<c:when test="${aOrderDetail.arrangeClassList == 0}">
+																尚未排課
+															</c:when>
+															<c:when test="${aOrderDetail.arrangeClassList == 1}">
+																已排課
+															</c:when>
+														</c:choose>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
@@ -269,6 +308,63 @@
 						</div>
 					</div>
 					<!-- end of modal for course-->
+					
+					<!-- Modal for ClassInfo -->
+					<div class="modal fade" id="classMID" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">
+										<b><i class='bx bx-book'></i>&nbsp;班級資訊</b>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								
+									<table class="table table-bordered" style="text-align: center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">學生姓名</th>
+												<th class="table-info" scope="col">科目</th>
+												<th class="table-info" scope="col">班級代碼</th>
+												<th class="table-info" scope="col">班導</th>
+												<th class="table-info" scope="col">教師</th>
+												<th class="table-info" scope="col">教室</th>
+												<th class="table-info" scope="col">人數</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="aCSL" items="${oneCSL}">
+												<tr>
+													<td>${aCSL.student.name}</td>
+													<td>${aCSL.classList.course.courseSubject}</td>
+													<td>${aCSL.classList.classCode}</td>
+													<td>${aCSL.classList.school.name}</td>
+													<td>${aCSL.classList.teacher.name}</td>
+													<td>${aCSL.classList.room.roomName}</td>
+													<td>${aCSL.classList.classMember}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
+									
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">關閉</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end of modal for ClassInfo-->
+					
+					
+					
+					
 					<!-- Modal for Activity -->
 					<div class="modal fade" id="activityMID" tabindex="-1" role="dialog"
 						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

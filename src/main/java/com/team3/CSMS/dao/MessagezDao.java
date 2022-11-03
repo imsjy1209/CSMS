@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Messagez;
+import com.team3.CSMS.model.OrderList;
 import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.School;
 
@@ -25,6 +26,10 @@ public interface MessagezDao extends JpaRepository<Messagez, Integer> {
 	
 	@Query(value="from Messagez where parent=:parent and toSchool=1")
 	public List<Messagez> getAllByParent(@Param("parent") Parent parent);
+	
+	//========Neil 1103===============================
+	List<Messagez> findBySchoolIsOrderByCreateTimeDesc(School school);
+	//========Neil 1103===============================
 	
 	//已讀方法
 	@Modifying

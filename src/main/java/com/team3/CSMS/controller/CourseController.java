@@ -76,13 +76,14 @@ public class CourseController {
 		//刪除Course資料-ajax
 		@GetMapping("/deleteCourseDataAjax.controller")
 		public @ResponseBody void deleteCourseDataAjax(@RequestParam(name="id") Integer id, Model model) {
+			if(classListService.findClassListByCourseId(id)!=null) {
 			ClassList oneClassList = classListService.findClassListByCourseId(id);
 			oneClassList.setCourse(null);
 			oneClassList.setRoom(null);
 			oneClassList.setSchool(null);
 			oneClassList.setTeacher(null);
 			classListService.deleteClassList(oneClassList);
-			
+			}
 			Optional<Course> oneCourse = courseService.findCourseById(id);
 			Course courseForDelete = oneCourse.get();
 			courseService.deleteCourse(courseForDelete);

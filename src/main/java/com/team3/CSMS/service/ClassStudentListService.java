@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team3.CSMS.dao.ClassStudentListDao;
 import com.team3.CSMS.dto.StudentListDto;
 import com.team3.CSMS.model.ClassStudentList;
+import com.team3.CSMS.model.Student;
 
 
 @Service
@@ -85,6 +86,11 @@ public class ClassStudentListService {
 	//find ClassStudntList By ClassListId And StudentId--Neil 1015
 	public ClassStudentList findClassStudentListByClassListIdAndStudentId(Integer clId,Integer stId) {
 		return classStudentListDao.findClassStudentListByClassListIdAndStudentId(clId,stId);
+	}
+	
+	//find ClassStudntList By Student--Neil 1103
+	public List<ClassStudentList> findByStudentIs(Student student){
+		return classStudentListDao.findByStudentIs(student);
 	}
 	
 

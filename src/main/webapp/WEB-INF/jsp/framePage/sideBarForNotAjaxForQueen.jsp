@@ -382,6 +382,15 @@ color:black;
                     </ul>
                 </li>
                 
+                <li>
+                    <a href="#messageInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">訊息相關</a>
+                     <ul class="collapse list-unstyled" id="messageInfo">
+                        <li>
+                            <a id="PostList-Btn" href="${contextRoot}/messageForSchool.controller">個人訊息</a>
+                        </li>
+                    </ul>
+                </li>   
+                
                 
                 <li>
                     <a href="#scoreInfo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">成績相關</a>

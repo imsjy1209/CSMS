@@ -18,10 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team3.CSMS.dto.UserParentDto;
 import com.team3.CSMS.dto.UserSchoolDto;
-import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.dto.UserStudentDto;
+import com.team3.CSMS.dto.UserTeacherDto;
 import com.team3.CSMS.model.Absent;
 import com.team3.CSMS.model.Activity;
+import com.team3.CSMS.model.ClassStudentList;
 import com.team3.CSMS.model.ContactBook;
 import com.team3.CSMS.model.Groups;
 import com.team3.CSMS.model.OrderDetail;
@@ -33,6 +34,7 @@ import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 import com.team3.CSMS.model.Users;
 import com.team3.CSMS.service.AbsentService;
+import com.team3.CSMS.service.ClassStudentListService;
 import com.team3.CSMS.service.ContactBookService;
 import com.team3.CSMS.service.OrderDetailService;
 import com.team3.CSMS.service.ParentService;
@@ -72,6 +74,9 @@ public class UsersController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private ClassStudentListService classStudentListService;
 
 	// 透過ID找到個資
 	@GetMapping(value = "/userProfile.json", produces = { "application/json;charset=UTF-8" })
@@ -176,54 +181,6 @@ public class UsersController {
 		return "login/login";
 	}
 
-//    @PostMapping("users/checklogin")
-//    public String checkLogin(@RequestParam(name="username") String username,@RequestParam(name="pwd") String pwd,SessionStatus status,Model m) {
-//    	Users users = userService.checkLogin(username, pwd);
-//    	// if(users.getIsFirst() == 1){
-//        //     return "users/firstlogin";
-//        // }     
-//        if(users !=null) {
-//			m.addAttribute("users",users);
-//		} else {
-//			m.addAttribute("LoginError", "帳號密碼錯誤，請重新輸入");
-//			return "login/login";
-//		}
-//        if(users.getAccRight()==0){
-//            m.addAttribute("LoginError", "帳號無登入權限，請聯絡工作人員");
-//			status.setComplete();
-//            return "login/login";
-//        }
-//        if(users.getIsFirst()==1){
-//            return "users/firstlogin";
-//        }
-//    	Groups groups = users.getGroups();
-//    	Integer id = groups.getId();
-//    	switch(id) {
-////        case 1:
-////        	users.getadmin();
-////            break;
-//        case 2:
-//            School school = users.getSchool();
-//            m.addAttribute("school",school);
-//            break;
-//        case 3:
-//            Teacher teacher = users.getTeacher();
-//            m.addAttribute("teacher",teacher);
-//            break;
-//        case 4:
-//            Student student = users.getStudent();
-//            m.addAttribute("student",student);
-//            
-//            List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
-//            m.addAttribute("aOrderDetailList",aOrderDetailList);
-//            break;
-//        case 5:
-//        	Parent parent = users.getParent();
-//        	m.addAttribute("parent",parent);
-//            break;     
-//    	}
-//    	return "activity/homepage";
-//    }
 
 	@PostMapping("users/checklogin")
 	public String checkLogin(@RequestParam(name = "username") String username, @RequestParam(name = "pwd") String pwd,
@@ -265,6 +222,16 @@ public class UsersController {
 		case 4:
 			Student student = users.getStudent();
 			m.addAttribute("student", student);
+			
+			//======Course Info which already have===========
+			List<OrderDetail> oneOrderList = orderDetailService.findByStudentIsAndConfirmOrderIs(student, 2);
+			//======End of Course Info which already have====
+			
+			//======Class Info===============================
+			List<ClassStudentList> oneCSL = classStudentListService.findByStudentIs(student);
+			//======End of Class Info========================
+			
+			
 			List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
@@ -275,6 +242,10 @@ public class UsersController {
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
 			m.addAttribute("activities", activities);
+			
+			m.addAttribute("oneOrderDetailList", oneOrderList);
+			m.addAttribute("oneCSL", oneCSL);
+			
 			return "cs_homePage/studentHomepage"; // 學生-前台	 
 			
         case 5:
@@ -303,6 +274,15 @@ public class UsersController {
 			return "cs_homePage/teacherHomepage";
 		case 4:
 			Student student = users.getStudent();
+			
+			//======Course Info which already have===========
+			List<OrderDetail> oneOrderList = orderDetailService.findByStudentIsAndConfirmOrderIs(student, 2);
+			//======End of Course Info which already have====
+			
+			//======Class Info===============================
+			List<ClassStudentList> oneCSL = classStudentListService.findByStudentIs(student);
+			//======End of Class Info========================
+			
 			List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
@@ -313,6 +293,10 @@ public class UsersController {
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
 			m.addAttribute("activities", activities);
+			
+			m.addAttribute("oneOrderDetailList", oneOrderList);
+			m.addAttribute("oneCSL", oneCSL);
+			
 			return "cs_homePage/studentHomepage";
 		case 5:
 			Parent parent = users.getParent();

@@ -151,6 +151,19 @@ public class OrderDetailController {
 					 List<OrderDetail> orderDetailList = orderDetailService.findAllOrderDetail();
 					 return orderDetailList;
 				}
+		//===============找全部訂單明細-Desc===============
+				@GetMapping(value ="/findAllOrderDetailDesc.controller",produces = {"application/json;charset=UTF-8"})
+				public @ResponseBody List<OrderDetail> findAllOrderDetailDesc(Model model) {
+					 List<OrderDetail> orderDetailList = orderDetailService.findByOrderByIdDesc();
+					 return orderDetailList;
+				}
+				
+		//===============找全部訂單明細-Asc===============
+				@GetMapping(value ="/findAllOrderDetailAsc.controller",produces = {"application/json;charset=UTF-8"})
+				public @ResponseBody List<OrderDetail> findAllOrderDetailAsc(Model model) {
+					 List<OrderDetail> orderDetailList = orderDetailService.findByOrderByIdAsc();
+					 return orderDetailList;
+				}
 				
 		//========find OrderDetail By Id And ConfirmOrder Is 2===========		
 				@GetMapping(value ="/findByStudentIsAndConfirmOrderIsAjax.controller")

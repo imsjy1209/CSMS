@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 	
+//	@GetMapping("/messageForSchool.controller")
+//	public String messageForSchool() {
+//		return "cs_message/getMessageForSchool";
+//	}
+	
 	@GetMapping("/course.page")
 	public String coursePage() {
 		return "cs_course/courseIndex";
