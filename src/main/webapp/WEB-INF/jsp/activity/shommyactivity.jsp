@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Welcome</title>
 </head>
 <body>
 <!-- NAVBAR -->
@@ -17,9 +17,10 @@
 <!-- CONTENT -->
 <br><br>
 <div class="wrapper">
-	<div class="container" align="center"><br>
-	<h2>我的活動</h2><br>
-	<br><span>${joinMsg}</span>
+	<div class="container" align="center">
+		<h3><i class='bx bxs-universal-access'></i>&nbsp;活動總覽</h3>
+	<br>
+	<span>${joinMsg}</span>
 		<c:forEach var="activity" items="${activities}">
 			<div class="card mb-3" style="max-width: 540px;">
 				<div class="row no-gutters">
@@ -43,6 +44,7 @@
 		</c:forEach>
 	</div>
 </div>
+<br>
 <!-- footer -->
 <jsp:include page="../footer/footer.jsp"></jsp:include>	
 </body>
