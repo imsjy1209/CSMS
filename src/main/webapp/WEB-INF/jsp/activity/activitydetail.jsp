@@ -32,7 +32,7 @@
 	<div class="container">
 		<div align="center" style="width: 50%; margin: 0 auto;">
 			<span id="hidActId" hidden>${act.id}</span>
-			<img src="${pageContext.request.contextPath}/downloadImage/${act.id}"
+			<img src="${contextRoot}/downloadImage/${act.id}"
 				class="img-fluid img"
 				style="display: block; width: 100%; height: auto; position: relative; top: 50px"
 				alt="...">
