@@ -17,6 +17,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- Teacher Navbar -->
+<jsp:include page="../layout/nav_teacher.jsp"></jsp:include>
 <style>
 	* {
 		margin: 0px;
@@ -110,9 +112,7 @@
 </head>
 
 <body>
-	<!-- Teacher Navbar -->
-	<jsp:include page="../layout/nav_teacher.jsp"></jsp:include>
-				<div class="article ">
+				<div class="wrapper">
 					<div class="announcementDiv"><!-- 輪播區 -->
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
@@ -147,17 +147,17 @@
 					</div><!-- end of class=announcementDiv -->
 					<div class="aside">	
 					<!-- Modal選單區 -->	
-					<div class="menuToggle">
+					<!-- <div class="menuToggle">
 						<i class='bx bx-list-ul' style="font-size: 90px; color:black" ></i>
-					</div>
+					</div> -->
 					<div class="menu">
 						<ul>
-							<li style="--i:0.1s;">
+							<li style="--i:0.1s;--clr:#1877f2;">
 								<a class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
 									<i style="font-size: 90px;" class='bx bx-book hoverLight' title="課程"></i>
 								</a>
 							</li>
-							<li style="--i:0.2s;">
+							<li style="--i:0.2s;--clr:#ff0000;">
 								<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
 									<i style="font-size: 90px;" class='bx bx-book-reader hoverLight'></i>
 								</a>

@@ -16,6 +16,7 @@
 					crossorigin="anonymous" referrerpolicy="no-referrer" />
 				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+				<jsp:include page="../layout/nav_student.jsp"></jsp:include>
 				<style>
 					* {
 						margin: 0px;
@@ -31,6 +32,7 @@
 					.announcementDiv {
 						justify-content: center;
 						width: 100%;
+						
 						/* border: 2px solid slateblue;	 */
 					}
 					
@@ -39,7 +41,6 @@
 						margin-left: 50px;
 						margin-top: 5px;
 						position: relative;
-						
 					}
 					.btnli {
 						border: none;
@@ -111,7 +112,7 @@
 
 			<body>
 				<!-- Student Navbar -->
-				<jsp:include page="../layout/nav_student.jsp"></jsp:include>
+				
 				<!-- Modal選單區 -->
 				<div class="wrapper">
 							<div class="announcementDiv"><!-- 輪播區 -->
