@@ -29,8 +29,8 @@
 <!-- SCHOOL -->	
 <!-- CONTENT -->
 <div class="container">	
-	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿首頁
-</h4>
+	<h3><i class='bx bx-book-reader'></i>&nbsp;聯絡簿首頁
+	</h3>
 	<br>
 	<div class="form-group">
   		<label for="exampleFormControlSelect1">選擇課程：</label>

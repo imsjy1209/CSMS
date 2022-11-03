@@ -10,7 +10,7 @@
 <!-- ADMIN -->	
 <!-- CONTENT -->
 <div class="container">	
-	<h4><i class='bx bx-book-reader'></i>&nbsp;聯絡簿查詢</h4>
+	<h3><i class='bx bx-book-reader'></i>&nbsp;聯絡簿查詢</h3>
 	<br>
 	
 	<div id="classInfo-area">
