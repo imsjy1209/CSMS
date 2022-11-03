@@ -143,20 +143,4 @@ public class PageController {
 		return "/login/firstLoginTest";
 	}
 	
-	// 回前台首頁
-	@GetMapping("/teacher.Homepage")
-	public String teacherGoHome(){
-		return "/cs_homePage/teacherHomepage";	
-	}
-	
-	@GetMapping("/student.Homepage")
-	public String studentGoHome(){
-		return "/cs_homePage/studentHomepage";	
-	}
-	
-	@GetMapping("/parent.Homepage")
-	public String parentGoHome(){
-		return "/cs_homePage/parentHomepage";	
-	}
-	
 }

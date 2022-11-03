@@ -43,7 +43,7 @@
     </div>
   </div>
 </div>	
-	
+<div>	
 			<table class="table table-striped mt-5">
 				<tr>
 					<th>
