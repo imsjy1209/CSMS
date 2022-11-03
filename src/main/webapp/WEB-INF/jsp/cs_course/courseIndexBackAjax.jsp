@@ -2682,8 +2682,11 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    $('#studentList').append(stulist_data)
 
 		    // absent select change event
-		    $('.abs').change(function(){
+		    
+		    
+		    
 		    // get student id
+		    $(document).on('change','.abs',function(){
 		    let absentid=$(this).parent().siblings('.absid ').text();
 		    let absOrNot=$(this).val();
 		    console.log(absOrNot);
@@ -2708,7 +2711,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 				  icon: 'success',
 			 	 title: '已更改成功'
 				})
-
+				
 		    })
 		  }//end of funtion displayStudentListAndInfox
 		  
