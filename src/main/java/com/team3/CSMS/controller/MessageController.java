@@ -67,7 +67,7 @@ public class MessageController {
 		Parent parent = pSer.findById(id);
 		Messagez messagez = new Messagez(parent,school,1,typeOfMsg,titleOfMsg,article);
 		mSer.insert(messagez);
-		return"redirect:/message/getallBySchool";
+		return"redirect:/messageForSchool.controller";
 	}
 	@GetMapping("message/getallBySchool")
 	public String getallBySchool(@SessionAttribute("school")School school,Model m) {		

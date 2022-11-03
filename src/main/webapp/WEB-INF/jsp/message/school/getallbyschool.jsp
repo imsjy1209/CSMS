@@ -62,7 +62,8 @@
 				</thead>
 					<c:forEach var="message" items="${list}">
 							<tr>
-								<td class="ptName">${message.parent.name}</td>
+								<td class="ptName">${message.parent.id}</td>
+								<td class="">${message.parent.name}</td>
 									<td><button class="btn btn-link tt" type="button" data-toggle="collapse"
 										data-target="#msg${message.id}" aria-expanded="true"
 										aria-controls="collapseOne">${message.titleOfMsg}</td>
@@ -118,8 +119,8 @@
 <script>
 	$('.orangebtn').click(function () {
 				let msgtitle=$(this).parent().parent().parent().parent().prev().children().find('.tt').text();
-				let parentName=$(this).parent().parent().parent().parent().prev().find('.ptName').text();
-				// console.log(schoolname);
+				let parentName=$(this).parent().parent().parent().parent().prev().prev().find('.ptName').text();
+				console.log(123);
 				str='<form action="${pageContext.request.contextPath}/message/addMessageBySchool" method="post"> '+
 					'<div style="">'+
 					'<input type="text" name="topic" value="'+msgtitle+'">'+
