@@ -248,7 +248,48 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<p>courseMID test</p>
+								
+							<c:forEach var="oneStu" items="${parent.student}">
+								<table class="table table-bordered" style="text-align: center">
+									<tr>
+										<th class="table-info" scope="col">學生姓名</th>
+									</tr>
+									<tr>
+										<td>${oneStu.name}</td>
+									</tr>
+								</table>
+								
+									<table class="table table-bordered" style="text-align: center">
+										<thead>
+											<tr>
+												<th class="table-info" scope="col">科目</th>
+												<th class="table-info" scope="col">班級代碼</th>
+												<th class="table-info" scope="col">座號</th>
+												<th class="table-info" scope="col">班導</th>
+												<th class="table-info" scope="col">教師</th>
+												<th class="table-info" scope="col">教室</th>
+												<th class="table-info" scope="col">人數</th>
+											</tr>
+										</thead>
+										<tbody>
+												<c:forEach var="oneCsl" items="${oneStu.classStudentLists}">
+												<tr>
+													
+															<td>${oneCsl.classList.course.courseSubject}</td>
+															<td>${oneCsl.classList.classCode}</td>
+															<td>${oneCsl.studentNo}</td>
+															<td>${oneCsl.classList.school.name}</td>
+															<td>${oneCsl.classList.teacher.name}</td>
+															<td>${oneCsl.classList.room.roomName}</td>
+															<td>${oneCsl.classList.classMember}</td>
+													
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
+							</c:forEach>
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
