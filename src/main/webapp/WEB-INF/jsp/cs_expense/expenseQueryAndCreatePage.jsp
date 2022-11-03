@@ -122,11 +122,11 @@ function displayData01(data) {
     });
 
 	$(document).on('click','.oneKey',function(){
-		$('input').eq(2).val('555')
-		$('input').eq(3).val('5555')
-		$('input').eq(4).val('45454')
-		$('input').eq(5).val('3425435')
-		$('input').eq(6).val('22222')
+		$('input').eq(2).val('210000')
+		$('input').eq(3).val('155550')
+		$('input').eq(4).val('67000')
+		$('input').eq(5).val('50000')
+		$('input').eq(6).val('35000')
 		
 		
 	})

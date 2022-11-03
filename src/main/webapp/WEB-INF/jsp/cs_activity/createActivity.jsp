@@ -78,13 +78,15 @@ CKEDITOR.config.height = 300;
       });
   });
   
-  $(document).on('click','.oneKey',function(){
+  $(document).on('click','.oneKey',function(){	  
 	  console.log($('input'))
 	  $('input').eq(0).val('文藝之旅')
 		$('input').eq(1).val('松菸')
-		$('input').eq(2).val('2022-11-06')
-	  
+		$('input').eq(2).val('2022-11-06')		
+		  
   })
+
+  
   
 
   
