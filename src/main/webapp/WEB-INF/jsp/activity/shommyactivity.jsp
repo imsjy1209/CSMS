@@ -18,7 +18,7 @@
 <br><br>
 <div class="wrapper">
 	<div class="container" align="center">
-		<h3><i class='bx bxs-universal-access'></i>&nbsp;活動總覽</h3>
+		<h3><i class='bx bxs-universal-access'></i>&nbsp;我的活動紀錄</h3>
 	<br>
 	<span>${joinMsg}</span>
 		<c:forEach var="activity" items="${activities}">

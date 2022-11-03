@@ -27,7 +27,7 @@
 <br><br>
 <div class="wrapper">
 	<div class="container" align="center">
-		<h3><i class='bx bxs-universal-access'></i>&nbsp;活動細項</h3>
+		<h3><i class='bx bxs-universal-access'></i>&nbsp;我的活動內容</h3>
 	</div>
 	<div class="container">
 		<div align="center" style="width: 50%; margin: 0 auto;">
@@ -119,8 +119,7 @@ function cancelConfirm() {
 			}, 1500);		
 	   }
 	})
-}
-	
+}	
 </script>
 </body>
 </html>
