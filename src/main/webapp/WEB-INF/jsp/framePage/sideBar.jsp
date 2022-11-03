@@ -231,7 +231,7 @@ cursor: pointer;
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-/*             background: #7386D5; */
+            background: #7386D5;
             background: cornflowerblue;
             color: #fff;
             transition: all 0.3s;
@@ -479,9 +479,9 @@ cursor: pointer;
                         <li>
                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Ad_Index">ContackBook(Admin)</a>
                         </li>
-                        <li>
-                            <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a>
-                        </li>
+<!--                         <li> -->
+<%--                             <a id="PostList-Btn" href="${contextRoot}/ContactBook/Sc_Index">ContackBook(校方)</a> --%>
+<!--                         </li> -->
                     </ul>
                 </li>
                 

@@ -77,7 +77,8 @@
 				</thead>
 					<c:forEach var="message" items="${list}">
 							<tr>
-								<td class="ptName">${message.parent.name}</td>
+								<td class="ptName" style="display: none;">${message.parent.id}</td>
+								<td class="">${message.parent.name}</td>
 									<td><button class="btn btn-link tt" type="button" data-toggle="collapse"
 										data-target="#msg${message.id}" aria-expanded="true"
 										aria-controls="collapseOne">${message.titleOfMsg}</button></td>
@@ -130,11 +131,11 @@
 	$('.orangebtn').click(function () {
 				let msgtitle=$(this).parent().parent().parent().parent().prev().children().find('.tt').text();
 				let parentName=$(this).parent().parent().parent().parent().prev().find('.ptName').text();
-				// console.log(schoolname);
+				// console.log(parentName);
 				str='<form action="${pageContext.request.contextPath}/message/addMessageBySchool" method="post"> '+
-					'<div style="">'+
-					'<input type="text" name="topic" value="'+msgtitle+'">'+
-					'<input type="text" name="type" value="導師回復"> '+
+					'<div style="display:none">'+
+					'<input type="text" name="titleOfMsg" value="'+msgtitle+'">'+
+					'<input type="text" name="typeOfMsg" value="導師回復"> '+
 					'<input type="text" name="parentid" value="'+parentName+'"> '+
 					'</div><br><h4></h4><br>'+
 					'<textarea class="form-control" name="article"></textarea> '+
@@ -145,5 +146,13 @@
 				CKEDITOR.config.width = 800;
 				CKEDITOR.config.height = 300;
 			})
+
+//=======================版面動作=======================
+$(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });				
+
 </script>
 </html>
