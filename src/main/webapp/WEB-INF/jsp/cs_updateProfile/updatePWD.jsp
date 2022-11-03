@@ -304,9 +304,9 @@
 								let emergencyContact=userProfile.student.parent.name;
 								let emergencyPhone=userProfile.student.parent.tel;
 								let stuProfileRelationship=	userProfile.student.relationship
-								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別: <input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
+								let profileStr ='<li class="list-group-item" id="">姓名：<input type="text" readonly style="border: none;" value="'+stuProfileName+'">性別：<input type="text" readonly style="border: none;" value="'+stuProfileGender+'"></li>'+
 												'<li class="list-group-item" id="">學校：<input type="text" readonly style="border: none;" value="'+stuProfileSchoolName+' '+stuProfileGrade+'年級'+'"></li>'+
-												'<li class="list-group-item" id="">緊急聯絡人：<input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係: <input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
+												'<li class="list-group-item" id="">緊急聯絡人：<input type="text" readonly style="border: none;" value="'+emergencyContact+'">關係：<input type="text" readonly style="border: none;" value="'+stuProfileRelationship+'"></li>'+
 												'<li class="list-group-item" id="">緊急連絡電話：<input type="text" readonly style="border: none;" value="'+emergencyPhone+'"></li>';
 								$('#porfileLi').html(profileStr);
 							}
@@ -378,7 +378,7 @@
 								}
 								// 檢查欄位是否空白未填
 								if (pwd1Length < 1) {
-									msg1.append = "❌ 請輸入密碼";
+									msg1.innerHTML = "❌ 請輸入密碼";
 									msg1.style.color = "red";
 									$(this).attr("aria-invalid", "false");
 									// console.log(this);
@@ -561,6 +561,24 @@
 
 
 //     		})
+
+			/* 消除個人資料中input focus的框框 */
+			$(document).on("click", function(){
+				$("#profilePwd").find("input[type='text']").on("focus",function(){
+					$(this).css({
+						"outline": "none",
+						"border-color":"white",
+						"box-shadow":"white"
+					})	
+				})
+			});
+
+			//		#profilePwd>input[type="text"]:focus {
+			//			outline: none;
+			//			border-color:white;
+			//			box-shadow:white;
+			//		}
+
 			</script>
 			</body>
 
