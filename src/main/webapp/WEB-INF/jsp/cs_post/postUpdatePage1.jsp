@@ -50,7 +50,7 @@ color:black;
 			<div class="col-sm-3">
 				<div class="form-group">
 					<label class="my-1 mr-2" for="exampleInputEmail1">公告標題：</label>
-					<input type="text" class="form-control" name="topic"  value="${post.topic}" size="100" maxlength="30"/>
+					<input type="text" class="form-control" name="topic"  value="${post.topic}" size="100" maxlength="30" required/>
 				</div>
 			</div>
 			<div class="col-sm-3">
@@ -58,12 +58,12 @@ color:black;
 				<select class="cg custom-select my-1 mr-sm-2" name="userType">
 				<c:choose>
 					<c:when test="${post.userType == 1}">
-							<option value="1" selected>校方
-							<option value="2">所有人					
+						<option value="1" selected>校方</option>
+						<option value="2">所有人</option>			
 					</c:when>
 					<c:when test="${post.userType ==2}">
-							<option value="1">校方
-							<option value="2" selected>所有人
+						<option value="1">校方</option>
+						<option value="2" selected>所有人</option>
 					</c:when>
 				</c:choose>
 				</select>

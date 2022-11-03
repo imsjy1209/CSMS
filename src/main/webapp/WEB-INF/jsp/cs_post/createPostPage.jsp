@@ -23,31 +23,39 @@
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
   </c:when>
  </c:choose>
-
+	<br>
 	<div class="container">
-		<div align="center">
-		<br><h2>建立公告</h2><br>
-		
-			<form action="${pageContext.request.contextPath}/postCreate" method="post">
-				<div class="form-group">
-					<label for="exampleInputEmail1">公告標題:</label> <input type="text"
-						class="form-control" name="topic" style="width:20%">
+		<div>
+		<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-message-square-edit' ></i>新增公告</h3>
+		<br>
+		<form action="${pageContext.request.contextPath}/postCreate" method="post">
+			<div class="form-group row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">公告標題：</label> 
+						<input type="text" class="form-control" name="topic" size="100" maxlength="30" required/>
+					</div>
 				</div>
-				<select name="userType">
-				<option value="1">校方
-				<option value="2">所有人
-				</select>
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">詳細內容:</label>
-					<textarea class="form-control" name="article"></textarea>
+			
+				<div class="col-sm-3">
+					<label class="my-1 mr-2" for="exampleInputEmail1">公告對象：</label>
+					<select class="cg custom-select my-1 mr-sm-2" name="userType">
+						<option value="1" selected>校方</option>
+						<option value="2">所有人</option>
+					</select>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1">詳細內容：</label>
+				<textarea class="form-control" name="article"></textarea>
+			</div>
+			<div style="margin-left:32%">		
+				<button type="submit" class="btn btn-success">確認送出</button>
+			</div>
+		</form>
 	</div>
+</div>
 
-	
-	</div>
 	
 <!-- ================for Side Bar==================	 -->
 	</div>
@@ -57,8 +65,12 @@
 <!--   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- 【Sweet Alert】 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js" 
+	integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" 
+	crossorigin="anonymous"></script>
 <script>
+
 
 CKEDITOR.replace('article');
 CKEDITOR.config.width = 800;
