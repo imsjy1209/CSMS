@@ -28,7 +28,11 @@ public interface MessagezDao extends JpaRepository<Messagez, Integer> {
 	public List<Messagez> getAllByParent(@Param("parent") Parent parent);
 	
 	//========Neil 1103===============================
+	//==from school
 	List<Messagez> findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(School school,Integer toSchool);
+	
+	//==from parent
+	List<Messagez> findByParentIsAndToSchoolIsOrderByCreateTimeDesc(Parent parent,Integer toSchool);
 	//========Neil 1103===============================
 	
 	//已讀方法

@@ -35,10 +35,16 @@ public class MessageService {
 		return mDao.findAll();
 	}
 	
-	//===find 
+	//===find==from School 
 	public List<Messagez> findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(School school){
 		return mDao.findBySchoolIsAndToSchoolIsOrderByCreateTimeDesc(school,0);
 	}
+	
+	//===find==from Parent 
+	public List<Messagez> findByParentIsAndToSchoolIsOrderByCreateTimeDesc(Parent parent){
+		return mDao.findByParentIsAndToSchoolIsOrderByCreateTimeDesc(parent,1);
+	}
+	
 	
 	public void insert(Messagez p) {
 		mDao.save(p);
