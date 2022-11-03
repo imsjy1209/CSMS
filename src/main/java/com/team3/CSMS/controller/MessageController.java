@@ -88,9 +88,16 @@ public class MessageController {
 	}
 	//=========End of Neil 1103================================
 	
+//	@GetMapping("message/getallByParent")
+//	public String getallByParent(@SessionAttribute("parent")Parent parent,Model m) {		
+//		List<Messagez> list = mSer.getAllByParent(parent);
+//		m.addAttribute("list",list);
+//		return "message/parent/getallbyparent";
+//	}
+	
 	@GetMapping("message/getallByParent")
 	public String getallByParent(@SessionAttribute("parent")Parent parent,Model m) {		
-		List<Messagez> list = mSer.getAllByParent(parent);
+		List<Messagez> list = mSer.findByParentIsAndToSchoolIsOrderByCreateTimeDesc(parent);
 		m.addAttribute("list",list);
 		return "message/parent/getallbyparent";
 	}
