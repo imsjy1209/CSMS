@@ -83,12 +83,12 @@
         }
         /*On/Off Course Button Style*/ 
         .con.active{
-			background-color:green;
+			background-color:#3ddc97;
  			cursor: default; 
 		}
 
 		.coff.active{
- 			background-color:red;
+ 			background-color:#e0777d;
  			cursor: default; 
 		}
 		
@@ -102,12 +102,12 @@
 		
 		  /*On/Off OrderDetail Button Style*/ 
         .oDon.active{
-			background-color:green;
+			background-color:#3ddc97;
  			cursor: default; 
 		}
 
 		.oDoff.active{
- 			background-color:red;
+ 			background-color:#e0777d;
  			cursor: default; 
 		}
 		
@@ -127,10 +127,10 @@
 	background-color:orange;
 }
 .orderNoP.active{
-	background-color:red;
+	background-color:#e0777d;
 }
 .orderFin.active{
-	background-color:green;
+	background-color:#3ddc97;
 }
 
 .bxs-edit{
@@ -142,15 +142,15 @@
 }
 
 .bxs-trash:hover{
-     color:red;
+     color:#e0777d;
 }
 .oDoffText{
 color:azure;
-background-color:red;
+background-color:#e0777d;
 }
 .oDonText{
 color:azure;
-background-color:green;
+background-color:#3ddc97;
 }
 .orderWaitText{
 color:azure;
@@ -158,11 +158,11 @@ background-color:orange;
 }
 .orderNoPText{
 color:azure;
-background-color:red;
+background-color:#e0777d;
 }
 .orderFinText{
 color:azure;
-background-color:green;
+background-color:#3ddc97;
 }
 
 .modal-body p{
@@ -171,15 +171,15 @@ color:black;
 }
 
 .teachBtn:hover{
-background-color: orange;
+background-color: #ff8000;
 }
 .teachBtn.active:hover{
-background-color: orange;
+background-color: #ff8000;
 }
 
 
 .teachBtn.active{
-background-color: cornflowerblue;
+background-color: #ffB366;
 transition: 0.2s;
 
 }

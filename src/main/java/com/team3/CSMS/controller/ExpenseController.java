@@ -107,11 +107,11 @@ public class ExpenseController {
 		String up = "";
 		String down = "";
 		if (semester.equals("上學期")) {
-			up = year + "-01-31";
-			down = year + "-06-30";
+			up = year + "-02-23";
+			down = year + "-11-15";
 		} else {
-			up = year + "-07-01";
-			down = year + "-01-30";
+			up = year + "-11-20";
+			down = year + "-11-25";
 		}
 		System.out.println(up + "" + down);
 		return eSer.coursenum(up, down);
