@@ -30,7 +30,7 @@
 		<input type="text" name="school" value="${message.school.name}">
 		</div>
 		<br><h4>回復 :</h4><br>
-		<textarea class="form-control" name="article"></textarea>
+		<button type="button" class="btn btn-dark oneKey">OneKey</button>
 		<input type="submit" value="回復">
 		</form>
 	</div>

@@ -92,7 +92,7 @@
 								<label for="idPwd1" class="t1">
 									<b>舊密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
 								</label>
-								<input type="text" id="idPwd1" name="password1" value=""
+								<input type="password" id="idPwd1" name="password1" value=""
 									placeholder="請輸入現在使用的密碼" maxlength="30" size="20" autocomplete="off"
 									aria-invalid="false">
 								<br>
@@ -103,7 +103,7 @@
 								<label for="idPwd2" class="t2"> 
 									<b>新密碼：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
 								</label>
-								<input type="text" id="idPwd2" name="password2" value=""
+								<input type="password" id="idPwd2" name="password2" value=""
 									placeholder="請輸入新密碼" maxlength="30" size="20" autocomplete="off"
 									aria-invalid="false">
 								<br>
@@ -113,7 +113,7 @@
 							<div class="d3">
 								<label for="idPwd3" class="t3"> <b>確認密碼：&nbsp&nbsp&nbsp</b>
 								</label>
-								<input type="text" id="idPwd3" name="password3" value=""
+								<input type="password" id="idPwd3" name="password3" value=""
 									placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off"
 									aria-invalid="false">
 								<br>
@@ -542,8 +542,9 @@
 										//     		                  console.log(result)
 										//     		                  console.log(result.password)
 										// 							  console.log("ttttt")
-										window.alert('密碼修改成功')
-										$('#exampleModalCenter').modal('hide')
+										window.alert('密碼修改成功');
+
+										$('#exampleModalCenter').modal('hide');
 										updatePwdFunction() //FIXME:不確定要不要修正2 by 冬冬
 										$('#idPwd1').val("");
 										$('#idPwd2').val("");
@@ -558,7 +559,6 @@
 						}
 					}
 				}
-
 
 //     		})
 

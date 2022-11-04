@@ -64,7 +64,7 @@ text-decoration:line-through;
 <body>
 <header>
 <div class="nav container">
-			<a href="${pageContext.request.contextPath}/student.Homepage" class="logo">CramSchool</a>
+			<a href="${pageContext.request.contextPath}/users/gotohomepage" class="logo">CramSchool</a>
 			<h3><i class='bx bxs-user' >${student.name}</i></h3>
 			<div><i style='font-size:48px;' class='bx bx-dollar-circle bx-spin' ></i></div>
 			

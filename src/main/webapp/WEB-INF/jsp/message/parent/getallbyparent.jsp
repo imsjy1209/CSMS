@@ -85,6 +85,7 @@
 													<i class='bx bxs-edit-alt' style="font-size: 30px; color: gray"></i>
 												</a> -->
 													<button type="button" class="orangebtn" data-toggle="modal" data-target="#replymsg">回覆</button>
+													
 												</blockquote>
 											</div>
 										</td>
@@ -130,14 +131,31 @@
 					'<input type="text" name="type" value="家長回復"> '+
 					'<input type="text" name="school" value="'+schoolname+'"> '+
 					'</div><br><h4></h4><br>'+
-					'<textarea class="form-control" name="article"></textarea> '+
-					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>'
+					'<textarea id="ckeditorContent" class="form-control" name="article"></textarea> '+
+					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>'+
+					
+					'<button type="button" class="btn btn-dark oneKey">OneKey</button>';
+					
 				$('#ckArea').html(str);
 				// console.log(123);
 				CKEDITOR.replace('article');
 				CKEDITOR.config.width = 800;
 				CKEDITOR.config.height = 300;
 			})
+			
+			$(document).on('click','.oneKey',function(){
+			console.log("3333")
+			var line1 = '<p>有陰影的地方必有陽光，轉個視角總有路闖蕩,<br /> 讓微光引路，希望就在前方。</p>有陰影的地方必有陽光，轉個視角總有路闖蕩，<br>';
+			var line2 = '<p>由財團法人典美文化基金會主辦的「第五屆紙上躍躍然．典美插畫大賞」，今年以〈轉動希望的曙光〉為主題吸引近300多位來自世界的插畫創作者熱情參與。<br />得獎與優秀作品手繪原稿共計58作品安排11月19日至11月27日在藝異空間展出，喜愛插畫的夥伴請現身支持!!</p>';
+			var line3 = '<p>參展者名單 (依姓氏筆劃排序)&nbsp;</p>';
+			var line4 = '<p>〔一般組〕</p>';
+			var line5 = '<p>朱品璇、朱家萱、沈芳因、林季嬅、林季誼、徐元晶、張芸瑄、郭育喬、陳孟嬉、陳品霖、陳威諺、陳淑娟、陳富容、陳麗芳、黃尹玟、詹政融、薛伊蒨、顧淑梅</p>';
+		
+			var article = line1 + line2 + line3 + line4 + line5;
+			
+			CKEDITOR.instances.ckeditorContent.insertHtml(article);	
+			
+		})
 			
 			</script>
 			</html>
