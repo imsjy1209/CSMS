@@ -542,8 +542,9 @@
 										//     		                  console.log(result)
 										//     		                  console.log(result.password)
 										// 							  console.log("ttttt")
-										window.alert('密碼修改成功')
-										$('#exampleModalCenter').modal('hide')
+										window.alert('密碼修改成功');
+
+										$('#exampleModalCenter').modal('hide');
 										updatePwdFunction() //FIXME:不確定要不要修正2 by 冬冬
 										$('#idPwd1').val("");
 										$('#idPwd2').val("");
@@ -558,7 +559,6 @@
 						}
 					}
 				}
-
 
 //     		})
 
