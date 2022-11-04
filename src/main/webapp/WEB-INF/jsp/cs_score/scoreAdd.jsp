@@ -63,7 +63,7 @@
 			</table>
 		</div>
 		<!-- (4) 最後送出 -->
-		<button id='send' class="btn btn-success">送出</button>		
+		<button id='send' class="btn btn-success">送出</button>&nbsp;&nbsp;	
 	</div><!-- End Of Content -->
 	
 </div><!-- End Of Container -->
@@ -156,6 +156,7 @@
 		 	$('#scoreTable').append(scolist_data);
 		}
 	}
+
 	
 //========================================================================
 	$("#send").click(function() {
