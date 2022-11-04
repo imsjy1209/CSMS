@@ -87,6 +87,31 @@ function forbiddenToLeave(){
 	event.preventDefault();
 }
 
+/* 回上一頁提醒 */
+// $(document).on("click","#prevPage", function(){
+// 	var cbId = $(this).parent().parent().find("#cbId").val();
+// 	console.log("cbId ="+ cbId);
+// 	notSubmitYet(cbId);
+// });
+
+// function notSubmitYet(cbId){
+// 	//SweetAlert
+// 	Swal.fire({
+// 		title: '友善提醒',
+// 		text: '系統將不會儲存您所編寫的內容，如欲重新填寫，可於返回聯絡簿首頁後重新建立',
+// 		icon: 'warning',
+// 		showConfirmButton: false,
+// 		showCancelButton: true,
+// 		cancelButtonColor: '#DC3545',
+// 		cancelButtonText: '確認'
+// 	}).then((result) => {
+// 		if (result.isConfirmed) {	
+// 			window.location.href = "/CSMS/ContactBook/T_GoPrevPage?cbId="+cbId;
+// 		}
+// 	})
+// }
+
+
 /* 視窗載入事件：(1)帶入【老師】選定的課程相關資訊 (2)帶入insert的該筆聯絡簿資料 (3)帶入「確認送出」按鈕 (4)帶入「回上一頁」按鈕 */
 window.onload = function(){ 
 	
@@ -187,8 +212,9 @@ window.onload = function(){
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>&nbsp&nbsp';
-			$('#cbListBtnArea').append(prevPageBtnObj);
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" id="prevPage" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>&nbsp&nbsp';
+    		// prevPageBtnObj = '<button id="prevPage" type="button" class="btn btn-primary">回上一頁</button>&nbsp&nbsp';
+    		$('#cbListBtnArea').append(prevPageBtnObj);
 			
 			// (5)帶入「一鍵輸入」按鈕
 			var oneKeyBtnObj = '<button type="button" class="btn btn-secondary" id="oneKey">一鍵輸入</button>';
