@@ -127,13 +127,15 @@
 					'<input type="text" name="type" value="導師回復"> '+
 					'<input type="text" name="parentid" value="'+parentName+'"> '+
 					'</div><br><h4></h4><br>'+
-					'<textarea class="form-control" name="article"></textarea> '+
-					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>'
+					'<textarea id="id="ckeditorContent" class="form-control" name="article"></textarea> '+
+					'<input type="submit" value="送出" id="sendbtn" class="orangebtn" style="margin-top: 10px;"></form>';
 				$('#ckArea').html(str);
 				// console.log(123);
 				CKEDITOR.replace('article');
 				CKEDITOR.config.width = 800;
 				CKEDITOR.config.height = 300;
 			})
+			
+			
 </script>
 </html>
