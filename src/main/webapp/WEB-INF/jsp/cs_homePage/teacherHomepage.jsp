@@ -224,10 +224,10 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
 //=====================homepage功能按鍵=======================
-	let menuToggle = document.querySelector('.menuToggle');
-			menuToggle.onclick = function () {
-				menuToggle.classList.toggle('active');
-			}
+	// let menuToggle = document.querySelector('.menuToggle');
+	// 		menuToggle.onclick = function () {
+	// 			menuToggle.classList.toggle('active');
+	// 		}
 </script>
 
 </body>

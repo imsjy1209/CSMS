@@ -1,5 +1,6 @@
 package com.team3.CSMS.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -231,7 +232,6 @@ public class UsersController {
 			List<ClassStudentList> oneCSL = classStudentListService.findByStudentIs(student);
 			//======End of Class Info========================
 			
-			
 			List<OrderDetail> aOrderDetailList = orderDetailService.findByStudentIs(student);
 			List<Absent> personalAbsent = absentService.selectAbsentByStudent(student);
 			List<Score> scoreforStudent = scoreStudentService.getScoreforStudent(student.getId());
@@ -252,10 +252,19 @@ public class UsersController {
         	Parent parent = users.getParent();
         	m.addAttribute("parent",parent);       	         
 			//List<Score> scoreforParent = scoreService.getscoreforParent(parent); // 改搜最新3筆
+			List<Absent> kidsAbsent = new ArrayList<Absent>(); 
 			List<Score> scoreforParent = scoreService.top3ScoreforParent(parent.getId());
 			List<Post> pListforAll = postService.viewAllByAll();
+			List<Student> kids=studentService.getKidByParent(parent);
+			for(Student kid: kids){
+				List<Absent> goToSchool=absentService.selectAbsentByStudent(kid);
+				for(Absent a:goToSchool){
+					kidsAbsent.add(a);
+				}
+			}
 			m.addAttribute("scoreforParent",scoreforParent);
 			m.addAttribute("pListforAll", pListforAll);
+			m.addAttribute("kidsGotoSchool", kidsAbsent);
             return "cs_homePage/parentHomepage"; // // 家長-前台
     	}
     	return "cs_homePage/parentHomepage"; // 此處無效但必填
@@ -293,10 +302,8 @@ public class UsersController {
 			m.addAttribute("scoreforStudent", scoreforStudent);
 			m.addAttribute("top3cbList", top3cbList);
 			m.addAttribute("activities", activities);
-			
 			m.addAttribute("oneOrderDetailList", oneOrderList);
 			m.addAttribute("oneCSL", oneCSL);
-			
 			return "cs_homePage/studentHomepage";
 		case 5:
 			Parent parent = users.getParent();

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team3.CSMS.dao.StudentDao;
 import com.team3.CSMS.model.Activity;
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Student;
 import com.team3.CSMS.model.Teacher;
 
@@ -36,6 +37,10 @@ public class StudentService {
 	}
 	public List<Student> findall(){
 		return studentDao.findAll();
+	}
+
+	public List<Student> getKidByParent(Parent parent){
+		return studentDao.getKidByParent(parent);
 	}
 	
 }

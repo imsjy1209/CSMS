@@ -59,7 +59,7 @@
 					<ul class="list-group list-group-flush " id="porfileLi">
 					</ul>
 					<!-- Modal功能鈕 -->
-					<div class="BtnArea" style="display:flex;">
+					<div class="BtnArea" style="display:flex; justify-content: center;">
 						<!-- 改密碼 -->
 						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 5px;">
 							Change Password

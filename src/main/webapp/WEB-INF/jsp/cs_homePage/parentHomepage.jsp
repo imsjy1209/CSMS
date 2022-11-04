@@ -204,7 +204,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="personalAbsent" items="${personalAbsent}">
+											<c:forEach var="personalAbsent" items="${kidsGotoSchool}">
 												<tr>
 													<td>
 														${personalAbsent.student.name}
@@ -277,7 +277,6 @@
 										<tbody>
 												<c:forEach var="oneCsl" items="${oneStu.classStudentLists}">
 												<tr>
-													
 															<td>${oneCsl.classList.course.courseSubject}</td>
 															<td>${oneCsl.classList.classCode}</td>
 															<td>${oneCsl.studentNo}</td>
@@ -285,7 +284,6 @@
 															<td>${oneCsl.classList.teacher.name}</td>
 															<td>${oneCsl.classList.room.roomName}</td>
 															<td>${oneCsl.classList.classMember}</td>
-													
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -423,7 +421,8 @@
 //console.log($(".btn-outline-success"));
 // ========================== 家長聯絡簿Ajax ==========================
 /* 視窗載入事件：帶入【家長】課程選單 */
-window.onload = function() { 
+window.onload = function() {
+	console.log('${kidsGotoSchool}'); 
 	var xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "<c:url value='/allParentClassList.json'/>", true);
     xhr1.send();
@@ -600,10 +599,10 @@ function showContactBookDetail(selectedClassListId,selectedStudentId){
   	}	
 }
 //=====================homepage功能按鍵=======================
-let menuToggle = document.querySelector('.menuToggle');
-			menuToggle.onclick = function () {
-				menuToggle.classList.toggle('active');
-			}
+	// let menuToggle = document.querySelector('.menuToggle');
+	// 			menuToggle.onclick = function () {
+	// 				menuToggle.classList.toggle('active');
+	// 			}
 </script>
 
 </body>
