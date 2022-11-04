@@ -154,6 +154,11 @@ li {
 <script type="text/javascript" src="${contextRoot}/js/bootstrap.bundle.js"></script>
 <script>
 	$('.dropdown-toggle').dropdown();
+	// let menuToggle = document.querySelector('.menuToggle');
+	// 			menuToggle.onclick = function () {
+	// 				menuToggle.classList.toggle('active');
+	// 			}
 </script>
+
 </body>
 </html>

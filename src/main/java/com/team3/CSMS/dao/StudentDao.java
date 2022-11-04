@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.team3.CSMS.model.Activity;
+import com.team3.CSMS.model.Parent;
 import com.team3.CSMS.model.Student;
 
 public interface StudentDao extends JpaRepository<Student, Integer> {
@@ -18,4 +19,7 @@ public interface StudentDao extends JpaRepository<Student, Integer> {
 	
 	@Query(value="select *from student_activity where id=:id",nativeQuery = true)
 	public List<Activity> getMyAct(int id);
+
+	@Query(value = "from Student where parent= :byParent")
+	public List<Student> getKidByParent(@Param("byParent") Parent parent);
 }

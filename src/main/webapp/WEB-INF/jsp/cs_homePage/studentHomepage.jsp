@@ -545,10 +545,10 @@
 				<jsp:include page="../footer/footer.jsp"></jsp:include>
 				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 				<script>
-					let menuToggle = document.querySelector('.menuToggle');
-					menuToggle.onclick = function () {
-						menuToggle.classList.toggle('active');
-					}
+					// let menuToggle = document.querySelector('.menuToggle');
+					// menuToggle.onclick = function () {
+					// 	menuToggle.classList.toggle('active');
+					// }
 				</script>
 			</body>
 

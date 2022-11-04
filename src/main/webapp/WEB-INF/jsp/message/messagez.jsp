@@ -26,7 +26,7 @@
 		<li class="list-group-item"><label class="col-sm-2 col-form-label">標題 :</label><input type="text" class="form-control" name="topic"></p></li>
 		<li class="list-group-item"><label class="col-sm-2 col-form-label">類型 :</label><input type="text" class="form-control" name="type"></li>
 		<li class="list-group-item" >內容:<br><textarea style="margin-left: 50px;" class="form-control" name="article"></textarea>
-			<input type="submit" class="form-control" style="margin-top: 10px;width: 50px; margin-left: 775px;" value="送出"></li>
+			<input type="submit" class="form-control" style="margin-top: 10px;width: 50px; margin-left: 810px;" value="送出"></li>
 		</ul>
 	</form>
   </div>

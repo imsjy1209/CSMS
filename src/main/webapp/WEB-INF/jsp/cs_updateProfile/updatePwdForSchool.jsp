@@ -23,13 +23,13 @@
 			</div>
 			<br>
 			<div id="profilePwd" style="flex-direction: column;">
-				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px;">
+				<div class="card" style="width: 700px; flex-direction: column;  margin: 10px; ">
 					<div class="card-body">
 						<h5 class="card-title">Personal Profile</h5>
 					</div>
 					<ul class="list-group list-group-flush " id="porfileLi">
 					</ul>
-					<div class="" style="display: flex;">
+					<div class="" style="display: flex; justify-content: center">
 						<!-- 改密碼 -->
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 5px;">
 							Change password
@@ -539,7 +539,6 @@
 					}
 				}
 
-
 //     		})
 
 			/* 消除個人資料中input focus的框框 */
@@ -558,6 +557,12 @@
 			//			border-color:white;
 			//			box-shadow:white;
 			//		}
+			//=======================版面動作=======================
+			$(document).ready(function () {
+					$('#sidebarCollapse').on('click', function () {
+						$('#sidebar').toggleClass('active');
+					});
+				});
 			</script>
 			</body>
 
