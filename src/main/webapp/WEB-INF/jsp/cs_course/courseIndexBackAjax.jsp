@@ -442,7 +442,7 @@ $(function() {
 	    	       		"<td><button class='con'>ON</button><button class='coff'>OFF</button></td>" +
 	    	       		"<td class='cPic-td'>" + "<img alt='I am Pic' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
 	    	       		"<td><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
-	    	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger courseDelBtn'>Delete</a></td>"+
+	    	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger courseDelBtn' style='background-color:#e0777d'>Delete</a></td>"+
 						"<td class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
 			        "</tr>";
 				}
@@ -855,7 +855,7 @@ $(document).on('click','.updateCourseAjax',function(e){
     	       	"<td>" + classListList[i].course.startDate + "</td>" +
     	       	"<td>" + classListList[i].course.endDate + "</td>" +
     	       	"<td class='test1'><i style='font-size:36px;' class='classList-edit-btn bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger classListDelBtn'>Delete</a></td>"+
+    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger classListDelBtn' style='background-color:#e0777d'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -1093,7 +1093,7 @@ $(document).on('click','.updateCourseAjax',function(e){
     	       	"<td>" + classRecordList[i].startTime + "</td>" +
     	       	"<td>" + classRecordList[i].endTime + "</td>" +
     	       	"<td class='test1'><a type='button' class='btn btn-warning'>Edit</a></td>" +
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -1171,7 +1171,7 @@ $(document).on('click','.updateCourseAjax',function(e){
     	       	"<td>" + orderListList[i].orderDate + "</td>";
     	       	
       content +=
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger'>Delete</a></td>"+
+    	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
            		"</tr>";
            		
      
@@ -1185,6 +1185,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<th></th>" +
 	       				"<th>明細ID</th>" +
 	       				"<th>訂購人</th>" +
+	       				"<th>學期</th>" +
 	       				"<th>學級</th>" +
 	       				"<th>科目</th>" +
 	       				"<th>年級</th>" +
@@ -1203,6 +1204,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<td class='student-id' style='display:none;'>" + orderListList[i].orderDetails[j].student.id + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].student.name + "</td>" +
 	       				"<td class='course-id' style='display:none;'>" + orderListList[i].orderDetails[j].course.id + "</td>" +
+	       				"<td>" + orderListList[i].orderDetails[j].course.courseSemester + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseGrade + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseSubject+ "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseClass + "</td>" +
@@ -1352,7 +1354,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 	    	       	"<td>" + orderListList[i].orderDate + "</td>";
 	    	       	
 	      content +=
-	    	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger'>Delete</a></td>"+
+	    	       	"<td class=' test2'><a id='delete-btn' type='button' class='ol-del-btn btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
 	           		"</tr>";
 	           		
 	     
@@ -1519,6 +1521,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"<th>所屬學校</th>"+
 			"<th>學生名稱</th>"+
 			"<th>性別</th>"+
+			"<th>學期</th>"+
 			"<th>方案資訊</th>"+
 			"<th>價錢</th>"+
 			"<th>購買狀態</th>"+
@@ -1540,11 +1543,12 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + orderDetailList[i].student.name + "</td>" +
 				"<td>" + orderDetailList[i].student.gender + "</td>" +
 				"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
+				"<td>" + orderDetailList[i].course.courseSemester + "</td>" +
 				"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
 				"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
 				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
 				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
-    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -1726,6 +1730,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<th>所屬學校</th>"+
 				"<th>學生名稱</th>"+
 				"<th>性別</th>"+
+				"<th>學期</th>"+
 				"<th>方案資訊</th>"+
 				"<th>價錢</th>"+
 				"<th>購買狀態</th>"+
@@ -1747,11 +1752,12 @@ $(document).on('click','.updateCourseAjax',function(e){
 					"<td>" + orderDetailList[i].student.name + "</td>" +
 					"<td>" + orderDetailList[i].student.gender + "</td>" +
 					"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
+					"<td>" + orderDetailList[i].course.courseSemester + "</td>" +
 					"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
 					"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
 					"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
 					"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
-	    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+	    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
 	           		"</tr>";
 				}
 				var info0 = document.getElementById("thead-title");
@@ -1833,8 +1839,9 @@ $(document).on('click','.updateCourseAjax',function(e){
 			
 			var content0 = "";
 			content0 += 
+// 			"<div class='container'><table>"+	
 			"<tr>" +
-			"<td>id</td>"+
+			"<td>編號#</td>"+
 			"<td>課程代碼</td>"+
 			"<td>學生名稱</td>"+
 			"<td>座號</td>"+
@@ -1855,7 +1862,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + cslList[i].student.name + "</td>" +
 				"<td class='cslStudentNo'>" + cslList[i].studentNo + "</td>" +
 				"<td><i style='font-size:36px;' class='bx bxs-edit bx-tada bx-rotate-90' ></i></td>" +	
-    	       	"<td class='cslDel-td'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+    	       	"<td class='cslDel-td'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
