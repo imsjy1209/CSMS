@@ -7,6 +7,7 @@
       <meta charset="UTF-8">
       <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
       <title>Login</title>
+
       <style>
         body {
           font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -66,8 +67,21 @@
           cursor: pointer;
         }
         
+          .blackbtn{
+          background-color:  black;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 22px;
+          cursor: pointer;
+        }
+        
         
       </style>
+      
     </head>
 
     <body>
@@ -80,22 +94,23 @@
             <h1>Change P@ssw0rd</h1>
             
             <label for="idPwd1" class="t1"><b class="spanMargin">Old Pwd</b></label>
-            <input readonly type="text" id="idPwd1" name="old" value="${users.password}" placeholder=""
+            <input readonly type="password" id="idPwd1" name="old" value="${users.password}" placeholder=""
 					maxlength="30" size="20" autocomplete="off" aria-invalid="false"><br>
 
             <label for="idPwd2" class="t2"><b class="spanMargin">New Pwd</b></label>
               <div class="hint1"><span id="h" class="spanMargin" ></span><span id="idsp2" class="spanOrange">&nbsp</span></div>
-            <input type="text" id="idPwd2" name="newPassword" value="" placeholder="請輸入新密碼"
+            <input type="password" id="idPwd2" name="newPassword" value="" placeholder="請輸入新密碼"
 						maxlength="30" size="20" autocomplete="off" aria-invalid="false">
           
            
            
             <label for="idPwd3" class="t3"><b class="spanMargin">DBC New Pwd</b></label>
             <div class="hint2"><span id="h" class="spanMargin" ></span><span id="idsp3" class="spanOrange">&nbsp</span></div>
-            <input type="text" id="idPwd3" name="" value="" placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off" aria-invalid="false">
+            <input type="password" id="idPwd3" name="" value="" placeholder="請再次輸入新密碼" maxlength="30" size="20" autocomplete="off" aria-invalid="false">
            
             <div class="btnDiv" >
             <button type="submit" class="orangebtn" id="btn">Change</button>
+            <button type="button" class="blackbtn oneKey">OneKey</button>
             </div>
             
           </div>
@@ -272,7 +287,13 @@
 			enableBtn();
 			// 按確認後送出新密碼
 		}
-      
+		$(document).on('click','.oneKey',function(){
+			console.log("3333")
+			
+			$('#idPwd2').val('abc123456')
+			$('#idPwd3').val('abc123456')
+			
+		})
       
       
       
