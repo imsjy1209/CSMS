@@ -7,6 +7,7 @@
       <meta charset="UTF-8">
       <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
       <title>Login</title>
+
       <style>
         body {
           font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -66,8 +67,21 @@
           cursor: pointer;
         }
         
+          .blackbtn{
+          background-color:  black;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 22px;
+          cursor: pointer;
+        }
+        
         
       </style>
+      
     </head>
 
     <body>
@@ -96,6 +110,7 @@
            
             <div class="btnDiv" >
             <button type="submit" class="orangebtn" id="btn">Change</button>
+            <button type="button" class="blackbtn oneKey">OneKey</button>
             </div>
             
           </div>
@@ -272,7 +287,13 @@
 			enableBtn();
 			// 按確認後送出新密碼
 		}
-      
+		$(document).on('click','.oneKey',function(){
+			console.log("3333")
+			
+			$('#idPwd2').val('abc123456')
+			$('#idPwd3').val('abc123456')
+			
+		})
       
       
       
