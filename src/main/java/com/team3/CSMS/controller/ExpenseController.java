@@ -33,7 +33,7 @@ public class ExpenseController {
 		Expense exp = new Expense(year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
 		m.addAttribute("message", "新增成功");
-		return "expense/expenseform2";
+		return "cs_expense/expenseQueryAndCreatePage";
 	}
 
 	@GetMapping("/expense/edit")
@@ -43,7 +43,7 @@ public class ExpenseController {
 		Expense exp = new Expense(id, year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
 		m.addAttribute("message", "更新成功");
-		return "expense/expenseform2";
+		return "cs_expense/expenseQueryAndCreatePage";
 	}
 
 	@GetMapping("/expense/all")

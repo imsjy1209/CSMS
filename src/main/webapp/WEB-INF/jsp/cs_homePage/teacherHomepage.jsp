@@ -36,13 +36,15 @@
 		width: 100%;
 		/* border: 2px solid slateblue;	 */
 	}
-	
+	.menu{
+		margin: auto;
+	}
 	.aside {
 		/* border: 1px solid red;  */
 		margin-left: 50px;
 		margin-top: 5px;
 		position: relative;
-		
+		justify-content: center;
 	}
 	.btnli {
 		border: none;
@@ -54,7 +56,7 @@
 		display: flex;
 		gap: 50px;
 		justify-content: center;
-		margin-top: 20px;
+		margin-top: 60px;
 	}
 	
 	.menu ul li{
@@ -77,9 +79,9 @@
 		content: '';
 		position:absolute;
 		inset: 30px;
-		box-shadow: 0 0 0 10px var(--clr),
-		0 0 0 15px var(--bg),
-		0 0 0 22px var(--clr);
+		box-shadow: 0 0 0 15px var(--clr),
+		0 0 0 20px var(--bg),
+		0 0 0 27px var(--clr);
 		transition: 0.5s;
 	}
 	.menu ul li:hover:before{
@@ -103,7 +105,7 @@
 	}
 	
 	.menu ul li:hover a{
-		font-size: 3em;
+		font-size: 70px;
 		filter: drop-shadow(0 0 20px var(--clr))
 				drop-shadow(0 0 40px var(--clr))
 				drop-shadow(0 0 60px var(--clr));			
@@ -158,12 +160,12 @@
 						<ul>
 							<li style="--i:0.1s;--clr:#1877f2;">
 								<a class="lessonIcon btnli" data-toggle="modal" data-target="#courseMID">
-									<i style="font-size: 90px;" class='bx bx-book hoverLight' title="課程"></i>
+									<i  class='bx bx-book hoverLight' title="課程"></i>
 								</a>
 							</li>
 							<li style="--i:0.2s;--clr:#ff0000;">
 								<a class="contactBookIcon btnli" data-toggle="modal" data-target="#contactBookMID">
-									<i style="font-size: 90px;" class='bx bx-book-reader hoverLight'></i>
+									<i  class='bx bx-book-reader hoverLight'></i>
 								</a>
 							</li>
 						</ul>

@@ -458,9 +458,9 @@ color:black;
                     </ul>
                 </li>
                 
-                <li>
+                <!-- <li>
                     <a href="#">Contact</a>
-                </li>
+                </li> -->
             </ul>
 
 <!--             <ul class="list-unstyled CTAs"> -->
@@ -482,7 +482,6 @@ color:black;
                     <!-- 伸縮按鈕 -->
                     <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color:#5984d4 ;">
                         <i class='bx bx-code'></i>
-                        
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

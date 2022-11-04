@@ -13,16 +13,19 @@
 
 	<div class="container">
 	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-camera-plus'></i>上傳活動封面</h3>
-	
+	<br>
 	<form action="${pageContext.request.contextPath}/createActivityPhoto.controller" method="post" enctype="multipart/form-data">
-		<p style="display: none">Id:<input type="text" name="id" value="${id}"></p>圖片:<input id='imgInp' type="file" name="file">
+		<p style="display: none">Id:<input type="text" name="id" value="${id}"></p>
+			圖片：<input id='imgInp' type="file" name="file">
 		<br>
-		
+		<br>
+		預覽：
 		<div class="col-md-6">
-			Picture Preview <img width="0px" id="preview_imgInp" src="#" alt="請放入照片" />
+			 
+			<img width="0px" id="preview_imgInp" src="#" alt="請放入照片" />
 		</div>
 		
-		<br><input type="submit" value="送出">
+		<br><input type="submit" class="btn btn-info" value="送出">
 	</form>
 		
     </div>

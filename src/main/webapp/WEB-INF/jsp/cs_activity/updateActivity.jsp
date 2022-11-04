@@ -15,178 +15,133 @@
 
 <style>
 .notWork{
-background-color:white;
-color:black;
-
+	background-color:white;
+	color: black;
 }
+
 </style>
 
 <div class="container">
 	<h3 class='main-title'>
-		<i style='font-size: 36px;' class='bx bxs-edit-location'></i>更改活動
+		<i style='font-size: 36px;' class='bx bxs-universal-access'></i>更改活動
 	</h3>
+	<br>
+<form action="${contextRoot}/updateActivityWithCkeditor.controller" method="post">
 
-<form action="${pageContext.request.contextPath}/updateActivityWithCkeditor.controller" method="post">
 	<p style="display: none"><input class="aId" name="id" value="${activity.id}" /></p>
 	<p style="display: none"><input name="added" value="${activity.added}" /></p>
-<table border="1">
+	
+	<table style="width:70%">
+		<tbody>
+			<tr>
+				<td class="col-sm-3">
+					<label class="my-1 mr-2" for="exampleInputEmail1">活動封面：</label>
+					<div>
+						<img src="${contextRoot}/downloadImage/${id}" class="img-fluid img" 
+							 style="width:300px;height:auto;margin:auto;position:relative;">
+						<a href="${contextRoot}/updatePicPageController/${id}">
+							<i class='bx bxs-edit-alt' 
+							   style="font-size:20px;background-color:rgb(73,73,73,0.5);color:white;position:absolute;bottom:1px;left:294px;"></i>
+						</a>
+					</div>
+				</td>
+			<tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td>
+					<div class="form-group row" style="padding-left:13px;">
+						<div class="col-sm-3">
+							<label class="my-1 mr-2" for="exampleInputEmail1">活動名稱：</label>
+							<input type="text" class="form-control" name="name" value="${activity.name}" size="50" maxlength="50" required/>
+						</div>
+						<div class="col-sm-3">
+							<label class="my-1 mr-2" for="exampleInputEmail1">活動地點：</label>
+							<input type="text" class="form-control" name="place" value="${activity.place}" size="50" maxlength="50" required/>	
+						</div>
+						<div class="col-sm-3">				
+							<label class="my-1 mr-2" for="exampleInputEmail1">活動日期：</label>
+							<input type="text" class="form-control" name="date" type="text" id="datepicker" value="${activity.date}" size="50" maxlength="50" required/>					
+						</div>
+						<div class="col-sm-3">				
+							<label class="my-1 mr-2" for="exampleInputEmail1">功能：</label>
+							<span style="display:none;" class="removedVal">${activity.removed}</span>
 
-<tr>
-<td align='center' valign="middle"><img src="${pageContext.request.contextPath}/downloadImage/${id}"
-		class="img-fluid img"
-		style="display: block; width: 300px; height: auto;"
-		alt="...">
-</td>
-		
-		
-<td>
-<table>
-
-<tr>
-<td><label class="my-1 mr-2" for="exampleInputEmail1">活動名稱:</label>
-    <input type="text" class="form-control" name="name" value="${activity.name}" /></td>
-</tr>
-
-<tr>
-<td><label class="my-1 mr-2" for="exampleInputEmail1">活動地點:</label>
-					<input type="text" class="form-control" name="place" value="${activity.place}" /></td>
-</tr>
-
-<tr>
-<td><label class="my-1 mr-2" for="exampleInputEmail1">活動日期:</label>
-					<input type="text" class="form-control" name="date" type="text" id="datepicker" value="${activity.date}" /></td>
-</tr>
-
-</table>
-</td>
-
-</tr>
-
-<tr>
-<td colspan="2">
-	<div style="display:flex; justify-content:center;">
-	<a style="margin:10px;" href="${pageContext.request.contextPath}/updatePicPageController/${id}" class="btn btn-primary card-link">修改照片</a>
-	<button style="margin:10px; width:100px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i style="font-size:36px" class='bx bx bxs-show'></i></button>
-	<span style="display:none;" class="removedVal">${activity.removed}</span>
-<i style="margin:10px" class='btn btn-primary onOrOff on1'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></i>
-<i style="margin:10px" class='btn btn-danger onOrOff on2'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></i>
-	</div>
-</td>
-</tr>
-
-<tr>
-<td colspan="2"><textarea name=contentForUpdate>${activity.content}</textarea></td>
-</tr>
-
-<tr>
-<td align='center' valign="middle" colspan="2"><input type="submit" class="btn btn-primary" value="更新"/></td>
-</tr>
-
-</table>
+							<div class="btn-group" role="group" aria-label="Basic example">
+		  						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalLong">名單</button>
+		  						<button type="button" class="btn btn-info onOrOff on1">上架</button>
+		  						<button type="button" class="btn btn-danger onOrOff on2">下架</button>
+							</div>				
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan="2"><textarea name=contentForUpdate>${activity.content}</textarea></td>
+			</tr>
+			<tr>
+				<td align='center' valign="middle" colspan="2">
+					<br>
+					<input type="submit" class="btn btn-primary" value="更新"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </form>
 
-
-
-	<!-- 		<div align="center" style="width: 500px; height: 200px; margin: 0 auto;"> -->
-<!-- <div align="center"> -->
-<!-- <div class="container"> -->
-
-<%-- 	<form action="${pageContext.request.contextPath}/updateActivityWithCkeditor.controller" method="post"> --%>
-<%-- 		<p style="display: none"><input name="id" value="${activity.id}" /></p> --%>
-<%-- 		<p style="display: none"><input name="added" value="${activity.added}" /></p> --%>
-		
-
-		
-<!-- 		<ul class="list-group list-group-flush"  style="width:300px;"> -->
-<!-- 			<li class="list-group-item"><a -->
-<%-- 				href="${pageContext.request.contextPath}/updatePicPageController/${id}" --%>
-<!-- 				class="btn btn-primary card-link">修改照片</a> -->
-<!-- 				<i class='btn btn-primary onOrOff'>上架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle'></i></i> -->
-<!-- 				<i class='btn btn-danger onOrOff notWork'>下架中<i style="font-size: 25px" class='bx bxs-chevron-up-circle bx-rotate-180' ></i></i> -->
-<!-- 			</li> -->
-
-<!-- 			<li class="list-group-item"><div align="left" -->
-<!-- 					style="float: left;">活動名稱: </div> <input name="name" -->
-<%-- 				value="${activity.name}" /></li> --%>
-<!-- 			<li class="list-group-item"><div align="left" -->
-<!-- 					style="float: left;">活動地點: </div> <input name="place" -->
-<%-- 				value="${activity.place}" /></li> --%>
-<!-- 			<li class="list-group-item"><div align="left" -->
-<!-- 					style="float: left;">活動日期: </div> <input name="date" type="text" -->
-<%-- 				id="datepicker" value="${activity.date}" /></li> --%>
-<!-- 			<li class="list-group-item"><div align="left" -->
-<!-- 					style="float: left;">參加名單: </div> -->
-<!-- 				<button type="button" class="btn btn-primary" data-toggle="modal" -->
-<!-- 					data-target="#exampleModalLong"><i class='bx bx bxs-show'></i></button></li> -->
-<!-- 		</ul> 		 -->
-<!-- 	</div>	 -->
-			
-<!-- 		<ul> 				 -->
-<!-- 			<li class="list-group-item"><div align="left" -->
-<%-- 					style="float: left;">詳細內容: </div> <textarea name=contentForUpdate>${activity.content}</textarea></li> --%>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${removed == 1}"> --%>
-<!-- 					<li class="list-group-item"><div align="left" -->
-<!-- 							style="float: left;">上架活動: </div> <a -->
-<%-- 						href="${contextRoot}/already/${id}"><i class='bx bxs-hand-up' --%>
-<!-- 							style="font-size: 25px"></i></a></li> -->
-<!-- 					<li class="list-group-item"> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:when test="${removed == 0}"> --%>
-<!-- 					<li class="list-group-item"><div align="left" -->
-<!-- 							style="float: left;">下架活動:</div> <a -->
-<%-- 						href="${contextRoot}/removed/${id}"><i --%>
-<!-- 							class='bx bxs-hand-down' style="font-size: 25px"></i></a></li> -->
-<!-- 					<li class="list-group-item"> -->
-<%-- 				</c:when> --%>
-<%-- 			</c:choose> --%>
-<!-- 		</ul> -->
-<!-- 		<div align="center"> -->
-<!-- 		<input type="submit" value="更新"/> -->
-<!-- 		</div> -->
-<!-- 	</form> -->
-
-<!-- </div> -->
-
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalLongTitle"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">參加名單</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<c:forEach var="student" items="${activity.students}">
-						<div class="card"
-							style="width: 10em; float: left; padding: 15px 20px; margin: 5px 10px 15px 20px">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">${student.name}</li>
-							</ul>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>					
-				</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">參加名單</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<c:forEach var="student" items="${activity.students}">
+					<div class="card" style="width: 10em; float: left; padding: 15px 20px; margin: 5px 10px 15px 20px">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">${student.name}</li>
+						</ul>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>					
 			</div>
 		</div>
 	</div>
-<!-- 	</div> -->
-
-
+</div>
+</div>
 <!-- ================for Side Bar==================	 -->
 </div>
 </body>
 
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-<!--   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+<!-- CDN -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+		
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+		
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+		
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+        integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -226,37 +181,57 @@ color:black;
 	
 	//============上下架========================
 		window.onload =(function(){
-		console.log("gogogogogo")
-		var onOrOff = $('.removedVal').text();
-			if(onOrOff==0){
-				$('.on2').addClass('notWork')
+			// console.log("gogogogogo")
+			var onOrOff = $('.removedVal').text();
+			console.log(onOrOff);
+			if(onOrOff==0){ // 上架
+				$('.on2').addClass('notWork');
 			}
-			else{
-				$('.on1').addClass('notWork')
+			else{ // 下架
+				$('.on1').addClass('notWork');
 			}
-			
-		})
+				
+		});
 		
 		
 		
 		$(document).on('click','.onOrOff',function(){
 			var onOrOff = $('.removedVal').text();
-			if(onOrOff=='0' && $(this).text()=='下架中'){
-				$('.removedVal').text('1')
-				$('.on1').attr('class','btn btn-primary onOrOff on1 notWork')
-				$('.on2').attr('class','btn btn-danger onOrOff on2')
+			if(onOrOff=='0' && $(this).text()=='下架'){
+				$('.removedVal').text('1');
+				$('.on1').attr('class','btn btn-info onOrOff on1 notWork');
+				$('.on2').attr('class','btn btn-danger onOrOff on2');
 				
 				var id=$('.aId').val();
-				console.log(id)
+				console.log(id);
 				var xhr = new XMLHttpRequest();
 				xhr.open("GET", "<c:url value='/removed/" + id + "' />", true);
 				xhr.send();
 				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已下架'
+				})
+				//===End of 更改成功alert======
+				
 			}
-			else if(onOrOff=='1' && $(this).text()=='上架中'){
-				$('.removedVal').text('0')
-				$('.on1').attr('class','btn btn-primary onOrOff on1')
-				$('.on2').attr('class','btn btn-danger onOrOff on2 notWork')
+			else if(onOrOff=='1' && $(this).text()=='上架'){
+				$('.removedVal').text('0');
+				$('.on1').attr('class','btn btn-info onOrOff on1');
+				$('.on2').attr('class','btn btn-danger onOrOff on2 notWork');
 				
 				var id=$('.aId').val();
 				console.log(id)
@@ -266,9 +241,28 @@ color:black;
 				xhr.open("GET", "<c:url value='/already/" + id + "' />", true);
 				xhr.send();
 				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已上架'
+				})
+				//===End of 更改成功alert======
+				
 			}
 			else{
-				console.log('nothing happened')
+				console.log('nothing happened');
 			}
 			
 			
