@@ -22,11 +22,11 @@
 	</div>
 	<form action="message/addMessageByParent" method="post">
 		<ul class="list-group list-group-flush">
-		<li class="list-group-item">發送對象 : <select id="school" name="school"></select></li>
-		<li class="list-group-item"><p>標題<br><input type="text" name="topic"></p></li>
-		<li class="list-group-item"><p>類型<br><input type="text" name="type"></p></li>
+		<li class="list-group-item"><label class="col-sm-2 col-form-label">發送對象 : </label><select id="school" class="form-control" name="school"></select></li>
+		<li class="list-group-item"><label class="col-sm-2 col-form-label">標題 :</label><input type="text" class="form-control" name="topic"></p></li>
+		<li class="list-group-item"><label class="col-sm-2 col-form-label">類型 :</label><input type="text" class="form-control" name="type"></li>
 		<li class="list-group-item" >內容:<br><textarea style="margin-left: 50px;" class="form-control" name="article"></textarea>
-			<input type="submit" value="送出"></li>
+			<input type="submit" class="form-control" style="margin-top: 10px;width: 50px; margin-left: 775px;" value="送出"></li>
 		</ul>
 	</form>
   </div>
@@ -52,7 +52,7 @@
 </script>
 <script>
 		CKEDITOR.replace('article');
-		CKEDITOR.config.width = 800;
+		CKEDITOR.config.width = 858;
 		CKEDITOR.config.height = 300;
 		
 	</script>
