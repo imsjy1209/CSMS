@@ -1185,7 +1185,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<th></th>" +
 	       				"<th>明細ID</th>" +
 	       				"<th>訂購人</th>" +
-	       				"<th>學期</th>" +
 	       				"<th>學級</th>" +
 	       				"<th>科目</th>" +
 	       				"<th>年級</th>" +
@@ -1204,7 +1203,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 	       				"<td class='student-id' style='display:none;'>" + orderListList[i].orderDetails[j].student.id + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].student.name + "</td>" +
 	       				"<td class='course-id' style='display:none;'>" + orderListList[i].orderDetails[j].course.id + "</td>" +
-	       				"<td>" + orderListList[i].orderDetails[j].course.courseSemester + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseGrade + "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseSubject+ "</td>" +
 	       				"<td>" + orderListList[i].orderDetails[j].course.courseClass + "</td>" +
@@ -1368,7 +1366,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		       				"<th></th>" +
 		       				"<th>明細ID</th>" +
 		       				"<th>訂購人</th>" +
-		       				"<th>學期</th>" +
 		       				"<th>學級</th>" +
 		       				"<th>科目</th>" +
 		       				"<th>年級</th>" +
@@ -1386,7 +1383,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 		       				"<td class='student-id' style='display:none;'>" + orderListList[i].orderDetails[j].student.id + "</td>" +
 		       				"<td>" + orderListList[i].orderDetails[j].student.name + "</td>" +
 		       				"<td class='course-id' style='display:none;'>" + orderListList[i].orderDetails[j].course.id + "</td>" +
-		       				"<td>" + orderListList[i].orderDetails[j].course.courseSemester + "</td>" +
 		       				"<td>" + orderListList[i].orderDetails[j].course.courseGrade + "</td>" +
 		       				"<td>" + orderListList[i].orderDetails[j].course.courseSubject+ "</td>" +
 		       				"<td>" + orderListList[i].orderDetails[j].course.courseClass + "</td>" +
@@ -1523,7 +1519,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"<th>所屬學校</th>"+
 			"<th>學生名稱</th>"+
 			"<th>性別</th>"+
-			"<th>學期</th>"+
 			"<th>方案資訊</th>"+
 			"<th>價錢</th>"+
 			"<th>購買狀態</th>"+
@@ -1544,7 +1539,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + orderDetailList[i].student.schoolName + "</td>" +
 				"<td>" + orderDetailList[i].student.name + "</td>" +
 				"<td>" + orderDetailList[i].student.gender + "</td>" +
-				"<td>" + orderDetailList[i].course.courseSemester + "</td>" +
 				"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
 				"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
 				"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
@@ -1732,7 +1726,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<th>所屬學校</th>"+
 				"<th>學生名稱</th>"+
 				"<th>性別</th>"+
-				"<th>學期</th>"+
 				"<th>方案資訊</th>"+
 				"<th>價錢</th>"+
 				"<th>購買狀態</th>"+
@@ -1753,7 +1746,6 @@ $(document).on('click','.updateCourseAjax',function(e){
 					"<td>" + orderDetailList[i].student.schoolName + "</td>" +
 					"<td>" + orderDetailList[i].student.name + "</td>" +
 					"<td>" + orderDetailList[i].student.gender + "</td>" +
-					"<td>" + orderDetailList[i].course.courseSemester + "</td>" +
 					"<td class='course-id' style='display:none;'>" + orderDetailList[i].course.id + "</td>" +
 					"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
 					"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
@@ -2710,7 +2702,6 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    // absent select change event
 			$(document).on('change','.abs',function(){
 		    // get student id
-		    $(document).on('change','.abs',function(){
 		    let absentid=$(this).parent().siblings('.absid ').text();
 		    let absOrNot=$(this).val();
 		    console.log(absOrNot);
@@ -2735,7 +2726,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 				  icon: 'success',
 			 	 title: '已更改成功'
 				})
-				
+
 		    })
 		  }//end of funtion displayStudentListAndInfox
 		  
