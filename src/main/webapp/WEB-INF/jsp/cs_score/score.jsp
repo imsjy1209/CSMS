@@ -34,7 +34,7 @@
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
 <div class="container">
-	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>All Score Data</h3>
+	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>班級成績查詢</h3>
            
 			<br>
 	<div class="topbtn">
@@ -63,10 +63,11 @@
 				<label> <select class="form-control" id="tool_type2"
 				name="tool_type" style="cursor: pointer;"
 				class="selectpicker ml-1 mb-2" data-width="150px">
-					<option value="0">請選擇</option>
+			<!-- 	預選全部才不會因為沒選而系統爆掉 -->	
+			<!-- 	<option value="0">請選擇</option> -->
 					<option value="1">及格</option>
 					<option value="2">不及格</option>
-					<option value="3">全部</option>
+					<option value="3" selected>全部</option>
 				
 			                </select>
 			</label>
@@ -211,11 +212,11 @@
 						+ sidto[i].scoreId + "</td>"		
 				scolist_data += "<td class='edit'><a href='${contextRoot}/scoreData/edit?id="
 						+ sidto[i].scoreId
-						+ "' type='button' class='btn btn-dark'>Edit</a></td>"
+						+ "' type='button' class='btn btn-danger'>Edit</a></td>"
 				scolist_data += "<td class='delete'><a onclick="
 						+ "\"return confirm('確定刪除嗎?')\" type='button' href='${contextRoot}/scoreData/delete?id="
 						+ sidto[i].scoreId
-						+ "' class='btn btn-dark'>Delete</a></td>"
+						+ "' class='btn btn-warning'>Delete</a></td>"
 
 				scolist_data += '<tr>'
 			}

@@ -1,35 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> --%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
-<!-- CSS only -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-	crossorigin="anonymous">
 
 <style>
-.form1 {
+.topbtn {
+	text-align: center;
 	width: 500px;
 	margin: auto;
 }
+
+.container {
+	width: 1500px;
+	margin: auto;
+}
+
+.input{border:0;
+  background-color:#003C9D;
+  color:#fff;
+  border-radius:10px;
+  cursor:pointer;}
+
+.input:hover{
+  color:#003C9D;
+  background-color:#fff;
+  border:2px #003C9D solid;
+}
 </style>
 
-<title>score Edit</title>
-</head>
-<body>
+<jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
+	<div class="container">
+		<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>班級成績編輯</h3>
+           
+		<br>
 	<form action="${contextRoot}/scoreDataUpdateAAA" method="POST"
 		class="row g-3 form1" enctype="multipart/form-data">
-		<h3>scoreData Edit</h3>
+		
 		<input type="hidden" name="scoreId" class="form-control" id="scoreId"
 				value="${score1.id}">
 		<div class="col-12">
@@ -43,7 +53,7 @@
 			${msg.ok}
 		</div>
 	</form>
-
+</div>
 
 <!-- JavaScript Bundle with Popper -->
 <script
