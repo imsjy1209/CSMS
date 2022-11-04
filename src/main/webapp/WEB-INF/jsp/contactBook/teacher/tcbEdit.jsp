@@ -187,12 +187,26 @@ window.onload = function(){
     		$('#cbListBtnArea').append(UpdateBtnObj);
     		
     		// (4)帶入「回上一頁」按鈕
-    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>';
+    		prevPageBtnObj = '<a href="/CSMS/ContactBook/T_GoPrevPage?cbId='+cbId+'" type="button" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">回上一頁</a>&nbsp&nbsp';
 			$('#cbListBtnArea').append(prevPageBtnObj);
+			
+			// (5)帶入「一鍵輸入」按鈕
+			var oneKeyBtnObj = '<button type="button" class="btn btn-secondary" id="oneKey">一鍵輸入</button>';
+			$('#cbListBtnArea').append(oneKeyBtnObj);
     	}
     }
     
 }
+
+// 一鍵輸入
+$(document).on("click","#oneKey", function() {
+	
+	$("#courseContent").val("第六章第一節、月考前總複習");
+	$("#homework").val("國文評量試卷*1(附解答)");
+	$("#quizNotice").val("抽背李白唐詩");
+	
+});
+
 
 //=======================版面動作=======================
 
