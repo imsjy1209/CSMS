@@ -25,7 +25,7 @@
 		<li class="list-group-item"><label class="col-sm-2 col-form-label">發送對象 : </label><select id="school" class="form-control" name="school"></select></li>
 		<li class="list-group-item"><label class="col-sm-2 col-form-label">標題 :</label><input type="text" class="form-control" name="topic"></p></li>
 		<li class="list-group-item"><label class="col-sm-2 col-form-label">類型 :</label><input type="text" class="form-control" name="type"></li>
-		<li class="list-group-item" >內容:<br><textarea style="margin-left: 50px;" class="form-control" name="article"></textarea>
+		<li class="list-group-item" >內容:<br><textarea style="margin-left: 50px;" id="ckeditorContent" class="form-control" name="article"></textarea>
 			<input type="submit" class="form-control" style="margin-top: 10px;width: 50px; margin-left: 775px;" value="送出">&nbsp;&nbsp;<button type="button" class="btn btn-dark oneKey">OneKey</button></li>
 		</ul>
 	</form>
