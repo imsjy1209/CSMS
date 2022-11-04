@@ -2707,7 +2707,8 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    stulist_data +='</tobody>';
 		    $('#studentList').append(stulist_data)
 
-		    // absent select change event
+		    // absent select change event123
+		    //123456
 			$(document).on('change','.abs',function(){
 		    // get student id
 		    $(document).on('change','.abs',function(){
