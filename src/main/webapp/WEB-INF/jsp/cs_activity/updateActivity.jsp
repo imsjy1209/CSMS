@@ -208,6 +208,25 @@
 				xhr.open("GET", "<c:url value='/removed/" + id + "' />", true);
 				xhr.send();
 				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已下架'
+				})
+				//===End of 更改成功alert======
+				
 			}
 			else if(onOrOff=='1' && $(this).text()=='上架'){
 				$('.removedVal').text('0');
@@ -221,6 +240,25 @@
 				var xhr = new XMLHttpRequest();
 				xhr.open("GET", "<c:url value='/already/" + id + "' />", true);
 				xhr.send();
+				
+				//===更改成功alert======
+				const Toast = Swal.mixin({
+			  	toast: true,
+			  	position: 'top-end',
+			  	showConfirmButton: false,
+			  	timer: 1000,
+			  	timerProgressBar: true,
+			  	didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			 	 }
+				})
+
+				Toast.fire({
+				  icon: 'success',
+			 	 title: '已上架'
+				})
+				//===End of 更改成功alert======
 				
 			}
 			else{

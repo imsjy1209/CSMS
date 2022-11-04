@@ -25,7 +25,7 @@
 			<img width="0px" id="preview_imgInp" src="#" alt="請放入照片" />
 		</div>
 		
-		<br><input type="submit" class="btn btn-info"value="送出">
+		<br><input type="submit" class="btn btn-info" value="送出">
 	</form>
 		
     </div>
