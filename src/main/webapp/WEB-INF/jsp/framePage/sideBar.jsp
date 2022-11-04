@@ -360,7 +360,7 @@ cursor: pointer;
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img src="${contextRoot}/image/CSMS1.png" class="csmslogo" alt="">
-                <h5 style='color:black;font-weight:800;'>Back-End System</h5>
+                <h5 >Back-End System</h5>
             </div>
 
             <ul class="list-unstyled components">
