@@ -20,15 +20,17 @@
 	
 		<div align='center'>
 
-			<button id='btn02'>查詢單學期損益</button>
-			<select id="myYear">
-			</select> <select id="semester">
+			<button id='btn02' class="btn btn-outline-secondary">查詢單學期損益</button>
+			
+			<select id="myYear" style="height:37px; border-radius: 3px;">
+			</select> 
+			<select id="semester" style="height:37px; border-radius: 3px;">
 				<option value="上學期">上學期</option>
 				<option value="下學期">下學期</option>
 			</select>
 			
-			<button id='btn03'>損益折現圖</button>
-			<select id="first"></select> <select id="second"></select>
+			<button id='btn03' class="btn btn-outline-secondary">損益折現圖</button>
+			<select id="first" style="height:37px; border-radius: 3px;"></select> <select id="second" style="height:37px; border-radius: 3px;"></select>
 			
 			<hr>
 			
@@ -52,7 +54,7 @@
 			</div>
 			<div id="full"></div>
 			<hr>
-<a type="button" href='<c:url value='/'/>' class="btn btn-primary">回前頁</a>
+<!-- <a type="button" href='<c:url value='/'/>' class="btn btn-primary">回前頁</a> -->
 			
 		</div>
 			

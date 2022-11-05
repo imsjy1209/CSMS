@@ -18,13 +18,13 @@
 	<div class="row g-3 form1">
 		<div class="col-md-4">
 			<span>選擇對象:</span>
-			<select id="type">
+			<select id="type" style="height:37px; border-radius: 3px;">
 				<option value="2">導師</option>
 				<option value="3">講師</option>
 				<option value="4">學生</option>
 				<option value="5">家長</option>
 			</select>
-			<button id='btn01' class="btn btn-info">Send</button>
+			<button id='btn01' class="btn btn-info" style="background-color: #2e446e;">Send</button>
 		</div>
 	</div>
 	

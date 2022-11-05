@@ -78,7 +78,7 @@
 				<button id='selectBtn' class="btn btn-info">搜尋</button>			     
 			     &nbsp 	     
 		  		<a href="${contextRoot}/scoreAdd" type="button"
-			class="btn btn-primary" >新增</a>
+			class="btn btn-info" >新增</a>
 			  &nbsp 	
 			  	<!--     
 				<a  href="${contextRoot}/passscore" type="button"

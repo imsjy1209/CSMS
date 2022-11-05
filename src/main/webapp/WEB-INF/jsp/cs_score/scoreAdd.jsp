@@ -30,7 +30,7 @@
 		<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
 			<!-- 課程選單 -->
 	  		<div class="input-group">	    		
-				<select class="form-control" id="classCode" style="width:150px">
+				<select class="form-control" id="classCode" style="width:150px;">
 					<option value="-1" selected="selected" hidden>請選擇課程</option>
 				</select>						
 	  		</div>
@@ -63,7 +63,7 @@
 			</table>
 		</div>
 		<!-- (4) 最後送出 -->
-		<button id='send' class="btn btn-success">送出</button>&nbsp;&nbsp;
+		<button id='send' class="btn btn-success"style="margin-left:420px;">送出</button>&nbsp;&nbsp;
 		<!-- 一鍵輸入有空再做 -->	
 <!-- 	<button id='send' class="btn btn-success" id="oneKey">一鍵輸入</button> -->	
 	</div><!-- End Of Content -->

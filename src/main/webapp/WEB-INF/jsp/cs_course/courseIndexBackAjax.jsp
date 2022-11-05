@@ -439,7 +439,7 @@ $(function() {
 	    	       		"<td class='courseMemberInfo'>" + courseList[i].courseMember + "</td>" +
 	    	       		"<td class='startDateInfo'>" + courseList[i].startDate + "</td>" +
 	    	       		"<td class='endDateInfo'>" + courseList[i].endDate + "</td>" +
-	    	       		"<td><button class='con'>ON</button><button class='coff'>OFF</button></td>" +
+	    	       		"<td><button class='con' style='width:45px; border-radius:3px;'>ON</button><button class='coff' style='width:45px; border-radius:3px;'>OFF</button></td>" +
 	    	       		"<td class='cPic-td'>" + "<img alt='I am Pic' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
 	    	       		"<td><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
 	    	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger courseDelBtn' style='background-color:#e0777d'>Delete</a></td>"+
@@ -1546,9 +1546,9 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + orderDetailList[i].course.courseSemester + "</td>" +
 				"<td>"+ orderDetailList[i].course.courseCategory +"班-"+ orderDetailList[i].course.courseGrade +orderDetailList[i].course.courseClass +"年級-"+ orderDetailList[i].course.courseSubject + "</td>" +
 				"<td>"+ orderDetailList[i].course.coursePrice + "</td>" +
-				"<td><button class='orderWait'>未結帳</button><button class='orderNoP'>未購買</button><button class='orderFin'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
-				"<td><button class='oDon'>已排課</button><button class='oDoff'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
-    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d'>Delete</a></td>"+
+				"<td><button class='orderWait' style='border-radius:3px;'>未結帳</button><button class='orderNoP'style='border-radius:3px;'>未購買</button><button class='orderFin' style='border-radius:3px;'>已購買</button><span class='order-info' hidden='hidden'>"+ orderDetailList[i].confirmOrder +"</span></td>" +
+				"<td><button class='oDon' style='border-radius:3px;'>已排課</button><button class='oDoff' style='border-radius:3px;'>未排課</button><span class='arrange-info' hidden='hidden'>"+ orderDetailList[i].arrangeClassList +"</span></td>" +
+    	       	"<td class='oD-delete-td'><a id='delete-btn' type='button' class='btn btn-danger' style='background-color:#e0777d;border-radius:3px;'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");
@@ -2040,8 +2040,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 				"<td>" + roomList[i].roomName + "</td>" +
 				"<td>" + roomList[i].roomSize + "</td>" +
     	    	"<td>" + "<img alt='img' width='100px' src='${contextRoot}/AllRoomPic/" + roomList[i].id +"' class='room-img'>" + "</td>" +
-    	       	"<td class='test1'><a href='${contextRoot}/roomData/edit?id=" + roomList[i].id + "' type='button' class='btn btn-warning'>Edit</a></td>" +
-    	       	"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger'>Delete</a></td>"+
+    	       	"<td class='test1'><a href='${contextRoot}/roomData/edit?id=" + roomList[i].id + "' type='button'  class='btn btn-warning'>Edit</a></td>" +
+    	       	"<td class=' test2'><a id='delete-btn' style='background-color:#e0777d' type='button' class='btn btn-danger'>Delete</a></td>"+
            		"</tr>";
 			}
 			var info0 = document.getElementById("thead-title");

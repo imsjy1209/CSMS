@@ -44,7 +44,7 @@
 			<div id="full"></div>
 			<hr>
 
-			<a href="<c:url value='/'  />">回前頁</a>
+			<!-- <a href="<c:url value='/'  />">回前頁</a> -->
 		</div>
 	</div>
 	<script>
