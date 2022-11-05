@@ -48,7 +48,6 @@
 		    	<span class="letters">${message}</span>
 		  	</span>
 		</div>
-<%-- 		<div style="color:#E0777D;">${message}</div> --%>
 		
 		<br>
 		<!-- 選單按鈕群組 --> 
@@ -161,7 +160,7 @@ function displayData01(data) {
 		htmlSeg += "<div style='color:#FF9933;font-weight:700;width:250px'>【尚未建立，請新增資料】</div><br>"
 		htmlSeg += "<form action=${pageContext.request.contextPath}/addExpense method=get style='margin-left:10px'>";
 		htmlSeg += "<div class='form-group row' style='display:none'>";
-		htmlSeg += "<input style='display:none' name='year' value="+year+"class='form-control' id='semester'>";
+		htmlSeg += "<input style='display:none' name='year' value="+year+" class='form-control' id='semester'>";
 		htmlSeg += "<input style='display:none' name='semester' value="+semester+" class='form-control' id='semester' style='width:200px'></div>";
 		htmlSeg += "</div>";
 		htmlSeg += "<div class='form-group row'>";
