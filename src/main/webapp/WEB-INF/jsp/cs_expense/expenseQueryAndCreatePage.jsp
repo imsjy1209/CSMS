@@ -18,15 +18,48 @@
 <div class="container">
 	<h3 class='main-title'><i style='font-size:36px;' class='bx bxs-dollar-circle'></i>損益紀錄</h3>
 	
-		<div class="container" align="center">
-		${message}<br> <select id="myYear">
-		</select> <select id="semester">
-			<option value="上學期">上學期</option>
-			<option value="下學期">下學期</option>
-		</select> <br><br>
-		<button id='btn01'>送出</button><br><br>
-		<div style="clear: both;" id='dataArea'>&nbsp;</div>
-	</div>
+	<div class="container" align="center">
+		${message}
+		<br>
+		<!-- 選單按鈕群組 --> 
+		<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" 
+			 style="width:395px">
+			<!-- 年份/學期選單 -->
+	  		<div class="input-group">	    		
+				<select id="myYear" class="form-control" style="width:150px">
+					<!-- data from script -->
+				</select>
+				&nbsp;&nbsp;&nbsp;
+				<select id="semester" class="form-control" style="width:150px">
+					<option value="上學期">上學期</option>
+					<option value="下學期">下學期</option>
+				</select> 
+						
+	  		</div>
+	  		&nbsp;&nbsp;&nbsp;
+	  		<!-- 查詢按鈕 -->
+	  		<div class="btn-group mr-2" role="group" aria-label="First group">
+	    		<button id='btn01' class="btn btn-info">查詢</button>
+	  		</div>
+		</div>
+		
+		<br><br>
+		<div style="clear: both;border:1px solid red" id='dataArea'>&nbsp;</div>
+		
+	</div><!-- End Of Container -->
+		
+<!-- 		<select id="myYear"> -->
+<!-- 		</select> -->
+		 
+<!-- 		<select id="semester"> -->
+<!-- 			<option value="上學期">上學期</option> -->
+<!-- 			<option value="下學期">下學期</option> -->
+<!-- 		</select>  -->
+<!-- 		<br><br> -->
+<!-- 		<button class="btn btn-info" id='btn01'>查詢</button> -->
+<!-- 		<br><br> -->
+<!-- 		<div style="clear: both;" id='dataArea'>&nbsp;</div> -->
+<!-- 	</div> -->
 			
 </div>
 	
@@ -89,12 +122,13 @@ function displayData01(data) {
 		htmlSeg += "<form action=${pageContext.request.contextPath}/addExpense method=get>";
 		htmlSeg += "<input style='display:none' name='year' value="+year+">";
 		htmlSeg += "<input style='display:none' name='semester' value="+semester+">";
-		htmlSeg += "總共收入: <input name='income' value="+obj.income+"><br><br>";
-		htmlSeg += "總共花費: <input name='totalcost' value="+obj.totalcost+"><br><br>";
-		htmlSeg += "行銷費用: <input name='markting' value="+obj.markting+"><br><br>";
-		htmlSeg += "人事費用: <input name='personnel' value="+obj.personnel+"><br><br>";
-		htmlSeg += "其他費用: <input name='other' value="+ obj.other+"><br><br>";
-		htmlSeg += "<input type='submit' value='上傳'><button type='button' class='btn btn-dark oneKey'>OneKey</button>";
+		htmlSeg += "總共收入：<input name='income' value="+obj.income+"><br><br>";
+		htmlSeg += "總共花費：<input name='totalcost' value="+obj.totalcost+"><br><br>";
+		htmlSeg += "行銷費用：<input name='markting' value="+obj.markting+"><br><br>";
+		htmlSeg += "人事費用：<input name='personnel' value="+obj.personnel+"><br><br>";
+		htmlSeg += "其他費用：<input name='other' value="+ obj.other+"><br><br>";
+		htmlSeg += "<input type='submit' value='上傳'>&nbsp;&nbsp;";
+		htmlSeg += "<button type='button' class='btn btn-dark oneKey'>OneKey</button>";
 		htmlSeg += "</form>"
 	} else {
 		htmlSeg += "已存在，可更新資料<br><br>"
@@ -102,11 +136,11 @@ function displayData01(data) {
 		htmlSeg += "<input style='display:none' name='id' value="+obj.id+">";
 		htmlSeg += "<input style='display:none' name='year' value="+year+">";
 		htmlSeg += "<input style='display:none' name='semester' value="+semester+">";
-		htmlSeg += "總共收入: <input name='income' value="+obj.income+"><br><br>";
-		htmlSeg += "總共花費: <input name='totalcost' value="+obj.totalcost+"><br><br>";
-		htmlSeg += "行銷費用: <input name='markting' value="+obj.markting+"><br><br>";
-		htmlSeg += "人事費用: <input name='personnel' value="+obj.personnel+"><br><br>";
-		htmlSeg += "其他費用: <input name='other' value="+ obj.other+"><br><br>";
+		htmlSeg += "總共收入：<input name='income' value="+obj.income+"><br><br>";
+		htmlSeg += "總共花費：<input name='totalcost' value="+obj.totalcost+"><br><br>";
+		htmlSeg += "行銷費用：<input name='markting' value="+obj.markting+"><br><br>";
+		htmlSeg += "人事費用：<input name='personnel' value="+obj.personnel+"><br><br>";
+		htmlSeg += "其他費用：<input name='other' value="+ obj.other+"><br><br>";
 		htmlSeg += "<input type='submit' value='更新'>"
 		htmlSeg += "</form>"
 	}
