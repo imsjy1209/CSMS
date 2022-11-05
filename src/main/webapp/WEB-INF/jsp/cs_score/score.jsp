@@ -92,7 +92,7 @@
 		  <table class="table table-striped mt-5 " id="scoreTable">
 			<thead id="thead-title">
 				<tr>
-					<td>id</td>
+					<td>ID</td>
 					<td>學生姓名</td>
 					<td>分數</td>
 					<td>編輯功能</td>
