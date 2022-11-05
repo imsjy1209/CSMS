@@ -99,6 +99,8 @@
         <button type="submit" class="btn btn-dark oneKey">Student</button>
         <button type="submit" class="btn btn-dark oneKey">Parent</button>
         <button type="submit" class="btn btn-dark oneKey">Admin</button> 
+        <br><br>
+        <button type="submit" class="btn btn-outline-primary oneKey">NewUser</button> 
       </div>
       
       
@@ -134,8 +136,13 @@
     		pwd.val('abc12345')
     	}
        	else if($(this).text()=='Admin'){
-    		console.log('Parennnnnnnnnnnt')
+    		console.log('Admiiiiiiiiiiin')
     		userName.val('admin')
+    		pwd.val('abc12345')
+    	}
+       	else if($(this).text()=='NewUser'){
+    		console.log('NewwwwwwwwUser')
+    		userName.val('BA099')
     		pwd.val('abc12345')
     	}
     	  

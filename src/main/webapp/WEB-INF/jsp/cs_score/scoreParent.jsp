@@ -18,6 +18,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+<!-- BOX ICONS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <title>Welcome</title>
 <style>
 .topbtn {
@@ -46,9 +48,10 @@
 <!-- 			To HomePage</a> -->
 <!-- 	</div> -->
 	   <div class="container">
-		<h3>All Score Data</h3>
+		<h3><i class='bx bx-poll'></i>&nbsp;各科成績紀錄</h3>
 		<span id="hiddenUserId" hidden>15</span>
 		<!-- 改${sessionScope.user.id} -->
+		<br>
 		<div>
 		<!-- 學生選單(一個父母2個小孩 -->
 			<label> <select class="form-control" id="studentList"

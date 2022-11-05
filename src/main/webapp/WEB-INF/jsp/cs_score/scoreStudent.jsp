@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome</title>
+<!-- BOX ICONS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <style>
 .topbtn {
 	text-align: center;
@@ -37,8 +39,9 @@
 	<br>
 	<div class="wrapper">
 		<div class="container">
-			<h3>All Score Data</h3>
+			<h3><i class='bx bx-poll'></i>&nbsp;各科成績紀錄</h3>
 			<%-- 		<span id="hiddenUserId" hidden>${sessionScope.Users.id}</span><!-- 改${sessionScope.user.id} --> --%>
+			<br>
 			<div>
 				<label> <select class="form-control" id="classCode"
 					style="width: 150px">
@@ -59,6 +62,7 @@
 			</table>
 		</div>
 	</div>
+	<br>
 	<!-- footer -->
 	<jsp:include page="../footer/footer.jsp"></jsp:include>
 

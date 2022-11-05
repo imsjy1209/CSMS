@@ -34,7 +34,7 @@
 <jsp:include page="../framePage/sideBarForNotAjax.jsp"></jsp:include>
 
 <div class="container">
-	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>All Score Data</h3>
+	<h3 class='main-title'><i style='font-size:36px;' class='bx bx-search-alt-2'></i>班級成績查詢</h3>
            
 			<br>
 	<div class="topbtn">
@@ -63,10 +63,11 @@
 				<label> <select class="form-control" id="tool_type2"
 				name="tool_type" style="cursor: pointer;"
 				class="selectpicker ml-1 mb-2" data-width="150px">
-					<option value="0">請選擇</option>
+			<!-- 	預選全部才不會因為沒選而系統爆掉 -->	
+			<!-- 	<option value="0">請選擇</option> -->
 					<option value="1">及格</option>
 					<option value="2">不及格</option>
-					<option value="3">全部</option>
+					<option value="3" selected>全部</option>
 				
 			                </select>
 			</label>
@@ -91,7 +92,7 @@
 		  <table class="table table-striped mt-5 " id="scoreTable">
 			<thead id="thead-title">
 				<tr>
-					<td>id</td>
+					<td>ID</td>
 					<td>學生姓名</td>
 					<td>分數</td>
 					<td>編輯功能</td>
@@ -113,6 +114,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.32/dist/sweetalert2.all.min.js"
+       	  integrity="sha256-bdzpgx4rIB/e4FJRNveqYCLZWEgcKyal3W9CQHNiZ3k=" crossorigin="anonymous"></script>
 
 
 
@@ -211,12 +214,13 @@
 						+ sidto[i].scoreId + "</td>"		
 				scolist_data += "<td class='edit'><a href='${contextRoot}/scoreData/edit?id="
 						+ sidto[i].scoreId
-						+ "' type='button' class='btn btn-dark'>Edit</a></td>"
-				scolist_data += "<td class='delete'><a onclick="
-						+ "\"return confirm('確定刪除嗎?')\" type='button' href='${contextRoot}/scoreData/delete?id="
-						+ sidto[i].scoreId
-						+ "' class='btn btn-dark'>Delete</a></td>"
-
+						+ "' type='button' class='btn btn-danger'>Edit</a></td>"
+// 				scolist_data += "<td class='delete'><a onclick="
+// 						+ "\"return confirm('確定刪除嗎?')\" type='button' href='${contextRoot}/scoreData/delete?id="
+// 						+ sidto[i].scoreId
+// 						+ "' class='btn btn-warning'>Delete</a></td>"
+				var scoreId = sidto[i].scoreId;
+				scolist_data += "<td class='delete'><a onclick='deleteConfirm("+scoreId+")' type='button' class='btn btn-warning'>Delete</a></td>"
 				scolist_data += '<tr>'
 			}
 
@@ -224,7 +228,33 @@
 			$('#scoreTable').append(scolist_data)
 		}
 	
-
+		// 新增sweet alert
+		function deleteConfirm(scoreId) {
+			console.log(scoreId);
+			Swal.fire({
+				title: '確定要刪除此筆成績嗎？',
+				text: '本次刪除後，如欲重新新增，可點選上方「新增」按鈕',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '確認',
+				cancelButtonText: '取消'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire({
+						title:'刪除成功',
+						icon:'success',
+						showConfirmButton: false,
+						showCancelButton: false
+					})
+					
+					setTimeout(function() {
+						window.location.href = "/CSMS/scoreData/delete?id="+scoreId;
+					}, 1500);		
+			   }
+			});
+		}
 	
 	
 </script>

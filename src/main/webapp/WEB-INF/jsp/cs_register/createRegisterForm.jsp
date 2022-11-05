@@ -59,7 +59,7 @@ window.onload = function() {
 					'</div>'+
 					'<div class="col-md-4">'+
 						'<label for="password" class="form-label">密碼</label>'+
-			            '<input type="text" name="password" class="form-control" id="password">'+
+			            '<input type="password" name="password" class="form-control" id="password">'+
 					'</div>'+
 					'<div class="col-md-4">'+
 						'<label for="name" class="form-label">名字</label>'+
@@ -92,7 +92,7 @@ window.onload = function() {
 				'</div>'+
 				'<div class="col-md-4">'+
 					'<label for="password" class="form-label">密碼</label>'+
-		            '<input type="text" name="password" class="form-control" id="password">'+
+		            '<input type="password" name="password" class="form-control" id="password">'+
 				'</div>'+
 				'<div class="col-md-4">'+
 					'<label for="name" class="form-label">名字</label>'+
@@ -132,7 +132,7 @@ window.onload = function() {
 					'</div>'+
 					'<div class="col-md-4">'+
 						'<label for="password" class="form-label">密碼</label>'+
-			            '<input type="text" name="password" class="form-control" id="password">'+
+			            '<input type="password" name="password" class="form-control" id="password">'+
 					'</div>'+
 					'<div class="col-md-4">'+
 						'<label for="name" class="form-label">名字</label>'+
@@ -178,7 +178,7 @@ window.onload = function() {
 						'</div>'+
 						'<div class="col-md-4">'+
 							'<label for="password" class="form-label">密碼</label>'+
-				            '<input type="text" name="password" class="form-control" id="password">'+
+				            '<input type="password" name="password" class="form-control" id="password">'+
 						'</div>'+
 						'<div class="col-md-4">'+
 							'<label for="name" class="form-label">名字</label>'+
