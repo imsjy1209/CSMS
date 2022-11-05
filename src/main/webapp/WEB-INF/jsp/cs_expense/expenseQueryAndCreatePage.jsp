@@ -48,7 +48,6 @@
 		    	<span class="letters">${message}</span>
 		  	</span>
 		</div>
-<%-- 		<div style="color:#E0777D;">${message}</div> --%>
 		
 		<br>
 		<!-- 選單按鈕群組 --> 

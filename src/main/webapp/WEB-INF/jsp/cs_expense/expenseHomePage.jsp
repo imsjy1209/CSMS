@@ -52,7 +52,7 @@
 			</div>
 			<div id="full"></div>
 			<hr>
-<a type="button" href='<c:url value='/'/>' class="btn btn-primary">回前頁</a>
+<a type="button" href='<c:url value='/'/>' class="btn btn-primary">回首頁</a><!-- 去哪好?? -->
 			
 		</div>
 			
