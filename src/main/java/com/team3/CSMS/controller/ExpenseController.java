@@ -32,7 +32,7 @@ public class ExpenseController {
 			@RequestParam int other, Model m) {
 		Expense exp = new Expense(year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
-		m.addAttribute("message", "新增成功");
+		m.addAttribute("message", "新增成功!!!");
 		return "cs_expense/expenseQueryAndCreatePage";
 	}
 
@@ -42,7 +42,7 @@ public class ExpenseController {
 			@RequestParam int personnel, @RequestParam int other, Model m) {
 		Expense exp = new Expense(id, year, semester, income, totalcost, markting, personnel, other);
 		eSer.insert(exp);
-		m.addAttribute("message", "更新成功");
+		m.addAttribute("message", "更新成功!!!");
 		return "cs_expense/expenseQueryAndCreatePage";
 	}
 
