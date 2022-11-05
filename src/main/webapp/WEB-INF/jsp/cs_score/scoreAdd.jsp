@@ -63,7 +63,9 @@
 			</table>
 		</div>
 		<!-- (4) 最後送出 -->
-		<button id='send' class="btn btn-success">送出</button>&nbsp;&nbsp;	
+		<button id='send' class="btn btn-success">送出</button>&nbsp;&nbsp;
+		<!-- 一鍵輸入有空再做 -->	
+<!-- 	<button id='send' class="btn btn-success" id="oneKey">一鍵輸入</button> -->	
 	</div><!-- End Of Content -->
 	
 </div><!-- End Of Container -->
@@ -145,11 +147,11 @@
 		 	let scoreLength=fcList.classStudentLists.length;   
 			$('#scoreTable tbody tr td').remove();
 			scolist_data='<tbody>';
-			for (i=0;i<scoreLength; i++){
+			for (i=0 ; i<scoreLength; i++){
 				scolist_data+='<tr>'		 	    
 				scolist_data+='<td>' + fcList.classStudentLists[i].student.id+'</td>'
 		    	scolist_data+='<td>' + fcList.classStudentLists[i].student.name +'</td>'
-		    	scolist_data+='<td><input type="number" name="score" min="1" max="4" size="2" width="5" class="form-control getscore" id="inputScore" value="${score1.score}"></td>'
+		    	scolist_data+='<td><input type="number" name="score" min="0" max="100" size="2" width="5" class="form-control getscore" id="inputScore" value="${score1.score}"></td>'
 				scolist_data +='</tobody>';
 			}
 		 	scolist_data +='</tobody>';
