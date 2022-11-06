@@ -15,6 +15,8 @@
 
 <jsp:include page="../framePage/sideBar.jsp"></jsp:include>
 
+
+
 <!-- For AccessMan中的Stu分頁=>show ParentInfo -->
 <!-- For AccessMan中的Stu分頁=>show ParentInfo -->
 <!-- For AccessMan中的Stu分頁=>show ParentInfo -->
@@ -400,21 +402,21 @@ $(function() {
 				var content0 = "";
 				content0 += 
 				"<tr>" +
-				"<td>年度</td>"+
-				"<td>學期</td>"+
-				"<td>分類</td>"+
-				"<td>學級</td>"+
-				"<td>年級</td>"+
-				"<td>科目</td>"+
-				"<td>價錢</td>"+
-				"<td>授課時間</td>"+
-				"<td>人數</td>"+
-				"<td>起始</td>"+
-				"<td>結業</td>"+
-				"<td>上/下架</td>"+
-				"<td>圖片</td>"+
-				"<td>編輯</td>"+
-				"<td>刪除</td>"+
+				"<td align='center'>年度</td>"+
+				"<td align='center'>學期</td>"+
+				"<td align='center'>分類</td>"+
+				"<td align='center'>學級</td>"+
+				"<td align='center'>年級</td>"+
+				"<td align='center'>科目</td>"+
+				"<td align='center'>價錢</td>"+
+				"<td align='center'>授課時間</td>"+
+				"<td align='center'>人數</td>"+
+				"<td align='center'>起始</td>"+
+				"<td align='center'>結業</td>"+
+				"<td align='center'>上/下架</td>"+
+				"<td align='center'>圖片</td>"+
+				"<td align='center'>編輯</td>"+
+				"<td align='center'>刪除</td>"+
 				"</tr>"; 
 				
 				var content = "";
@@ -423,27 +425,27 @@ $(function() {
 				for(var i=0; i < courseList.length; i++){
 					content += 
 					"<tr>" +
-						"<td id='course-id' hidden='hidden'>" + courseList[i].id + "</td>" +
-						"<td class='courseYearInfo'>" + courseList[i].courseYear + "</td>" +
-						"<td class='courseSemInfo'>" + courseList[i].courseSemester + "</td>" +
-						"<td class='courseCategoryInfo'>" + courseList[i].courseCategory + "</td>" +
-						"<td class='courseGradeInfo'>" + courseList[i].courseGrade + "</td>" +
-						"<td class='courseClassInfo'>" + courseList[i].courseClass + "年級</td>" +
-						"<td class='courseSubjectInfo'>" + courseList[i].courseSubject + "</td>" +
-	    	       		"<td class='coursePriceInfo'>" + courseList[i].coursePrice + "</td>" +
+						"<td align='center' id='course-id' hidden='hidden'>" + courseList[i].id + "</td>" +
+						"<td align='center' class='courseYearInfo'>" + courseList[i].courseYear + "</td>" +
+						"<td align='center' class='courseSemInfo'>" + courseList[i].courseSemester + "</td>" +
+						"<td align='center' class='courseCategoryInfo'>" + courseList[i].courseCategory + "</td>" +
+						"<td align='center' class='courseGradeInfo'>" + courseList[i].courseGrade + "</td>" +
+						"<td align='center' class='courseClassInfo'>" + courseList[i].courseClass + "年級</td>" +
+						"<td align='center' class='courseSubjectInfo'>" + courseList[i].courseSubject + "</td>" +
+	    	       		"<td align='center' class='coursePriceInfo'>" + courseList[i].coursePrice + "</td>" +
 	    	       		
-	    	       		"<td class='courseTeachTimeBoxGroup'><p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p></td>" +
+	    	       		"<td align='center' class='courseTeachTimeBoxGroup'><p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p></td>" +
 	    	       		
-	    	       		"<td style='display:none;' class='courseTeachTimeInfo'>" + courseList[i].courseTeachTime + "</td>" +
+	    	       		"<td align='center' style='display:none;' class='courseTeachTimeInfo'>" + courseList[i].courseTeachTime + "</td>" +
 	    	       		
-	    	       		"<td class='courseMemberInfo'>" + courseList[i].courseMember + "</td>" +
-	    	       		"<td class='startDateInfo'>" + courseList[i].startDate + "</td>" +
-	    	       		"<td class='endDateInfo'>" + courseList[i].endDate + "</td>" +
-	    	       		"<td><button class='con' style='width:45px; border-radius:3px;'>ON</button><button class='coff' style='width:45px; border-radius:3px;'>OFF</button></td>" +
-	    	       		"<td class='cPic-td'>" + "<img alt='I am Pic' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
-	    	       		"<td><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
-	    	       		"<td class=' test2'><a id='delete-btn' type='button' class='btn btn-danger courseDelBtn' style='background-color:#e0777d'>Delete</a></td>"+
-						"<td class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
+	    	       		"<td align='center' class='courseMemberInfo'>" + courseList[i].courseMember + "</td>" +
+	    	       		"<td align='center' class='startDateInfo'>" + courseList[i].startDate + "</td>" +
+	    	       		"<td align='center' class='endDateInfo'>" + courseList[i].endDate + "</td>" +
+	    	       		"<td align='center'><button class='con' style='width:45px; border-radius:3px;'>ON</button><button class='coff' style='width:45px; border-radius:3px;'>OFF</button></td>" +
+	    	       		"<td align='center' class='cPic-td'>" + "<img alt='I am Pic' width='50px' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" + "</td>" +
+	    	       		"<td align='center'><a style='font-size:36px;' class='courseEditBtn bx bxs-edit bx-tada bx-rotate-90' ></a></td>" +
+	    	       		"<td align='center' class=' test2'><a id='delete-btn' type='button' class='btn btn-danger courseDelBtn' style='background-color:#e0777d'>Delete</a></td>"+
+						"<td align='center' class='onOrOff-td'>"+ "<input class='onOrOff' type='hidden' value='" + courseList[i].courseOnOff + "'/>" + "</td>" +
 			        "</tr>";
 				}
 				var info0 = document.getElementById("thead-title");
@@ -780,8 +782,8 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"<tr>" +
 			"<td>id</td>"+
 			"<td>課程代碼</td>"+
+			"<td>教師</td>"+
 			"<td>班導</td>"+
-			"<td>行政</td>"+
 			"<td>教室</td>"+
 			"<td>分類</td>"+
 			"<td>課程</td>"+
@@ -823,10 +825,10 @@ $(document).on('click','.updateCourseAjax',function(e){
     	    	"<td>" + "<select class='schoolDataSelect'>";
 				for(var j=0;j<schoolList.length;j++){
 					if(classListList[i].school.id==schoolList[j].id){	
-	    		content += 	"<option value='"+ schoolList[j].id +"' selected>"+schoolList[j].name+"</option>";
+	    		content += 	"<option value='"+ schoolList[j].id +"' selected>"+schoolList[j].title + "-" +schoolList[j].name+"</option>";
 	    					}
 					else{
-						content += 	"<option value='"+ schoolList[j].id +"'>"+schoolList[j].name+"</option>";
+						content += 	"<option value='"+ schoolList[j].id +"'>"+schoolList[j].title + "-" +schoolList[j].name+"</option>";
 					}
 				}
 	    		content +=  "</select>"+
@@ -1073,7 +1075,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			"<td>多選</td>"+
 			"<td>id</td>"+
 			"<td>課程代碼</td>"+
-			"<td>班導</td>"+
+			"<td>授課教師</td>"+
 			"<td>教室</td>"+
 			"<td>開始時間</td>"+
 			"<td>結束時間</td>"+
@@ -1163,7 +1165,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			for(var i=0; i < orderListList.length; i++){
 				content += 
 				"<tr data-toggle='collapse' data-target='#demo" +i+"' class='accordion-toggle'>" +	
-				"<td><button class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></span></button></td>"+
+				"<td><button class='btn btn-default btn-xs'><i class='bx bxs-show'></i></span></button></td>"+
 				"<td class='ol-id'>" + orderListList[i].id + "</td>" +
 				"<td>" + orderListList[i].student.name + "</td>" +
 				"<td>" + orderListList[i].amount + "</td>" +
@@ -1346,7 +1348,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 				for(var i=0; i < orderListList.length; i++){
 					content += 
 					"<tr data-toggle='collapse' data-target='#demo" +i+"' class='accordion-toggle'>" +	
-					"<td><button class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></span></button></td>"+
+					"<td><button class='btn btn-default btn-xs'><i class='bx bxs-show'></i></span></button></td>"+
 					"<td class='ol-id'>" + orderListList[i].id + "</td>" +
 					"<td>" + orderListList[i].student.name + "</td>" +
 					"<td>" + orderListList[i].amount + "</td>" +
@@ -1663,42 +1665,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		
 	})//====End of移除排班=====
 			
-			//=======刪除按鈕的功能===========
-// 			$('.oD-delete-td').click(function(){
-			$(document).on('click','.oD-delete-td',function(){
-			var oDidDel = $(this).siblings('.oDId-id').text();
-			console.log(oDidDel);
-			if(window.confirm('確定刪除嗎?')){
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "<c:url value='/deleteOrderDetailByIdAjax.controller?id=" + oDidDel + "' />", true);
-				xhr.send();
-				$(this).parent().remove();
-				
-				//===更改成功alert======
-				const Toast = Swal.mixin({
-			  	toast: true,
-			  	position: 'top-end',
-			  	showConfirmButton: false,
-			  	timer: 1000,
-			  	timerProgressBar: true,
-			  	didOpen: (toast) => {
-			    toast.addEventListener('mouseenter', Swal.stopTimer)
-			    toast.addEventListener('mouseleave', Swal.resumeTimer)
-			 	 }
-				})
-
-				Toast.fire({
-				  icon: 'success',
-			 	 title: '已刪除成功'
-				})
-				//===End of 更改成功alert======
-				
-		 	} 
-		 	else{
-		 		console.log("nothing happened")
-		 	}
 			
-			})//========End Of 刪除按鈕的功能=========
 				
 				
 			
@@ -1799,15 +1766,44 @@ $(document).on('click','.updateCourseAjax',function(e){
 				})
 			}
 		} //=======End of After Btn Click Create Data=======
-		
-		
-			
 	})//=====End of Btn Click=======
+	})//======End of OD Show============
 		
+	//=======刪除按鈕的功能===========
+	$(document).on('click','.oD-delete-td',function(){
+	var oDidDel = $(this).siblings('.oDId-id').text();
+	console.log(oDidDel);
+	if(window.confirm('確定刪除嗎?')){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/deleteOrderDetailByIdAjax.controller?id=" + oDidDel + "' />", true);
+		xhr.send();
+		$(this).parent().remove();
 		
+		//===更改成功alert======
+		const Toast = Swal.mixin({
+	  	toast: true,
+	  	position: 'top-end',
+	  	showConfirmButton: false,
+	  	timer: 1000,
+	  	timerProgressBar: true,
+	  	didOpen: (toast) => {
+	    toast.addEventListener('mouseenter', Swal.stopTimer)
+	    toast.addEventListener('mouseleave', Swal.resumeTimer)
+	 	 }
+		})
+
+		Toast.fire({
+		  icon: 'success',
+	 	 title: '已刪除成功'
+		})
+		//===End of 更改成功alert======
+		
+ 	} 
+ 	else{
+ 		console.log("nothing happened")
+ 	}
 	
-	
-	})//======End of OD Show============		
+	})//========End Of 刪除按鈕的功能=========
 	
 //========================ClassStudentList==================
 	
@@ -2108,7 +2104,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 			content += 
 	
 				"<tr class='accordion-toggle'>" +	
-				"<td><button data-toggle='collapse' data-target='#demo' class='btn btn-default btn-xs'><i class='bx bx-happy-heart-eyes'></i></button></td>"+
+				"<td><button data-toggle='collapse' data-target='#demo' class='btn btn-default btn-xs'><i class='bx bxs-show'></i></button></td>"+
     	       	"<td class='classListId'>" + oneClassList.id + "</td>" +
     	       	"<td>" + oneClassList.classCode+ "</td>" +
     	       	

@@ -265,7 +265,7 @@
 									<table class="table table-bordered" style="text-align: center">
 										<thead>
 											<tr>
-												<th class="table-info" scope="col">學生姓名</th>
+<!-- 												<th class="table-info" scope="col">學生姓名</th> -->
 												<th class="table-info" scope="col">商品資訊</th>
 												<th class="table-info" scope="col">商品價格</th>
 												<th class="table-info" scope="col">付款方式</th>
@@ -277,8 +277,8 @@
 										<tbody>
 											<c:forEach var="aOrderDetail" items="${oneOrderDetailList}">
 												<tr>
-													<td>${aOrderDetail.student.name}</td>
-													<td>${aOrderDetail.course.courseCategory}-${aOrderDetail.course.courseSubject}-${aOrderDetail.course.courseGrade}${aOrderDetail.course.courseClass}年級</td>
+<%-- 													<td>${aOrderDetail.student.name}</td> --%>
+													<td>${aOrderDetail.course.courseCategory}-${aOrderDetail.course.courseSubject}-${aOrderDetail.course.courseGrade}-${aOrderDetail.course.courseClass}年級-${aOrderDetail.course.courseSemester}學期</td>
 													<td>${aOrderDetail.course.coursePrice}</td>
 													<td>${aOrderDetail.orderList.payment}</td>
 													<td>${aOrderDetail.orderList.orderDate}</td>

@@ -99,7 +99,7 @@ text-decoration:line-through;
     <th class='orderIdTh' style='vertical-align:middle'><span class=''>${item.id}</span></th>
    	<td style='color:red;vertical-align:middle'><span class=''><span class='courseInfoId' style='display:none ;'>${item.course.id}</span>未結帳</span></td>
    	<td style='vertical-align:middle'><span class=''>${item.student.name}</span></td>
-   	<td style='vertical-align:middle'><span class=''>[${item.course.courseSubject}]-${item.course.courseGrade}${item.course.courseClass}年級</span></td>
+   	<td style='vertical-align:middle'><span class=''>【${item.course.courseSubject}】【${item.course.courseGrade}】【${item.course.courseCategory}】${item.course.courseClass}年級-${item.course.courseSemester}學期</span></td>
    	<td style='vertical-align:middle' class='course-price'><span class=''>${item.course.coursePrice}</span></td>
    	<td style='vertical-align:middle'><span class=''>${item.course.startDate}</span></td>
    	<td style='vertical-align:middle'><span class=''>${item.course.endDate}</span></td>

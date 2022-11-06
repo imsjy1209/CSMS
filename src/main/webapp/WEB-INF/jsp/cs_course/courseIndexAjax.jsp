@@ -217,15 +217,15 @@ $(".searchAllBtn").click(function(){
 				"<div class='product-box'>" +	
 				"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" +
 				"<h2 class='product-title'>" +
-				courseList[i].courseGrade+
-    	        courseList[i].courseClass + "年級" +
-    	       	courseList[i].courseSubject +
-    	       	courseList[i].courseCategory + 
+				"<p style='text-align: center'>"+
+				"【"+courseList[i].courseSubject+"】"+
+				"【"+courseList[i].courseGrade+"】"+
+				"【"+courseList[i].courseCategory+"班"+"】"+ "</p>"+
+				"<p style='text-align: center'>"+  courseList[i].courseClass + "年級-" +
+    	        courseList[i].courseSemester + "學期" + "</p>"+
     	       	"</h2>" +
-    	       	
     	       	"<span class='course-id' hidden='hidden'>"+ courseList[i].id + "</span>" +
-    	       	
-    	       	"<p class='course-info'>上課期間:" + courseList[i].startDate + "~" +
+    	       	"<p class='course-info'style='font-size:14px'>上課期間:" + courseList[i].startDate + "~" +
     	       	courseList[i].endDate + "</p>" +
     	    	"<p style='font-size:16px' class='course-member'>尚餘人數:" + courseList[i].courseMember + "</p>" +
     	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
@@ -309,15 +309,17 @@ $(".searchAllBtn").click(function(){
 					"<div class='product-box'>" +	
 					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img' >" +
 					"<h2 class='product-title'>" +
-					courseList[i].courseGrade+
-	    	        courseList[i].courseClass + "年級" +
-	    	       	courseList[i].courseSubject +
-	    	       	courseList[i].courseCategory + 
+					"<p style='text-align: center'>"+
+					"【"+courseList[i].courseSubject+"】"+
+					"【"+courseList[i].courseGrade+"】"+
+					"【"+courseList[i].courseCategory+"班"+"】"+ "</p>"+
+					"<p style='text-align: center'>"+  courseList[i].courseClass + "年級-" +
+	    	        courseList[i].courseSemester + "學期" + "</p>"+
 	    	       	"</h2>" +
 
 	    	       	"<span class='course-id' hidden='hidden'>"+ courseList[i].id + "</span>" +
 	    	       	
-	    	       	"<p class='course-info'>上課期間:" + courseList[i].startDate + "~" +
+	    	       	"<p class='course-info'style='font-size:14px'>上課期間:" + courseList[i].startDate + "~" +
 	    	       	courseList[i].endDate + "</p>" +
 	    	    	"<p style='font-size:16px' class='course-member'>尚餘人數:" + courseList[i].courseMember + "</p>" +
 	    	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
@@ -428,15 +430,17 @@ $(".searchAllBtn").click(function(){
 					"<div class='product-box'>" +	
 					"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img' >" +
 					"<h2 class='product-title'>" +
-					courseList[i].courseGrade+
-	    	        courseList[i].courseClass + "年級" +
-	    	       	courseList[i].courseSubject +
-	    	       	courseList[i].courseCategory + 
+					"<p style='text-align: center'>"+
+					"【"+courseList[i].courseSubject+"】"+
+					"【"+courseList[i].courseGrade+"】"+
+					"【"+courseList[i].courseCategory+"班"+"】"+ "</p>"+
+					"<p style='text-align: center'>"+  courseList[i].courseClass + "年級-" +
+	    	        courseList[i].courseSemester + "學期" + "</p>"+
 	    	       	"</h2>" +
 	    	       	
 	    	       	"<span class='course-id' hidden='hidden'>"+ courseList[i].id + "</span>" +
 	    	       	
-	    	       	"<p class='course-info'>上課期間:" + courseList[i].startDate + "~" +
+	    	       	"<p class='course-info'style='font-size:14px'>上課期間:" + courseList[i].startDate + "~" +
 	    	       	courseList[i].endDate + "</p>" +
 	    	    	"<p style='font-size:16px' class='course-member'>尚餘人數:" + courseList[i].courseMember + "</p>" +
 	    	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
@@ -508,11 +512,6 @@ $(function(){
 	var stuIdForFindAlreadyBuy =$('#stuSessionId').text();
 	
 	//====確認Session資料並添加到購物車中===========
-// 	$('.stuIdFromSession').each(function(){
-// 		if($(this).text()==stuIdForFindAlreadyBuy){
-			
-// 		}
-// 	})	
 	
 	$('.courseIdSession').each(function(){
 		var courseIdFromSession = $(this).text()
@@ -526,13 +525,17 @@ $(function(){
 			var courseDataForShoppingCart = JSON.parse(xhrShoppingCart.responseText);
 			console.log(courseDataForShoppingCart)
 			contentForSessionShoppingCart += "<div class='cart-box'><img src=data:image/jpeg;base64," + courseDataForShoppingCart.coursePic + " class='cart-img'>" +
-			"<div class='detail-box'><span hidden='hidden'>" + courseDataForShoppingCart.id + "</span><div class='cart-product-title'>" + courseDataForShoppingCart.courseGrade +courseDataForShoppingCart.courseClass +"年級"+courseDataForShoppingCart.courseSubject+ courseDataForShoppingCart.courseCategory + "</div>" +
+			"<div class='detail-box'><span hidden='hidden'>" + courseDataForShoppingCart.id + "</span>"+
+			"<div class='cart-product-title'>" + "【" + courseDataForShoppingCart.courseSubject + "】" +
+												 "【" + courseDataForShoppingCart.courseGrade + "】" +
+												 "【" + courseDataForShoppingCart.courseCategory + "班】" + 
+												 courseDataForShoppingCart.courseClass+"年級-"+ courseDataForShoppingCart.courseSemester +"學期" + "</div>" +
 			"<div class='cart-price'>$" + courseDataForShoppingCart.coursePrice + "</div>" +
 			"</div><i class='bx bxs-trash-alt cart-remove'></i></div>";
 			$(".cart-content").append(contentForSessionShoppingCart);
 					}//====End Of 4 & 200======		
 				}//===End Of ReadyStateChange=====
-	})
+	})//====End of 確認Session資料並添加到購物車中===========
 	
 	var xhr = new XMLHttpRequest();
 	if(stuIdForFindAlreadyBuy!=""){
@@ -550,15 +553,17 @@ $(function(){
 				"<div class='product-box'>" +	
 				"<img alt='img' src='data:image/jpeg;base64,"+courseList[i].coursePic + "' class='product-img'>" +
 				"<h2 class='product-title'>" +
-				courseList[i].courseGrade+
-    	        courseList[i].courseClass + "年級" +
-    	       	courseList[i].courseSubject +
-    	       	courseList[i].courseCategory + 
+				"<p style='text-align: center'>"+
+				"【"+courseList[i].courseSubject+"】"+
+				"【"+courseList[i].courseGrade+"】"+
+				"【"+courseList[i].courseCategory+"班"+"】"+ "</p>"+
+				"<p style='text-align: center'>"+  courseList[i].courseClass + "年級-" +
+    	        courseList[i].courseSemester + "學期" + "</p>"+
     	       	"</h2>" +
     	       	
     	       	"<span class='course-id' hidden='hidden'>"+ courseList[i].id + "</span>" +
     	       	
-    	       	"<p class='course-info'>上課期間:" + courseList[i].startDate + "~" +
+    	       	"<p class='course-info'style='font-size:14px'>上課期間:" + courseList[i].startDate + "~" +
     	       	courseList[i].endDate + "</p>" +
     	       	"<p style='font-size:16px' class='course-member'>尚餘人數:" + courseList[i].courseMember + "</p>" +
     	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
@@ -665,13 +670,15 @@ function functionGoGo(){
 					"<div class='product-box-test'>" +	
 					"<img alt='img' width='200px' src='data:image/jpeg;base64,"+orderDetailList[i].course.coursePic + "' class='product-img'>" +
 					"<h2 class='product-title'>" +
-					orderDetailList[i].course.courseGrade+
-					orderDetailList[i].course.courseClass + "年級" +
-					orderDetailList[i].course.courseSubject +
-					orderDetailList[i].course.courseCategory + 
+					"<p style='text-align: center'>"+
+					"【"+orderDetailList[i].course.courseSubject+"】"+
+					"【"+orderDetailList[i].course.courseGrade+"】"+
+					"【"+orderDetailList[i].course.courseCategory+"班"+"】"+ "</p>"+
+					"<p style='text-align: center'>"+  orderDetailList[i].course.courseClass + "年級-" +
+					orderDetailList[i].course.courseSemester + "學期" + "</p>"+
 	    	       	"</h2>" +
 	    	       	
-	    	       	"<p class='course-info'>上課期間:" + orderDetailList[i].course.startDate + "~" +
+	    	       	"<p class='course-info'style='font-size:14px'>上課期間:" + orderDetailList[i].course.startDate + "~" +
 	    	       	orderDetailList[i].course.endDate + "</p>" +
 	    	        "<p class='course-info'><button class='teachBtn'>一</button><button class='teachBtn'>二</button><button class='teachBtn'>三</button class='teachBtn'><button class='teachBtn'>四</button><button class='teachBtn'>五</button><button class='teachBtn'>六</button><button class='teachBtn'>日</button></p>" +
 	    	       	"<span class='price'>$" + orderDetailList[i].course.coursePrice + "</span>" +
@@ -788,9 +795,6 @@ $(document).on('click','.cart-remove',function(){
 	
 	//更新商品庫存數量
 	var courseUpdateNumId = $(this).siblings('.detail-box').find('span').text();
-	console.log('===============')
-	console.log(courseUpdateNumId)
-	console.log('===============')
 	$('.shop-content').children('.product-box').each(function(){
 		var targetId = $(this).children('.course-id').text();
 		if(courseUpdateNumId==targetId){
@@ -926,7 +930,8 @@ function addProductToCart(title,course_id, price, productImg) {
 	console.log('stuIdForSession=' + stuIdForSession)
 	
 	var cartBoxContent ="<div class='cart-box'><img src=" + productImg + " class='cart-img'>" +
-"<div class='detail-box'><span hidden='hidden'>" + course_id + "</span><div class='cart-product-title'>" + title + "</div>" +
+"<div class='detail-box'><span hidden='hidden'>" + course_id + "</span>"+
+"<div class='cart-product-title'>" + title + "</div>" +
     "<div class='cart-price'>" + price + "</div>" +
     "</div><i class='bx bxs-trash-alt cart-remove'></i></div>";
     
