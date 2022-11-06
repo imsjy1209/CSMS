@@ -49,7 +49,8 @@
 						htmlSeg += "名字: <input name='name'><br><br>";
 						htmlSeg += "職位: <input name='title'><br><br>";
 						htmlSeg += "聘用日期: <input name='hiredate' id='datepicker'><br><br>";
-						htmlSeg += "離職: <input name='resigndate' id='datepicker2'><br><br>";
+						// htmlSeg += "離職: <input name='resigndate' id='datepicker2'><br><br>";
+						htmlSeg += "<input name='resigndate' style='display:none' id='datepicker2'><br><br>";
 						htmlSeg += "<input type='submit' value='註冊'>"
 						htmlSeg += "</form>"
 					}if (type == "3") {

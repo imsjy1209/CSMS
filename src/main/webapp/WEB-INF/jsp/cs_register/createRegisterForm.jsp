@@ -107,8 +107,8 @@ window.onload = function() {
 					 '<input type="text" name="hiredate" id="datepicker" class="form-control" id="hiredate">'+
 				'</div>'+
 		        '<div class="col-md-4">'+
-					'<label for="resigndate" class="form-label">離職</label>'+ 
-					'<input type="text" name="resigndate" id="datepicker2" class="form-control" id="resigndate">'+
+					'<label for="resigndate" class="form-label"></label>'+ 
+					'<input type="text" name="resigndate" id="datepicker2" class="form-control" id="resigndate" style="display:none">'+
 				'</div>'+
 		        '<div class="col-md-4">'+
 					'<label for="expertise" class="form-label">專長</label>'+ 

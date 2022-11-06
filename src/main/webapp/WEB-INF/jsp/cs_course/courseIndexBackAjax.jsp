@@ -2403,7 +2403,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		    '<thead>'+
 		      '<tr>'+
 		        '<th scope="col">出席</th>'+
-		        '<th scope="col">坐號</th>'+
+		        '<th scope="col">座號</th>'+
 		        '<th scope="col">姓名</th>'+
 		      '</tr> '+
 		    '</thead>'+
@@ -2594,7 +2594,7 @@ $('#exampleModalCenter').on('hidden.bs.modal', function (e) {
 		'<table class="table table-hover" id="studentList">'+
 		    '<thead>'+
 		      '<tr>'+
-		        '<th scope="col">坐號</th>'+
+		        '<th scope="col">座號</th>'+
 		        '<th scope="col">姓名</th>'+
 		        '<th scope="col">出席</th>'+
 
