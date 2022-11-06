@@ -423,7 +423,7 @@ cursor: pointer;
                             <a id="orderList-Btn" href="#">OrderList(訂單)</a>
                         </li>
                          <li>
-                            <a id="orderDetail-Btn"  href="#">Purchase/Arrange(訂單明細)</a>
+                            <a id="orderDetail-Btn"  href="#">OrderDetail(訂單明細)</a>
                         </li>
                     </ul>
                 </li>

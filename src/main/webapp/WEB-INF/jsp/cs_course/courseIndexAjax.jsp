@@ -537,6 +537,8 @@ $(function(){
 				}//===End Of ReadyStateChange=====
 	})//====End of 確認Session資料並添加到購物車中===========
 	
+		
+	//==============建立商城商品資訊================
 	var xhr = new XMLHttpRequest();
 	if(stuIdForFindAlreadyBuy!=""){
 	xhr.open("POST", "<c:url value='/AllOnCourseExceptAlreadyBuyAjax.controller?stuIdForFindAlreadyBuy=" + stuIdForFindAlreadyBuy + "'/>", true);
@@ -580,7 +582,7 @@ $(function(){
 			console.log("loading finished")
 			
 			//確認購物車中有那些商品，讓當前商品頁面的購買按鈕亮燈
-					$('.cart-content').children('.cart-box').each(function(){
+			$('.cart-content').children('.cart-box').each(function(){
 					var cartId = $(this).children('.detail-box').find('span').text();
 					$('.shop-content').children('.product-box').each(function(){
 						var shopId = $(this).children('.course-id').text();
@@ -607,9 +609,7 @@ $(function(){
 				})
 			})
 			
-			//======依照目前購物車中數量更新數字===========
-			var cartCount = $('.cart-box').length;
-			$('.badge-pill').text(cartCount);
+			
 			
 			//=====依照目前購物車中數量更新總價格===========
 			var cartTotalP = 0;
@@ -636,6 +636,9 @@ $(function(){
 					}
 				}
 			}
+			
+			
+			
 		}//End of print data
 	}
 	//End Of CourseDataLoading
@@ -701,6 +704,11 @@ function functionGoGo(){
 						ctt.eq(j).siblings('.course-info').find('button').eq(z).addClass('active');
 					}
 				}
+				
+				//======依照目前購物車中數量更新數字===========
+				var cartCount = $('.cart-box').length;
+				$('.badge-pill').text(cartCount);
+				
 			}
 				
 			}

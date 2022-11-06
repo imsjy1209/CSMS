@@ -390,7 +390,7 @@ $(function() {
 			$('.ClassStudentListBtnGroup').remove();
 			$('.absentContent').remove();
 			$('.accessMan').remove();
-			$('.main-title').text('課程商品-Course')
+			$('.main-title').html("<i class='bx bx-store-alt' ></i>Course-商品列表")
 	})
 		function showAllCourse(){
 		var xhr = new XMLHttpRequest();
@@ -733,7 +733,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
 		$('.accessMan').remove();
-		$('.main-title').text('班級資訊-ClassList')
+		$('.main-title').html("<i class='bx bxs-book-content'></i>ClassList-班級資訊")
 		
 
 	})
@@ -1061,7 +1061,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
 		$('.accessMan').remove();
-		$('.main-title').text('上課紀錄-ClassRecord')
+		$('.main-title').text('ClassRecord-上課紀錄')
 		
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllClassRecordAjax.controller' />", true);
@@ -1125,7 +1125,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
 		$('.accessMan').remove();
-		$('.main-title').text('訂單總表-OrderList')
+		$('.main-title').html("<i class='bx bx-list-ul'></i>OrderList-訂單總表")
 		
 		
 		//======Create Btn Option====================	
@@ -1494,7 +1494,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.ClassStudentListBtnGroup').remove();
 		$('.absentContent').remove();
 		$('.accessMan').remove();
-		$('.main-title').text('購買/排課狀態-OrderDetail')
+		$('.main-title').html("<i class='bx bx-money'></i>OrderDetail-訂單明細")
 		
 		
 		//======Create Btn Option====================	
@@ -1813,7 +1813,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.classListSelDiv').remove();
 		$('.absentContent').remove();
 		$('.accessMan').remove();
-		$('.main-title').text('學員對應班級清單-ClassStudentList')
+		$('.main-title').html("<i class='bx bxs-user-badge'></i>ClassStudentList-學員對應班級清單")
 		
 		
 		//======Create Btn Option====================	
@@ -2005,7 +2005,7 @@ $(document).on('click','.updateCourseAjax',function(e){
 		$('.ClassStudentListBtnGroup').remove();
 		$('.accessMan').remove();
 		$('.absentContent').remove();
-		$('.main-title').text('教室清單-Room')
+		$('.main-title').text('Room-教室清單')
 		
 		var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/findAllRoomAjax.controller' />", true);
