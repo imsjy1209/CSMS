@@ -149,23 +149,23 @@ $("#classInfoList").on("change",function(){
   					
 		  	   		// cb_content +='<td>' + cbList[i].courseContent + '</td>';
 		  	    	if (cbList[i].courseContent != null ){
-		  	    		cb_content +='<td>' + cbList[i].courseContent + '</td>';
+		  	    		cb_content +='<td style="width:150px">' + cbList[i].courseContent + '</td>';
 		  	    	} else {
-		  	    		cb_content +='<td></td>';
+		  	    		cb_content +='<td style="width:150px"></td>';
 		  	    	}
   					
 		  	   		// cb_content +='<td>' + cbList[i].homework + '</td>'; 
 		  	    	if (cbList[i].homework != null ){
-		  	    		cb_content +='<td>' + cbList[i].homework + '</td>';
+		  	    		cb_content +='<td style="width:150px">' + cbList[i].homework + '</td>';
 		  	    	} else {
-		  	    		cb_content +='<td></td>';
+		  	    		cb_content +='<td style="width:150px"></td>';
 		  	    	}
 		  	    	
 		  	   		// cb_content +='<td>' + cbList[i].quizNotice + '</td>';
 		  	    	if (cbList[i].quizNotice != null ){
-		  	    		cb_content +='<td>' + cbList[i].quizNotice + '</td>';
+		  	    		cb_content +='<td style="width:150px">' + cbList[i].quizNotice + '</td>';
 		  	    	} else {
-		  	    		cb_content +='<td></td>';
+		  	    		cb_content +='<td style="width:150px"></td>';
 		  	    	}
 		  	    	
 		  	   		// cb_content +='<td>' + cbList[i].phase + '</td>';
