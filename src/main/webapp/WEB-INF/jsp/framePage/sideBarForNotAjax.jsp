@@ -359,7 +359,7 @@ color:black;
                             <a id="orderList-Btn" href="${contextRoot}/courseAllPageBackAjax.page">OrderList(訂單)</a>
                         </li>
                          <li>
-                            <a id="orderDetail-Btn"  href="${contextRoot}/courseAllPageBackAjax.page">購買/排課狀態(訂單明細)</a>
+                            <a id="orderDetail-Btn"  href="${contextRoot}/courseAllPageBackAjax.page">OrderDetail(訂單明細)</a>
                         </li>
                     </ul>
                 </li>

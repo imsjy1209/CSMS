@@ -217,8 +217,9 @@
 	            // 塞入 scoreList
 	            scoreList.push(eachList);
 	            // console.log(scoreList);
-
-			    let scoreListJsonString = JSON.stringify(scoreList);
+				
+			});
+			let scoreListJsonString = JSON.stringify(scoreList);
 		        // console.log(scoreListJsonString);
 		        $.ajax({                            
 			        url:'http://localhost:8081/CSMS/scoreDataCreate',
@@ -244,8 +245,6 @@
 			            console.log("ngngngng")
 			        } 	
 				});
-				
-			});
 			
 		}
 
