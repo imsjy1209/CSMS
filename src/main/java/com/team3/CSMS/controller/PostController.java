@@ -96,6 +96,7 @@ public class PostController {
 		return "post/postdetail";
 	}
 
+	//
 	@PostMapping("/post/add")
 	public String add(@RequestParam("topic") String topic, @RequestParam("userType") int userType,
 			@RequestParam("article") String article) {
