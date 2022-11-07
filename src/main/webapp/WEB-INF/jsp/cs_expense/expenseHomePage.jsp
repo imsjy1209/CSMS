@@ -29,7 +29,7 @@
 				<option value="下學期">下學期</option>
 			</select>
 			
-			<button id='btn03' class="btn btn-outline-secondary">損益折現圖</button>
+			<button id='btn03' class="btn btn-outline-secondary">損益折線圖</button>
 			<select id="first" style="height:37px; border-radius: 3px;"></select> <select id="second" style="height:37px; border-radius: 3px;"></select>
 			
 			<hr>
