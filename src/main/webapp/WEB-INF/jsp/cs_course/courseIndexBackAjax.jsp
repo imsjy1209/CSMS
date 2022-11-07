@@ -612,7 +612,8 @@ $(function() {
 				$('.courseDelBtn').click(function(){
 					var delCourseId = $(this).parent().siblings('#course-id').text();
 					var xhr = new XMLHttpRequest();
-					xhr.open("GET", "<c:url value='deleteCourseDataAjax.controller?id=" + delCourseId +"' />", true);
+					console.log('dellllllllll')
+					xhr.open("GET", "<c:url value='/deleteCourseDataAjax.controller?id=" + delCourseId +"' />", true);
 					xhr.send();
 					$(this).parent().parent().remove();
 					
