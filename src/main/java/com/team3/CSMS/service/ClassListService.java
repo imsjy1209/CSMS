@@ -78,6 +78,12 @@ public class ClassListService {
 		List<ClassList> clList = classListDao.findAll();
 		return clList;
 	}
+	
+	//find All Order By Id Desc
+		public List<ClassList> findByOrderByIdDesc(){
+			List<ClassList> oneList = classListDao.findByOrderByIdDesc();
+			return oneList;
+		}
 
 	/* 依使用者帳號列出可選擇之課程清單 */
 	// 老師課程選單By account
@@ -138,5 +144,7 @@ public class ClassListService {
 	public ClassList findLatestClassListByClassCode (String name){
 		return classListDao.findLatestClassListByClassCode(name);
 	}
+	
+	
 
 }

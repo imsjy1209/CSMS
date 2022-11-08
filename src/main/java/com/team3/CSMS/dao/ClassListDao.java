@@ -93,6 +93,8 @@ public interface ClassListDao extends JpaRepository<ClassList, Integer>{
     @Query(value = "SELECT TOP(1) * from ClassList WHERE classCode like ?1% order BY classCode DESC", nativeQuery = true)
     ClassList findLatestClassListByClassCode(String classCode);
     
+    //find ClassList By Order By id Desc--Neil 1107
+    List<ClassList> findByOrderByIdDesc();
 }
 
 
