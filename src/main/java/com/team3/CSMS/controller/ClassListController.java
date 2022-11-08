@@ -40,11 +40,20 @@ public class ClassListController {
 	}
 	
 	//找全部課程
+//		@GetMapping("/findAllClassListAjax.controller")
+//		public @ResponseBody List<ClassList> findAllClssList(Model model) {
+//			 List<ClassList> classListList = classListService.findAllClassList();
+//			 return classListList;
+//		}
+		
+	//找全部課程-OrderByIdDesc
 		@GetMapping("/findAllClassListAjax.controller")
 		public @ResponseBody List<ClassList> findAllClssList(Model model) {
-			 List<ClassList> classListList = classListService.findAllClassList();
+			 List<ClassList> classListList = classListService.findByOrderByIdDesc();
 			 return classListList;
-		}
+		}	
+		
+		
 	//更改課程教室資料
 		@GetMapping("/updateClssListRoomDataAjax.controller")
 		public @ResponseBody void updateClssListRoomDataAjax
