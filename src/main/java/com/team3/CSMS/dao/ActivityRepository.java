@@ -21,11 +21,11 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
 	@Modifying
 	@Query(value = "update Activity set removed = 0 where id=:id")
-	public void already(int id);
+	public void already(@Param("id") int id);
 
 	@Modifying
 	@Query(value = "update Activity set removed = 1 where id=:id")
-	public void remove(int id);
+	public void remove(@Param("id") int id);
 
 //	@Query(value="from Activity where removed=0 order by date")
 //	public List<Activity> getAllByDate();
