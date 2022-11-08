@@ -490,13 +490,13 @@ $(function() {
 				var thisBtnClass = $(this).attr('class')
 				var nowId = $(this).parent().parent().siblings('#course-id').text();
 				var newTT="";
-				
 				if(thisBtnClass=='teachBtn active'){
 					$(this).removeClass('active')
 				}
 				
 				else{
 					$(this).addClass('active')
+					
 				}
 				
 				var allBtn = $(this).parent().find('button')
@@ -514,6 +514,13 @@ $(function() {
 				var xhr = new XMLHttpRequest();
 				xhr.open("GET", "<c:url value='/updateCourseTeachTime.controller?id=" + nowId + "&teachTime=" + newTT + "' />", true);
 				xhr.send();
+				
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						showAllCourse();
+					}
+				}
+				
 				
 				//===更改成功alert======
 				const Toast = Swal.mixin({
